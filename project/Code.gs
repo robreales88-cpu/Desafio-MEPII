@@ -42,14 +42,14 @@
 // CONFIG
 // ══════════════════════════════════════════════════════════════════
 const CONFIG = {
-  SPREADSHEET_ID: 'YOUR_SPREADSHEET_ID_HERE',  // ← replace this
-  ADMIN_EMAILS: ['docente@universidad.edu'],    // ← teacher emails
-  ADMIN_TOKEN: 'REPLACE_WITH_A_LONG_RANDOM_SECRET_BEFORE_DEPLOYING', // ← replace this
+  SPREADSHEET_ID: '1wRaDF9ytZz56805n9CvFhV32YFuz9uSBDKqrTG45qIA',
+  ADMIN_EMAILS: ['rob.reales88@gmail.com'],
+  ADMIN_TOKEN: '3ffe8c6e64caba7c20b34c1043d01a52254d19667c07d055',
   VERSION: '1.0-rc',
   MAX_ROWS_PER_QUERY: 500,
   CACHE_TTL_SECONDS: 60,
-  MAX_XP_PER_EVENT: 400, // hard ceiling on XP accepted from a single microreto event
-  IDEMPOTENCY_TTL_SECONDS: 21600, // 6h — CacheService's max TTL
+  MAX_XP_PER_EVENT: 400,
+  IDEMPOTENCY_TTL_SECONDS: 21600,
 };
 
 const SHEETS = {

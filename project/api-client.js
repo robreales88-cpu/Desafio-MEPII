@@ -16,7 +16,7 @@
   'use strict';
 
   // ── CONFIG ──────────────────────────────────────────────────────
-  const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec'; // ← replace
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyZpJ7HaSYI27XitxkWT5XZ0CLg-jQcYmwtuFIRluxeL-vmhQNuRxEEVwNSR7X4pA3G/exec';
   const CACHE_KEY  = 'desafio_api_cache';
   const QUEUE_KEY  = 'desafio_api_queue';
   const UA         = navigator.userAgent.substring(0, 120);
