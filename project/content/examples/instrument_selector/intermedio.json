@@ -1,0 +1,106 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Instrument Selector — intermedio",
+  "titleEn": "Instrument Selector Example — intermedio",
+  "type": "instrument_selection",
+  "skillEs": "Selección de instrumento adecuado (ejemplo ficticio)",
+  "skillEn": "Appropriate tool selection (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-instrument_selector-intermedio",
+      "type": "instrument_selection",
+      "titleEs": "Selector de Herramientas (intermedio)",
+      "titleEn": "Tool Selector (intermedio)",
+      "difficulty": "intermediate",
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "instrument_selector"
+      ],
+      "componentConfig": {
+        "promptEs": "¿Qué herramienta usarías para clavar un clavo?",
+        "promptEn": "Which tool would you use to hammer a nail?",
+        "cards": [
+          {
+            "id": "martillo",
+            "nameEs": "Martillo",
+            "nameEn": "Hammer",
+            "catEs": "Construcción",
+            "catEn": "Construction",
+            "initials": "MA",
+            "colorKey": "amber"
+          },
+          {
+            "id": "destornillador",
+            "nameEs": "Destornillador",
+            "nameEn": "Screwdriver",
+            "catEs": "Construcción",
+            "catEn": "Construction",
+            "initials": "DE",
+            "colorKey": "cyan"
+          },
+          {
+            "id": "regadera",
+            "nameEs": "Regadera",
+            "nameEn": "Watering can",
+            "catEs": "Jardinería",
+            "catEn": "Gardening",
+            "initials": "RE",
+            "colorKey": "green"
+          }
+        ],
+        "correctId": "martillo"
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Qué herramienta usarías para clavar un clavo?",
+          "textEn": "Which tool would you use to hammer a nail?",
+          "options": [
+            "Martillo",
+            "Destornillador",
+            "Regadera"
+          ],
+          "correctEs": "Martillo",
+          "correctEn": "Martillo",
+          "skillEs": "Selección de instrumento adecuado",
+          "skillEn": "Appropriate tool selection",
+          "explanEs": "El martillo es la herramienta diseñada específicamente para clavar.",
+          "explanEn": "The hammer is the tool specifically designed for hammering."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Qué herramienta usarías para regar las plantas?",
+          "textEn": "Which tool would you use to water plants?",
+          "options": [
+            "Martillo",
+            "Destornillador",
+            "Regadera"
+          ],
+          "correctEs": "Regadera",
+          "correctEn": "Regadera",
+          "skillEs": "Selección de instrumento adecuado",
+          "skillEn": "Appropriate tool selection",
+          "explanEs": "La regadera está diseñada para dosificar agua a las plantas.",
+          "explanEn": "The watering can is designed to dose water for plants."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

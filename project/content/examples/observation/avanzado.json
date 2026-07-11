@@ -1,0 +1,156 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Observation — avanzado",
+  "titleEn": "Observation Example — avanzado",
+  "type": "observation",
+  "skillEs": "Atención al detalle (ejemplo ficticio)",
+  "skillEn": "Attention to detail (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-observation-avanzado",
+      "type": "observation",
+      "titleEs": "Listas de Compras (avanzado)",
+      "titleEn": "Shopping Lists (avanzado)",
+      "difficulty": "advanced",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "observation"
+      ],
+      "componentConfig": {
+        "leftPanel": [
+          {
+            "labelEs": "Manzanas",
+            "labelEn": "Apples",
+            "value": "6"
+          },
+          {
+            "labelEs": "Pan",
+            "labelEn": "Bread",
+            "value": "2"
+          },
+          {
+            "labelEs": "Leche",
+            "labelEn": "Milk",
+            "value": "1L"
+          },
+          {
+            "labelEs": "Huevos",
+            "labelEn": "Eggs",
+            "value": "12"
+          },
+          {
+            "labelEs": "Queso",
+            "labelEn": "Cheese",
+            "value": "200g"
+          }
+        ],
+        "rightPanel": [
+          {
+            "labelEs": "Manzanas",
+            "labelEn": "Apples",
+            "value": "6",
+            "isDifferent": false
+          },
+          {
+            "labelEs": "Pan",
+            "labelEn": "Bread",
+            "value": "3",
+            "isDifferent": true
+          },
+          {
+            "labelEs": "Leche",
+            "labelEn": "Milk",
+            "value": "1L",
+            "isDifferent": false
+          },
+          {
+            "labelEs": "Huevos",
+            "labelEn": "Eggs",
+            "value": "10",
+            "isDifferent": true
+          },
+          {
+            "labelEs": "Queso",
+            "labelEn": "Cheese",
+            "value": "200g",
+            "isDifferent": false
+          }
+        ],
+        "differences": [
+          1,
+          3
+        ]
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuántas diferencias hay entre las dos listas?",
+          "textEn": "How many differences are there between the two lists?",
+          "options": [
+            "0",
+            "2",
+            "3",
+            "5"
+          ],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Atención al detalle",
+          "skillEn": "Attention to detail",
+          "explanEs": "Hay 2 valores distintos entre ambas listas.",
+          "explanEn": "There are 2 different values between both lists."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Qué valor cambió en 'Pan'?",
+          "textEn": "What value changed in 'Bread'?",
+          "options": [
+            "2",
+            "3",
+            "0",
+            "N/A"
+          ],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Comparación numérica",
+          "skillEn": "Numeric comparison",
+          "explanEs": "Pasó de 2 a 3.",
+          "explanEn": "It went from 2 to 3."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Cuántos elementos NO cambiaron?",
+          "textEn": "How many items did NOT change?",
+          "options": [
+            "3",
+            "2",
+            "5",
+            "0"
+          ],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Atención selectiva",
+          "skillEn": "Selective attention",
+          "explanEs": "3 de 5 elementos se mantuvieron iguales.",
+          "explanEn": "3 of 5 items stayed the same."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

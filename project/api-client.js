@@ -32,6 +32,12 @@
   function readCache()  { try { return JSON.parse(localStorage.getItem(CACHE_KEY) || '{}'); } catch { return {}; } }
   function saveCache(c) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(c)); } catch {} }
 
+  // Stable per-action id so a retried/queued POST can be deduped server-side
+  // instead of double-applying (e.g. double-crediting XP) — see Code.gs withIdempotency().
+  function genRequestId() {
+    return 'r_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+  }
+
   // ── CORE REQUEST ────────────────────────────────────────────────
   async function _request(method, params, body, attempt = 0) {
     const url = new URL(SCRIPT_URL);
@@ -74,6 +80,9 @@
     /** POST to Apps Script action endpoint. */
     async post(action, data = {}) {
       data.ua = UA;
+      // Assign once per logical action; retries (in _request) and offline-queue
+      // replays (in _flushQueue) reuse this same object, so the id stays stable.
+      if (!data.requestId) data.requestId = genRequestId();
       if (!this._online || SCRIPT_URL.includes('YOUR_DEPLOYMENT_ID')) {
         this._enqueue(action, data);
         return { ok: true, queued: true };
@@ -115,24 +124,26 @@
       return this.post('registro', perfil);
     }
 
-    async login(email) {
-      return this.post('login', { email });
+    async login(email, token) {
+      return this.post('login', { email, token });
     }
 
+    /** data must include { email, token, semana, microreto, ... } — see DESAFIO.dc.html finishMicroreto. */
     async guardarProgreso(data) {
       return this.post('guardarProgreso', data);
     }
 
-    async guardarXP(email, xp) {
-      return this.post('guardarXP', { email, xp });
+    /** extra may carry { token, semana, microreto, answers, bonus } for server-side XP validation. */
+    async guardarXP(email, xp, extra = {}) {
+      return this.post('guardarXP', { email, xp, ...extra });
     }
 
-    async guardarInsignia(email, insignia) {
-      return this.post('guardarInsignia', { email, insignia });
+    async guardarInsignia(email, insignia, token) {
+      return this.post('guardarInsignia', { email, insignia, token });
     }
 
-    async guardarEvento(email, evento, detalle = '') {
-      return this.post('guardarEvento', { email, evento, detalle });
+    async guardarEvento(email, evento, detalle = '', token) {
+      return this.post('guardarEvento', { email, evento, detalle, token });
     }
 
     async getRanking(limit = 20) {
@@ -143,12 +154,17 @@
       return this.get('estadisticas', {}, 300);
     }
 
-    async getPerfil(email) {
-      return this.get('perfil', { email }, 30);
+    async getPerfil(email, token) {
+      return this.get('perfil', { email, token }, 30);
     }
 
-    async getAdminData(adminEmail, page = 0, query = '') {
-      return this.get('admin', { adminEmail, page, query }, 15);
+    async getAdminData(adminEmail, adminToken, page = 0, query = '') {
+      return this.get('admin', { adminEmail, adminToken, page, query }, 15);
+    }
+
+    /** Publish a week's answer key to the backend (admin-only) — see Code.gs subirBanco(). */
+    async subirBanco(adminEmail, adminToken, weekJson) {
+      return this.post('subirBanco', { adminEmail, adminToken, weekJson });
     }
 
     async ping() {

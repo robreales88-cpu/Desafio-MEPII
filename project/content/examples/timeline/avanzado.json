@@ -1,0 +1,129 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Timeline — avanzado",
+  "titleEn": "Timeline Example — avanzado",
+  "type": "reasoning",
+  "skillEs": "Secuenciación de procesos (ejemplo ficticio)",
+  "skillEn": "Process sequencing (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-timeline-avanzado",
+      "type": "reasoning",
+      "titleEs": "Preparar un Sándwich (avanzado)",
+      "titleEn": "Making a Sandwich (avanzado)",
+      "difficulty": "advanced",
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "timeline"
+      ],
+      "componentConfig": {
+        "steps": [
+          {
+            "id": "s1",
+            "textEs": "Sacar el pan",
+            "textEn": "Take out the bread"
+          },
+          {
+            "id": "s2",
+            "textEs": "Poner el jamón",
+            "textEn": "Add the ham"
+          },
+          {
+            "id": "s3",
+            "textEs": "Agregar queso",
+            "textEn": "Add cheese"
+          },
+          {
+            "id": "s4",
+            "textEs": "Cerrar el sándwich",
+            "textEn": "Close the sandwich"
+          },
+          {
+            "id": "s5",
+            "textEs": "Cortar por la mitad",
+            "textEn": "Cut in half"
+          }
+        ],
+        "correctOrder": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ]
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál es el primer paso para preparar el sándwich?",
+          "textEn": "What is the first step to make the sandwich?",
+          "options": [
+            "Sacar el pan",
+            "Poner el jamón",
+            "Agregar queso",
+            "Cerrar el sándwich",
+            "Cortar por la mitad"
+          ],
+          "correctEs": "Sacar el pan",
+          "correctEn": "Sacar el pan",
+          "skillEs": "Secuenciación de procesos",
+          "skillEn": "Process sequencing",
+          "explanEs": "Siempre se empieza sacando el pan.",
+          "explanEn": "You always start by taking out the bread."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuál es el último paso de esta secuencia?",
+          "textEn": "What is the last step in this sequence?",
+          "options": [
+            "Sacar el pan",
+            "Poner el jamón",
+            "Agregar queso",
+            "Cerrar el sándwich",
+            "Cortar por la mitad"
+          ],
+          "correctEs": "Cortar por la mitad",
+          "correctEn": "Cortar por la mitad",
+          "skillEs": "Secuenciación de procesos",
+          "skillEn": "Process sequencing",
+          "explanEs": "El último paso es: Cortar por la mitad.",
+          "explanEn": "The last step is: Cut in half."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Cuántos pasos tiene esta secuencia en total?",
+          "textEn": "How many steps does this sequence have in total?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctEs": "5",
+          "correctEn": "5",
+          "skillEs": "Conteo de pasos",
+          "skillEn": "Step counting",
+          "explanEs": "La secuencia completa tiene 5 pasos.",
+          "explanEn": "The full sequence has 5 steps."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

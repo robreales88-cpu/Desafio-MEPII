@@ -1,14 +1,41 @@
 /**
  * DESAFÍO: Método de Evaluación Psicológica II
- * Google Apps Script Backend — Version 1.0
+ * Google Apps Script Backend — Version 1.0 RC
  *
  * SETUP INSTRUCTIONS:
  * 1. Create a new Google Spreadsheet and copy its ID to CONFIG.SPREADSHEET_ID
- * 2. In Apps Script editor: Deploy → New deployment → Web app
+ * 2. Set CONFIG.ADMIN_TOKEN to a long random string (this is the shared secret the
+ *    teacher enters once in AdminPanel.dc.html / AuthorStudio.dc.html to unlock them).
+ *    Generate one yourself, e.g. with `Utilities.getUuid() + Utilities.getUuid()` in
+ *    the Apps Script editor's execution log, and paste the result below.
+ * 3. In Apps Script editor: Deploy → New deployment → Web app
  *    - Execute as: Me
  *    - Who has access: Anyone
- * 3. Copy the deployment URL into api-client.js (SCRIPT_URL)
- * 4. Run initSheets() once manually to create all sheets with headers
+ * 4. Copy the deployment URL into api-client.js (SCRIPT_URL)
+ * 5. Run initSheets() once manually to create all sheets with headers
+ *
+ * SECURITY MODEL (v1.0 RC):
+ *   - Students authenticate with email + a random Token issued at first registro()
+ *     and stored in localStorage on their device. Every endpoint that reads or
+ *     writes a specific student's data requires that token to match the one on
+ *     file for that email — a bare email is no longer sufficient (closes the
+ *     identity-spoofing gap from the technical audit, SEC-1/BACK-7).
+ *   - Admin endpoints require BOTH an email in CONFIG.ADMIN_EMAILS AND a shared
+ *     CONFIG.ADMIN_TOKEN — a client can no longer self-declare adminEmail and be
+ *     believed (SEC-2/BACK-8).
+ *   - guardarProgreso/guardarXP independently recompute correctness and XP from
+ *     the 07_RESPUESTAS answer key (populated by Author Studio when a docente
+ *     saves a week) instead of trusting client-reported numbers outright. Until a
+ *     given week's key has been (re-)saved through Author Studio, those endpoints
+ *     fall back to the client-reported values, clamped to CONFIG.MAX_XP_PER_EVENT.
+ *   - Mutating endpoints accept an optional requestId; a duplicate requestId
+ *     returns the original cached result instead of re-applying the action, so a
+ *     retried/offline-queued request can't double-credit XP or progress
+ *     (SEC-9/BACK-15). Dedup window is CacheService's max TTL (6 hours).
+ *   - guardarXP / ranking updates are wrapped in LockService so two students
+ *     finishing at the same instant can't clobber each other's XP, and the
+ *     ranking sheet is rewritten with a single range write instead of a
+ *     clear+append-in-a-loop, so it's never readable half-built (SEC-5/BACK-3/BACK-12).
  */
 
 // ══════════════════════════════════════════════════════════════════
@@ -17,9 +44,12 @@
 const CONFIG = {
   SPREADSHEET_ID: 'YOUR_SPREADSHEET_ID_HERE',  // ← replace this
   ADMIN_EMAILS: ['docente@universidad.edu'],    // ← teacher emails
-  VERSION: '1.0',
+  ADMIN_TOKEN: 'REPLACE_WITH_A_LONG_RANDOM_SECRET_BEFORE_DEPLOYING', // ← replace this
+  VERSION: '1.0-rc',
   MAX_ROWS_PER_QUERY: 500,
   CACHE_TTL_SECONDS: 60,
+  MAX_XP_PER_EVENT: 400, // hard ceiling on XP accepted from a single microreto event
+  IDEMPOTENCY_TTL_SECONDS: 21600, // 6h — CacheService's max TTL
 };
 
 const SHEETS = {
@@ -29,15 +59,17 @@ const SHEETS = {
   RANKING     : '04_RANKING',
   EVENTOS     : '05_EVENTOS',
   ANALITICA   : '06_ANALITICA',
+  RESPUESTAS  : '07_RESPUESTAS',
 };
 
 const HEADERS = {
-  ESTUDIANTES : ['ID','Correo','Nombre','Nickname','Avatar','Grupo','Seccion','FechaRegistro','UltimoAcceso','Nivel','XP','Estado'],
-  PROGRESO    : ['IDEstudiante','Semana','Microreto','Tipo','Intentos','Tiempo','Correctas','Incorrectas','XP','CambiosPestana','Fecha'],
+  ESTUDIANTES : ['ID','Correo','Nombre','Nickname','Avatar','Grupo','Seccion','FechaRegistro','UltimoAcceso','Nivel','XP','Estado','Token'],
+  PROGRESO    : ['IDEstudiante','Semana','Microreto','Tipo','Intentos','Tiempo','Correctas','Incorrectas','XP','CambiosPestana','Fecha','Validado'],
   INSIGNIAS   : ['IDEstudiante','Insignia','Fecha','XPAcumulada'],
-  RANKING     : ['Posicion','Nombre','Nickname','Nivel','XP','Insignias','Grupo'],
-  EVENTOS     : ['IDEstudiante','Evento','Detalle','Fecha','Navegador'],
+  RANKING     : ['Posicion','Nombre','Nickname','Nivel','XP','Insignias','Grupo','Avatar'],
+  EVENTOS     : ['Actor','Evento','Detalle','Fecha','Navegador'],
   ANALITICA   : ['Metrica','Valor','Periodo','Fecha'],
+  RESPUESTAS  : ['Semana','Microreto','PreguntaIdx','CorrectaEs','CorrectaEn','XPBase','XPSpeedMax','XPPerfectBonus','TiempoRespuesta'],
 };
 
 // ══════════════════════════════════════════════════════════════════
@@ -48,7 +80,7 @@ function doPost(e) {
   try {
     const action = e.parameter.action;
     const body   = e.postData ? JSON.parse(e.postData.contents) : {};
-    logEvento(body.email || 'anonymous', 'API_POST', action, e.parameter.ua || '');
+    logEvento(body.adminEmail || body.email || 'anonymous', 'API_POST', action, e.parameter.ua || '');
 
     switch (action) {
       case 'registro'        : return respond(registro(body));
@@ -58,6 +90,7 @@ function doPost(e) {
       case 'guardarInsignia' : return respond(guardarInsignia(body));
       case 'guardarEvento'   : return respond(guardarEvento(body));
       case 'adminAction'     : return respond(adminAction(body));
+      case 'subirBanco'      : return respond(subirBanco(body));
       default: return respond({ ok: false, error: 'Acción no reconocida: ' + action });
     }
   } catch (err) {
@@ -68,7 +101,7 @@ function doPost(e) {
 function doGet(e) {
   try {
     const action = e.parameter.action;
-    logEvento(e.parameter.email || 'anonymous', 'API_GET', action, e.parameter.ua || '');
+    logEvento(e.parameter.adminEmail || e.parameter.email || 'anonymous', 'API_GET', action, e.parameter.ua || '');
 
     switch (action) {
       case 'ranking'       : return respond(getRanking(e.parameter));
@@ -85,110 +118,296 @@ function doGet(e) {
 }
 
 // ══════════════════════════════════════════════════════════════════
+// AUTH HELPERS
+// ══════════════════════════════════════════════════════════════════
+
+/** Generate a fresh random session token for a newly-registered student. */
+function generateToken() {
+  return Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '');
+}
+
+/** Constant-effort string compare (best-effort in the Apps Script sandbox). */
+function tokensMatch(a, b) {
+  const sa = String(a || ''), sb = String(b || '');
+  if (!sa || !sb || sa.length !== sb.length) return false;
+  let diff = 0;
+  for (let i = 0; i < sa.length; i++) diff |= sa.charCodeAt(i) ^ sb.charCodeAt(i);
+  return diff === 0;
+}
+
+/**
+ * Verify a student request. Returns { ok:true, user, rows, sheet } on success,
+ * or { ok:false, error } — callers should `return` that object directly.
+ */
+function requireStudent(email, token) {
+  if (!email) return { ok: false, error: 'Correo requerido' };
+  const sheet = getSheet(SHEETS.ESTUDIANTES);
+  const rows  = sheetToObjects(sheet);
+  const user  = rows.find(r => r.Correo === String(email).toLowerCase());
+  if (!user) return { ok: false, error: 'Usuario no encontrado' };
+  if (!tokensMatch(token, user.Token)) return { ok: false, error: 'No autorizado' };
+  return { ok: true, user, rows, sheet };
+}
+
+/** Verify an admin request (email in allow-list AND correct shared admin token). */
+function requireAdmin(adminEmail, adminToken) {
+  if (!adminEmail || !adminToken) return false;
+  if (!CONFIG.ADMIN_EMAILS.includes(adminEmail)) return false;
+  return tokensMatch(adminToken, CONFIG.ADMIN_TOKEN);
+}
+
+/**
+ * Run `fn` at most once per requestId. Repeated calls with the same requestId
+ * (retries, offline-queue replays) return the original cached result instead of
+ * re-applying the action. Requests without a requestId always run (older
+ * clients) — callers of mutating endpoints should always send one.
+ */
+function withIdempotency(requestId, fn) {
+  if (!requestId) return fn();
+  const cache    = CacheService.getScriptCache();
+  const cacheKey = 'req_' + requestId;
+  const cached   = cache.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+  const result = fn();
+  try { cache.put(cacheKey, JSON.stringify(result), CONFIG.IDEMPOTENCY_TTL_SECONDS); } catch (e) { /* non-critical */ }
+  return result;
+}
+
+// ══════════════════════════════════════════════════════════════════
 // POST ENDPOINTS
 // ══════════════════════════════════════════════════════════════════
 
-/** Register or log in (email-based, no password). */
+/** Register (first visit) or acknowledge an existing account (email + token, no password). */
 function registro(data) {
   if (!data.email) return { ok: false, error: 'Correo requerido' };
+  const email = data.email.toLowerCase();
   const sheet = getSheet(SHEETS.ESTUDIANTES);
   const rows  = sheetToObjects(sheet);
-  const existing = rows.find(r => r.Correo === data.email.toLowerCase());
-  if (existing) return { ok: true, action: 'login', user: sanitizeUser(existing) };
+  const existing = rows.find(r => r.Correo === email);
 
-  const id   = generateId();
-  const now  = new Date().toISOString();
-  const lvl  = calcLevel(0);
+  if (existing) {
+    // Do not hand another student's profile/token to whoever merely knows their email.
+    if (tokensMatch(data.token, existing.Token)) {
+      return { ok: true, action: 'login', user: sanitizeUser(existing), token: existing.Token };
+    }
+    return {
+      ok: false,
+      error: 'CUENTA_EXISTENTE',
+      message: 'Ya existe una cuenta con este correo. Si es tuya, usa el dispositivo donde te registraste originalmente o contacta a tu docente.',
+    };
+  }
+
+  const id    = generateId();
+  const token = generateToken();
+  const now   = new Date().toISOString();
+  const lvl   = calcLevel(0);
   sheet.appendRow([
-    id, data.email.toLowerCase(), data.nombre || '', data.nickname || '',
+    id, email, data.nombre || '', data.nickname || '',
     data.avatar || 0, data.grupo || '', data.seccion || '',
-    now, now, lvl, 0, 'activo',
+    now, now, lvl, 0, 'activo', token,
   ]);
-  logEvento(data.email, 'REGISTRO', `Nuevo usuario: ${data.nombre}`, data.ua || '');
-  return { ok: true, action: 'registro', user: { ID: id, Correo: data.email, Nombre: data.nombre, Nickname: data.nickname, Avatar: data.avatar, Grupo: data.grupo, Seccion: data.seccion, Nivel: lvl, XP: 0, Estado: 'activo' } };
+  logEvento(email, 'REGISTRO', `Nuevo usuario: ${data.nombre}`, data.ua || '');
+  return {
+    ok: true, action: 'registro',
+    user: { ID: id, Correo: email, Nombre: data.nombre, Nickname: data.nickname, Avatar: data.avatar, Grupo: data.grupo, Seccion: data.seccion, Nivel: lvl, XP: 0, Estado: 'activo' },
+    token,
+  };
 }
 
-/** Login by email — returns profile or error. */
+/** Login by email + token — returns profile or error. */
 function login(data) {
-  if (!data.email) return { ok: false, error: 'Correo requerido' };
-  const sheet = getSheet(SHEETS.ESTUDIANTES);
-  const rows  = sheetToObjects(sheet);
-  const user  = rows.find(r => r.Correo === data.email.toLowerCase());
-  if (!user) return { ok: false, error: 'Usuario no encontrado' };
-  if (user.Estado === 'inactivo') return { ok: false, error: 'Cuenta desactivada' };
+  const auth = requireStudent(data.email, data.token);
+  if (!auth.ok) return auth;
+  if (auth.user.Estado === 'inactivo') return { ok: false, error: 'Cuenta desactivada' };
 
-  // Update last access
-  updateRow(sheet, rows, r => r.Correo === data.email.toLowerCase(), { UltimoAcceso: new Date().toISOString() });
-  logEvento(data.email, 'LOGIN', '', data.ua || '');
-  return { ok: true, user: sanitizeUser(user) };
+  updateRow(auth.sheet, auth.rows, r => r.Correo === auth.user.Correo, { UltimoAcceso: new Date().toISOString() });
+  logEvento(auth.user.Correo, 'LOGIN', '', data.ua || '');
+  return { ok: true, user: sanitizeUser(auth.user), token: auth.user.Token };
 }
 
-/** Save microreto progress. */
+/** Save microreto progress. Recomputes correctas/incorrectas from the answer key when available. */
 function guardarProgreso(data) {
-  if (!data.email) return { ok: false, error: 'Correo requerido' };
-  const sheet = getSheet(SHEETS.PROGRESO);
-  sheet.appendRow([
-    data.email, data.semana || 0, data.microreto || 0, data.tipo || '',
-    data.intentos || 1, data.tiempo || 0, data.correctas || 0,
-    data.incorrectas || 0, data.xp || 0, data.cambiosPestana || 0,
-    new Date().toISOString(),
-  ]);
-  recalcAnalitica();
-  return { ok: true };
+  return withIdempotency(data.requestId, () => {
+    const auth = requireStudent(data.email, data.token);
+    if (!auth.ok) return auth;
+
+    const evalResult = evaluateSubmission(data.semana, data.microreto, data.answers, data.tiempo, {
+      correctas: data.correctas, incorrectas: data.incorrectas, xp: data.xp,
+    });
+
+    const sheet = getSheet(SHEETS.PROGRESO);
+    sheet.appendRow([
+      auth.user.Correo, data.semana || 0, data.microreto || 0, data.tipo || '',
+      data.intentos || 1, data.tiempo || 0, evalResult.correctas,
+      evalResult.incorrectas, evalResult.xp, data.cambiosPestana || 0,
+      new Date().toISOString(), evalResult.validated,
+    ]);
+    recalcAnalitica();
+    return { ok: true, correctas: evalResult.correctas, incorrectas: evalResult.incorrectas, xp: evalResult.xp, validated: evalResult.validated };
+  });
 }
 
-/** Update XP for a student. */
+/** Update XP for a student. Recomputes the XP delta from the answer key when available. */
 function guardarXP(data) {
-  if (!data.email || data.xp == null) return { ok: false, error: 'Correo y XP requeridos' };
-  const sheet = getSheet(SHEETS.ESTUDIANTES);
-  const rows  = sheetToObjects(sheet);
-  const user  = rows.find(r => r.Correo === data.email.toLowerCase());
-  if (!user) return { ok: false, error: 'Usuario no encontrado' };
+  return withIdempotency(data.requestId, () => {
+    const auth = requireStudent(data.email, data.token);
+    if (!auth.ok) return auth;
+    if (data.xp == null) return { ok: false, error: 'XP requerido' };
 
-  const newXP    = Number(user.XP) + Number(data.xp);
-  const newLevel = calcLevel(newXP);
-  updateRow(sheet, rows, r => r.Correo === data.email.toLowerCase(), { XP: newXP, Nivel: newLevel });
-  updateRanking();
-  logEvento(data.email, 'XP_GANADA', `+${data.xp} XP → Total: ${newXP}`, '');
-  return { ok: true, newXP, newLevel };
+    const evalResult = evaluateSubmission(data.semana, data.microreto, data.answers, data.tiempo, {
+      correctas: data.correctas, incorrectas: data.incorrectas, xp: data.xp,
+    });
+    // Bonus for completing all 3 microretos of a challenge — same cap applies.
+    const delta = Math.max(0, Math.min(Number(evalResult.xp) + (Number(data.bonus) || 0), CONFIG.MAX_XP_PER_EVENT));
+
+    const lock = LockService.getScriptLock();
+    try {
+      lock.waitLock(10000);
+      const sheet = getSheet(SHEETS.ESTUDIANTES);
+      const rows  = sheetToObjects(sheet);
+      const user  = rows.find(r => r.Correo === auth.user.Correo);
+      if (!user) return { ok: false, error: 'Usuario no encontrado' };
+
+      const newXP    = Number(user.XP) + delta;
+      const newLevel = calcLevel(newXP);
+      updateRow(sheet, rows, r => r.Correo === user.Correo, { XP: newXP, Nivel: newLevel });
+      updateRanking();
+      logEvento(user.Correo, 'XP_GANADA', `+${delta} XP → Total: ${newXP}`, '');
+      return { ok: true, newXP, newLevel, xpApplied: delta, validated: evalResult.validated };
+    } finally {
+      lock.releaseLock();
+    }
+  });
 }
 
 /** Record a badge unlock. */
 function guardarInsignia(data) {
-  if (!data.email || !data.insignia) return { ok: false, error: 'Correo e insignia requeridos' };
-  const sheet    = getSheet(SHEETS.INSIGNIAS);
-  const studSheet= getSheet(SHEETS.ESTUDIANTES);
-  const rows     = sheetToObjects(studSheet);
-  const user     = rows.find(r => r.Correo === data.email.toLowerCase());
-  sheet.appendRow([data.email, data.insignia, new Date().toISOString(), user ? user.XP : 0]);
-  logEvento(data.email, 'INSIGNIA', data.insignia, '');
-  return { ok: true };
+  return withIdempotency(data.requestId, () => {
+    const auth = requireStudent(data.email, data.token);
+    if (!auth.ok) return auth;
+    if (!data.insignia) return { ok: false, error: 'Insignia requerida' };
+
+    const sheet = getSheet(SHEETS.INSIGNIAS);
+    sheet.appendRow([auth.user.Correo, data.insignia, new Date().toISOString(), auth.user.XP]);
+    logEvento(auth.user.Correo, 'INSIGNIA', data.insignia, '');
+    return { ok: true };
+  });
 }
 
-/** Log any event. */
+/** Log any event (student-authenticated). */
 function guardarEvento(data) {
-  if (!data.email || !data.evento) return { ok: false, error: 'Correo y evento requeridos' };
-  logEvento(data.email, data.evento, data.detalle || '', data.ua || '');
+  const auth = requireStudent(data.email, data.token);
+  if (!auth.ok) return auth;
+  if (!data.evento) return { ok: false, error: 'Evento requerido' };
+  logEvento(auth.user.Correo, data.evento, data.detalle || '', data.ua || '');
   return { ok: true };
 }
 
-/** Admin actions (requires admin email). */
+/** Admin actions (email in allow-list + shared admin token required). */
 function adminAction(data) {
-  if (!CONFIG.ADMIN_EMAILS.includes(data.adminEmail)) return { ok: false, error: 'No autorizado' };
+  if (!requireAdmin(data.adminEmail, data.adminToken)) return { ok: false, error: 'No autorizado' };
   switch (data.action) {
-    case 'desactivarEstudiante': return adminSetEstado(data.targetEmail, 'inactivo');
-    case 'activarEstudiante':    return adminSetEstado(data.targetEmail, 'activo');
-    case 'resetXP':              return adminResetXP(data.targetEmail);
-    case 'editarEstudiante':     return adminEditarEstudiante(data.targetEmail, data.fields);
+    case 'desactivarEstudiante': return adminSetEstado(data.adminEmail, data.targetEmail, 'inactivo');
+    case 'activarEstudiante':    return adminSetEstado(data.adminEmail, data.targetEmail, 'activo');
+    case 'resetXP':              return adminResetXP(data.adminEmail, data.targetEmail);
+    case 'editarEstudiante':     return adminEditarEstudiante(data.adminEmail, data.targetEmail, data.fields);
     default: return { ok: false, error: 'Acción admin desconocida' };
   }
+}
+
+/**
+ * Publish a week's answer key so guardarProgreso/guardarXP can validate against
+ * it server-side. Called from Author Studio whenever a docente saves a week.
+ * Does NOT touch the static challenge-bank/weekNN.json files (those still ship
+ * the full content to the student's browser as before) — this only mirrors the
+ * grading-relevant fields (correct answers + XP config) into the backend.
+ */
+function subirBanco(data) {
+  if (!requireAdmin(data.adminEmail, data.adminToken)) return { ok: false, error: 'No autorizado' };
+  const weekJson = data.weekJson;
+  if (!weekJson || !weekJson.week || !Array.isArray(weekJson.microretos)) {
+    return { ok: false, error: 'JSON de semana inválido: se requiere "week" y "microretos".' };
+  }
+
+  const sheet    = getSheet(SHEETS.RESPUESTAS);
+  const existing = sheetToObjects(sheet).filter(r => Number(r.Semana) !== Number(weekJson.week));
+  const fresh    = [];
+  weekJson.microretos.forEach((mr, mi) => {
+    (mr.questions || []).forEach((q, qi) => {
+      fresh.push({
+        Semana: weekJson.week, Microreto: mi, PreguntaIdx: qi,
+        CorrectaEs: q.correctEs || '', CorrectaEn: q.correctEn || q.correctEs || '',
+        XPBase: (mr.xp && mr.xp.base) || 50,
+        XPSpeedMax: (mr.xp && mr.xp.speedMax) || 30,
+        XPPerfectBonus: (mr.xp && mr.xp.perfectBonus) || 50,
+        TiempoRespuesta: mr.answerTime || 20,
+      });
+    });
+  });
+
+  const merged = existing.concat(fresh);
+  const values = [HEADERS.RESPUESTAS].concat(merged.map(r => HEADERS.RESPUESTAS.map(h => r[h])));
+  sheet.clearContents();
+  sheet.getRange(1, 1, values.length, HEADERS.RESPUESTAS.length).setValues(values);
+  logEvento(data.adminEmail, 'BANCO_ACTUALIZADO', `Semana ${weekJson.week} · ${fresh.length} preguntas`, data.ua || '');
+  return { ok: true, week: weekJson.week, preguntas: fresh.length };
+}
+
+/**
+ * Recompute correctas/incorrectas/xp from the 07_RESPUESTAS answer key when one
+ * exists for this week+microreto AND the client sent raw answers. Otherwise
+ * falls back to the client-reported values, clamped to MAX_XP_PER_EVENT — this
+ * keeps weeks whose key hasn't been (re-)published through Author Studio yet
+ * working exactly as before, just with an XP ceiling.
+ */
+function evaluateSubmission(semana, microretoOneBased, answers, tiempo, fallback) {
+  const microretoIdx = Number(microretoOneBased) - 1;
+  const keyRows = sheetToObjects(getSheet(SHEETS.RESPUESTAS))
+    .filter(r => Number(r.Semana) === Number(semana) && Number(r.Microreto) === microretoIdx);
+
+  if (!keyRows.length || !Array.isArray(answers)) {
+    return {
+      correctas: Number(fallback.correctas) || 0,
+      incorrectas: Number(fallback.incorrectas) || 0,
+      xp: Math.max(0, Math.min(Number(fallback.xp) || 0, CONFIG.MAX_XP_PER_EVENT)),
+      validated: false,
+    };
+  }
+
+  let correct = 0;
+  keyRows.forEach(row => {
+    const given = answers.find(a => Number(a.qIdx) === Number(row.PreguntaIdx));
+    if (!given) return;
+    const answerEs = String(given.answerEs || given.answer || '').trim();
+    const answerEn = String(given.answerEn || given.answer || '').trim();
+    const correctEs = String(row.CorrectaEs || '').trim();
+    const correctEn = String(row.CorrectaEn || '').trim();
+    const isRight = (answerEs && (answerEs === correctEs || answerEs === correctEn))
+                 || (answerEn && (answerEn === correctEs || answerEn === correctEn));
+    if (isRight) correct++;
+  });
+
+  const total = keyRows.length;
+  const first = keyRows[0];
+  const base       = Number(first.XPBase) || 50;
+  const speedMax   = Number(first.XPSpeedMax) || 30;
+  const perfect    = Number(first.XPPerfectBonus) || 50;
+  const maxTime    = Number(first.TiempoRespuesta) || 20;
+  const timeUsed   = Number(tiempo) || 0;
+  const speedRatio = maxTime > 0 ? Math.max(0, (maxTime - timeUsed) / maxTime) : 0;
+
+  let xp = correct * (base + Math.round(speedRatio * speedMax));
+  if (total > 0 && correct === total) xp += perfect;
+  xp = Math.max(0, Math.min(xp, CONFIG.MAX_XP_PER_EVENT));
+
+  return { correctas: correct, incorrectas: total - correct, xp, validated: true };
 }
 
 // ══════════════════════════════════════════════════════════════════
 // GET ENDPOINTS
 // ══════════════════════════════════════════════════════════════════
 
-/** Return ranked leaderboard (top N). */
+/** Return ranked leaderboard (top N) — public read, no per-student secrets in this sheet. */
 function getRanking(params) {
   const limit = Number(params.limit) || 20;
   const sheet = getSheet(SHEETS.RANKING);
@@ -209,29 +428,27 @@ function getEstadisticas(params) {
   const avgXP       = totalEst ? Math.round(totalXP / totalEst) : 0;
   const completados = progRows.filter(r => Number(r.Correctas) === 3).length;
 
-  // Per-semana participation
   const semanas = {};
   progRows.forEach(r => { semanas[r.Semana] = (semanas[r.Semana] || 0) + 1; });
 
   return { ok: true, stats: { totalEstudiantes: totalEst, activos: active, avgXP, completados, porSemana: semanas } };
 }
 
-/** Full profile for one student. */
+/** Full profile for one student — requires the student's own token. */
 function getPerfil(params) {
-  if (!params.email) return { ok: false, error: 'Correo requerido' };
-  const estRows = sheetToObjects(getSheet(SHEETS.ESTUDIANTES));
-  const user    = estRows.find(r => r.Correo === params.email.toLowerCase());
-  if (!user) return { ok: false, error: 'Usuario no encontrado' };
+  const auth = requireStudent(params.email, params.token);
+  if (!auth.ok) return auth;
 
-  const progRows   = sheetToObjects(getSheet(SHEETS.PROGRESO));
-  const badgeRows  = sheetToObjects(getSheet(SHEETS.INSIGNIAS));
-  const eventRows  = sheetToObjects(getSheet(SHEETS.EVENTOS));
+  const progRows  = sheetToObjects(getSheet(SHEETS.PROGRESO));
+  const badgeRows = sheetToObjects(getSheet(SHEETS.INSIGNIAS));
+  const eventRows = sheetToObjects(getSheet(SHEETS.EVENTOS));
 
-  const progreso = progRows.filter(r => r.IDEstudiante === params.email.toLowerCase());
-  const insignias = badgeRows.filter(r => r.IDEstudiante === params.email.toLowerCase()).map(r => r.Insignia);
-  const eventos   = eventRows.filter(r => r.IDEstudiante === params.email.toLowerCase()).slice(-20);
+  const email = auth.user.Correo;
+  const progreso  = progRows.filter(r => r.IDEstudiante === email);
+  const insignias = badgeRows.filter(r => r.IDEstudiante === email).map(r => r.Insignia);
+  const eventos   = eventRows.filter(r => r.Actor === email).slice(-20);
 
-  return { ok: true, user: sanitizeUser(user), progreso, insignias, eventos };
+  return { ok: true, user: sanitizeUser(auth.user), progreso, insignias, eventos };
 }
 
 /** Challenge data proxy (reads from challenge-bank folder if Drive-hosted). */
@@ -243,9 +460,9 @@ function getDesafio(params) {
   return { ok: true, source: 'static', week };
 }
 
-/** Admin dashboard data. */
+/** Admin dashboard data — email in allow-list AND shared admin token required. */
 function getAdminData(params) {
-  if (!CONFIG.ADMIN_EMAILS.includes(params.adminEmail)) return { ok: false, error: 'No autorizado' };
+  if (!requireAdmin(params.adminEmail, params.adminToken)) return { ok: false, error: 'No autorizado' };
   const estRows  = sheetToObjects(getSheet(SHEETS.ESTUDIANTES));
   const progRows = sheetToObjects(getSheet(SHEETS.PROGRESO));
   const badgeRows= sheetToObjects(getSheet(SHEETS.INSIGNIAS));
@@ -265,7 +482,7 @@ function getAdminData(params) {
     completados: progRows.filter(r => r.IDEstudiante === u.Correo && Number(r.Correctas) === 3).length,
     insignias  : badgeRows.filter(r => r.IDEstudiante === u.Correo).length,
     tiempoTotal: progRows.filter(r => r.IDEstudiante === u.Correo).reduce((s, r) => s + Number(r.Tiempo || 0), 0),
-    cambiosPestana: eventRows.filter(r => r.IDEstudiante === u.Correo && r.Evento === 'TAB_SWITCH').length,
+    cambiosPestana: eventRows.filter(r => r.Actor === u.Correo && r.Evento === 'TAB_SWITCH').length,
   }));
 
   return {
@@ -285,28 +502,30 @@ function getAdminData(params) {
 // ADMIN HELPERS
 // ══════════════════════════════════════════════════════════════════
 
-function adminSetEstado(email, estado) {
+function adminSetEstado(adminEmail, email, estado) {
   const sheet = getSheet(SHEETS.ESTUDIANTES);
   const rows  = sheetToObjects(sheet);
   const ok    = updateRow(sheet, rows, r => r.Correo === email, { Estado: estado });
+  if (ok) logEvento(adminEmail, 'ADMIN_SET_ESTADO', `${email} → ${estado}`, '');
   return ok ? { ok: true } : { ok: false, error: 'Usuario no encontrado' };
 }
 
-function adminResetXP(email) {
+function adminResetXP(adminEmail, email) {
   const sheet = getSheet(SHEETS.ESTUDIANTES);
   const rows  = sheetToObjects(sheet);
   const ok    = updateRow(sheet, rows, r => r.Correo === email, { XP: 0, Nivel: 1 });
-  if (ok) { updateRanking(); logEvento(email, 'ADMIN_RESET_XP', 'XP restablecido a 0', ''); }
+  if (ok) { updateRanking(); logEvento(adminEmail, 'ADMIN_RESET_XP', `${email} → XP restablecido a 0`, ''); }
   return ok ? { ok: true } : { ok: false, error: 'Usuario no encontrado' };
 }
 
-function adminEditarEstudiante(email, fields) {
+function adminEditarEstudiante(adminEmail, email, fields) {
   const allowed = ['Nombre','Nickname','Grupo','Seccion','Avatar'];
   const safe = {};
   allowed.forEach(k => { if (fields[k] != null) safe[k] = fields[k]; });
   const sheet = getSheet(SHEETS.ESTUDIANTES);
   const rows  = sheetToObjects(sheet);
   const ok    = updateRow(sheet, rows, r => r.Correo === email, safe);
+  if (ok) logEvento(adminEmail, 'ADMIN_EDITAR_ESTUDIANTE', `${email} → ${JSON.stringify(safe)}`, '');
   return ok ? { ok: true } : { ok: false, error: 'Usuario no encontrado' };
 }
 
@@ -314,21 +533,25 @@ function adminEditarEstudiante(email, fields) {
 // RANKING + ANALYTICS
 // ══════════════════════════════════════════════════════════════════
 
+/** Rewritten with a single range write (not clear+appendRow-in-a-loop) so the
+ *  sheet is never readable half-built by a concurrent getRanking() call. */
 function updateRanking() {
-  const estRows = sheetToObjects(getSheet(SHEETS.ESTUDIANTES));
+  const estRows   = sheetToObjects(getSheet(SHEETS.ESTUDIANTES));
   const badgeRows = sheetToObjects(getSheet(SHEETS.INSIGNIAS));
 
   const sorted = estRows
     .filter(r => r.Estado === 'activo')
     .sort((a, b) => Number(b.XP) - Number(a.XP));
 
-  const rankSheet = getSheet(SHEETS.RANKING);
-  rankSheet.clearContents();
-  rankSheet.appendRow(HEADERS.RANKING);
+  const values = [HEADERS.RANKING];
   sorted.forEach((u, i) => {
     const badges = badgeRows.filter(b => b.IDEstudiante === u.Correo).map(b => b.Insignia).join(',');
-    rankSheet.appendRow([i + 1, u.Nombre, u.Nickname, u.Nivel, u.XP, badges, u.Grupo]);
+    values.push([i + 1, u.Nombre, u.Nickname, u.Nivel, u.XP, badges, u.Grupo, u.Avatar || 0]);
   });
+
+  const rankSheet = getSheet(SHEETS.RANKING);
+  rankSheet.clearContents();
+  rankSheet.getRange(1, 1, values.length, HEADERS.RANKING.length).setValues(values);
 }
 
 function recalcAnalitica() {
@@ -397,9 +620,9 @@ function updateRow(sheet, rows, predicate, updates) {
   return true;
 }
 
-function logEvento(email, evento, detalle, ua) {
+function logEvento(actor, evento, detalle, ua) {
   try {
-    getSheet(SHEETS.EVENTOS).appendRow([email, evento, detalle, new Date().toISOString(), ua]);
+    getSheet(SHEETS.EVENTOS).appendRow([actor, evento, detalle, new Date().toISOString(), ua]);
   } catch(e) { /* non-critical */ }
 }
 
@@ -423,6 +646,8 @@ function sanitizeUser(u) {
   return { ID: u.ID, Correo: u.Correo, Nombre: u.Nombre, Nickname: u.Nickname,
     Avatar: u.Avatar, Grupo: u.Grupo, Seccion: u.Seccion, Nivel: u.Nivel,
     XP: u.XP, Estado: u.Estado, FechaRegistro: u.FechaRegistro };
+  // NOTE: Token is intentionally never included here — it must only ever be
+  // returned directly by registro()/login() to the account's own owner.
 }
 
 function respond(data) {

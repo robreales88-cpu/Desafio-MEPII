@@ -1,0 +1,74 @@
+{
+  "_templateInfo": {
+    "component": "drag_drop",
+    "componentLabel": "Drag & Drop",
+    "engineType": "classification",
+    "engineTypeEnAuthorStudioDropdown": true,
+    "schemaVersion": "1.0",
+    "note": "Plantilla vacia generada por el Content SDK. Ver /content/docs/CONTENT_GUIDE.md antes de completar. 'componentConfig' describe la interaccion visual propia de este componente (para cuando el Challenge Engine la soporte de forma nativa); 'questions' es el campo que el motor SI ejecuta hoy (todo tipo distinto de 'memory' corre hoy como opcion multiple generica) -- completa siempre 'questions' para que el reto sea jugable en la version actual de la plataforma."
+  },
+  "week": null,
+  "titleEs": "",
+  "titleEn": "",
+  "type": "classification",
+  "skillEs": "",
+  "skillEn": "",
+  "descEs": "",
+  "descEn": "",
+  "microretos": [
+    {
+      "id": "",
+      "type": "classification",
+      "titleEs": "",
+      "titleEn": "",
+      "difficulty": "basic",
+      "answerTime": null,
+      "maxAttempts": 3,
+      "xp": {
+        "base": null,
+        "speedMax": null,
+        "perfectBonus": null,
+        "challengeComplete": null
+      },
+      "badge": "",
+      "tags": [],
+      "componentConfig": {
+        "items": [
+          {
+            "id": "",
+            "labelEs": "",
+            "labelEn": ""
+          }
+        ],
+        "zones": [
+          {
+            "id": "",
+            "labelEs": "",
+            "labelEn": "",
+            "accepts": []
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "",
+          "textEs": "",
+          "textEn": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctEs": "",
+          "correctEn": "",
+          "skillEs": "",
+          "skillEn": "",
+          "explanEs": "",
+          "explanEn": ""
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Escape Room — avanzado",
+  "titleEn": "Escape Room Example — avanzado",
+  "type": "escape_room",
+  "skillEs": "Planificación y secuenciación (ejemplo ficticio)",
+  "skillEn": "Planning and sequencing (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-escape_room-avanzado",
+      "type": "escape_room",
+      "titleEs": "Aventura del Jardín (avanzado)",
+      "titleEn": "Garden Adventure (avanzado)",
+      "difficulty": "advanced",
+      "answerTime": 30,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 30,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "escape_room"
+      ],
+      "componentConfig": {
+        "rooms": [
+          {
+            "id": "r1",
+            "nameEs": "Sala del Jardín",
+            "nameEn": "Garden Room",
+            "descEs": "Hay un cofre cerrado. Una maceta esconde una llave dorada.",
+            "descEn": "There is a locked chest. A flowerpot hides a golden key.",
+            "objects": [
+              {
+                "id": "key1",
+                "labelEs": "Llave dorada",
+                "labelEn": "Golden key",
+                "type": "key",
+                "keyId": "goldKey",
+                "leadsTo": null
+              },
+              {
+                "id": "chest",
+                "labelEs": "Cofre cerrado",
+                "labelEn": "Locked chest",
+                "type": "lock",
+                "keyId": "goldKey",
+                "leadsTo": 1
+              }
+            ]
+          },
+          {
+            "id": "r2",
+            "nameEs": "Sala de la Torre",
+            "nameEn": "Tower Room",
+            "descEs": "Encuentra el mapa del tesoro para completar la aventura.",
+            "descEn": "Find the treasure map to complete the adventure.",
+            "objects": [
+              {
+                "id": "map",
+                "labelEs": "Mapa del tesoro",
+                "labelEn": "Treasure map",
+                "type": "goal",
+                "keyId": "goldKey",
+                "leadsTo": null
+              }
+            ]
+          }
+        ],
+        "locks": [
+          {
+            "id": "chest",
+            "requiresKeyId": "goldKey"
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Qué debe encontrar el jugador primero en la Sala del Jardín?",
+          "textEn": "What must the player find first in the Garden Room?",
+          "options": [
+            "La llave dorada",
+            "El mapa del tesoro",
+            "Una escalera",
+            "Un espejo"
+          ],
+          "correctEs": "La llave dorada",
+          "correctEn": "La llave dorada",
+          "skillEs": "Planificación de pasos",
+          "skillEn": "Step planning",
+          "explanEs": "Sin la llave dorada no se puede abrir el cofre.",
+          "explanEn": "Without the golden key you cannot open the chest."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Qué abre la llave dorada?",
+          "textEn": "What does the golden key open?",
+          "options": [
+            "El cofre cerrado",
+            "La puerta principal",
+            "Una ventana",
+            "Nada"
+          ],
+          "correctEs": "El cofre cerrado",
+          "correctEn": "El cofre cerrado",
+          "skillEs": "Relación causa-efecto",
+          "skillEn": "Cause-effect relation",
+          "explanEs": "La llave dorada está asociada directamente al cofre.",
+          "explanEn": "The golden key is directly tied to the chest."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Cuál es el objetivo final de esta aventura?",
+          "textEn": "What is the final goal of this adventure?",
+          "options": [
+            "Encontrar el mapa del tesoro",
+            "Encontrar la llave dorada",
+            "Abrir una ventana",
+            "Nada en especial"
+          ],
+          "correctEs": "Encontrar el mapa del tesoro",
+          "correctEn": "Encontrar el mapa del tesoro",
+          "skillEs": "Comprensión de objetivos",
+          "skillEn": "Goal comprehension",
+          "explanEs": "El mapa del tesoro en la Sala de la Torre es el objeto meta ('goal').",
+          "explanEn": "The treasure map in the Tower Room is the goal object."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

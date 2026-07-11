@@ -1,0 +1,67 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Visual Search — minimo",
+  "titleEn": "Visual Search Example — minimo",
+  "type": "visual_search",
+  "skillEs": "Búsqueda visual (ejemplo ficticio)",
+  "skillEn": "Visual search (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-visual_search-minimo",
+      "type": "visual_search",
+      "titleEs": "Encuentra la Figura (minimo)",
+      "titleEn": "Find the Shape (minimo)",
+      "difficulty": "basic",
+      "answerTime": 30,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 40,
+        "speedMax": 25,
+        "perfectBonus": 30,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "visual_search"
+      ],
+      "componentConfig": {
+        "target": "Estrella Amarilla",
+        "distractors": [
+          "Círculo Rojo",
+          "Cuadrado Azul",
+          "Triángulo Verde",
+          "Diamante Morado",
+          "Círculo Azul"
+        ],
+        "gridCols": 4,
+        "timeLimit": 30
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Encontraste la figura objetivo ('Estrella Amarilla') en la cuadrícula?",
+          "textEn": "Did you find the target shape ('Estrella Amarilla') in the grid?",
+          "options": [
+            "Sí, la encontré",
+            "No la encontré"
+          ],
+          "correctEs": "Sí, la encontré",
+          "correctEn": "Sí, la encontré",
+          "skillEs": "Búsqueda visual",
+          "skillEn": "Visual search",
+          "explanEs": "La búsqueda visual entrena la capacidad de localizar un objetivo entre distractores similares.",
+          "explanEn": "Visual search trains the ability to locate a target among similar distractors."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

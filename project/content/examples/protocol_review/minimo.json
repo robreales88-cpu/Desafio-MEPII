@@ -1,0 +1,77 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Protocol Review — minimo",
+  "titleEn": "Protocol Review Example — minimo",
+  "type": "protocol_review",
+  "skillEs": "Revisión de protocolo (ejemplo ficticio)",
+  "skillEn": "Protocol review (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-protocol_review-minimo",
+      "type": "protocol_review",
+      "titleEs": "Armar un Mueble (minimo)",
+      "titleEn": "Assembling Furniture (minimo)",
+      "difficulty": "basic",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "protocol_review"
+      ],
+      "componentConfig": {
+        "steps": [
+          {
+            "num": 1,
+            "textEs": "Leer todas las instrucciones antes de empezar.",
+            "textEn": "Read all instructions before starting.",
+            "hasError": false,
+            "errorNoteEs": "",
+            "errorNoteEn": ""
+          },
+          {
+            "num": 2,
+            "textEs": "Atornillar las patas sin revisar cuáles van en cada esquina.",
+            "textEn": "Screw the legs in without checking which goes in each corner.",
+            "hasError": true,
+            "errorNoteEs": "Error: cada pata puede ser distinta y debe revisarse el diagrama.",
+            "errorNoteEn": "Error: each leg may differ and the diagram should be checked."
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuántos errores hay en este protocolo de armado?",
+          "textEn": "How many errors are there in this assembly protocol?",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "correctEs": "1",
+          "correctEn": "1",
+          "skillEs": "Revisión de protocolo",
+          "skillEn": "Protocol review",
+          "explanEs": "Este protocolo contiene 1 paso(s) con error.",
+          "explanEn": "This protocol has 1 step(s) with an error."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

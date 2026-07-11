@@ -54,6 +54,31 @@ pre,code{font-family:'JetBrains Mono',monospace;}
 
   <div style="flex:1;display:flex;overflow:hidden;">
 
+    <!-- Access gate — opening this file directly no longer reveals content-authoring
+         controls; verified against the same backend admin check as the Panel Docente. -->
+    <sc-if value="{{ isNotAuthed }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+        <div style="width:100%;max-width:380px;background:#12121e;border:1px solid rgba(124,58,237,0.25);border-radius:14px;padding:24px;">
+          <div style="font-size:13px;font-weight:700;color:#a855f7;margin-bottom:4px;">Author Studio</div>
+          <div style="font-size:12px;color:#64748b;margin-bottom:18px;">Acceso restringido — solo docentes</div>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:10px;color:#64748b;margin-bottom:4px;">Correo docente</div>
+            <input type="email" value="{{ authEmailVal }}" onInput="{{ onAuthEmail }}" placeholder="docente@universidad.edu">
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="font-size:10px;color:#64748b;margin-bottom:4px;">Token de acceso</div>
+            <input type="password" value="{{ authTokenVal }}" onInput="{{ onAuthToken }}" placeholder="Token compartido por la coordinación">
+          </div>
+          <sc-if value="{{ hasAuthErr }}" hint-placeholder-val="{{ false }}">
+            <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:8px 12px;font-size:12px;color:#fca5a5;margin-bottom:12px;">{{ authErr }}</div>
+          </sc-if>
+          <button onClick="{{ authLogin }}" style="width:100%;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:10px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">Entrar</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAuthed }}" hint-placeholder-val="{{ false }}">
+
     <!-- SIDEBAR -->
     <aside style="width:188px;flex-shrink:0;height:100%;overflow-y:auto;background:#060610;border-right:1px solid rgba(124,58,237,0.12);padding:10px 7px;">
       <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="9">
@@ -557,16 +582,81 @@ pre,code{font-family:'JetBrains Mono',monospace;}
         </div>
       </sc-if>
 
-      <!-- Stubs for Variants, Preview, History -->
+      <!-- ═══ GESTOR DE VARIANTES ═════════════════════════════════ -->
       <sc-if value="{{ isVariants }}" hint-placeholder-val="{{ false }}">
-        <div style="max-width:700px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+        <div style="max-width:760px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
           <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Gestor de Variantes</h2>
           <p style="font-size:12px;color:#64748b;margin-bottom:22px;">Cada microreto puede tener N variantes para rotación aleatoria.</p>
-          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.15);border-radius:14px;padding:28px;text-align:center;color:#475569;">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" style="margin-bottom:12px;"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-            <div style="font-size:13px;margin-bottom:6px;">Selecciona un microreto en la Biblioteca para gestionar sus variantes</div>
-            <button onClick="{{ goToLib }}" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;">Ir a Biblioteca</button>
-          </div>
+
+          <sc-if value="{{ vNoMrSelected }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.15);border-radius:14px;padding:28px;text-align:center;color:#475569;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" style="margin-bottom:12px;"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+              <div style="font-size:13px;margin-bottom:6px;">Selecciona un microreto en la Biblioteca para gestionar sus variantes</div>
+              <button onClick="{{ goToLib }}" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;">Ir a Biblioteca</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ vHasMrSelected }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+              <div>
+                <div style="font-size:10px;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:3px;">{{ vBreadcrumb }}</div>
+                <div style="font-size:14px;font-weight:700;color:#f1f5f9;">{{ vMrTitle }}</div>
+              </div>
+              <div style="display:flex;gap:7px;">
+                <button onClick="{{ addVariant }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">+ Variante</button>
+                <button onClick="{{ downloadVariantsWeek }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Descargar JSON</button>
+              </div>
+            </div>
+
+            <sc-if value="{{ vNoVariants }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#12121e;border:1px dashed rgba(124,58,237,0.2);border-radius:12px;padding:22px;text-align:center;color:#475569;font-size:12px;">Este microreto todavía no tiene variantes. Usa "+ Variante" para crear la primera.</div>
+            </sc-if>
+
+            <sc-for list="{{ variantsList }}" as="v" hint-placeholder-count="2">
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;margin-bottom:10px;overflow:hidden;">
+                <div style="display:flex;align-items:center;gap:9px;padding:12px 14px;cursor:pointer;" onClick="{{ v.toggle }}">
+                  <div style="width:22px;height:22px;border-radius:6px;background:rgba(124,58,237,0.18);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#a855f7;flex-shrink:0;">{{ v.n }}</div>
+                  <div style="flex:1;font-size:13px;font-weight:600;color:#e2e8f0;">{{ v.title }}</div>
+                  <span style="font-size:10px;color:#64748b;">{{ v.qCount }} preguntas</span>
+                  <button onClick="{{ v.moveUp }}" title="Subir" style="background:transparent;border:none;color:#64748b;cursor:pointer;font-size:13px;padding:2px 4px;">↑</button>
+                  <button onClick="{{ v.moveDown }}" title="Bajar" style="background:transparent;border:none;color:#64748b;cursor:pointer;font-size:13px;padding:2px 4px;">↓</button>
+                  <button onClick="{{ v.duplicate }}" title="Duplicar" style="background:transparent;border:none;color:#64748b;cursor:pointer;font-size:12px;padding:2px 4px;">⧉</button>
+                  <button onClick="{{ v.remove }}" title="Eliminar" style="background:transparent;border:none;color:#f87171;cursor:pointer;font-size:15px;padding:2px 4px;">×</button>
+                  <span style="font-size:11px;color:#475569;">{{ v.arrow }}</span>
+                </div>
+                <sc-if value="{{ v.expanded }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:0 14px 14px;border-top:1px solid rgba(124,58,237,0.08);padding-top:11px;display:flex;flex-direction:column;gap:9px;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                      <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Título ES</div><input type="text" value="{{ v.titleEs }}" onInput="{{ v.onTitleEs }}"></div>
+                      <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Título EN</div><input type="text" value="{{ v.titleEn }}" onInput="{{ v.onTitleEn }}"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+                      <div style="font-size:10px;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Preguntas ({{ v.qCount }})</div>
+                      <button onClick="{{ v.addQuestion }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">+ Pregunta</button>
+                    </div>
+                    <sc-for list="{{ v.questions }}" as="vq" hint-placeholder-count="3">
+                      <div style="background:#0a0a14;border:1px solid rgba(124,58,237,0.1);border-radius:9px;padding:10px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                          <div style="font-size:10px;color:#64748b;font-weight:600;">Pregunta {{ vq.n }}</div>
+                          <button onClick="{{ vq.remove }}" style="background:transparent;border:none;color:#475569;cursor:pointer;font-size:14px;">×</button>
+                        </div>
+                        <input type="text" value="{{ vq.textEs }}" onInput="{{ vq.onTextEs }}" placeholder="Texto de la pregunta en español" style="margin-bottom:7px;font-size:12px;">
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:5px;margin-bottom:7px;">
+                          <sc-for list="{{ vq.opts }}" as="vopt" hint-placeholder-count="4">
+                            <div style="display:flex;gap:4px;align-items:center;">
+                              <button onClick="{{ vopt.setCorrect }}" style="width:16px;height:16px;border-radius:50%;border:2px solid {{ vopt.dotBorder }};background:{{ vopt.dotBg }};flex-shrink:0;cursor:pointer;" title="Marcar como correcta"></button>
+                              <input type="text" value="{{ vopt.value }}" onInput="{{ vopt.onChange }}" placeholder="{{ vopt.ph }}" style="font-size:11px;">
+                            </div>
+                          </sc-for>
+                        </div>
+                        <input type="text" value="{{ vq.explanEs }}" onInput="{{ vq.onExplan }}" placeholder="Explicación / retroalimentación" style="font-size:11px;background:rgba(124,58,237,0.04);">
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </sc-if>
         </div>
       </sc-if>
 
@@ -605,6 +695,7 @@ pre,code{font-family:'JetBrains Mono',monospace;}
       </sc-if>
 
     </main>
+    </sc-if>
   </div>
 </div>
 </x-dc>
@@ -677,6 +768,23 @@ class Component extends DCLogic {
     mediaFilter:'all',mediaCopied:false,
     // Import/Export
     importText:'',importError:false,importErrorMsg:'',importSuccess:false,importedWeek:'',
+    // Variants
+    vExpanded:{},
+    // Access gate
+    isAuthed:false, authEmail:'', authToken:'', authErr:'',
+  };
+
+  // ─── ACCESS GATE ──────────────────────────────────────────────────
+  onAuthEmail = e => this.setState({ authEmail: e.target.value, authErr: '' });
+  onAuthToken = e => this.setState({ authToken: e.target.value, authErr: '' });
+
+  authLogin = () => {
+    const { authEmail, authToken } = this.state;
+    if (!window.desafioAPI) { this.setState({ authErr: 'Backend no configurado todavía.' }); return; }
+    window.desafioAPI.getAdminData(authEmail, authToken).then(res => {
+      if (res && res.ok) this.setState({ isAuthed: true, authErr: '' });
+      else this.setState({ authErr: 'No autorizado. Verifica el correo y el token.' });
+    }).catch(() => this.setState({ authErr: 'Error de conexión con el backend.' }));
   };
 
   // ─── NAV ────────────────────────────────────────────────────────
@@ -775,6 +883,11 @@ class Component extends DCLogic {
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `week${week}.json`; a.click();
       // Save version to localStorage
       this._saveVersion(json);
+      // Publish the answer key so guardarProgreso/guardarXP can validate
+      // student submissions server-side instead of trusting them outright.
+      if (window.desafioAPI && this.state.authEmail && this.state.authToken) {
+        window.desafioAPI.subirBanco(this.state.authEmail, this.state.authToken, json).catch(() => {});
+      }
     }, 100);
   };
 
@@ -806,6 +919,131 @@ class Component extends DCLogic {
     versions.unshift({ts:Date.now(),data:json,label:`v${versions.length+1}`});
     localStorage.setItem(key, JSON.stringify(versions.slice(0,10)));
   }
+
+  // ─── VARIANTS ───────────────────────────────────────────────────
+  // Variants live on the microreto currently selected in the Biblioteca
+  // (`variants: [...]`), each holding its own alternate question set. The
+  // Challenge Engine itself isn't wired to pick among them at runtime yet —
+  // that's a Challenge Engine change and stays out of this sprint's scope —
+  // so today this manages the authored data only.
+  _selectedMr() {
+    const { selectedWeek, selectedMrIdx, loadedWeeks } = this.state;
+    if (selectedWeek == null || selectedMrIdx == null) return null;
+    return loadedWeeks[selectedWeek]?.microretos?.[selectedMrIdx] || null;
+  }
+
+  _updateSelectedMr(patch) {
+    this.setState(s => {
+      const data = s.loadedWeeks[s.selectedWeek];
+      if (!data) return {};
+      const microretos = data.microretos.map((m, i) => i === s.selectedMrIdx ? { ...m, ...patch } : m);
+      return { loadedWeeks: { ...s.loadedWeeks, [s.selectedWeek]: { ...data, microretos } } };
+    });
+  }
+
+  addVariant = () => {
+    const mr = this._selectedMr();
+    if (!mr) return;
+    const n = (mr.variants || []).length + 1;
+    const variant = {
+      id: `v${n}`, titleEs: `Variante ${n}`, titleEn: '',
+      questions: (mr.questions || []).map(q => ({ ...q, options: [...(q.options || [])] })),
+    };
+    this._updateSelectedMr({ variants: [...(mr.variants || []), variant] });
+  };
+
+  duplicateVariant = (vIdx) => {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = [...mr.variants];
+    const copy = JSON.parse(JSON.stringify(variants[vIdx]));
+    copy.titleEs = (copy.titleEs || '') + ' (copia)';
+    variants.splice(vIdx + 1, 0, copy);
+    this._updateSelectedMr({ variants });
+  };
+
+  removeVariant = (vIdx) => {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = [...mr.variants];
+    variants.splice(vIdx, 1);
+    this._updateSelectedMr({ variants });
+  };
+
+  moveVariant = (vIdx, dir) => {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = [...mr.variants];
+    const j = vIdx + dir;
+    if (j < 0 || j >= variants.length) return;
+    [variants[vIdx], variants[j]] = [variants[j], variants[vIdx]];
+    this._updateSelectedMr({ variants });
+  };
+
+  toggleVariant = (vIdx) => this.setState(s => ({ vExpanded: { ...s.vExpanded, [vIdx]: !s.vExpanded[vIdx] } }));
+
+  setVariantField(vIdx, key, val) {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = mr.variants.map((v, i) => i === vIdx ? { ...v, [key]: val } : v);
+    this._updateSelectedMr({ variants });
+  }
+
+  addVariantQuestion = (vIdx) => {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = mr.variants.map((v, i) => i === vIdx ? { ...v, questions: [...(v.questions || []), this.newQuestion()] } : v);
+    this._updateSelectedMr({ variants });
+  };
+
+  removeVariantQuestion(vIdx, qIdx) {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = mr.variants.map((v, i) => {
+      if (i !== vIdx) return v;
+      const questions = [...v.questions]; questions.splice(qIdx, 1);
+      return { ...v, questions };
+    });
+    this._updateSelectedMr({ variants });
+  }
+
+  setVariantQField(vIdx, qIdx, key, val) {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = mr.variants.map((v, i) => {
+      if (i !== vIdx) return v;
+      const questions = v.questions.map((q, qi) => qi === qIdx ? { ...q, [key]: val } : q);
+      return { ...v, questions };
+    });
+    this._updateSelectedMr({ variants });
+  }
+
+  setVariantQOption(vIdx, qIdx, optIdx, val) {
+    const mr = this._selectedMr();
+    if (!mr?.variants) return;
+    const variants = mr.variants.map((v, i) => {
+      if (i !== vIdx) return v;
+      const questions = v.questions.map((q, qi) => {
+        if (qi !== qIdx) return q;
+        const options = [...q.options]; options[optIdx] = val;
+        return { ...q, options };
+      });
+      return { ...v, questions };
+    });
+    this._updateSelectedMr({ variants });
+  }
+
+  setVariantQCorrect(vIdx, qIdx, val) { this.setVariantQField(vIdx, qIdx, 'correctEs', val); }
+
+  downloadVariantsWeek = () => {
+    const { selectedWeek, loadedWeeks } = this.state;
+    if (selectedWeek == null) return;
+    const data = loadedWeeks[selectedWeek];
+    if (!data) return;
+    const week = String(selectedWeek + 1).padStart(2, '0');
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `week${week}.json`; a.click();
+  };
 
   // ─── CONSTRUCTOR ────────────────────────────────────────────────
   selectCType = (t) => this.setState({ cType:t, cStep:1, cFields:this.defaultCFields(), cErrors:[], cJSON:'' });
@@ -867,6 +1105,9 @@ class Component extends DCLogic {
     const week = String(parseInt(f?.week)||99).padStart(2,'0');
     const blob = new Blob([this.state.cJSON],{type:'application/json'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download=`week${week}.json`; a.click();
+    if (window.desafioAPI && this.state.authEmail && this.state.authToken) {
+      try { window.desafioAPI.subirBanco(this.state.authEmail, this.state.authToken, JSON.parse(this.state.cJSON)).catch(() => {}); } catch(e) {}
+    }
   };
 
   cCopyJSON = () => { navigator.clipboard?.writeText(this.state.cJSON).then(()=>alert('JSON copiado.')); };
@@ -1004,6 +1245,42 @@ class Component extends DCLogic {
       };
     });
     const libQCount = selMr?.questions?.length||0;
+
+    // ── VARIANTS ──
+    const vNoMrSelected = !libHasSelected;
+    const vHasMrSelected = libHasSelected;
+    const vBreadcrumb = libHasSelected ? `Semana ${s.selectedWeek+1} › Microreto ${s.selectedMrIdx+1}` : '';
+    const vMrTitle = selMr?.titleEs || '';
+    const variantsRaw = selMr?.variants || [];
+    const vNoVariants = libHasSelected && variantsRaw.length === 0;
+    const variantsList = variantsRaw.map((v, vi) => {
+      const vExp = !!s.vExpanded[vi];
+      const questions = (v.questions || []).map((q, qi) => ({
+        n: qi + 1, textEs: q.textEs, explanEs: q.explanEs,
+        opts: (q.options || ['', '', '', '']).map((o, oi) => ({
+          value: o, ph: `Opción ${oi + 1}`,
+          dotBorder: o === q.correctEs && o ? '#10b981' : 'rgba(255,255,255,0.2)',
+          dotBg: o === q.correctEs && o ? '#10b981' : 'transparent',
+          onChange: e => this.setVariantQOption(vi, qi, oi, e.target.value),
+          setCorrect: () => this.setVariantQCorrect(vi, qi, o),
+        })),
+        onTextEs: e => this.setVariantQField(vi, qi, 'textEs', e.target.value),
+        onExplan: e => this.setVariantQField(vi, qi, 'explanEs', e.target.value),
+        remove: () => this.removeVariantQuestion(vi, qi),
+      }));
+      return {
+        n: vi + 1, title: v.titleEs || `Variante ${vi + 1}`, qCount: (v.questions || []).length,
+        expanded: vExp, arrow: vExp ? '▾' : '▸',
+        titleEs: v.titleEs, titleEn: v.titleEn,
+        onTitleEs: e => this.setVariantField(vi, 'titleEs', e.target.value),
+        onTitleEn: e => this.setVariantField(vi, 'titleEn', e.target.value),
+        toggle: () => this.toggleVariant(vi),
+        moveUp: () => this.moveVariant(vi, -1), moveDown: () => this.moveVariant(vi, 1),
+        duplicate: () => this.duplicateVariant(vi), remove: () => this.removeVariant(vi),
+        addQuestion: () => this.addVariantQuestion(vi),
+        questions,
+      };
+    });
 
     // ── EDITOR ──
     const ef = s.editFields || this.defaultFields();
@@ -1156,6 +1433,14 @@ class Component extends DCLogic {
     return {
       navItems, hasBreadcrumb, breadcrumb, contentStats,
       isBiblioteca,isEditor,isConstructor,isMedia,isVariants,isPreview,isHistory,isStats,isImportExport,
+      // access gate
+      isAuthed: s.isAuthed, isNotAuthed: !s.isAuthed,
+      authEmailVal: s.authEmail, authTokenVal: s.authToken,
+      hasAuthErr: !!s.authErr, authErr: s.authErr,
+      onAuthEmail: this.onAuthEmail, onAuthToken: this.onAuthToken, authLogin: this.authLogin,
+      // variants
+      vNoMrSelected, vHasMrSelected, vBreadcrumb, vMrTitle, vNoVariants, variantsList,
+      addVariant: this.addVariant, downloadVariantsWeek: this.downloadVariantsWeek,
       // library
       libWeeks,libHasSelected,libNoSelected,libDetailBreadcrumb,libDetailTitle,libDetailFields,libDetailQuestions,libQCount,openEditor:this.openEditor,
       // editor

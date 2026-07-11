@@ -1,0 +1,77 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Analogies — minimo",
+  "titleEn": "Analogies Example — minimo",
+  "type": "analogy",
+  "skillEs": "Razonamiento analógico (ejemplo ficticio)",
+  "skillEn": "Analogical reasoning (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-analogies-minimo",
+      "type": "analogy",
+      "titleEs": "Herramientas Cotidianas (minimo)",
+      "titleEn": "Everyday Tools (minimo)",
+      "difficulty": "basic",
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "analogies"
+      ],
+      "componentConfig": {
+        "a": {
+          "labelEs": "Llave",
+          "labelEn": "Key",
+          "subEs": "Abre",
+          "subEn": "Opens"
+        },
+        "b": {
+          "labelEs": "Cerradura",
+          "labelEn": "Lock",
+          "subEs": "",
+          "subEn": ""
+        },
+        "c": {
+          "labelEs": "Destornillador",
+          "labelEn": "Screwdriver",
+          "subEs": "Ajusta",
+          "subEn": "Tightens"
+        }
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "Llave es a Cerradura como Destornillador es a…",
+          "textEn": "Key is to Lock as Screwdriver is to…",
+          "options": [
+            "Tornillo",
+            "Martillo",
+            "Clavo",
+            "Pintura"
+          ],
+          "correctEs": "Tornillo",
+          "correctEn": "Tornillo",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "Así como la llave abre la cerradura, el destornillador ajusta el tornillo.",
+          "explanEn": "Just as the key opens the lock, the screwdriver tightens the screw."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

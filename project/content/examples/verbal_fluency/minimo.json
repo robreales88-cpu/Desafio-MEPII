@@ -1,0 +1,70 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Verbal Fluency — minimo",
+  "titleEn": "Verbal Fluency Example — minimo",
+  "type": "verbal_fluency",
+  "skillEs": "Fluidez verbal (ejemplo ficticio)",
+  "skillEn": "Verbal fluency (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK. Nota: la interacción real de texto libre con conteo de palabras aún no tiene un módulo dedicado en el motor -- ver CONTENT_GUIDE.md sección 1.",
+  "descEn": "Fictional example for the Content SDK. Note: the real free-text word-counting interaction doesn't have a dedicated engine module yet -- see CONTENT_GUIDE.md section 1.",
+  "microretos": [
+    {
+      "id": "ex-verbal_fluency-minimo",
+      "type": "verbal_fluency",
+      "titleEs": "Frutas (minimo)",
+      "titleEn": "Fruits (minimo)",
+      "difficulty": "basic",
+      "answerTime": 30,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 40,
+        "speedMax": 20,
+        "perfectBonus": 30,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "verbal_fluency"
+      ],
+      "componentConfig": {
+        "categoryEs": "Frutas",
+        "categoryEn": "Fruits",
+        "timeLimit": 30,
+        "validWords": [
+          "manzana",
+          "pera",
+          "uva",
+          "banana",
+          "naranja"
+        ],
+        "minTarget": 3
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estas palabras SÍ pertenece a la categoría 'Frutas'?",
+          "textEn": "Which of these words DOES belong to the 'Fruits' category?",
+          "options": [
+            "Manzana",
+            "Martillo",
+            "Regadera",
+            "Grapadora"
+          ],
+          "correctEs": "Manzana",
+          "correctEn": "Manzana",
+          "skillEs": "Fluidez verbal / memoria semántica",
+          "skillEn": "Verbal fluency / semantic memory",
+          "explanEs": "La manzana es la única fruta entre las opciones; las demás son herramientas u objetos de otras categorías.",
+          "explanEn": "The apple is the only fruit among the options; the rest are tools or objects from other categories."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Drag & Drop — minimo",
+  "titleEn": "Drag & Drop Example — minimo",
+  "type": "classification",
+  "skillEs": "Clasificación conceptual (ejemplo ficticio)",
+  "skillEn": "Conceptual classification (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-drag_drop-minimo",
+      "type": "classification",
+      "titleEs": "Frutas y Verduras (minimo)",
+      "titleEn": "Fruits and Vegetables (minimo)",
+      "difficulty": "basic",
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "drag_drop"
+      ],
+      "componentConfig": {
+        "items": [
+          {
+            "id": "manzana",
+            "labelEs": "Manzana",
+            "labelEn": "Apple"
+          },
+          {
+            "id": "zanahoria",
+            "labelEs": "Zanahoria",
+            "labelEn": "Carrot"
+          }
+        ],
+        "zones": [
+          {
+            "id": "frutas",
+            "labelEs": "Frutas",
+            "labelEn": "Fruits",
+            "accepts": [
+              "manzana",
+              "platano"
+            ]
+          },
+          {
+            "id": "verduras",
+            "labelEs": "Verduras",
+            "labelEn": "Vegetables",
+            "accepts": [
+              "zanahoria",
+              "brocoli"
+            ]
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿En qué categoría va la 'Manzana'?",
+          "textEn": "Which category does 'Apple' belong to?",
+          "options": [
+            "Frutas",
+            "Verduras"
+          ],
+          "correctEs": "Frutas",
+          "correctEn": "Frutas",
+          "skillEs": "Clasificación conceptual",
+          "skillEn": "Conceptual classification",
+          "explanEs": "La manzana es una fruta.",
+          "explanEn": "An apple is a fruit."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

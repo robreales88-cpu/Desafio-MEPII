@@ -1,0 +1,80 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Case Card — intermedio",
+  "titleEn": "Case Card Example — intermedio",
+  "type": "case_analysis",
+  "skillEs": "Análisis de caso (ejemplo ficticio)",
+  "skillEn": "Case analysis (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-case_card-intermedio",
+      "type": "case_analysis",
+      "titleEs": "El Jardín Encantado (intermedio)",
+      "titleEn": "The Enchanted Garden (intermedio)",
+      "difficulty": "intermediate",
+      "answerTime": 30,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 30,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "case_card"
+      ],
+      "componentConfig": {
+        "scenarioEs": "Glorbo encuentra una puerta cerrada en el Jardín Encantado. Tiene una llave dorada y una llave plateada.",
+        "scenarioEn": "Glorbo finds a locked door in the Enchanted Garden. He has a golden key and a silver key.",
+        "imageRef": "",
+        "timeLimit": 30
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Qué debería probar Glorbo primero?",
+          "textEn": "What should Glorbo try first?",
+          "options": [
+            "La llave dorada",
+            "La llave plateada",
+            "Tocar la puerta",
+            "Irse a casa"
+          ],
+          "correctEs": "La llave dorada",
+          "correctEn": "La llave dorada",
+          "skillEs": "Toma de decisiones",
+          "skillEn": "Decision making",
+          "explanEs": "La llave dorada brillaba junto a la cerradura, es la pista más clara.",
+          "explanEn": "The golden key glowed next to the lock — it's the clearest clue."
+        },
+        {
+          "id": "q2",
+          "textEs": "Si la llave dorada no funciona, ¿qué debería hacer Glorbo?",
+          "textEn": "If the golden key doesn't work, what should Glorbo do?",
+          "options": [
+            "Probar la llave plateada",
+            "Romper la puerta",
+            "Rendirse",
+            "Esperar a que llueva"
+          ],
+          "correctEs": "Probar la llave plateada",
+          "correctEn": "Probar la llave plateada",
+          "skillEs": "Razonamiento secuencial",
+          "skillEn": "Sequential reasoning",
+          "explanEs": "Tiene sentido probar la otra opción disponible antes de recurrir a algo drástico.",
+          "explanEn": "It makes sense to try the other available option before resorting to something drastic."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

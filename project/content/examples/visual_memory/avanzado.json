@@ -1,0 +1,139 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Visual Memory — avanzado",
+  "titleEn": "Visual Memory Example — avanzado",
+  "type": "memory",
+  "skillEs": "Memoria visual (ejemplo ficticio)",
+  "skillEn": "Visual memory (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-visual_memory-avanzado",
+      "type": "memory",
+      "titleEs": "Objetos de Oficina (avanzado)",
+      "titleEn": "Office Objects (avanzado)",
+      "difficulty": "advanced",
+      "answerTime": 18,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 30,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "visual_memory"
+      ],
+      "memorizeTime": 10,
+      "items": [
+        {
+          "name": "Grapadora Azul",
+          "categoryEs": "Oficina",
+          "categoryEn": "Office",
+          "initials": "GA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "Taza Roja",
+          "categoryEs": "Cocina",
+          "categoryEn": "Kitchen",
+          "initials": "TR",
+          "colorKey": "red"
+        },
+        {
+          "name": "Lámpara Verde",
+          "categoryEs": "Iluminación",
+          "categoryEn": "Lighting",
+          "initials": "LV",
+          "colorKey": "green"
+        },
+        {
+          "name": "Cuaderno Amarillo",
+          "categoryEs": "Oficina",
+          "categoryEn": "Office",
+          "initials": "CA",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Tijeras Moradas",
+          "categoryEs": "Oficina",
+          "categoryEn": "Office",
+          "initials": "TM",
+          "colorKey": "purple"
+        },
+        {
+          "name": "Termo Cian",
+          "categoryEs": "Cocina",
+          "categoryEn": "Kitchen",
+          "initials": "TC",
+          "colorKey": "cyan"
+        }
+      ],
+      "componentConfig": {
+        "gridSize": "3x2"
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos objetos NO estaba en la cuadrícula?",
+          "textEn": "Which object was NOT in the grid?",
+          "options": [
+            "Grapadora Azul",
+            "Taza Roja",
+            "Mochila Negra",
+            "Cuaderno Amarillo"
+          ],
+          "correctEs": "Mochila Negra",
+          "correctEn": "Mochila Negra",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "La Mochila Negra nunca se presentó en la cuadrícula.",
+          "explanEn": "The Black Backpack was never shown in the grid."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuántos objetos de 'Oficina' había en la cuadrícula?",
+          "textEn": "How many 'Office' objects were in the grid?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Había 3 objetos de oficina: grapadora, cuaderno y tijeras.",
+          "explanEn": "There were 3 office objects: stapler, notebook and scissors."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿A qué categoría pertenece el 'Termo Cian'?",
+          "textEn": "What category does the 'Cyan Thermos' belong to?",
+          "options": [
+            "Oficina",
+            "Cocina",
+            "Iluminación",
+            "Ninguna"
+          ],
+          "correctEs": "Cocina",
+          "correctEn": "Cocina",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El termo es un objeto de cocina.",
+          "explanEn": "The thermos is a kitchen object."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Protocol Review — avanzado",
+  "titleEn": "Protocol Review Example — avanzado",
+  "type": "protocol_review",
+  "skillEs": "Revisión de protocolo (ejemplo ficticio)",
+  "skillEn": "Protocol review (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK.",
+  "descEn": "Fictional example for the Content SDK.",
+  "microretos": [
+    {
+      "id": "ex-protocol_review-avanzado",
+      "type": "protocol_review",
+      "titleEs": "Armar un Mueble (avanzado)",
+      "titleEn": "Assembling Furniture (avanzado)",
+      "difficulty": "advanced",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 45,
+        "speedMax": 25,
+        "perfectBonus": 40,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "protocol_review"
+      ],
+      "componentConfig": {
+        "steps": [
+          {
+            "num": 1,
+            "textEs": "Leer todas las instrucciones antes de empezar.",
+            "textEn": "Read all instructions before starting.",
+            "hasError": false,
+            "errorNoteEs": "",
+            "errorNoteEn": ""
+          },
+          {
+            "num": 2,
+            "textEs": "Atornillar las patas sin revisar cuáles van en cada esquina.",
+            "textEn": "Screw the legs in without checking which goes in each corner.",
+            "hasError": true,
+            "errorNoteEs": "Error: cada pata puede ser distinta y debe revisarse el diagrama.",
+            "errorNoteEn": "Error: each leg may differ and the diagram should be checked."
+          },
+          {
+            "num": 3,
+            "textEs": "Verificar que todos los tornillos queden ajustados.",
+            "textEn": "Verify all screws are tight.",
+            "hasError": false,
+            "errorNoteEs": "",
+            "errorNoteEn": ""
+          },
+          {
+            "num": 4,
+            "textEs": "Usar la superficie sin dejar secar el pegamento.",
+            "textEn": "Use the surface without letting the glue dry.",
+            "hasError": true,
+            "errorNoteEs": "Error: el pegamento necesita tiempo de secado antes de usar el mueble.",
+            "errorNoteEn": "Error: glue needs drying time before the furniture is used."
+          }
+        ]
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuántos errores hay en este protocolo de armado?",
+          "textEn": "How many errors are there in this assembly protocol?",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Revisión de protocolo",
+          "skillEn": "Protocol review",
+          "explanEs": "Este protocolo contiene 2 paso(s) con error.",
+          "explanEn": "This protocol has 2 step(s) with an error."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuál es el error en el paso 2?",
+          "textEn": "What is the error in step 2?",
+          "options": [
+            "Error: cada pata puede ser distinta y debe revisarse el diagrama.",
+            "No hay error",
+            "El paso está incompleto",
+            "El paso está duplicado"
+          ],
+          "correctEs": "Error: cada pata puede ser distinta y debe revisarse el diagrama.",
+          "correctEn": "Error: cada pata puede ser distinta y debe revisarse el diagrama.",
+          "skillEs": "Identificación de errores",
+          "skillEn": "Error identification",
+          "explanEs": "Ese paso omite una verificación necesaria del proceso.",
+          "explanEn": "That step skips a necessary verification of the process."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Cuántos pasos tiene el protocolo completo revisado?",
+          "textEn": "How many steps does the full reviewed protocol have?",
+          "options": [
+            "4",
+            "5",
+            "3",
+            "10"
+          ],
+          "correctEs": "4",
+          "correctEn": "4",
+          "skillEs": "Conteo de pasos",
+          "skillEn": "Step counting",
+          "explanEs": "El protocolo revisado tiene 4 pasos.",
+          "explanEn": "The reviewed protocol has 4 steps."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

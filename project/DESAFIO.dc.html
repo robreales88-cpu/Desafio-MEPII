@@ -655,49 +655,72 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
             <div style="font-size:11px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;">{{ t_panel_docente }}</div>
             <h2 style="font-size:21px;font-weight:700;color:#f1f5f9;">{{ t_panel_sub }}</h2>
           </div>
-          <div style="display:flex;gap:8px;">
-            <button onClick="{{ doExportCSV }}" style="background:transparent;border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              CSV
-            </button>
-            <button onClick="{{ doExportExcel }}" style="background:transparent;border:1px solid rgba(6,182,212,0.3);color:#06b6d4;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/></svg>
-              Excel
-            </button>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:22px;">
-          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_estudiantes }}</div><div style="font-size:26px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ tc_students }}</div></div>
-          <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_xp }}</div><div style="font-size:26px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ tc_avgXP }}</div></div>
-          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_time }}</div><div style="font-size:26px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ tc_avgTime }}</div></div>
-          <div style="background:#12121e;border:1px solid rgba(239,68,68,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_pendientes }}</div><div style="font-size:26px;font-weight:700;color:#ef4444;font-family:'Space Grotesk',sans-serif;">{{ tc_pending }}</div></div>
-        </div>
-
-        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;overflow:hidden;margin-bottom:18px;">
-          <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_est_registrados }}</div>
-          <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
-            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_estudiante }}</span>
-            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_nivel }}</span>
-            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">XP</span>
-            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_completados }}</span>
-            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_tiempo_min }}</span>
-          </div>
-          <sc-for list="{{ tcRows }}" as="st" hint-placeholder-count="8">
-            <div style="padding:11px 16px;border-bottom:1px solid rgba(124,58,237,0.06);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;align-items:center;">
-              <div><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ st.name }}</div><div style="font-size:9px;color:#64748b;">{{ st.email }} · G:{{ st.group }}/S:{{ st.section }}</div></div>
-              <div style="text-align:center;font-size:11px;color:#a855f7;font-weight:500;">{{ st.level }}</div>
-              <div style="text-align:center;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#06b6d4;">{{ st.xp }}</div>
-              <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}</div>
-              <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.time }}</div>
+          <sc-if value="{{ teacherAuthed }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:8px;">
+              <button onClick="{{ doExportCSV }}" style="background:transparent;border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                CSV
+              </button>
+              <button onClick="{{ doExportExcel }}" style="background:transparent;border:1px solid rgba(6,182,212,0.3);color:#06b6d4;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/></svg>
+                Excel
+              </button>
             </div>
-          </sc-for>
+          </sc-if>
         </div>
 
-        <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:5px;">{{ t_integridad }}</div>
-          <div style="font-size:12px;color:#94a3b8;">{{ t_sin_eventos }}</div>
-        </div>
+        <!-- Access gate — clicking "Docente" no longer reveals real student data by itself. -->
+        <sc-if value="{{ teacherNotAuthed }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:22px;max-width:380px;">
+            <div style="font-size:12px;font-weight:600;color:#f59e0b;margin-bottom:14px;">Acceso restringido — solo docentes</div>
+            <div style="margin-bottom:10px;">
+              <div style="font-size:10px;color:#64748b;margin-bottom:4px;">Correo docente</div>
+              <input type="email" value="{{ teacherEmailVal }}" onInput="{{ onTeacherEmail }}" placeholder="docente@universidad.edu" style="width:100%;background:#0a0a14;border:1px solid rgba(245,158,11,0.22);border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;">
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:10px;color:#64748b;margin-bottom:4px;">Token de acceso</div>
+              <input type="password" value="{{ teacherTokenVal }}" onInput="{{ onTeacherToken }}" placeholder="Token compartido por la coordinación" style="width:100%;background:#0a0a14;border:1px solid rgba(245,158,11,0.22);border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;">
+            </div>
+            <sc-if value="{{ hasTeacherAuthErr }}" hint-placeholder-val="{{ false }}">
+              <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:8px 12px;font-size:12px;color:#fca5a5;margin-bottom:10px;">{{ teacherAuthErr }}</div>
+            </sc-if>
+            <button onClick="{{ teacherLogin }}" style="width:100%;background:linear-gradient(135deg,#f59e0b,#f97316);color:white;border:none;padding:10px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Entrar</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ teacherAuthed }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:22px;">
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_estudiantes }}</div><div style="font-size:26px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ tc_students }}</div></div>
+            <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_xp }}</div><div style="font-size:26px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ tc_avgXP }}</div></div>
+            <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_time }}</div><div style="font-size:26px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ tc_avgTime }}</div></div>
+            <div style="background:#12121e;border:1px solid rgba(239,68,68,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_pendientes }}</div><div style="font-size:26px;font-weight:700;color:#ef4444;font-family:'Space Grotesk',sans-serif;">{{ tc_pending }}</div></div>
+          </div>
+
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;overflow:hidden;margin-bottom:18px;">
+            <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_est_registrados }}</div>
+            <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
+              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_estudiante }}</span>
+              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_nivel }}</span>
+              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">XP</span>
+              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_completados }}</span>
+              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_tiempo_min }}</span>
+            </div>
+            <sc-for list="{{ tcRows }}" as="st" hint-placeholder-count="8">
+              <div style="padding:11px 16px;border-bottom:1px solid rgba(124,58,237,0.06);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;align-items:center;">
+                <div><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ st.name }}</div><div style="font-size:9px;color:#64748b;">{{ st.email }} · G:{{ st.group }}/S:{{ st.section }}</div></div>
+                <div style="text-align:center;font-size:11px;color:#a855f7;font-weight:500;">{{ st.level }}</div>
+                <div style="text-align:center;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#06b6d4;">{{ st.xp }}</div>
+                <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}</div>
+                <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.time }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:13px 15px;">
+            <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:5px;">{{ t_integridad }}</div>
+            <div style="font-size:12px;color:#94a3b8;">{{ t_sin_eventos }}</div>
+          </div>
+        </sc-if>
       </div>
     </sc-if>
 
@@ -984,6 +1007,11 @@ class Component extends DCLogic {
     newBadge: null,
     resBreak: [],
     hasNextMr: false,
+    // ranking (real data from backend; empty until fetched / no backend configured)
+    remoteRanking: [],
+    // teacher panel access gate
+    teacherAuthed: false,
+    teacherEmail: '', teacherToken: '', teacherAuthErr: '', teacherData: null,
   };
 
   engine = null;
@@ -1064,8 +1092,10 @@ class Component extends DCLogic {
   };
 
   _onTabSwitch = () => {
-    if (this.engine) this.engine.abandon();
-    this.setState({ screen: 'challenges' });
+    // Route through abandonChallenge() (not a bare engine.abandon()) so a tab
+    // switch actually consumes an attempt like any other abandoned microreto —
+    // previously this bypassed the 3-attempt rule entirely.
+    this.abandonChallenge();
   };
 
   onVisChange = () => {
@@ -1081,12 +1111,42 @@ class Component extends DCLogic {
       if (raw) {
         const user = JSON.parse(raw);
         this.setState({ user, screen: 'dashboard' });
+        this._reconcileWithServer(user);
       }
     } catch(e) {}
+    this._refreshRanking();
   }
 
   saveUser(user) {
     try { localStorage.setItem('desafio_user', JSON.stringify(user)); } catch(e) {}
+  }
+
+  /** Never lowers local XP (would look like a punitive/confusing drop) — only
+   *  raises it to match the backend when the backend is further ahead, e.g.
+   *  after syncing from another device. The backend itself is what actually
+   *  caps how much XP a single event can grant (see Code.gs), so this is a
+   *  display-consistency step, not the enforcement point. */
+  _reconcileWithServer(user) {
+    if (!window.desafioAPI || !user?.email || !user?.token) return;
+    window.desafioAPI.getPerfil(user.email, user.token).then(res => {
+      if (!res || !res.ok || !res.user) return;
+      const serverXP = Number(res.user.XP) || 0;
+      if (serverXP > (this.state.user?.xp || 0)) {
+        const updUser = { ...this.state.user, xp: serverXP };
+        this.saveUser(updUser);
+        this.setState({ user: updUser });
+      }
+    }).catch(() => {});
+  }
+
+  /** Real classmates from the backend leaderboard, replacing the fixture data
+   *  the ranking/teacher screens used to show. No backend configured yet →
+   *  stays empty and the student just sees themself, which is the honest state. */
+  _refreshRanking() {
+    if (!window.desafioAPI) return;
+    window.desafioAPI.getRanking(50).then(res => {
+      if (res && res.ok) this.setState({ remoteRanking: res.ranking || [] });
+    }).catch(() => {});
   }
 
   defaultUser(form, avatar) {
@@ -1112,12 +1172,33 @@ class Component extends DCLogic {
   loginExisting = () => { if (this.state.user) this.nav('dashboard'); else this.nav('register'); };
   goDashboard   = () => this.nav('dashboard');
   goChallenges  = () => this.nav('challenges');
-  goRanking     = () => this.nav('ranking');
+  goRanking     = () => { this._refreshRanking(); this.nav('ranking'); };
   goProfile     = () => this.nav('profile');
   goTeacher     = () => this.nav('teacher');
 
+  // ─── TEACHER PANEL ACCESS GATE ──────────────────────────────────────────────
+  onTeacherEmail = e => this.setState({ teacherEmail: e.target.value, teacherAuthErr: '' });
+  onTeacherToken = e => this.setState({ teacherToken: e.target.value, teacherAuthErr: '' });
+
+  teacherLogin = () => {
+    const { teacherEmail, teacherToken } = this.state;
+    if (!window.desafioAPI) { this.setState({ teacherAuthErr: 'Backend no configurado todavía.' }); return; }
+    window.desafioAPI.getAdminData(teacherEmail, teacherToken).then(res => {
+      if (res && res.ok) this.setState({ teacherAuthed: true, teacherData: res, teacherAuthErr: '' });
+      else this.setState({ teacherAuthErr: 'No autorizado. Verifica el correo y el token.' });
+    }).catch(() => this.setState({ teacherAuthErr: 'Error de conexión con el backend.' }));
+  };
+
   nav(screen) {
-    clearInterval(this.timerRef);
+    // Leaving an active challenge through the top/bottom nav (Dashboard,
+    // Challenges, Ranking, Profile, Docente…) used to leave the engine's timer
+    // running in the background and never consumed an attempt — the exact
+    // same rule violation as closing it early ("cerrar el reto antes de
+    // terminar consume un intento"). Route through the same bookkeeping the
+    // explicit "Salir" button uses, then continue to wherever was clicked.
+    if (this.state.screen === 'challenge-active' && this.engine && this.engine.isActive()) {
+      this._registerAbandon();
+    }
     this.setState({ screen });
   }
 
@@ -1137,12 +1218,21 @@ class Component extends DCLogic {
     const user = this.defaultUser({ name: fName, email: fEmail, nick: this.state.fNick, group: fGroup, section: fSection }, selAvatar);
     this.saveUser(user);
     this.playXP();
-    // Sync to backend (non-blocking)
+    this.setState({ user, screen: 'dashboard' });
+    // Sync to backend (non-blocking). The returned token is what authenticates
+    // every later guardarXP/guardarProgreso/getPerfil call for this account —
+    // without it those calls are rejected server-side (see Code.gs requireStudent).
     if (window.desafioAPI) {
-      window.desafioAPI.registro({ nombre: fName, email: fEmail, nickname: this.state.fNick || fName.split(' ')[0], grupo: fGroup, seccion: fSection, avatar: selAvatar });
+      window.desafioAPI.registro({ nombre: fName, email: fEmail, nickname: this.state.fNick || fName.split(' ')[0], grupo: fGroup, seccion: fSection, avatar: selAvatar })
+        .then(res => {
+          if (res && res.ok && res.token) {
+            const withToken = { ...this.state.user, token: res.token };
+            this.saveUser(withToken);
+            this.setState({ user: withToken });
+          }
+        }).catch(() => {});
       window.desafioAPI.guardarEvento(fEmail, 'REGISTRO', `Nuevo perfil: ${fName}`);
     }
-    this.setState({ user, screen: 'dashboard' });
   };
 
   // ─── LEVEL / XP ─────────────────────────────────────────────────────────────
@@ -1157,9 +1247,18 @@ class Component extends DCLogic {
   }
 
   // ─── RANKING ────────────────────────────────────────────────────────────────
+  /** Real classmates from the backend (04_RANKING), merged with the current
+   *  user's live local state so "you" always reflects up-to-the-second XP even
+   *  if the last sync hasn't landed yet. No backend configured / not synced
+   *  yet → the list is just yourself, which is the honest state rather than
+   *  fabricated classmates. */
   getRankedList() {
     const user = this.state.user;
-    const all = [...this.MOCK_STUDENTS];
+    const remote = this.state.remoteRanking || [];
+    const others = remote
+      .filter(r => !(user && r.Nombre === user.name && r.Nickname === user.nickname))
+      .map(r => ({ name: r.Nombre, nick: r.Nickname, xp: Number(r.XP) || 0, av: Number(r.Avatar) || 0, g: r.Grupo, s: '' }));
+    const all = [...others];
     if (user) all.push({ name: user.name, nick: user.nickname, xp: user.xp, av: user.avatar, g: user.group, s: user.section, isMe: true });
     return all.sort((a, b) => b.xp - a.xp);
   }
@@ -1203,20 +1302,37 @@ class Component extends DCLogic {
 
   finishMicroreto = () => {
     if (!this.engine) return;
+    const rawAnswers = this.engine.getAnswers(); // capture before finishMicroreto() tears anything down
     const stats = this.engine.finishMicroreto();
     if (!stats) return;
 
-    const { curChIdx, curMrIdx, user } = this.state;
+    const { curChIdx, curMrIdx, user, challengeData } = this.state;
     const updUser = JSON.parse(JSON.stringify(user));
     const mr = updUser.challenges[curChIdx].microretos[curMrIdx];
+    const mrJsonCfg = challengeData?.microretos?.[curMrIdx];
+    const maxAttempts = mrJsonCfg?.maxAttempts || 3;
+
+    // Was this microreto/challenge already completed before this run? Replaying
+    // a finished microreto is still allowed (harmless practice) but must not
+    // re-grant XP/bonuses every time — otherwise a student could farm unlimited
+    // XP by replaying the same easy microreto forever.
+    const wasAlreadyCompleted   = !!mr.completed;
+    const wasChallengeCompleted = !!updUser.challenges[curChIdx].completed;
+
     mr.completed = true;
     mr.attempts = (mr.attempts || 0) + 1;
+    if (mr.attempts >= maxAttempts) mr.blocked = true;
     mr.xp = Math.max(mr.xp || 0, stats.finalXP);
-    updUser.xp += stats.finalXP;
+    if (!wasAlreadyCompleted) updUser.xp += stats.finalXP;
     updUser.totalTime = (updUser.totalTime || 0) + stats.timeUsed;
 
     const allMrDone = updUser.challenges[curChIdx].microretos.every(m => m.completed);
-    if (allMrDone) { updUser.challenges[curChIdx].completed = true; updUser.xp += 100; }
+    let challengeBonus = 0;
+    if (allMrDone && !wasChallengeCompleted) {
+      updUser.challenges[curChIdx].completed = true;
+      challengeBonus = 100;
+      updUser.xp += challengeBonus;
+    }
 
     let newBadge = null;
     if (!updUser.badges.includes('observer')) { updUser.badges.push('observer'); newBadge = 'observer'; }
@@ -1227,36 +1343,53 @@ class Component extends DCLogic {
     updUser.activityLog = [{ text: `Microreto ${curMrIdx+1} del Desafío ${curChIdx+1} completado`, time: 'ahora', c: '#10b981' }, ...(updUser.activityLog||[])].slice(0, 10);
     this.saveUser(updUser);
     this.playXP();
-    // Sync to backend (non-blocking, queued if offline)
-    if (window.desafioAPI && updUser.email) {
-      window.desafioAPI.guardarProgreso({ email: updUser.email, semana: curChIdx+1, microreto: curMrIdx+1, tipo: this.state.challengeData?.type||'memory', intentos: updUser.challenges[curChIdx].microretos[curMrIdx].attempts, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, xp: stats.finalXP, cambiosPestana: stats.tabSwitches||0 });
-      window.desafioAPI.guardarXP(updUser.email, stats.finalXP);
-      if (newBadge) window.desafioAPI.guardarInsignia(updUser.email, newBadge);
-      window.desafioAPI.guardarEvento(updUser.email, 'MICRORETO_COMPLETADO', `S${curChIdx+1}M${curMrIdx+1} · ${stats.finalXP} XP`);
+    // Sync to backend (non-blocking, queued if offline). The backend
+    // independently recomputes correctas/incorrectas/xp from the answer key
+    // (once Author Studio has published one for this week) instead of trusting
+    // these numbers outright — see Code.gs evaluateSubmission().
+    if (window.desafioAPI && updUser.email && updUser.token) {
+      const answers = rawAnswers.map(a => ({
+        qIdx: a.qIdx,
+        answerEs: typeof a.answer === 'object' ? (a.answer.es || '') : (a.answer === '__timeout__' ? '' : a.answer),
+        answerEn: typeof a.answer === 'object' ? (a.answer.en || '') : (a.answer === '__timeout__' ? '' : a.answer),
+      }));
+      const token = updUser.token;
+      window.desafioAPI.guardarProgreso({ email: updUser.email, token, semana: curChIdx+1, microreto: curMrIdx+1, tipo: this.state.challengeData?.type||'memory', intentos: mr.attempts, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, xp: stats.finalXP, cambiosPestana: stats.tabSwitches||0, answers });
+      window.desafioAPI.guardarXP(updUser.email, stats.finalXP, { token, semana: curChIdx+1, microreto: curMrIdx+1, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, answers, bonus: challengeBonus });
+      if (newBadge) window.desafioAPI.guardarInsignia(updUser.email, newBadge, token);
+      window.desafioAPI.guardarEvento(updUser.email, 'MICRORETO_COMPLETADO', `S${curChIdx+1}M${curMrIdx+1} · ${stats.finalXP} XP`, token);
     }
 
     const resBreak = [
       { label: 'Respuestas correctas', val: `${stats.correct} / ${stats.total}`, c: '#10b981' },
       { label: 'Precisión', val: `${stats.accuracy}%`, c: '#a855f7' },
       { label: 'XP ganado', val: `+${stats.baseXP}`, c: '#06b6d4' },
-      { label: stats.allCorrect ? 'Bonus perfecto' : 'Total', val: `+${stats.finalXP + (allMrDone ? 100 : 0)}`, c: '#f59e0b' },
+      { label: stats.allCorrect ? 'Bonus perfecto' : 'Total', val: `+${stats.finalXP + challengeBonus}`, c: '#f59e0b' },
     ];
     const hasNextMr = curMrIdx < 2 && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.blocked && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.completed;
 
-    this.setState({ user: updUser, screen: 'results', lastMrXP: stats.finalXP + (allMrDone ? 100 : 0), newBadge, resBreak, hasNextMr });
+    this.setState({ user: updUser, screen: 'results', lastMrXP: stats.finalXP + challengeBonus, newBadge, resBreak, hasNextMr });
   };
 
-  abandonChallenge = () => {
+  /** Stops the engine and consumes an attempt for whatever microreto is
+   *  active — shared by the explicit "Salir" button, the tab-switch handler,
+   *  and nav() (leaving via the top/bottom nav mid-challenge). Does not touch
+   *  `screen` — callers decide where to land. */
+  _registerAbandon() {
     if (this.engine) this.engine.abandon();
-    const { curChIdx, curMrIdx, user } = this.state;
-    if (user) {
-      const updUser = JSON.parse(JSON.stringify(user));
-      const mr = updUser.challenges[curChIdx].microretos[curMrIdx];
-      mr.attempts = (mr.attempts || 0) + 1;
-      if (mr.attempts >= 3) mr.blocked = true;
-      this.saveUser(updUser);
-      this.setState({ user: updUser });
-    }
+    const { curChIdx, curMrIdx, user, challengeData } = this.state;
+    if (!user) return;
+    const updUser = JSON.parse(JSON.stringify(user));
+    const mr = updUser.challenges[curChIdx].microretos[curMrIdx];
+    const maxAttempts = challengeData?.microretos?.[curMrIdx]?.maxAttempts || 3;
+    mr.attempts = (mr.attempts || 0) + 1;
+    if (mr.attempts >= maxAttempts) mr.blocked = true;
+    this.saveUser(updUser);
+    this.setState({ user: updUser });
+  }
+
+  abandonChallenge = () => {
+    this._registerAbandon();
     this.setState({ screen: 'challenges' });
   };
 
@@ -1571,16 +1704,27 @@ class Component extends DCLogic {
     // Activity log
     const actLog = (user?.activityLog || [{ text: lang==='es'?'Cuenta creada':'Account created', time: 'hoy', c:'#a855f7' }]).map(a => ({...a}));
 
-    // Teacher
-    const tc_students = rkSorted.length;
-    const tc_avgXP = Math.round(rkSorted.reduce((s, r) => s + r.xp, 0) / (rkSorted.length || 1));
-    const tc_avgTime = Math.round(this.MOCK_STUDENTS.reduce((s, r) => s + r.time, 0) / this.MOCK_STUDENTS.length);
-    const tc_pending = rkSorted.filter(s => s.xp === 0).length;
-    const tcRows = rkSorted.map(s => ({
-      name: s.name || s.nick, email: (s.name || '').toLowerCase().replace(' ','.')+'@edu.sv',
-      group: s.g || '-', section: s.s || '-',
-      level: this.getLevel(s.xp).label[lang],
-      xp: s.xp, done: Math.floor(s.xp / 180), time: s.time || Math.floor(s.xp / 8),
+    // Teacher — gated behind teacherAuthed (SEC-3). Only populated with real
+    // backend data (getAdminData) once the docente has verified in; never
+    // fabricated from mock/ranking data, so nothing real-looking is shown
+    // to a caller who hasn't authenticated.
+    const teacherAuthed = this.state.teacherAuthed;
+    const teacherNotAuthed = !teacherAuthed;
+    const teacherEmailVal = this.state.teacherEmail;
+    const teacherTokenVal = this.state.teacherToken;
+    const hasTeacherAuthErr = !!this.state.teacherAuthErr;
+    const teacherAuthErr = this.state.teacherAuthErr;
+    const td = this.state.teacherData;
+    const tdStudents = td?.students || [];
+    const tc_students = td?.totalStudents || 0;
+    const tc_avgXP = td?.avgXP || 0;
+    const tc_avgTime = tdStudents.length ? Math.round(tdStudents.reduce((s, r) => s + Number(r.tiempoTotal || 0), 0) / tdStudents.length / 60) : 0;
+    const tc_pending = tdStudents.filter(r => Number(r.XP) === 0).length;
+    const tcRows = tdStudents.map(u => ({
+      name: u.Nombre, email: u.Correo,
+      group: u.Grupo || '-', section: u.Seccion || '-',
+      level: this.getLevel(Number(u.XP) || 0).label[lang],
+      xp: Number(u.XP) || 0, done: u.completados || 0, time: Math.round((u.tiempoTotal || 0) / 60),
     }));
 
     return {
@@ -1632,6 +1776,10 @@ class Component extends DCLogic {
       allBadges, actLog,
       // teacher
       tc_students, tc_avgXP, tc_avgTime, tc_pending, tcRows,
+      teacherAuthed, teacherNotAuthed, teacherEmailVal, teacherTokenVal,
+      hasTeacherAuthErr, teacherAuthErr,
+      onTeacherEmail: this.onTeacherEmail, onTeacherToken: this.onTeacherToken,
+      teacherLogin: this.teacherLogin,
       // navigation handlers
       goLanding: this.goLanding, goRegister: this.goRegister, loginExisting: this.loginExisting,
       goDashboard: this.goDashboard, goChallenges: this.goChallenges,

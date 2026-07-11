@@ -1,0 +1,172 @@
+{
+  "_exampleInfo": {
+    "purpose": "Ejemplo ficticio del Content SDK -- NO es contenido academico definitivo.",
+    "schemaVersion": "1.0"
+  },
+  "week": 0,
+  "titleEs": "Ejemplo Matrix — avanzado",
+  "titleEn": "Matrix Example — avanzado",
+  "type": "reasoning",
+  "skillEs": "Razonamiento abstracto (ejemplo ficticio)",
+  "skillEn": "Abstract reasoning (fictional example)",
+  "descEs": "Ejemplo ficticio para el Content SDK, no es contenido académico real.",
+  "descEn": "Fictional example for the Content SDK, not real academic content.",
+  "microretos": [
+    {
+      "id": "ex-matrix-avanzado",
+      "type": "reasoning",
+      "titleEs": "Patrón de Figuras (avanzado)",
+      "titleEn": "Shape Pattern (avanzado)",
+      "difficulty": "advanced",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 40,
+        "speedMax": 20,
+        "perfectBonus": 30,
+        "challengeComplete": 100
+      },
+      "badge": "",
+      "tags": [
+        "ejemplo",
+        "ficticio",
+        "matrix"
+      ],
+      "componentConfig": {
+        "grid": [
+          {
+            "shape": "circle",
+            "color": "#7c3aed",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "square",
+            "color": "#06b6d4",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "triangle",
+            "color": "#10b981",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "diamond",
+            "color": "#f59e0b",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "circle",
+            "color": "#7c3aed",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "square",
+            "color": "#06b6d4",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "triangle",
+            "color": "#10b981",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "diamond",
+            "color": "#f59e0b",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "circle",
+            "color": "#7c3aed",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          }
+        ],
+        "options": [
+          {
+            "shape": "circle",
+            "color": "#7c3aed",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "square",
+            "color": "#06b6d4",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "triangle",
+            "color": "#10b981",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          },
+          {
+            "shape": "diamond",
+            "color": "#f59e0b",
+            "rotation": 0,
+            "size": "md",
+            "svgRef": ""
+          }
+        ],
+        "correctIndex": 3
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Qué figura completa el patrón?",
+          "textEn": "Which shape completes the pattern?",
+          "options": [
+            "Círculo morado",
+            "Cuadrado cian",
+            "Triángulo verde",
+            "Diamante ámbar"
+          ],
+          "correctEs": "Diamante ámbar",
+          "correctEn": "Diamante ámbar",
+          "skillEs": "Razonamiento abstracto",
+          "skillEn": "Abstract reasoning",
+          "explanEs": "La secuencia de figuras rota entre las 4 formas base siguiendo el mismo orden de color.",
+          "explanEn": "The shape sequence rotates through the 4 base shapes following the same color order."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuántos colores distintos aparecen en la cuadrícula?",
+          "textEn": "How many distinct colors appear in the grid?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctEs": "4",
+          "correctEn": "4",
+          "skillEs": "Discriminación visual",
+          "skillEn": "Visual discrimination",
+          "explanEs": "La cuadrícula usa exactamente 4 colores base en rotación.",
+          "explanEn": "The grid uses exactly 4 base colors in rotation."
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

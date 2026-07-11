@@ -1,0 +1,63 @@
+{
+  "_templateInfo": {
+    "component": "visual_search",
+    "componentLabel": "Visual Search",
+    "engineType": "visual_search",
+    "engineTypeEnAuthorStudioDropdown": false,
+    "schemaVersion": "1.0",
+    "note": "Plantilla vacia generada por el Content SDK. Ver /content/docs/CONTENT_GUIDE.md antes de completar. 'componentConfig' describe la interaccion visual propia de este componente (para cuando el Challenge Engine la soporte de forma nativa); 'questions' es el campo que el motor SI ejecuta hoy (todo tipo distinto de 'memory' corre hoy como opcion multiple generica) -- completa siempre 'questions' para que el reto sea jugable en la version actual de la plataforma."
+  },
+  "week": null,
+  "titleEs": "",
+  "titleEn": "",
+  "type": "visual_search",
+  "skillEs": "",
+  "skillEn": "",
+  "descEs": "",
+  "descEn": "",
+  "microretos": [
+    {
+      "id": "",
+      "type": "visual_search",
+      "titleEs": "",
+      "titleEn": "",
+      "difficulty": "basic",
+      "answerTime": null,
+      "maxAttempts": 3,
+      "xp": {
+        "base": null,
+        "speedMax": null,
+        "perfectBonus": null,
+        "challengeComplete": null
+      },
+      "badge": "",
+      "tags": [],
+      "componentConfig": {
+        "target": "",
+        "distractors": [],
+        "gridCols": null,
+        "timeLimit": null
+      },
+      "questions": [
+        {
+          "id": "",
+          "textEs": "",
+          "textEn": "",
+          "options": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "correctEs": "",
+          "correctEn": "",
+          "skillEs": "",
+          "skillEn": "",
+          "explanEs": "",
+          "explanEn": ""
+        }
+      ],
+      "variants": []
+    }
+  ]
+}
