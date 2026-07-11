@@ -1,9 +1,5 @@
 {
-  "version": 2,
-  "buildCommand": null,
   "outputDirectory": "project",
-  "cleanUrls": false,
-  "trailingSlash": false,
   "rewrites": [
     { "source": "/", "destination": "/DESAFIO.dc.html" }
   ],
@@ -11,53 +7,10 @@
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        }
-      ]
-    },
-    {
-      "source": "/support.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=3600"
-        }
-      ]
-    },
-    {
-      "source": "/challenge-bank/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=300, stale-while-revalidate=60"
-        }
-      ]
-    },
-    {
-      "source": "/content/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=300"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
-  ],
-  "env": {
-    "VITE_SCRIPT_URL": "@script_url"
-  }
+  ]
 }
