@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "public": false,
   "buildCommand": null,
   "outputDirectory": "project",
   "cleanUrls": false,
