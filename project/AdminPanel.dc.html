@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./api-client.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{background:#0a0a14;color:#e2e8f0;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#0a0a14;}::-webkit-scrollbar-thumb{background:rgba(245,158,11,0.35);border-radius:3px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+input,textarea,select{background:#0a0a14;color:#e2e8f0;border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:8px 12px;font-family:'Inter',sans-serif;font-size:13px;outline:none;}
+input:focus,textarea:focus,select:focus{border-color:rgba(245,158,11,0.5);}
+</style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;height:100vh;overflow:hidden;">
+
+  <!-- ── TOP BAR ─────────────────────────────────────────────────── -->
+  <header style="flex-shrink:0;height:54px;background:rgba(8,6,2,0.96);border-bottom:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;padding:0 20px;gap:14px;z-index:100;">
+    <div style="display:flex;align-items:center;gap:9px;">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,#f59e0b,#f97316);border-radius:7px;display:flex;align-items:center;justify-content:center;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#f1f5f9;font-family:'Space Grotesk',sans-serif;">DESAFÍO</div>
+        <div style="font-size:9px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-top:-1px;">Centro de Administración</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <nav style="display:flex;gap:2px;margin-left:24px;flex:1;">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="5">
+        <button onClick="{{ tab.go }}" style="background:{{ tab.bg }};color:{{ tab.tc }};border:none;padding:5px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.15s;font-family:'Space Grotesk',sans-serif;">
+          {{ tab.label }}
+          <sc-if value="{{ tab.hasBadge }}" hint-placeholder-val="{{ false }}">
+            <span style="background:{{ tab.badgeBg }};color:{{ tab.badgeC }};font-size:9px;font-weight:700;padding:1px 5px;border-radius:20px;">{{ tab.badge }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+      <sc-if value="{{ syncPending }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:10px;color:#f59e0b;display:flex;align-items:center;gap:4px;">
+          <div style="width:8px;height:8px;border-radius:50%;border:2px solid #f59e0b;border-top-color:transparent;animation:spin 0.8s linear infinite;"></div>
+          {{ pendingCount }} pendiente{{ pendingCountPlural }}
+        </div>
+      </sc-if>
+      <div style="font-size:10px;color:{{ onlineColor }};font-weight:600;">{{ onlineLabel }}</div>
+      <a href="DESAFIO.dc.html" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#f59e0b;padding:5px 11px;border-radius:7px;font-size:11px;font-weight:600;text-decoration:none;">← Plataforma</a>
+    </div>
+  </header>
+
+  <!-- ── CONTENT ─────────────────────────────────────────────────── -->
+  <div style="flex:1;overflow-y:auto;overflow-x:hidden;">
+
+    <!-- ═══ TAB 1: DASHBOARD ══════════════════════════════════════ -->
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:980px;margin:0 auto;padding:26px 22px;animation:fadeUp 0.4s ease;">
+
+        <!-- Stats row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;">
+          <sc-for list="{{ dashStats }}" as="stat" hint-placeholder-count="4">
+            <div style="background:#12121e;border:1px solid {{ stat.border }};border-radius:14px;padding:18px;">
+              <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ stat.label }}</div>
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:{{ stat.c }};">{{ stat.val }}</div>
+              <div style="font-size:10px;color:{{ stat.subC }};margin-top:3px;">{{ stat.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- Two charts row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;">
+          <!-- Weekly participation line chart -->
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:18px;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Participación Semanal</div>
+            <svg viewBox="0 0 380 110" width="100%" height="110" style="overflow:visible;">
+              <!-- Grid lines -->
+              <line x1="0" y1="20" x2="380" y2="20" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              <line x1="0" y1="55" x2="380" y2="55" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              <line x1="0" y1="90" x2="380" y2="90" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+              <!-- Area fill -->
+              <polygon points="{{ chartAreaPoints }}" fill="rgba(124,58,237,0.08)"></polygon>
+              <!-- Line -->
+              <polyline points="{{ chartLinePoints }}" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+              <!-- Dots -->
+              <sc-for list="{{ chartDots }}" as="dot" hint-placeholder-count="12">
+                <circle cx="{{ dot.x }}" cy="{{ dot.y }}" r="3" fill="#7c3aed"></circle>
+              </sc-for>
+            </svg>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;">
+              <span style="font-size:9px;color:#475569;">Sem 1</span>
+              <span style="font-size:9px;color:#475569;">Sem 12</span>
+            </div>
+          </div>
+
+          <!-- XP distribution bar chart -->
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.18);border-radius:14px;padding:18px;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Distribución XP</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <sc-for list="{{ xpBars }}" as="bar" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="width:68px;font-size:10px;color:#64748b;text-align:right;flex-shrink:0;">{{ bar.label }}</div>
+                  <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:4px;height:14px;overflow:hidden;">
+                    <div style="height:100%;background:{{ bar.color }};border-radius:4px;width:{{ bar.w }};transition:width 0.6s ease;"></div>
+                  </div>
+                  <div style="width:22px;font-size:10px;color:{{ bar.color }};font-weight:600;text-align:right;">{{ bar.n }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent events table -->
+        <div style="background:#12121e;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;">
+          <div style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;font-weight:600;color:#f1f5f9;">Eventos Recientes</div>
+          <sc-for list="{{ recentEvents }}" as="ev" hint-placeholder-count="8">
+            <div style="padding:9px 16px;border-bottom:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:120px 1fr 110px 120px;gap:10px;align-items:center;">
+              <div style="font-size:11px;font-weight:600;color:{{ ev.typeC }};background:{{ ev.typeBg }};padding:2px 8px;border-radius:20px;text-align:center;">{{ ev.type }}</div>
+              <div style="font-size:11px;color:#94a3b8;">{{ ev.detail }}</div>
+              <div style="font-size:10px;color:#64748b;text-align:right;">{{ ev.student }}</div>
+              <div style="font-size:10px;color:#475569;text-align:right;">{{ ev.time }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══ TAB 2: PARTICIPANTES ══════════════════════════════════ -->
+    <sc-if value="{{ isParticipants }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1020px;margin:0 auto;padding:26px 22px;animation:fadeUp 0.4s ease;">
+
+        <!-- Search + actions bar -->
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;position:relative;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" value="{{ searchQuery }}" onInput="{{ onSearch }}" placeholder="Buscar por nombre, correo o grupo…" style="width:100%;padding-left:34px;background:#12121e;border:1px solid rgba(245,158,11,0.2);border-radius:9px;height:36px;font-size:13px;">
+          </div>
+          <div style="font-size:12px;color:#64748b;">{{ filteredCount }} estudiantes</div>
+          <button onClick="{{ exportCSV }}" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#10b981;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            CSV
+          </button>
+        </div>
+
+        <!-- Participants table -->
+        <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:14px;overflow:hidden;">
+          <div style="padding:10px 16px;background:rgba(245,158,11,0.05);display:grid;grid-template-columns:1.6fr 60px 60px 60px 54px 60px 70px;gap:8px;border-bottom:1px solid rgba(245,158,11,0.1);">
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;">Estudiante</span>
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;text-align:center;">Nivel</span>
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;text-align:center;">XP</span>
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;text-align:center;">Retos</span>
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;text-align:center;">Ins.</span>
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;text-align:center;">Estado</span>
+            <span style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;text-align:center;">Acciones</span>
+          </div>
+          <sc-for list="{{ participantRows }}" as="st" hint-placeholder-count="10">
+            <div style="padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:1.6fr 60px 60px 60px 54px 60px 70px;gap:8px;align-items:center;">
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ st.nombre }}</div>
+                <div style="font-size:9px;color:#475569;">{{ st.email }} · G:{{ st.grupo }}/S:{{ st.seccion }}</div>
+              </div>
+              <div style="text-align:center;font-size:11px;color:#a855f7;font-weight:500;">{{ st.nivel }}</div>
+              <div style="text-align:center;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#06b6d4;">{{ st.xp }}</div>
+              <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.completados }}/18</div>
+              <div style="text-align:center;font-size:12px;color:#f59e0b;">{{ st.insignias }}</div>
+              <div style="text-align:center;">
+                <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:{{ st.estadoBg }};color:{{ st.estadoC }};">{{ st.estado }}</span>
+              </div>
+              <div style="display:flex;gap:4px;justify-content:center;">
+                <button onClick="{{ st.ver }}" title="Ver historial" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);color:#a855f7;width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                <button onClick="{{ st.toggle }}" title="{{ st.toggleTip }}" style="background:{{ st.toggleBg }};border:1px solid {{ st.toggleBorder }};color:{{ st.toggleC }};width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                </button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- Detail panel (shown when a student is selected) -->
+        <sc-if value="{{ showDetailPanel }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:16px;background:#12121e;border:1px solid rgba(245,158,11,0.2);border-radius:14px;padding:20px;animation:slideDown 0.3s ease;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+              <h3 style="font-size:15px;font-weight:700;color:#f1f5f9;">{{ detailName }}</h3>
+              <button onClick="{{ closeDetail }}" style="background:transparent;border:none;color:#64748b;cursor:pointer;font-size:18px;line-height:1;">×</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
+              <sc-for list="{{ detailStats }}" as="ds" hint-placeholder-count="4">
+                <div style="background:#0a0a14;border-radius:10px;padding:12px;text-align:center;">
+                  <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:{{ ds.c }};">{{ ds.val }}</div>
+                  <div style="font-size:10px;color:#64748b;margin-top:2px;">{{ ds.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button onClick="{{ resetDetailXP }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Restablecer XP</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══ TAB 3: DESAFÍOS ═══════════════════════════════════════ -->
+    <sc-if value="{{ isChallenges }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:920px;margin:0 auto;padding:26px 22px;animation:fadeUp 0.4s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:3px;">Gestión de Desafíos</h2>
+            <p style="font-size:12px;color:#64748b;">Activar, desactivar, modificar XP y tiempo. Los cambios se propagan en tiempo real.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <sc-for list="{{ challengeRows }}" as="ch" hint-placeholder-count="6">
+            <div style="background:#12121e;border:1px solid {{ ch.border }};border-radius:13px;padding:14px 16px;display:grid;grid-template-columns:34px 1.4fr 90px 80px 80px 80px 120px;gap:10px;align-items:center;opacity:{{ ch.op }};">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#64748b;text-align:center;">{{ ch.week }}</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:{{ ch.titleC }};">{{ ch.title }}</div>
+                <div style="font-size:10px;color:#475569;margin-top:1px;">{{ ch.type }}</div>
+              </div>
+              <div style="text-align:center;">
+                <span style="font-size:9px;padding:2px 8px;border-radius:20px;background:{{ ch.stateBg }};color:{{ ch.stateC }};font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">{{ ch.state }}</span>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:10px;color:#64748b;margin-bottom:3px;">XP Base</div>
+                <input type="number" value="{{ ch.xp }}" onInput="{{ ch.onXP }}" min="10" max="200" style="width:100%;text-align:center;font-size:12px;font-weight:600;color:#f59e0b;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:4px;height:28px;">
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:10px;color:#64748b;margin-bottom:3px;">Tiempo (s)</div>
+                <input type="number" value="{{ ch.time }}" onInput="{{ ch.onTime }}" min="5" max="120" style="width:100%;text-align:center;font-size:12px;font-weight:600;color:#06b6d4;background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:6px;padding:4px;height:28px;">
+              </div>
+              <div style="text-align:center;font-size:11px;color:#94a3b8;">{{ ch.completados }} est.</div>
+              <div style="display:flex;gap:6px;justify-content:flex-end;">
+                <button onClick="{{ ch.toggleState }}" style="background:{{ ch.toggleBg }};border:1px solid {{ ch.toggleBorder }};color:{{ ch.toggleC }};padding:5px 10px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;">{{ ch.toggleLabel }}</button>
+                <button onClick="{{ ch.duplicate }}" title="Duplicar" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#64748b;width:28px;height:28px;border-radius:7px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">⧉</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══ TAB 4: BANCO ══════════════════════════════════════════ -->
+    <sc-if value="{{ isBank }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:820px;margin:0 auto;padding:26px 22px;animation:fadeUp 0.4s ease;">
+        <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Gestión del Banco de Desafíos</h2>
+        <p style="font-size:12px;color:#64748b;margin-bottom:22px;">Subir nuevos JSONs, editar preguntas y visualizar previamente cualquier semana.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <!-- Left: JSON input -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Pegar o subir JSON</div>
+            <textarea onInput="{{ onBankInput }}" value="{{ bankText }}" placeholder='{"week":1,"titleEs":"…","microretos":[…]}' style="width:100%;height:260px;resize:vertical;background:#0a0a14;border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;font-size:11px;font-family:monospace;color:#94a3b8;line-height:1.5;"></textarea>
+            <div style="display:flex;gap:8px;margin-top:10px;">
+              <button onClick="{{ validateBank }}" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:white;border:none;padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;flex:1;">Validar JSON</button>
+              <button onClick="{{ saveBank }}" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.28);color:#10b981;padding:9px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;flex:1;">Guardar</button>
+            </div>
+            <sc-if value="{{ bankError }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:8px;padding:8px 12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:8px;font-size:11px;color:#fca5a5;">{{ bankErrorMsg }}</div>
+            </sc-if>
+            <sc-if value="{{ bankValid }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:8px;padding:8px 12px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:8px;font-size:11px;color:#10b981;">JSON válido · Semana {{ bankWeek }} · {{ bankMicroretoCount }} microretos · {{ bankQuestionCount }} preguntas</div>
+            </sc-if>
+          </div>
+
+          <!-- Right: Preview -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Vista Previa</div>
+            <sc-if value="{{ bankHasPreview }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#0a0a14;border:1px solid rgba(245,158,11,0.18);border-radius:10px;padding:14px;animation:slideDown 0.3s ease;">
+                <div style="font-size:10px;color:#f59e0b;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Semana {{ bankWeek }}</div>
+                <div style="font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:3px;">{{ bankTitleEs }}</div>
+                <div style="font-size:11px;color:#64748b;margin-bottom:12px;">{{ bankDescEs }}</div>
+                <div style="display:flex;flex-direction:column;gap:7px;">
+                  <sc-for list="{{ bankMicroretoList }}" as="mr" hint-placeholder-count="3">
+                    <div style="background:#12121e;border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:10px 12px;">
+                      <div style="font-size:12px;font-weight:600;color:#e2e8f0;margin-bottom:3px;">{{ mr.num }}. {{ mr.title }}</div>
+                      <div style="font-size:10px;color:#64748b;">{{ mr.qCount }} preguntas · {{ mr.time }}s · XP base: {{ mr.xp }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ bankNoPreview }}" hint-placeholder-val="{{ true }}">
+              <div style="background:#0a0a14;border:1px dashed rgba(245,158,11,0.15);border-radius:10px;padding:32px;text-align:center;color:#475569;font-size:12px;">
+                Valida un JSON para ver la vista previa
+              </div>
+            </sc-if>
+
+            <!-- Existing weeks quick load -->
+            <div style="margin-top:14px;">
+              <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Cargar semana existente</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <sc-for list="{{ bankWeekButtons }}" as="wb" hint-placeholder-count="6">
+                  <button onClick="{{ wb.load }}" style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);color:#f59e0b;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">S{{ wb.n }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══ TAB 5: ANALÍTICA ══════════════════════════════════════ -->
+    <sc-if value="{{ isAnalytics }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:960px;margin:0 auto;padding:26px 22px;animation:fadeUp 0.4s ease;">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:3px;">Analítica</h2>
+            <p style="font-size:12px;color:#64748b;">Gráficas sin librerías externas · SVG nativo.</p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button onClick="{{ exportExcel }}" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);color:#06b6d4;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Excel</button>
+            <button onClick="{{ exportCSV }}" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#10b981;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">CSV</button>
+            <button onClick="{{ exportPDF }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#ef4444;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">PDF</button>
+          </div>
+        </div>
+
+        <!-- Summary metrics -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px;">
+          <sc-for list="{{ analyticsKPIs }}" as="kpi" hint-placeholder-count="3">
+            <div style="background:#12121e;border:1px solid {{ kpi.border }};border-radius:13px;padding:16px;">
+              <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">{{ kpi.label }}</div>
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:{{ kpi.c }};">{{ kpi.val }}</div>
+              <div style="font-size:10px;color:#64748b;margin-top:2px;">{{ kpi.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- Error rate bar chart -->
+        <div style="background:#12121e;border:1px solid rgba(244,63,94,0.18);border-radius:14px;padding:20px;margin-bottom:16px;">
+          <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">Tasa de Error por Desafío (primeras 7 semanas)</div>
+          <svg viewBox="0 0 560 140" width="100%" height="140" style="overflow:visible;">
+            <sc-for list="{{ errorBars }}" as="eb" hint-placeholder-count="7">
+              <rect x="{{ eb.x }}" y="{{ eb.y }}" width="{{ eb.w }}" height="{{ eb.h }}" fill="{{ eb.fill }}" rx="4"></rect>
+              <text x="{{ eb.lx }}" y="135" text-anchor="middle" fill="#475569" font-size="9" font-family="Inter,sans-serif">{{ eb.label }}</text>
+              <text x="{{ eb.lx }}" y="{{ eb.vy }}" text-anchor="middle" fill="{{ eb.fill }}" font-size="9" font-weight="600" font-family="Space Grotesk,sans-serif">{{ eb.val }}%</text>
+            </sc-for>
+            <!-- Baseline -->
+            <line x1="0" y1="110" x2="560" y2="110" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          </svg>
+        </div>
+
+        <!-- Two smaller charts -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <!-- Time distribution -->
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.18);border-radius:14px;padding:18px;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Tiempo Promedio por Reto (min)</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ timeBars }}" as="tb" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="width:55px;font-size:10px;color:#64748b;text-align:right;flex-shrink:0;">{{ tb.label }}</div>
+                  <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:3px;height:12px;overflow:hidden;">
+                    <div style="height:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);border-radius:3px;width:{{ tb.w }};"></div>
+                  </div>
+                  <div style="width:30px;font-size:10px;color:#f59e0b;font-weight:600;">{{ tb.val }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- Skills radar (simplified as horizontal bars) -->
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:18px;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Habilidades Más Desarrolladas</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ skillBars }}" as="sb" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="width:80px;font-size:10px;color:#94a3b8;text-align:right;flex-shrink:0;line-height:1.2;">{{ sb.label }}</div>
+                  <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:3px;height:12px;overflow:hidden;">
+                    <div style="height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);border-radius:3px;width:{{ sb.w }};"></div>
+                  </div>
+                  <div style="width:30px;font-size:10px;color:#a855f7;font-weight:600;">{{ sb.val }}%</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:820}}">
+class Component extends DCLogic {
+
+  // ─── MOCK DATA ──────────────────────────────────────────────────────────────
+  MOCK_STUDENTS = [
+    {id:'u001',nombre:'Valentina Torres',email:'v.torres@edu.sv',grupo:'A',seccion:'01',nivel:3,xp:1250,completados:5,insignias:3,estado:'activo',tiempo:142,pestanas:0},
+    {id:'u002',nombre:'Sebastián Mora',email:'s.mora@edu.sv',grupo:'A',seccion:'01',nivel:3,xp:1120,completados:4,insignias:2,estado:'activo',tiempo:130,pestanas:1},
+    {id:'u003',nombre:'Camila Restrepo',email:'c.restrepo@edu.sv',grupo:'B',seccion:'02',nivel:2,xp:980,completados:4,insignias:2,estado:'activo',tiempo:115,pestanas:0},
+    {id:'u004',nombre:'Andrés Patiño',email:'a.patino@edu.sv',grupo:'A',seccion:'01',nivel:2,xp:850,completados:3,insignias:2,estado:'activo',tiempo:98,pestanas:0},
+    {id:'u005',nombre:'Isabella García',email:'i.garcia@edu.sv',grupo:'B',seccion:'02',nivel:2,xp:720,completados:3,insignias:1,estado:'activo',tiempo:84,pestanas:2},
+    {id:'u006',nombre:'Miguel Herrera',email:'m.herrera@edu.sv',grupo:'A',seccion:'01',nivel:2,xp:650,completados:2,insignias:1,estado:'activo',tiempo:76,pestanas:0},
+    {id:'u007',nombre:'Sofía Rodríguez',email:'s.rodriguez@edu.sv',grupo:'C',seccion:'03',nivel:2,xp:580,completados:2,insignias:1,estado:'activo',tiempo:68,pestanas:1},
+    {id:'u008',nombre:'Tomás Gutiérrez',email:'t.gutierrez@edu.sv',grupo:'B',seccion:'02',nivel:1,xp:510,completados:2,insignias:1,estado:'activo',tiempo:60,pestanas:0},
+    {id:'u009',nombre:'Mariana Díaz',email:'m.diaz@edu.sv',grupo:'C',seccion:'03',nivel:1,xp:440,completados:1,insignias:0,estado:'activo',tiempo:52,pestanas:3},
+    {id:'u010',nombre:'Felipe Jiménez',email:'f.jimenez@edu.sv',grupo:'A',seccion:'01',nivel:1,xp:380,completados:1,insignias:0,estado:'activo',tiempo:44,pestanas:0},
+    {id:'u011',nombre:'Laura Vargas',email:'l.vargas@edu.sv',grupo:'C',seccion:'03',nivel:1,xp:310,completados:1,insignias:0,estado:'inactivo',tiempo:36,pestanas:1},
+    {id:'u012',nombre:'Diego Martínez',email:'d.martinez@edu.sv',grupo:'B',seccion:'02',nivel:1,xp:240,completados:0,insignias:0,estado:'activo',tiempo:28,pestanas:0},
+  ];
+
+  CHALLENGE_TYPES = ['Memoria Visual','Serie Lógica','Análisis de Caso','Observación','Analogías','Clasificación','Observación','Interpretación','Escape Room','Protocolo','Fluidez Verbal','Memoria Visual','Razonamiento','Caso Clínico','Velocidad','Asociaciones','Memoria Visual','Integración'];
+  CHALLENGE_TITLES = ['Instrumentos de Evaluación','Patrones y Secuencias','El Caso de Ana','Foco en el Detalle','Relaciones Conceptuales','Categorías Diagnósticas','Errores y Señales','Resultados e Interpretación','Fuga del Consultorio','Proceso de Evaluación','Palabras y Conceptos','Mapa Cognitivo','Pensamiento Abstracto','Dilemas Clínicos','Rapidez Cognitiva','Red de Constructos','Síntesis del Proceso','Integración Final'];
+
+  RECENT_EVENTS = [
+    {type:'REGISTRO',detail:'Nueva cuenta creada',student:'V. Torres',time:'hace 2 min',typeC:'#10b981',typeBg:'rgba(16,185,129,0.12)'},
+    {type:'XP_GANADA',detail:'+180 XP — Desafío 3 completado',student:'S. Mora',time:'hace 8 min',typeC:'#f59e0b',typeBg:'rgba(245,158,11,0.12)'},
+    {type:'INSIGNIA',detail:'Observador Experto desbloqueada',student:'C. Restrepo',time:'hace 12 min',typeC:'#a855f7',typeBg:'rgba(168,85,247,0.12)'},
+    {type:'TAB_SWITCH',detail:'Cambio de pestaña durante reto',student:'I. García',time:'hace 18 min',typeC:'#ef4444',typeBg:'rgba(239,68,68,0.12)'},
+    {type:'LOGIN',detail:'Inicio de sesión',student:'A. Patiño',time:'hace 22 min',typeC:'#06b6d4',typeBg:'rgba(6,182,212,0.12)'},
+    {type:'XP_GANADA',detail:'+95 XP — Microreto 2 completado',student:'M. Herrera',time:'hace 31 min',typeC:'#f59e0b',typeBg:'rgba(245,158,11,0.12)'},
+    {type:'NIVEL',detail:'Alcanzó Nivel 3 (Evaluador)',student:'V. Torres',time:'hace 45 min',typeC:'#7c3aed',typeBg:'rgba(124,58,237,0.12)'},
+    {type:'LOGIN',detail:'Inicio de sesión',student:'S. Rodríguez',time:'hace 1h',typeC:'#06b6d4',typeBg:'rgba(6,182,212,0.12)'},
+  ];
+
+  // ─── STATE ──────────────────────────────────────────────────────────────────
+  state = {
+    activeTab: 'dashboard',
+    searchQuery: '',
+    selectedStudentId: null,
+    challengeEdits: {},
+    challengeStates: {},
+    bankText: '',
+    bankParsed: null,
+    bankError: false,
+    bankErrorMsg: '',
+    bankValid: false,
+    onlineStatus: navigator.onLine,
+  };
+
+  componentDidMount() {
+    window.addEventListener('online',  () => this.setState({ onlineStatus: true }));
+    window.addEventListener('offline', () => this.setState({ onlineStatus: false }));
+  }
+
+  // ─── NAV ────────────────────────────────────────────────────────────────────
+  setTab = (tab) => this.setState({ activeTab: tab });
+
+  // ─── PARTICIPANTS ────────────────────────────────────────────────────────────
+  onSearch = (e) => this.setState({ searchQuery: e.target.value, selectedStudentId: null });
+
+  selectStudent = (id) => this.setState(s => ({
+    selectedStudentId: s.selectedStudentId === id ? null : id,
+  }));
+
+  closeDetail = () => this.setState({ selectedStudentId: null });
+
+  toggleStudentState = (id) => {
+    // In production: call API adminAction
+    console.info(`[Admin] Toggle state for student ${id}`);
+    alert('En producción: llama a API adminAction desactivar/activar');
+  };
+
+  resetDetailXP = () => {
+    const id = this.state.selectedStudentId;
+    if (!id) return;
+    if (confirm('¿Restablecer XP a 0? Esta acción es irreversible.')) {
+      console.info(`[Admin] Reset XP for ${id}`);
+      alert('En producción: llama a API adminAction resetXP');
+    }
+  };
+
+  // ─── CHALLENGES ─────────────────────────────────────────────────────────────
+  onChallengeXP = (idx, val) => {
+    this.setState(s => ({ challengeEdits: { ...s.challengeEdits, [`xp_${idx}`]: val } }));
+  };
+
+  onChallengeTime = (idx, val) => {
+    this.setState(s => ({ challengeEdits: { ...s.challengeEdits, [`time_${idx}`]: val } }));
+  };
+
+  toggleChallengeState = (idx) => {
+    this.setState(s => {
+      const current = s.challengeStates[idx] ?? (idx === 0 ? 'activo' : idx < 6 ? 'activo' : 'inactivo');
+      const next    = current === 'activo' ? 'inactivo' : 'activo';
+      return { challengeStates: { ...s.challengeStates, [idx]: next } };
+    });
+  };
+
+  duplicateChallenge = (idx) => {
+    alert(`Desafío ${idx + 1} duplicado como borrador. En producción: guarda copia en Drive.`);
+  };
+
+  // ─── BANK ────────────────────────────────────────────────────────────────────
+  onBankInput = (e) => {
+    this.setState({ bankText: e.target.value, bankParsed: null, bankError: false, bankValid: false });
+  };
+
+  validateBank = () => {
+    try {
+      const parsed = JSON.parse(this.state.bankText);
+      if (!parsed.week) throw new Error('Falta el campo "week"');
+      if (!Array.isArray(parsed.microretos)) throw new Error('Falta el array "microretos"');
+      parsed.microretos.forEach((mr, i) => {
+        if (!Array.isArray(mr.questions)) throw new Error(`Microreto ${i + 1}: falta "questions"`);
+      });
+      this.setState({ bankParsed: parsed, bankValid: true, bankError: false });
+    } catch (err) {
+      this.setState({ bankError: true, bankErrorMsg: `JSON inválido: ${err.message}`, bankValid: false, bankParsed: null });
+    }
+  };
+
+  saveBank = () => {
+    if (!this.state.bankValid) { alert('Valida el JSON primero.'); return; }
+    const week = String(this.state.bankParsed.week).padStart(2, '0');
+    const blob = new Blob([this.state.bankText], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `week${week}.json`;
+    a.click();
+    alert(`week${week}.json descargado. Sube este archivo a la carpeta challenge-bank/.`);
+  };
+
+  loadWeekPreview = (n) => {
+    fetch(`./challenge-bank/week${String(n).padStart(2,'0')}.json`)
+      .then(r => r.json())
+      .then(data => this.setState({ bankText: JSON.stringify(data, null, 2), bankParsed: data, bankValid: true, bankError: false }))
+      .catch(() => alert(`No se pudo cargar week${n}.json`));
+  };
+
+  // ─── EXPORTS ─────────────────────────────────────────────────────────────────
+  exportCSV = () => {
+    const students = this.MOCK_STUDENTS;
+    const headers  = 'Nombre,Correo,Grupo,Sección,Nivel,XP,Completados,Insignias,Tiempo(min),Estado';
+    const rows = students.map(s =>
+      `${s.nombre},${s.email},${s.grupo},${s.seccion},${s.nivel},${s.xp},${s.completados},${s.insignias},${s.tiempo},${s.estado}`
+    );
+    const csv  = [headers, ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a    = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'desafio_estudiantes.csv'; a.click();
+  };
+
+  exportExcel = () => alert('Exportación Excel disponible en producción via Google Apps Script.');
+  exportPDF   = () => window.print();
+
+  // ─── HELPERS ─────────────────────────────────────────────────────────────────
+  calcLevel(xp) {
+    if (xp>=4000)return 5; if(xp>=2500)return 4; if(xp>=1200)return 3; if(xp>=500)return 2; return 1;
+  }
+  levelLabel(n) { return ['Observador','Analista','Evaluador','Especialista','Maestro'][n-1]||''; }
+
+  // ─── RENDER VALS ────────────────────────────────────────────────────────────
+  renderVals() {
+    const s = this.state;
+    const active = s.activeTab;
+
+    // Tabs nav
+    const TAB_DEFS = [
+      {id:'dashboard',   label:'Dashboard'},
+      {id:'participants',label:'Participantes', badge: this.MOCK_STUDENTS.length},
+      {id:'challenges',  label:'Desafíos',      badge: 18},
+      {id:'bank',        label:'Banco JSON'},
+      {id:'analytics',   label:'Analítica'},
+    ];
+    const tabs = TAB_DEFS.map(t => ({
+      label: t.label, go: () => this.setTab(t.id),
+      bg: active===t.id ? 'rgba(245,158,11,0.16)' : 'transparent',
+      tc: active===t.id ? '#f59e0b' : '#64748b',
+      hasBadge: !!t.badge,
+      badge: t.badge, badgeBg:'rgba(245,158,11,0.14)', badgeC:'#f59e0b',
+    }));
+
+    // Online status
+    const onlineColor = s.onlineStatus ? '#10b981' : '#ef4444';
+    const onlineLabel = s.onlineStatus ? 'Conectado' : 'Sin conexión';
+    const pendingCount = typeof window.desafioAPI !== 'undefined' ? (window.desafioAPI.pendingCount || 0) : 0;
+    const syncPending  = pendingCount > 0;
+    const pendingCountPlural = pendingCount === 1 ? '' : 's';
+
+    // Screen flags
+    const isDashboard    = active === 'dashboard';
+    const isParticipants = active === 'participants';
+    const isChallenges   = active === 'challenges';
+    const isBank         = active === 'bank';
+    const isAnalytics    = active === 'analytics';
+
+    // ── DASHBOARD ──
+    const totalXP   = this.MOCK_STUDENTS.reduce((a,b)=>a+b.xp,0);
+    const avgXP     = Math.round(totalXP / this.MOCK_STUDENTS.length);
+    const activos   = this.MOCK_STUDENTS.filter(s=>s.estado==='activo').length;
+    const totalDone = this.MOCK_STUDENTS.reduce((a,b)=>a+b.completados,0);
+
+    const dashStats = [
+      {label:'Participantes',val:this.MOCK_STUDENTS.length,c:'#a855f7',sub:`${activos} activos`,border:'rgba(168,85,247,0.18)',subC:'#64748b'},
+      {label:'XP Promedio',val:avgXP,c:'#06b6d4',sub:'puntos por estudiante',border:'rgba(6,182,212,0.18)',subC:'#64748b'},
+      {label:'Retos Completados',val:totalDone,c:'#10b981',sub:'total acumulado',border:'rgba(16,185,129,0.18)',subC:'#64748b'},
+      {label:'Pendientes',val:this.MOCK_STUDENTS.filter(s=>s.completados===0).length,c:'#ef4444',sub:'sin iniciar',border:'rgba(239,68,68,0.18)',subC:'#64748b'},
+    ];
+
+    // Line chart: weekly participation (12 weeks)
+    const lineData = [5,8,12,15,14,16,18,17,19,20,18,21];
+    const maxLine  = Math.max(...lineData);
+    const chartW   = 380, chartH = 90;
+    const chartDots = lineData.map((v, i) => ({
+      x: Math.round(i * (chartW / (lineData.length - 1))),
+      y: Math.round(chartH - (v / maxLine) * chartH + 10),
+    }));
+    const chartLinePoints  = chartDots.map(d=>`${d.x},${d.y}`).join(' ');
+    const chartAreaPoints  = chartLinePoints + ` ${chartW},${chartH+10} 0,${chartH+10}`;
+
+    // XP distribution (5 levels)
+    const levelCounts = [1,2,3,4,5].map(l => this.MOCK_STUDENTS.filter(s=>this.calcLevel(s.xp)===l).length);
+    const maxLevel    = Math.max(...levelCounts, 1);
+    const xpBars = ['Nivel 1','Nivel 2','Nivel 3','Nivel 4','Nivel 5'].map((label,i) => ({
+      label, n: levelCounts[i],
+      w: Math.round((levelCounts[i]/maxLevel)*100)+'%',
+      color: ['#64748b','#3b82f6','#7c3aed','#06b6d4','#f59e0b'][i],
+    }));
+
+    const recentEvents = this.RECENT_EVENTS;
+
+    // ── PARTICIPANTS ──
+    const q = s.searchQuery.toLowerCase();
+    const filtered = q
+      ? this.MOCK_STUDENTS.filter(st => st.nombre.toLowerCase().includes(q) || st.email.toLowerCase().includes(q) || st.grupo.toLowerCase().includes(q))
+      : this.MOCK_STUDENTS;
+
+    const participantRows = filtered.map(st => ({
+      ...st,
+      nivel: `Nv${st.nivel} ${this.levelLabel(st.nivel)}`,
+      estadoBg: st.estado==='activo'?'rgba(16,185,129,0.12)':'rgba(239,68,68,0.1)',
+      estadoC:  st.estado==='activo'?'#10b981':'#fca5a5',
+      ver:    () => this.selectStudent(st.id),
+      toggle: () => this.toggleStudentState(st.id),
+      toggleTip: st.estado==='activo'?'Desactivar':'Activar',
+      toggleBg: st.estado==='activo'?'rgba(239,68,68,0.08)':'rgba(16,185,129,0.08)',
+      toggleBorder: st.estado==='activo'?'rgba(239,68,68,0.22)':'rgba(16,185,129,0.22)',
+      toggleC:  st.estado==='activo'?'#fca5a5':'#10b981',
+    }));
+    const filteredCount = filtered.length;
+
+    const sel = this.MOCK_STUDENTS.find(st => st.id === s.selectedStudentId);
+    const showDetailPanel = !!sel;
+    const detailName      = sel ? sel.nombre : '';
+    const detailStats     = sel ? [
+      {val:sel.xp,    label:'XP Total',      c:'#a855f7'},
+      {val:sel.completados, label:'Desafíos', c:'#10b981'},
+      {val:sel.insignias,   label:'Insignias',c:'#f59e0b'},
+      {val:sel.tiempo+'m',  label:'Tiempo',   c:'#06b6d4'},
+    ] : [];
+
+    // ── CHALLENGES ──
+    const challengeRows = Array.from({length:18},(_,i)=>{
+      const state    = s.challengeStates[i] ?? (i < 6 ? 'activo' : 'inactivo');
+      const active   = state === 'activo';
+      const xp       = s.challengeEdits[`xp_${i}`] ?? 50;
+      const time     = s.challengeEdits[`time_${i}`] ?? 20;
+      const doneEst  = Math.floor(Math.random()*8+2);
+      return {
+        week: i+1, title: this.CHALLENGE_TITLES[i], type: this.CHALLENGE_TYPES[i],
+        state, xp, time, completados: doneEst,
+        border: active?'rgba(124,58,237,0.18)':'rgba(255,255,255,0.06)',
+        titleC: active?'#e2e8f0':'#64748b',
+        stateBg: active?'rgba(16,185,129,0.12)':'rgba(255,255,255,0.07)',
+        stateC:  active?'#10b981':'#475569',
+        op: active?'1':'0.6',
+        toggleLabel: active?'Desactivar':'Activar',
+        toggleBg:    active?'rgba(239,68,68,0.09)':'rgba(16,185,129,0.09)',
+        toggleBorder:active?'rgba(239,68,68,0.22)':'rgba(16,185,129,0.22)',
+        toggleC:     active?'#fca5a5':'#10b981',
+        toggleState: () => this.toggleChallengeState(i),
+        duplicate:   () => this.duplicateChallenge(i),
+        onXP:   (e) => this.onChallengeXP(i, e.target.value),
+        onTime: (e) => this.onChallengeTime(i, e.target.value),
+      };
+    });
+
+    // ── BANK ──
+    const parsed = s.bankParsed;
+    const bankHasPreview   = !!parsed;
+    const bankNoPreview    = !parsed;
+    const bankError        = s.bankError;
+    const bankErrorMsg     = s.bankErrorMsg;
+    const bankValid        = s.bankValid;
+    const bankWeek         = parsed?.week || '';
+    const bankTitleEs      = parsed?.titleEs || '';
+    const bankDescEs       = parsed?.descEs || '';
+    const bankMicroretoCount = parsed?.microretos?.length || 0;
+    const bankQuestionCount  = parsed?.microretos?.reduce((a,m)=>a+(m.questions?.length||0),0) || 0;
+    const bankMicroretoList  = (parsed?.microretos||[]).map((mr,i)=>({
+      num: i+1,
+      title: mr.titleEs||`Microreto ${i+1}`,
+      qCount: mr.questions?.length||0,
+      time: mr.answerTime||20,
+      xp: mr.xp?.base||50,
+    }));
+    const bankWeekButtons = Array.from({length:6},(_,i)=>({ n:i+1, load:()=>this.loadWeekPreview(i+1) }));
+
+    // ── ANALYTICS ──
+    const analyticsKPIs = [
+      {label:'Tiempo Promedio',val:'6.8 min',c:'#f59e0b',sub:'por desafío',border:'rgba(245,158,11,0.18)'},
+      {label:'Tasa de Error',val:'32%',c:'#f43f5e',sub:'respuestas incorrectas',border:'rgba(244,63,94,0.18)'},
+      {label:'Reto más difícil',val:'S3M3',c:'#ef4444',sub:'42% tasa de error',border:'rgba(239,68,68,0.18)'},
+    ];
+
+    // Error rate bar chart SVG
+    const errorData = [{l:'Sem 1',v:35},{l:'Sem 2',v:28},{l:'Sem 3',v:42},{l:'Sem 4',v:31},{l:'Sem 5',v:25},{l:'Sem 6',v:38},{l:'Sem 7',v:29}];
+    const maxErr    = Math.max(...errorData.map(d=>d.v));
+    const barW      = 50, barGap = 30, svgH = 110;
+    const errorBars = errorData.map((d,i)=>{
+      const h    = Math.round((d.v/maxErr) * (svgH-20));
+      const x    = i * (barW + barGap) + 15;
+      const y    = svgH - h - 5;
+      const fill = d.v >= 40 ? '#f43f5e' : d.v >= 35 ? '#f59e0b' : '#7c3aed';
+      return { x, y, w:barW, h, fill, lx: x+barW/2, val:d.v, label:d.l, vy: y-4 };
+    });
+
+    const timeBarsData = [{label:'Semana 1',v:5.2},{label:'Semana 2',v:6.1},{label:'Semana 3',v:7.4},{label:'Semana 4',v:6.8},{label:'Semana 5',v:5.9}];
+    const maxTime = Math.max(...timeBarsData.map(d=>d.v));
+    const timeBars = timeBarsData.map(d=>({label:d.label,val:d.v.toFixed(1),w:Math.round((d.v/maxTime)*100)+'%'}));
+
+    const skillBarsData = [{label:'Mem. Visual',v:78},{label:'Razonamiento',v:65},{label:'Atención',v:71},{label:'Clasificación',v:55},{label:'Velocidad',v:83}];
+    const skillBars = skillBarsData.map(d=>({label:d.label,val:d.v,w:d.v+'%'}));
+
+    return {
+      tabs, onlineColor, onlineLabel, syncPending, pendingCount, pendingCountPlural,
+      isDashboard, isParticipants, isChallenges, isBank, isAnalytics,
+      // dashboard
+      dashStats, chartLinePoints, chartAreaPoints, chartDots, xpBars, recentEvents,
+      // participants
+      participantRows, filteredCount, searchQuery: s.searchQuery, onSearch: this.onSearch,
+      showDetailPanel, detailName, detailStats, closeDetail: this.closeDetail,
+      resetDetailXP: this.resetDetailXP, exportCSV: this.exportCSV,
+      // challenges
+      challengeRows,
+      // bank
+      bankText: s.bankText, bankHasPreview, bankNoPreview, bankError, bankErrorMsg,
+      bankValid, bankWeek, bankTitleEs, bankDescEs, bankMicroretoCount, bankQuestionCount,
+      bankMicroretoList, bankWeekButtons,
+      onBankInput: this.onBankInput, validateBank: this.validateBank, saveBank: this.saveBank,
+      // analytics
+      analyticsKPIs, errorBars, timeBars, skillBars,
+      exportExcel: this.exportExcel, exportPDF: this.exportPDF,
+    };
+  }
+}
+</script>
+</body>
+</html>

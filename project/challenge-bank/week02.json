@@ -1,0 +1,228 @@
+{
+  "week": 2,
+  "type": "logic",
+  "titleEs": "Patrones y Secuencias",
+  "titleEn": "Patterns and Sequences",
+  "skillEs": "Razonamiento Lógico",
+  "skillEn": "Logical Reasoning",
+  "descEs": "Identifica patrones y completa series lógicas relacionadas con la evaluación psicológica.",
+  "descEn": "Identify patterns and complete logical series related to psychological assessment.",
+  "microretos": [
+    {
+      "id": "w2m1",
+      "type": "logic",
+      "titleEs": "Series Conceptuales",
+      "titleEn": "Conceptual Series",
+      "difficulty": "basic",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 55,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "WAIS-IV → Wechsler. MMPI-2 → ___?",
+          "textEn": "WAIS-IV → Wechsler. MMPI-2 → ___?",
+          "options": [
+            "Rorschach",
+            "Hathaway y McKinley",
+            "Binet",
+            "Cattell"
+          ],
+          "correctEs": "Hathaway y McKinley",
+          "correctEn": "Hathaway y McKinley",
+          "skillEs": "Razonamiento relacional",
+          "skillEn": "Relational reasoning",
+          "explanEs": "El MMPI-2 fue desarrollado por Hathaway y McKinley, así como el WAIS fue desarrollado por Wechsler.",
+          "explanEn": "The MMPI-2 was developed by Hathaway and McKinley, just as the WAIS was developed by Wechsler."
+        },
+        {
+          "id": "q2",
+          "textEs": "Proyectivo → TAT. Neuropsicológico → ___?",
+          "textEn": "Projective → TAT. Neuropsychological → ___?",
+          "options": [
+            "NEO PI-R",
+            "Rorschach",
+            "Bender",
+            "MMPI-2"
+          ],
+          "correctEs": "Bender",
+          "correctEn": "Bender",
+          "skillEs": "Clasificación instrumental",
+          "skillEn": "Instrumental classification",
+          "explanEs": "El Bender es el instrumento neuropsicológico, así como el TAT es un instrumento proyectivo.",
+          "explanEn": "The Bender is the neuropsychological instrument, just as the TAT is a projective instrument."
+        },
+        {
+          "id": "q3",
+          "textEs": "Niños → WISC-V. Adultos → ___?",
+          "textEn": "Children → WISC-V. Adults → ___?",
+          "options": [
+            "WAIS-IV",
+            "K-ABC",
+            "TAT",
+            "Bender"
+          ],
+          "correctEs": "WAIS-IV",
+          "correctEn": "WAIS-IV",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El WAIS-IV es la versión para adultos de la escala de Wechsler, mientras que el WISC-V es para niños.",
+          "explanEn": "The WAIS-IV is the adult version of the Wechsler scale, while the WISC-V is for children."
+        }
+      ]
+    },
+    {
+      "id": "w2m2",
+      "type": "logic",
+      "titleEs": "Secuencias Históricas",
+      "titleEn": "Historical Sequences",
+      "difficulty": "intermediate",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 60,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "Binet-Simon (1905) → Stanford-Binet → ___?",
+          "textEn": "Binet-Simon (1905) → Stanford-Binet → ___?",
+          "options": [
+            "Rorschach",
+            "WAIS",
+            "TAT",
+            "Bender"
+          ],
+          "correctEs": "WAIS",
+          "correctEn": "WAIS",
+          "skillEs": "Razonamiento histórico",
+          "skillEn": "Historical reasoning",
+          "explanEs": "La evolución de las pruebas de inteligencia va de Binet-Simon al Stanford-Binet y luego al WAIS de Wechsler.",
+          "explanEn": "The evolution of intelligence tests goes from Binet-Simon to Stanford-Binet and then to the Wechsler WAIS."
+        },
+        {
+          "id": "q2",
+          "textEs": "Entrevista → Historia clínica → Aplicación de pruebas → ___?",
+          "textEn": "Interview → Clinical history → Test application → ___?",
+          "options": [
+            "Diagnóstico",
+            "Corrección e interpretación",
+            "Informe",
+            "Devolución"
+          ],
+          "correctEs": "Corrección e interpretación",
+          "correctEn": "Corrección e interpretación",
+          "skillEs": "Secuencia del proceso evaluativo",
+          "skillEn": "Assessment process sequence",
+          "explanEs": "Después de aplicar las pruebas, el siguiente paso es la corrección e interpretación de los resultados.",
+          "explanEn": "After applying the tests, the next step is scoring and interpretation of results."
+        },
+        {
+          "id": "q3",
+          "textEs": "Validez → Fiabilidad → ___? (propiedades psicométricas)",
+          "textEn": "Validity → Reliability → ___? (psychometric properties)",
+          "options": [
+            "Estandarización",
+            "Baremación",
+            "Sensibilidad",
+            "Especificidad"
+          ],
+          "correctEs": "Estandarización",
+          "correctEn": "Estandarización",
+          "skillEs": "Razonamiento psicométrico",
+          "skillEn": "Psychometric reasoning",
+          "explanEs": "Las propiedades psicométricas fundamentales incluyen validez, fiabilidad y estandarización.",
+          "explanEn": "The fundamental psychometric properties include validity, reliability, and standardization."
+        }
+      ]
+    },
+    {
+      "id": "w2m3",
+      "type": "logic",
+      "titleEs": "Patrones Diagnósticos",
+      "titleEn": "Diagnostic Patterns",
+      "difficulty": "advanced",
+      "answerTime": 22,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 70,
+        "speedMax": 25,
+        "perfectBonus": 60,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "BDI → Depresión. BAI → ___?",
+          "textEn": "BDI → Depression. BAI → ___?",
+          "options": [
+            "Ansiedad",
+            "Personalidad",
+            "Inteligencia",
+            "Psicosis"
+          ],
+          "correctEs": "Ansiedad",
+          "correctEn": "Ansiedad",
+          "skillEs": "Razonamiento instrumental",
+          "skillEn": "Instrumental reasoning",
+          "explanEs": "El BAI (Beck Anxiety Inventory) mide ansiedad, mientras el BDI mide depresión.",
+          "explanEn": "The BAI (Beck Anxiety Inventory) measures anxiety, while the BDI measures depression."
+        },
+        {
+          "id": "q2",
+          "textEs": "Escala T (MMPI): 50 = promedio. 70 = ___?",
+          "textEn": "T-scale (MMPI): 50 = average. 70 = ___?",
+          "options": [
+            "Normal",
+            "Límite clínico",
+            "Desviación significativa",
+            "Perfil inválido"
+          ],
+          "correctEs": "Desviación significativa",
+          "correctEn": "Desviación significativa",
+          "skillEs": "Interpretación normativa",
+          "skillEn": "Normative interpretation",
+          "explanEs": "En las escalas T, una puntuación de 70 indica una desviación estadísticamente significativa (2 desviaciones típicas sobre la media).",
+          "explanEn": "On T-scales, a score of 70 indicates a statistically significant deviation (2 standard deviations above the mean)."
+        },
+        {
+          "id": "q3",
+          "textEs": "CI 115-129: Inteligencia ___?",
+          "textEn": "IQ 115-129: ___ Intelligence?",
+          "options": [
+            {
+              "es": "Media",
+              "en": "Average"
+            },
+            {
+              "es": "Superior",
+              "en": "Superior"
+            },
+            {
+              "es": "Muy superior",
+              "en": "Very superior"
+            },
+            {
+              "es": "Límite",
+              "en": "Borderline"
+            }
+          ],
+          "correctEs": "Superior",
+          "correctEn": "Superior",
+          "skillEs": "Interpretación del CI",
+          "skillEn": "IQ interpretation",
+          "explanEs": "Un CI entre 115 y 129 corresponde a Inteligencia Superior según la clasificación WAIS.",
+          "explanEn": "An IQ between 115 and 129 corresponds to Superior Intelligence according to WAIS classification."
+        }
+      ]
+    }
+  ]
+}

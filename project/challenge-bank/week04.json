@@ -1,0 +1,216 @@
+{
+  "week": 4,
+  "type": "observation",
+  "titleEs": "Foco en el Detalle",
+  "titleEn": "Focus on Detail",
+  "skillEs": "Observación",
+  "skillEn": "Observation",
+  "descEs": "Entrena la habilidad de Observación mediante preguntas interactivas.",
+  "descEn": "Train your Observation skill through interactive questions.",
+  "microretos": [
+    {
+      "id": "w4m1",
+      "type": "observation",
+      "titleEs": "Microreto 1",
+      "titleEn": "Micro-task 1",
+      "difficulty": "basic",
+      "answerTime": 25,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
+          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "options": [
+            "Confidencialidad",
+            "Consentimiento informado",
+            "Publicar todos los resultados",
+            "No maleficencia"
+          ],
+          "correctEs": "Publicar todos los resultados",
+          "correctEn": "Publicar todos los resultados",
+          "skillEs": "Ética en evaluación",
+          "skillEn": "Assessment ethics",
+          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
+          "explanEn": "Publishing all results without consent violates confidentiality."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Qué significa \"validez de constructo\"?",
+          "textEn": "What does \"construct validity\" mean?",
+          "options": [
+            "La prueba mide lo que dice medir",
+            "La prueba es consistente",
+            "La prueba fue bien estandarizada",
+            "La prueba tiene normas actualizadas"
+          ],
+          "correctEs": "La prueba mide lo que dice medir",
+          "correctEn": "La prueba mide lo que dice medir",
+          "skillEs": "Psicometría",
+          "skillEn": "Psychometrics",
+          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
+          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
+          "textEn": "What is Cronbach's alpha coefficient?",
+          "options": [
+            "Una medida de validez",
+            "Una medida de consistencia interna",
+            "Una puntuación estándar",
+            "Un índice de dificultad"
+          ],
+          "correctEs": "Una medida de consistencia interna",
+          "correctEn": "Una medida de consistencia interna",
+          "skillEs": "Fiabilidad",
+          "skillEn": "Reliability",
+          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
+          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+        }
+      ]
+    },
+    {
+      "id": "w4m2",
+      "type": "observation",
+      "titleEs": "Microreto 2",
+      "titleEn": "Micro-task 2",
+      "difficulty": "intermediate",
+      "answerTime": 22,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 60,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
+          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "options": [
+            "Confidencialidad",
+            "Consentimiento informado",
+            "Publicar todos los resultados",
+            "No maleficencia"
+          ],
+          "correctEs": "Publicar todos los resultados",
+          "correctEn": "Publicar todos los resultados",
+          "skillEs": "Ética en evaluación",
+          "skillEn": "Assessment ethics",
+          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
+          "explanEn": "Publishing all results without consent violates confidentiality."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Qué significa \"validez de constructo\"?",
+          "textEn": "What does \"construct validity\" mean?",
+          "options": [
+            "La prueba mide lo que dice medir",
+            "La prueba es consistente",
+            "La prueba fue bien estandarizada",
+            "La prueba tiene normas actualizadas"
+          ],
+          "correctEs": "La prueba mide lo que dice medir",
+          "correctEn": "La prueba mide lo que dice medir",
+          "skillEs": "Psicometría",
+          "skillEn": "Psychometrics",
+          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
+          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
+          "textEn": "What is Cronbach's alpha coefficient?",
+          "options": [
+            "Una medida de validez",
+            "Una medida de consistencia interna",
+            "Una puntuación estándar",
+            "Un índice de dificultad"
+          ],
+          "correctEs": "Una medida de consistencia interna",
+          "correctEn": "Una medida de consistencia interna",
+          "skillEs": "Fiabilidad",
+          "skillEn": "Reliability",
+          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
+          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+        }
+      ]
+    },
+    {
+      "id": "w4m3",
+      "type": "observation",
+      "titleEs": "Microreto 3",
+      "titleEn": "Micro-task 3",
+      "difficulty": "advanced",
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 70,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
+          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "options": [
+            "Confidencialidad",
+            "Consentimiento informado",
+            "Publicar todos los resultados",
+            "No maleficencia"
+          ],
+          "correctEs": "Publicar todos los resultados",
+          "correctEn": "Publicar todos los resultados",
+          "skillEs": "Ética en evaluación",
+          "skillEn": "Assessment ethics",
+          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
+          "explanEn": "Publishing all results without consent violates confidentiality."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Qué significa \"validez de constructo\"?",
+          "textEn": "What does \"construct validity\" mean?",
+          "options": [
+            "La prueba mide lo que dice medir",
+            "La prueba es consistente",
+            "La prueba fue bien estandarizada",
+            "La prueba tiene normas actualizadas"
+          ],
+          "correctEs": "La prueba mide lo que dice medir",
+          "correctEn": "La prueba mide lo que dice medir",
+          "skillEs": "Psicometría",
+          "skillEn": "Psychometrics",
+          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
+          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
+          "textEn": "What is Cronbach's alpha coefficient?",
+          "options": [
+            "Una medida de validez",
+            "Una medida de consistencia interna",
+            "Una puntuación estándar",
+            "Un índice de dificultad"
+          ],
+          "correctEs": "Una medida de consistencia interna",
+          "correctEn": "Una medida de consistencia interna",
+          "skillEs": "Fiabilidad",
+          "skillEn": "Reliability",
+          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
+          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+        }
+      ]
+    }
+  ]
+}

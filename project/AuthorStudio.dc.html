@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{background:#0a0a14;color:#e2e8f0;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:'Space Grotesk',system-ui,sans-serif;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:#0a0a14;}::-webkit-scrollbar-thumb{background:rgba(124,58,237,0.35);border-radius:3px;}
+input,textarea,select{background:#0a0a14;color:#e2e8f0;border:1px solid rgba(124,58,237,0.2);border-radius:8px;padding:7px 11px;font-family:'Inter',sans-serif;font-size:13px;outline:none;width:100%;}
+input:focus,textarea:focus,select:focus{border-color:rgba(124,58,237,0.5);}
+pre,code{font-family:'JetBrains Mono',monospace;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:translateX(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;height:100vh;overflow:hidden;">
+
+  <!-- HEADER -->
+  <header style="flex-shrink:0;height:52px;background:rgba(5,3,12,0.97);border-bottom:1px solid rgba(124,58,237,0.18);display:flex;align-items:center;padding:0 18px;gap:14px;">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:7px;display:flex;align-items:center;justify-content:center;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#f1f5f9;">Author Studio</div>
+        <div style="font-size:9px;color:#7c3aed;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-top:-1px;">DESAFÍO · Content Engine</div>
+      </div>
+    </div>
+
+    <div style="flex:1;display:flex;align-items:center;gap:8px;padding-left:16px;border-left:1px solid rgba(124,58,237,0.15);">
+      <sc-if value="{{ hasBreadcrumb }}" hint-placeholder-val="{{ false }}">
+        <span style="font-size:11px;color:#64748b;">{{ breadcrumb }}</span>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="font-size:10px;color:#64748b;">{{ contentStats }}</div>
+      <a href="AdminPanel.dc.html" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:5px 11px;border-radius:7px;font-size:11px;font-weight:600;text-decoration:none;">← Admin</a>
+    </div>
+  </header>
+
+  <div style="flex:1;display:flex;overflow:hidden;">
+
+    <!-- SIDEBAR -->
+    <aside style="width:188px;flex-shrink:0;height:100%;overflow-y:auto;background:#060610;border-right:1px solid rgba(124,58,237,0.12);padding:10px 7px;">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="9">
+        <button onClick="{{ n.go }}" style="width:100%;background:{{ n.bg }};border:none;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:2px;transition:all 0.15s;text-align:left;">
+          <div style="width:26px;height:26px;border-radius:7px;background:{{ n.iconBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{ n.iconC }}" stroke-width="2">{{ n.icon }}</svg>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:{{ n.tc }};">{{ n.label }}</div>
+            <div style="font-size:9px;color:#475569;margin-top:1px;">{{ n.sub }}</div>
+          </div>
+        </button>
+      </sc-for>
+    </aside>
+
+    <!-- MAIN -->
+    <main style="flex:1;overflow-y:auto;min-width:0;">
+
+      <!-- ═══ BIBLIOTECA ═════════════════════════════════════════ -->
+      <sc-if value="{{ isBiblioteca }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;height:100%;overflow:hidden;">
+          <!-- Week list -->
+          <div style="width:260px;flex-shrink:0;border-right:1px solid rgba(124,58,237,0.1);overflow-y:auto;padding:16px 12px;">
+            <div style="font-size:10px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;padding:0 4px;">18 Semanas · 54 Microretos</div>
+            <sc-for list="{{ libWeeks }}" as="wk" hint-placeholder-count="18">
+              <div style="margin-bottom:3px;">
+                <button onClick="{{ wk.toggle }}" style="width:100%;background:{{ wk.bg }};border:1px solid {{ wk.border }};border-radius:9px;padding:9px 11px;display:flex;align-items:center;gap:9px;cursor:pointer;transition:all 0.15s;text-align:left;">
+                  <div style="width:22px;height:22px;border-radius:6px;background:{{ wk.numBg }};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:{{ wk.numC }};flex-shrink:0;">{{ wk.n }}</div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-size:12px;font-weight:600;color:{{ wk.tc }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ wk.title }}</div>
+                    <div style="font-size:9px;color:#475569;margin-top:1px;">{{ wk.type }}</div>
+                  </div>
+                  <div style="font-size:11px;color:#475569;flex-shrink:0;">{{ wk.arrow }}</div>
+                </button>
+                <!-- Microreto items when expanded -->
+                <sc-if value="{{ wk.expanded }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin:3px 0 3px 10px;display:flex;flex-direction:column;gap:2px;animation:slideIn 0.2s ease;">
+                    <sc-for list="{{ wk.microretos }}" as="mr" hint-placeholder-count="3">
+                      <button onClick="{{ mr.open }}" style="background:{{ mr.bg }};border:1px solid {{ mr.border }};border-radius:7px;padding:7px 10px;display:flex;align-items:center;gap:7px;cursor:pointer;width:100%;text-align:left;transition:all 0.15s;">
+                        <div style="width:18px;height:18px;border-radius:4px;background:{{ mr.numBg }};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:{{ mr.numC }};flex-shrink:0;">{{ mr.n }}</div>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-size:11px;font-weight:500;color:{{ mr.tc }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ mr.title }}</div>
+                          <div style="font-size:9px;color:#475569;">{{ mr.meta }}</div>
+                        </div>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- Detail panel -->
+          <div style="flex:1;overflow-y:auto;padding:24px;">
+            <sc-if value="{{ libHasSelected }}" hint-placeholder-val="{{ false }}">
+              <div style="max-width:640px;animation:fadeUp 0.3s ease;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+                  <div>
+                    <div style="font-size:10px;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:4px;">{{ libDetailBreadcrumb }}</div>
+                    <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ libDetailTitle }}</h2>
+                  </div>
+                  <button onClick="{{ openEditor }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    Editar
+                  </button>
+                </div>
+
+                <!-- Fields preview -->
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ libDetailFields }}" as="f" hint-placeholder-count="6">
+                    <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:10px;padding:13px 15px;">
+                      <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:5px;">{{ f.label }}</div>
+                      <div style="font-size:13px;color:#e2e8f0;line-height:1.5;">{{ f.value }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <!-- Questions preview -->
+                <div style="margin-top:16px;">
+                  <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:10px;">{{ libQCount }} preguntas</div>
+                  <div style="display:flex;flex-direction:column;gap:7px;">
+                    <sc-for list="{{ libDetailQuestions }}" as="q" hint-placeholder-count="3">
+                      <div style="background:#12121e;border:1px solid rgba(124,58,237,0.12);border-radius:10px;padding:13px 15px;">
+                        <div style="font-size:12px;font-weight:600;color:#e2e8f0;margin-bottom:6px;">{{ q.n }}. {{ q.text }}</div>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                          <sc-for list="{{ q.opts }}" as="opt" hint-placeholder-count="4">
+                            <span style="font-size:10px;padding:2px 9px;border-radius:20px;background:{{ opt.bg }};color:{{ opt.c }};font-weight:{{ opt.fw }};">{{ opt.text }}</span>
+                          </sc-for>
+                        </div>
+                        <div style="margin-top:7px;font-size:10px;color:#7c3aed;font-style:italic;">{{ q.skill }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ libNoSelected }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:#475569;text-align:center;">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" style="margin-bottom:12px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <div style="font-size:13px;margin-bottom:4px;">Selecciona una semana</div>
+                <div style="font-size:11px;">y elige un microreto para ver sus detalles</div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ═══ EDITOR ═════════════════════════════════════════════ -->
+      <sc-if value="{{ isEditor }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;height:100%;overflow:hidden;animation:fadeUp 0.3s ease;">
+          <!-- Form column -->
+          <div style="flex:1;overflow-y:auto;padding:20px 22px;">
+            <!-- Editor header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+              <div>
+                <div style="font-size:10px;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:3px;">{{ editBreadcrumb }}</div>
+                <h2 style="font-size:17px;font-weight:700;color:#f1f5f9;">Editor de Microreto</h2>
+              </div>
+              <div style="display:flex;gap:7px;">
+                <button onClick="{{ validateEdit }}" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);color:#06b6d4;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Validar</button>
+                <button onClick="{{ saveEdit }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Guardar JSON</button>
+              </div>
+            </div>
+
+            <!-- Validation feedback -->
+            <sc-if value="{{ editHasErrors }}" hint-placeholder-val="{{ false }}">
+              <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.22);border-radius:9px;padding:12px 14px;margin-bottom:14px;">
+                <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:6px;">{{ editErrorCount }} problemas encontrados:</div>
+                <sc-for list="{{ editErrors }}" as="err" hint-placeholder-count="3">
+                  <div style="font-size:11px;color:#fca5a5;display:flex;gap:6px;margin-bottom:3px;"><span style="color:#ef4444;">›</span>{{ err }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ editIsValid }}" hint-placeholder-val="{{ false }}">
+              <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);border-radius:9px;padding:10px 14px;margin-bottom:14px;font-size:11px;font-weight:600;color:#10b981;">JSON válido · Listo para publicar</div>
+            </sc-if>
+
+            <!-- General fields -->
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:16px;margin-bottom:14px;">
+              <div style="font-size:11px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">General</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Título ES</div><input type="text" value="{{ ef_titleEs }}" onInput="{{ onTitleEs }}" placeholder="Nombre del desafío en español"></div>
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Título EN</div><input type="text" value="{{ ef_titleEn }}" onInput="{{ onTitleEn }}" placeholder="Challenge name in English"></div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Habilidad ES</div><input type="text" value="{{ ef_skillEs }}" onInput="{{ onSkillEs }}" placeholder="Ej: Memoria Visual"></div>
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Habilidad EN</div><input type="text" value="{{ ef_skillEn }}" onInput="{{ onSkillEn }}" placeholder="e.g. Visual Memory"></div>
+              </div>
+              <div style="margin-bottom:10px;"><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Descripción ES</div><textarea value="{{ ef_descEs }}" onInput="{{ onDescEs }}" rows="2" placeholder="Descripción del desafío para el estudiante…" style="resize:none;"></textarea></div>
+              <div style="display:flex;gap:10px;align-items:flex-end;">
+                <div style="flex:1;"><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Tipo</div>
+                  <select value="{{ ef_type }}" onChange="{{ onType }}" style="height:34px;">
+                    <sc-for list="{{ typeOptions }}" as="to" hint-placeholder-count="8"><option value="{{ to.val }}">{{ to.label }}</option></sc-for>
+                  </select>
+                </div>
+                <div style="flex:1;"><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Dificultad</div>
+                  <select value="{{ ef_difficulty }}" onChange="{{ onDifficulty }}" style="height:34px;">
+                    <option value="basic">Básico</option>
+                    <option value="intermediate">Intermedio</option>
+                    <option value="advanced">Avanzado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Config fields -->
+            <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:16px;margin-bottom:14px;">
+              <div style="font-size:11px;font-weight:700;color:#06b6d4;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Configuración</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Tiempo Respuesta (s)</div><input type="number" value="{{ ef_answerTime }}" onInput="{{ onAnswerTime }}" min="5" max="120" style="height:34px;"></div>
+                <sc-if value="{{ efIsMemory }}" hint-placeholder-val="{{ false }}"><div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Tiempo Memorizar (s)</div><input type="number" value="{{ ef_memorizeTime }}" onInput="{{ onMemorizeTime }}" min="5" max="30" style="height:34px;"></div></sc-if>
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">XP Base</div><input type="number" value="{{ ef_xpBase }}" onInput="{{ onXPBase }}" min="10" max="200" style="height:34px;"></div>
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Insignia</div><input type="text" value="{{ ef_badge }}" onInput="{{ onBadge }}" placeholder="ej: observer" style="height:34px;"></div>
+                <div><div style="font-size:10px;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Etiquetas</div><input type="text" value="{{ ef_tags }}" onInput="{{ onTags }}" placeholder="memoria, visual, básico" style="height:34px;"></div>
+              </div>
+            </div>
+
+            <!-- Items builder (memory type only) -->
+            <sc-if value="{{ efIsMemory }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:12px;padding:16px;margin-bottom:14px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                  <div style="font-size:11px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:1px;">Ítems de Memoria ({{ efItemCount }})</div>
+                  <button onClick="{{ addItem }}" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#f59e0b;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;">+ Agregar</button>
+                </div>
+                <sc-for list="{{ editorItems }}" as="item" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:1.2fr 1.2fr 80px 28px;gap:7px;margin-bottom:7px;align-items:center;">
+                    <input type="text" value="{{ item.name }}" onInput="{{ item.onName }}" placeholder="Nombre (ej: WAIS-IV)">
+                    <input type="text" value="{{ item.catEs }}" onInput="{{ item.onCat }}" placeholder="Categoría ES">
+                    <select value="{{ item.colorKey }}" onChange="{{ item.onColor }}" style="height:34px;font-size:11px;">
+                      <option value="purple">Morado</option>
+                      <option value="cyan">Cyan</option>
+                      <option value="amber">Ámbar</option>
+                      <option value="green">Verde</option>
+                      <option value="red">Rojo</option>
+                    </select>
+                    <button onClick="{{ item.remove }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.22);color:#fca5a5;width:28px;height:34px;border-radius:7px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">×</button>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <!-- Questions builder -->
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div style="font-size:11px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:1px;">Preguntas ({{ efQCount }})</div>
+                <button onClick="{{ addQuestion }}" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.28);color:#a855f7;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;">+ Pregunta</button>
+              </div>
+              <sc-for list="{{ editorQuestions }}" as="q" hint-placeholder-count="3">
+                <div style="background:#0a0a14;border:1px solid rgba(124,58,237,0.12);border-radius:10px;margin-bottom:9px;overflow:hidden;">
+                  <!-- Question header -->
+                  <div style="display:flex;align-items:center;gap:9px;padding:10px 13px;cursor:pointer;" onClick="{{ q.toggle }}">
+                    <div style="width:20px;height:20px;border-radius:5px;background:rgba(124,58,237,0.18);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#a855f7;flex-shrink:0;">{{ q.n }}</div>
+                    <div style="flex:1;font-size:12px;font-weight:500;color:{{ q.previewC }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ q.preview }}</div>
+                    <div style="font-size:11px;color:#475569;">{{ q.arrow }}</div>
+                    <button onClick="{{ q.remove }}" style="background:transparent;border:none;color:#475569;cursor:pointer;font-size:16px;line-height:1;padding:0 2px;" title="Eliminar">×</button>
+                  </div>
+                  <!-- Question body -->
+                  <sc-if value="{{ q.expanded }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding:0 13px 13px;border-top:1px solid rgba(124,58,237,0.08);padding-top:11px;display:flex;flex-direction:column;gap:8px;animation:fadeUp 0.2s ease;">
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                        <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;">Pregunta ES</div><input type="text" value="{{ q.textEs }}" onInput="{{ q.onTextEs }}" placeholder="¿Cuál de estos…?"></div>
+                        <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;">Pregunta EN</div><input type="text" value="{{ q.textEn }}" onInput="{{ q.onTextEn }}" placeholder="Which of these…?"></div>
+                      </div>
+                      <!-- Options row -->
+                      <div>
+                        <div style="font-size:9px;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px;">Opciones (marca la correcta)</div>
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
+                          <sc-for list="{{ q.opts }}" as="opt" hint-placeholder-count="4">
+                            <div style="display:flex;gap:5px;align-items:center;">
+                              <button onClick="{{ opt.setCorrect }}" style="width:18px;height:18px;border-radius:50%;border:2px solid {{ opt.dotBorder }};background:{{ opt.dotBg }};flex-shrink:0;cursor:pointer;transition:all 0.15s;"></button>
+                              <input type="text" value="{{ opt.value }}" onInput="{{ opt.onChange }}" placeholder="{{ opt.ph }}" style="font-size:12px;">
+                            </div>
+                          </sc-for>
+                        </div>
+                      </div>
+                      <!-- Skill + Explanation -->
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                        <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;">Habilidad ES</div><input type="text" value="{{ q.skillEs }}" onInput="{{ q.onSkillEs }}" placeholder="Mem. de reconocimiento"></div>
+                        <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;">Habilidad EN</div><input type="text" value="{{ q.skillEn }}" onInput="{{ q.onSkillEn }}" placeholder="Recognition memory"></div>
+                      </div>
+                      <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;">Explicación / Retroalimentación ES</div><textarea value="{{ q.explanEs }}" onInput="{{ q.onExplanEs }}" rows="2" placeholder="El instrumento correcto es… porque…" style="resize:none;font-size:12px;"></textarea></div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- JSON preview column -->
+          <div style="width:320px;flex-shrink:0;border-left:1px solid rgba(124,58,237,0.1);overflow-y:auto;background:#060610;padding:16px;">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:10px;">JSON en tiempo real</div>
+            <pre style="font-size:10px;color:#94a3b8;line-height:1.55;white-space:pre-wrap;word-break:break-all;">{{ editJSONPreview }}</pre>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ═══ CONSTRUCTOR ═══════════════════════════════════════ -->
+      <sc-if value="{{ isConstructor }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:740px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+
+          <!-- Step indicator -->
+          <div style="display:flex;align-items:center;gap:0;margin-bottom:28px;">
+            <sc-for list="{{ cStepDots }}" as="dot" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:{{ dot.bg }};border:2px solid {{ dot.border }};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:{{ dot.tc }};">{{ dot.n }}</div>
+                  <div style="font-size:9px;color:{{ dot.tc }};white-space:nowrap;">{{ dot.label }}</div>
+                </div>
+                <sc-if value="{{ dot.hasLine }}" hint-placeholder-val="{{ false }}">
+                  <div style="width:80px;height:2px;background:{{ dot.lineBg }};margin:0 4px;margin-bottom:14px;"></div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- STEP 0: Choose type -->
+          <sc-if value="{{ cIsTypeStep }}" hint-placeholder-val="{{ true }}">
+            <h3 style="font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:5px;">Selecciona el tipo de reto</h3>
+            <p style="font-size:12px;color:#64748b;margin-bottom:18px;">El tipo determina qué componente interactivo usará el estudiante.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+              <sc-for list="{{ cTypeCards }}" as="tc" hint-placeholder-count="8">
+                <button onClick="{{ tc.select }}" style="background:{{ tc.bg }};border:1.5px solid {{ tc.border }};border-radius:13px;padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.15s;">
+                  <div style="width:40px;height:40px;border-radius:10px;background:{{ tc.iconBg }};display:flex;align-items:center;justify-content:center;margin:0 auto 9px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tc.iconC }}" stroke-width="2">{{ tc.icon }}</svg>
+                  </div>
+                  <div style="font-size:11px;font-weight:700;color:{{ tc.tc }};margin-bottom:3px;">{{ tc.label }}</div>
+                  <div style="font-size:9px;color:#475569;line-height:1.3;">{{ tc.sub }}</div>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <!-- STEP 1: Fill form -->
+          <sc-if value="{{ cIsFormStep }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+              <button onClick="{{ cBack }}" style="background:transparent;border:1px solid rgba(124,58,237,0.25);color:#64748b;padding:6px 12px;border-radius:7px;font-size:12px;cursor:pointer;">← Volver</button>
+              <h3 style="font-size:16px;font-weight:700;color:#f1f5f9;">Nuevo reto: <span style="color:#a855f7;">{{ cSelectedTypeLabel }}</span></h3>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:14px;">
+                <div style="font-size:10px;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Identificación</div>
+                <div style="display:grid;grid-template-columns:80px 1fr 1fr;gap:8px;margin-bottom:8px;">
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Semana</div><input type="number" value="{{ cf_week }}" onInput="{{ onCWeek }}" min="1" max="18" style="height:32px;text-align:center;"></div>
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Título ES</div><input type="text" value="{{ cf_titleEs }}" onInput="{{ onCTitleEs }}" placeholder="Nombre del desafío"></div>
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Título EN</div><input type="text" value="{{ cf_titleEn }}" onInput="{{ onCTitleEn }}" placeholder="Challenge name"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Habilidad ES</div><input type="text" value="{{ cf_skillEs }}" onInput="{{ onCSkillEs }}" placeholder="Ej: Memoria Visual"></div>
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Título Microreto ES</div><input type="text" value="{{ cf_mrTitleEs }}" onInput="{{ onCMrTitle }}" placeholder="Microreto 1"></div>
+                </div>
+              </div>
+
+              <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:14px;">
+                <div style="font-size:10px;color:#06b6d4;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Configuración</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Dificultad</div>
+                    <select value="{{ cf_difficulty }}" onChange="{{ onCDifficulty }}" style="height:32px;font-size:11px;">
+                      <option value="basic">Básico</option><option value="intermediate">Intermedio</option><option value="advanced">Avanzado</option>
+                    </select>
+                  </div>
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">Tiempo Resp. (s)</div><input type="number" value="{{ cf_answerTime }}" onInput="{{ onCAnsTime }}" min="5" max="120" style="height:32px;"></div>
+                  <div><div style="font-size:9px;color:#64748b;margin-bottom:3px;">XP Base</div><input type="number" value="{{ cf_xpBase }}" onInput="{{ onCXP }}" min="10" max="200" style="height:32px;"></div>
+                </div>
+              </div>
+
+              <!-- Questions builder (constructor) -->
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:14px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                  <div style="font-size:10px;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Preguntas ({{ cQCount }})</div>
+                  <button onClick="{{ cAddQuestion }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">+ Agregar</button>
+                </div>
+                <sc-for list="{{ cEditorQuestions }}" as="cq" hint-placeholder-count="2">
+                  <div style="background:#0a0a14;border:1px solid rgba(124,58,237,0.1);border-radius:9px;padding:10px;margin-bottom:7px;">
+                    <div style="font-size:10px;color:#64748b;margin-bottom:6px;font-weight:600;">Pregunta {{ cq.n }}</div>
+                    <input type="text" value="{{ cq.textEs }}" onInput="{{ cq.onTextEs }}" placeholder="Texto de la pregunta en español" style="margin-bottom:7px;font-size:12px;">
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:5px;margin-bottom:7px;">
+                      <sc-for list="{{ cq.opts }}" as="copt" hint-placeholder-count="4">
+                        <div style="display:flex;gap:4px;align-items:center;">
+                          <button onClick="{{ copt.setCorrect }}" style="width:16px;height:16px;border-radius:50%;border:2px solid {{ copt.dotBorder }};background:{{ copt.dotBg }};flex-shrink:0;cursor:pointer;" title="Marcar como correcta"></button>
+                          <input type="text" value="{{ copt.value }}" onInput="{{ copt.onChange }}" placeholder="{{ copt.ph }}" style="font-size:11px;">
+                        </div>
+                      </sc-for>
+                    </div>
+                    <input type="text" value="{{ cq.explanEs }}" onInput="{{ cq.onExplan }}" placeholder="Explicación / retroalimentación" style="font-size:11px;background:rgba(124,58,237,0.04);">
+                  </div>
+                </sc-for>
+              </div>
+
+              <button onClick="{{ cNextStep }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;width:100%;">Validar y generar JSON →</button>
+            </div>
+          </sc-if>
+
+          <!-- STEP 2: Generate + Download -->
+          <sc-if value="{{ cIsGenerateStep }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+              <button onClick="{{ cBack }}" style="background:transparent;border:1px solid rgba(124,58,237,0.25);color:#64748b;padding:6px 12px;border-radius:7px;font-size:12px;cursor:pointer;">← Editar</button>
+              <h3 style="font-size:16px;font-weight:700;color:#f1f5f9;">JSON generado</h3>
+            </div>
+
+            <sc-if value="{{ cHasErrors }}" hint-placeholder-val="{{ false }}">
+              <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.22);border-radius:9px;padding:12px 14px;margin-bottom:14px;">
+                <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:5px;">Correcciones necesarias:</div>
+                <sc-for list="{{ cErrors }}" as="e" hint-placeholder-count="2">
+                  <div style="font-size:11px;color:#fca5a5;margin-bottom:2px;">› {{ e }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ cNoErrors }}" hint-placeholder-val="{{ false }}">
+              <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.22);border-radius:9px;padding:10px 14px;margin-bottom:14px;font-size:11px;font-weight:600;color:#10b981;">JSON válido · Semana {{ cGeneratedWeek }} · {{ cGeneratedQCount }} preguntas</div>
+            </sc-if>
+
+            <pre style="background:#0a0a14;border:1px solid rgba(124,58,237,0.14);border-radius:10px;padding:14px;font-size:10px;color:#94a3b8;line-height:1.55;max-height:340px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;margin-bottom:14px;">{{ cGeneratedJSON }}</pre>
+
+            <div style="display:flex;gap:9px;">
+              <button onClick="{{ cDownload }}" style="flex:1;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:11px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Descargar JSON
+              </button>
+              <button onClick="{{ cCopyJSON }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">Copiar</button>
+              <button onClick="{{ cReset }}" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:#64748b;padding:11px 16px;border-radius:10px;font-size:13px;cursor:pointer;">Nuevo</button>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ═══ BANCO MULTIMEDIA ════════════════════════════════════ -->
+      <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:22px;animation:fadeUp 0.3s ease;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+            <div><h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:3px;">Banco Multimedia</h2><p style="font-size:12px;color:#64748b;">Iconos, patrones y matrices reutilizables.</p></div>
+            <div style="display:flex;gap:6px;">
+              <sc-for list="{{ mediaFilters }}" as="mf" hint-placeholder-count="4">
+                <button onClick="{{ mf.set }}" style="background:{{ mf.bg }};border:1px solid {{ mf.border }};color:{{ mf.tc }};padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;">{{ mf.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;">
+            <sc-for list="{{ mediaAssets }}" as="asset" hint-placeholder-count="20">
+              <button onClick="{{ asset.copy }}" style="background:#12121e;border:1px solid {{ asset.border }};border-radius:11px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;transition:all 0.15s;" title="Click para copiar">
+                <div style="width:40px;height:40px;border-radius:9px;background:{{ asset.iconBg }};display:flex;align-items:center;justify-content:center;">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:{{ asset.iconC }};">{{ asset.initials }}</span>
+                </div>
+                <div style="font-size:9px;color:#94a3b8;text-align:center;line-height:1.2;font-weight:600;">{{ asset.name }}</div>
+                <div style="font-size:8px;padding:1px 6px;border-radius:20px;background:{{ asset.catBg }};color:{{ asset.catC }};">{{ asset.cat }}</div>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ mediaCopied }}" hint-placeholder-val="{{ false }}">
+            <div style="position:fixed;bottom:20px;right:20px;background:rgba(16,185,129,0.9);color:white;padding:8px 16px;border-radius:9px;font-size:12px;font-weight:600;animation:fadeUp 0.3s ease;">✓ Copiado al portapapeles</div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ═══ ESTADÍSTICAS ═══════════════════════════════════════ -->
+      <sc-if value="{{ isStats }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:760px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+          <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Estadísticas del Contenido</h2>
+          <p style="font-size:12px;color:#64748b;margin-bottom:22px;">Vista global del banco de desafíos.</p>
+
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:22px;">
+            <sc-for list="{{ statsCards }}" as="sc2" hint-placeholder-count="4">
+              <div style="background:#12121e;border:1px solid {{ sc2.border }};border-radius:13px;padding:16px;text-align:center;">
+                <div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:{{ sc2.c }};">{{ sc2.val }}</div>
+                <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;">{{ sc2.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- Distribution by component -->
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.15);border-radius:14px;padding:18px;margin-bottom:14px;">
+            <div style="font-size:11px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Distribución por Componente</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ compDist }}" as="cd" hint-placeholder-count="6">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:100px;font-size:11px;color:#94a3b8;text-align:right;flex-shrink:0;">{{ cd.label }}</div>
+                  <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:4px;height:14px;overflow:hidden;">
+                    <div style="height:100%;background:{{ cd.color }};border-radius:4px;width:{{ cd.w }};transition:width 0.6s ease;"></div>
+                  </div>
+                  <div style="width:24px;font-size:10px;font-weight:600;color:{{ cd.color }};text-align:right;">{{ cd.n }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- By difficulty -->
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.15);border-radius:14px;padding:18px;">
+            <div style="font-size:11px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Distribución por Dificultad</div>
+            <div style="display:flex;gap:14px;align-items:flex-end;">
+              <sc-for list="{{ diffBars }}" as="db" hint-placeholder-count="3">
+                <div style="flex:1;text-align:center;">
+                  <div style="font-size:11px;font-weight:700;color:{{ db.c }};margin-bottom:6px;">{{ db.pct }}%</div>
+                  <div style="background:{{ db.c }};border-radius:4px 4px 0 0;height:{{ db.h }}px;opacity:0.8;"></div>
+                  <div style="font-size:10px;color:#64748b;margin-top:5px;">{{ db.label }}</div>
+                  <div style="font-size:9px;color:#475569;">{{ db.n }} retos</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ═══ IMPORTAR / EXPORTAR ════════════════════════════════ -->
+      <sc-if value="{{ isImportExport }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:720px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+          <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Importar / Exportar</h2>
+          <p style="font-size:12px;color:#64748b;margin-bottom:22px;">Importa JSON, CSV o ZIP. Exporta el banco completo.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <!-- Import -->
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.15);border-radius:14px;padding:18px;">
+              <div style="font-size:12px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Importar</div>
+              <textarea onInput="{{ onImportInput }}" value="{{ importText }}" placeholder='Pega un JSON de semana aquí&#10;{"week":1,"titleEs":"…"}' style="height:140px;resize:none;font-size:11px;font-family:'JetBrains Mono',monospace;margin-bottom:10px;line-height:1.5;"></textarea>
+              <sc-if value="{{ importError }}" hint-placeholder-val="{{ false }}">
+                <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:#fca5a5;margin-bottom:8px;">{{ importErrorMsg }}</div>
+              </sc-if>
+              <sc-if value="{{ importSuccess }}" hint-placeholder-val="{{ false }}">
+                <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:8px 12px;font-size:11px;color:#10b981;margin-bottom:8px;">JSON importado — Semana {{ importedWeek }}</div>
+              </sc-if>
+              <div style="display:flex;gap:7px;">
+                <button onClick="{{ doImport }}" style="flex:1;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:8px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Importar JSON</button>
+                <button onClick="{{ importToEditor }}" style="flex:1;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:8px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Abrir en Editor</button>
+              </div>
+            </div>
+
+            <!-- Export -->
+            <div style="background:#12121e;border:1px solid rgba(16,185,129,0.15);border-radius:14px;padding:18px;">
+              <div style="font-size:12px;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Exportar</div>
+              <p style="font-size:12px;color:#64748b;margin-bottom:14px;line-height:1.6;">Descarga el banco completo o semanas individuales en distintos formatos.</p>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <sc-for list="{{ exportActions }}" as="ea" hint-placeholder-count="4">
+                  <button onClick="{{ ea.run }}" style="background:{{ ea.bg }};border:1px solid {{ ea.border }};color:{{ ea.tc }};padding:10px 14px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    {{ ea.label }}
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- Stubs for Variants, Preview, History -->
+      <sc-if value="{{ isVariants }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:700px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+          <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Gestor de Variantes</h2>
+          <p style="font-size:12px;color:#64748b;margin-bottom:22px;">Cada microreto puede tener N variantes para rotación aleatoria.</p>
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.15);border-radius:14px;padding:28px;text-align:center;color:#475569;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5" style="margin-bottom:12px;"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+            <div style="font-size:13px;margin-bottom:6px;">Selecciona un microreto en la Biblioteca para gestionar sus variantes</div>
+            <button onClick="{{ goToLib }}" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);color:#a855f7;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;">Ir a Biblioteca</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:700px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+          <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Vista Previa</h2>
+          <p style="font-size:12px;color:#64748b;margin-bottom:18px;">Previsualización del reto tal como lo verá el estudiante.</p>
+          <sc-if value="{{ previewHasData }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.2);border-radius:14px;padding:24px;">
+              <div style="font-size:10px;color:#7c3aed;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ previewType }}</div>
+              <h3 style="font-size:17px;font-weight:700;color:#f1f5f9;margin-bottom:8px;">{{ previewTitle }}</h3>
+              <p style="font-size:13px;color:#94a3b8;margin-bottom:16px;">{{ previewDesc }}</p>
+              <div style="font-size:11px;color:#64748b;">Para ver el reto ejecutándose en tiempo real, abre el reto desde la plataforma del estudiante (DESAFIO.dc.html).</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ previewNoData }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#12121e;border:1px dashed rgba(124,58,237,0.18);border-radius:14px;padding:32px;text-align:center;color:#475569;font-size:12px;">Abre un microreto en el Editor para ver su previsualización aquí</div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isHistory }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:680px;margin:0 auto;padding:24px 22px;animation:fadeUp 0.3s ease;">
+          <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">Historial de Versiones</h2>
+          <p style="font-size:12px;color:#64748b;margin-bottom:18px;">Cada cambio guardado crea una versión restaurable.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{ versionItems }}" as="v" hint-placeholder-count="4">
+              <div style="background:#12121e;border:1px solid {{ v.border }};border-radius:11px;padding:13px 15px;display:flex;align-items:center;gap:12px;">
+                <div style="width:8px;height:8px;border-radius:50%;background:{{ v.dot }};flex-shrink:0;"></div>
+                <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ v.label }}</div><div style="font-size:10px;color:#64748b;margin-top:2px;">{{ v.time }} · {{ v.desc }}</div></div>
+                <button onClick="{{ v.restore }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.22);color:#a855f7;padding:5px 11px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;">Restaurar</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360,&quot;height&quot;:860}}">
+class Component extends DCLogic {
+
+  CHALLENGE_TITLES = ['Instrumentos de Evaluación','Patrones y Secuencias','El Caso de Ana','Foco en el Detalle','Relaciones Conceptuales','Categorías Diagnósticas','Errores y Señales','Resultados e Interpretación','Fuga del Consultorio','Proceso de Evaluación','Palabras y Conceptos','Mapa Cognitivo','Pensamiento Abstracto','Dilemas Clínicos','Rapidez Cognitiva','Red de Constructos','Síntesis del Proceso','Integración Final'];
+  CHALLENGE_TYPES = ['memory','logic','case_analysis','observation','analogy','classification','observation','interpretation','escape_room','protocol_review','verbal_fluency','memory','reasoning','case_analysis','reaction','association','memory','case_analysis'];
+
+  TYPE_OPTIONS = [
+    {val:'memory',label:'Memoria Visual'},{val:'logic',label:'Serie Lógica'},{val:'case_analysis',label:'Análisis de Caso'},{val:'observation',label:'Observación'},{val:'analogy',label:'Analogías'},{val:'classification',label:'Clasificación'},{val:'reasoning',label:'Razonamiento'},{val:'escape_room',label:'Escape Room'},{val:'reaction',label:'Velocidad'},{val:'verbal_fluency',label:'Fluidez Verbal'},{val:'association',label:'Asociaciones'},{val:'protocol_review',label:'Protocolo'},
+  ];
+
+  CONSTRUCTOR_TYPES = [
+    {val:'memory',label:'Memoria Visual',sub:'Cuadrícula + memorización',icon:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>'},
+    {val:'logic',label:'Serie Lógica',sub:'Patrones y secuencias',icon:'<line x1="3" y1="12" x2="21" y2="12"/><polyline points="8 8 3 12 8 16"/>'},
+    {val:'case_analysis',label:'Caso Clínico',sub:'Escenario + instrumento',icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'},
+    {val:'observation',label:'Observación',sub:'Detectar diferencias',icon:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'},
+    {val:'analogy',label:'Analogías',sub:'A:B :: C:?',icon:'<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="m6 21 15-15"/>'},
+    {val:'classification',label:'Clasificación',sub:'Drag & drop categorías',icon:'<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>'},
+    {val:'reaction',label:'Velocidad',sub:'Respuesta rápida',icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+    {val:'verbal_fluency',label:'Fluidez Verbal',sub:'Texto cronometrado',icon:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'},
+  ];
+
+  MEDIA_ITEMS = [
+    {name:'WAIS-IV',initials:'WA',cat:'Inteligencia',ck:'purple'},{name:'WISC-V',initials:'WI',cat:'Inteligencia',ck:'purple'},{name:'Raven',initials:'RV',cat:'Inteligencia',ck:'purple'},{name:'MMPI-2',initials:'MM',cat:'Personalidad',ck:'cyan'},{name:'NEO PI-R',initials:'NE',cat:'Personalidad',ck:'cyan'},{name:'16PF',initials:'16',cat:'Personalidad',ck:'cyan'},{name:'Rorschach',initials:'RO',cat:'Proyectivo',ck:'amber'},{name:'TAT',initials:'TA',cat:'Proyectivo',ck:'amber'},{name:'HTP',initials:'HT',cat:'Proyectivo',ck:'amber'},{name:'Bender',initials:'BN',cat:'Neuropsicológico',ck:'green'},{name:'BDI-II',initials:'BD',cat:'Clínico',ck:'red'},{name:'STAI',initials:'ST',cat:'Ansiedad',ck:'red'},{name:'BAI',initials:'BA',cat:'Ansiedad',ck:'red'},{name:'PAI',initials:'PA',cat:'Clínico',ck:'red'},{name:'K-ABC',initials:'KA',cat:'Inteligencia',ck:'purple'},{name:'MACI',initials:'MA',cat:'Clínico',ck:'red'},{name:'SCL-90',initials:'SC',cat:'Clínico',ck:'red'},{name:'MIPS',initials:'MI',cat:'Personalidad',ck:'cyan'},{name:'Zulliger',initials:'ZU',cat:'Proyectivo',ck:'amber'},{name:'Machover',initials:'MC',cat:'Proyectivo',ck:'amber'},
+  ];
+
+  CK = {
+    purple:{bg:'rgba(124,58,237,0.18)',border:'rgba(124,58,237,0.3)',iconBg:'rgba(124,58,237,0.2)',iconC:'#a855f7',catBg:'rgba(124,58,237,0.14)',catC:'#a855f7'},
+    cyan:  {bg:'rgba(6,182,212,0.1)',  border:'rgba(6,182,212,0.25)', iconBg:'rgba(6,182,212,0.16)',  iconC:'#06b6d4',catBg:'rgba(6,182,212,0.12)',  catC:'#06b6d4'},
+    amber: {bg:'rgba(245,158,11,0.1)', border:'rgba(245,158,11,0.25)',iconBg:'rgba(245,158,11,0.16)', iconC:'#f59e0b',catBg:'rgba(245,158,11,0.12)', catC:'#f59e0b'},
+    green: {bg:'rgba(16,185,129,0.1)', border:'rgba(16,185,129,0.25)',iconBg:'rgba(16,185,129,0.16)', iconC:'#10b981',catBg:'rgba(16,185,129,0.12)', catC:'#10b981'},
+    red:   {bg:'rgba(244,63,94,0.1)',  border:'rgba(244,63,94,0.25)', iconBg:'rgba(244,63,94,0.16)',  iconC:'#f43f5e',catBg:'rgba(244,63,94,0.12)',  catC:'#f43f5e'},
+  };
+
+  defaultFields = () => ({
+    titleEs:'',titleEn:'',skillEs:'',skillEn:'',descEs:'',descEn:'',
+    difficulty:'basic',type:'memory',memorizeTime:10,answerTime:20,xpBase:50,badge:'',tags:'',
+    items:[{name:'',catEs:'',catEn:'',colorKey:'purple'},{name:'',catEs:'',catEn:'',colorKey:'cyan'}],
+    questions:[this.newQuestion()],
+  });
+
+  newQuestion = () => ({ textEs:'',textEn:'',options:['','','',''],correctEs:'',skillEs:'',skillEn:'',explanEs:'',explanEn:'' });
+
+  defaultCFields = () => ({
+    week:'',titleEs:'',titleEn:'',skillEs:'',skillEn:'',descEs:'',descEn:'',
+    mrTitleEs:'',mrTitleEn:'',difficulty:'basic',answerTime:20,memorizeTime:10,xpBase:50,
+    items:[],questions:[this.newQuestion()],
+  });
+
+  state = {
+    section:'library',
+    // Library
+    expandedWeeks:{},
+    loadedWeeks:{},
+    selectedWeek:null,
+    selectedMrIdx:null,
+    // Editor
+    editFields:null,
+    editWeek:null,editMrIdx:null,
+    editExpanded:{},
+    editErrors:[],editIsValid:false,
+    // Constructor
+    cStep:0,cType:'',
+    cFields:null,
+    cExpanded:{},
+    cErrors:[],cJSON:'',
+    // Media
+    mediaFilter:'all',mediaCopied:false,
+    // Import/Export
+    importText:'',importError:false,importErrorMsg:'',importSuccess:false,importedWeek:'',
+  };
+
+  // ─── NAV ────────────────────────────────────────────────────────
+  setSection = (s) => this.setState({ section: s });
+  goToLib = () => this.setState({ section: 'library' });
+
+  // ─── LIBRARY ────────────────────────────────────────────────────
+  toggleWeek = (idx) => {
+    const ew = this.state.expandedWeeks;
+    const isOpen = !!ew[idx];
+    if (!isOpen && !this.state.loadedWeeks[idx]) {
+      // Load from challenge-bank
+      fetch(`./challenge-bank/week${String(idx+1).padStart(2,'0')}.json`)
+        .then(r=>r.json())
+        .then(data=>this.setState(s=>({ loadedWeeks:{...s.loadedWeeks,[idx]:data}, expandedWeeks:{...s.expandedWeeks,[idx]:true} })))
+        .catch(()=>this.setState(s=>({ expandedWeeks:{...s.expandedWeeks,[idx]:true} })));
+    } else {
+      this.setState(s=>({ expandedWeeks:{...s.expandedWeeks,[idx]:!ew[idx]} }));
+    }
+  };
+
+  selectMr = (weekIdx, mrIdx) => this.setState({ selectedWeek:weekIdx, selectedMrIdx:mrIdx });
+
+  openEditor = () => {
+    const { selectedWeek, selectedMrIdx, loadedWeeks } = this.state;
+    if (selectedWeek == null) return;
+    const data = loadedWeeks[selectedWeek];
+    if (!data) return;
+    const mr = data.microretos?.[selectedMrIdx];
+    if (!mr) return;
+    const fields = {
+      titleEs: data.titleEs||'', titleEn: data.titleEn||'',
+      skillEs: data.skillEs||'', skillEn: data.skillEn||'',
+      descEs: data.descEs||'', descEn: data.descEn||'',
+      difficulty: mr.difficulty||'basic', type: mr.type||'memory',
+      memorizeTime: mr.memorizeTime||10, answerTime: mr.answerTime||20,
+      xpBase: mr.xp?.base||50, badge: mr.badge||'', tags: mr.tags||'',
+      items: (mr.items||[]).map(i=>({ name:i.name, catEs:i.categoryEs||'', catEn:i.categoryEn||'', colorKey:i.colorKey||'purple' })),
+      questions: (mr.questions||[]).map(q=>({ textEs:q.textEs||'', textEn:q.textEn||'', options:Array.isArray(q.options)?q.options.map(o=>typeof o==='object'?o.es||'':o):['','','',''], correctEs:q.correctEs||'', skillEs:q.skillEs||'', skillEn:q.skillEn||'', explanEs:q.explanEs||'', explanEn:q.explanEn||'' })),
+    };
+    this.setState({ section:'editor', editFields:fields, editWeek:selectedWeek, editMrIdx:selectedMrIdx, editErrors:[], editIsValid:false, editExpanded:{} });
+  };
+
+  // ─── EDITOR FIELD HANDLERS ──────────────────────────────────────
+  _setEF(key, val) { this.setState(s=>({ editFields:{...s.editFields,[key]:val}, editIsValid:false })); }
+  onTitleEs = e=>this._setEF('titleEs',e.target.value); onTitleEn = e=>this._setEF('titleEn',e.target.value);
+  onSkillEs = e=>this._setEF('skillEs',e.target.value);  onSkillEn = e=>this._setEF('skillEn',e.target.value);
+  onDescEs = e=>this._setEF('descEs',e.target.value);
+  onType = e=>this._setEF('type',e.target.value);
+  onDifficulty = e=>this._setEF('difficulty',e.target.value);
+  onAnswerTime = e=>this._setEF('answerTime',parseInt(e.target.value)||20);
+  onMemorizeTime = e=>this._setEF('memorizeTime',parseInt(e.target.value)||10);
+  onXPBase = e=>this._setEF('xpBase',parseInt(e.target.value)||50);
+  onBadge = e=>this._setEF('badge',e.target.value);
+  onTags = e=>this._setEF('tags',e.target.value);
+
+  // Items
+  addItem = () => this.setState(s=>({ editFields:{...s.editFields,items:[...s.editFields.items,{name:'',catEs:'',catEn:'',colorKey:'purple'}]} }));
+  removeItem(idx) { this.setState(s=>{ const items=[...s.editFields.items]; items.splice(idx,1); return{editFields:{...s.editFields,items}}; }); }
+  setItemField(idx, key, val) { this.setState(s=>{ const items=[...s.editFields.items]; items[idx]={...items[idx],[key]:val}; return{editFields:{...s.editFields,items}}; }); }
+
+  // Questions
+  addQuestion = () => this.setState(s=>({ editFields:{...s.editFields,questions:[...s.editFields.questions,this.newQuestion()]} }));
+  removeQuestion(idx) { this.setState(s=>{ const q=[...s.editFields.questions]; q.splice(idx,1); return{editFields:{...s.editFields,questions:q}}; }); }
+  toggleQuestion(idx) { this.setState(s=>({ editExpanded:{...s.editExpanded,[idx]:!s.editExpanded[idx]} })); }
+  setQField(idx, key, val) { this.setState(s=>{ const q=s.editFields.questions.map((x,i)=>i===idx?{...x,[key]:val}:x); return{editFields:{...s.editFields,questions:q}}; }); }
+  setQOption(idx, optIdx, val) { this.setState(s=>{ const q=s.editFields.questions.map((x,i)=>{ if(i!==idx)return x; const opts=[...x.options]; opts[optIdx]=val; return{...x,options:opts}; }); return{editFields:{...s.editFields,questions:q}}; }); }
+  setQCorrect(idx, val) { this.setQField(idx,'correctEs',val); }
+
+  // Validation
+  validateEdit = () => {
+    const f = this.state.editFields;
+    if (!f) return;
+    const errs = [];
+    if (!f.titleEs.trim()) errs.push('El título en español es obligatorio.');
+    if (!f.skillEs.trim()) errs.push('La habilidad es obligatoria.');
+    if (f.answerTime < 5) errs.push('El tiempo de respuesta debe ser al menos 5 segundos.');
+    if (f.xpBase < 1) errs.push('La XP base debe ser mayor que 0.');
+    if (!f.questions.length) errs.push('Debe tener al menos 1 pregunta.');
+    f.questions.forEach((q,i) => {
+      if (!q.textEs.trim()) errs.push(`Pregunta ${i+1}: el texto en español es obligatorio.`);
+      if (q.options.filter(o=>o.trim()).length < 2) errs.push(`Pregunta ${i+1}: debe tener al menos 2 opciones.`);
+      if (!q.correctEs.trim()) errs.push(`Pregunta ${i+1}: debe marcar una respuesta correcta.`);
+      if (!q.explanEs.trim()) errs.push(`Pregunta ${i+1}: la explicación es obligatoria.`);
+    });
+    this.setState({ editErrors: errs, editIsValid: errs.length === 0 });
+  };
+
+  saveEdit = () => {
+    this.validateEdit();
+    setTimeout(() => {
+      if (!this.state.editIsValid) { alert('Corrige los errores antes de guardar.'); return; }
+      const json = this._buildEditJSON();
+      const week = String((this.state.editWeek||0)+1).padStart(2,'0');
+      const blob = new Blob([JSON.stringify(json,null,2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `week${week}.json`; a.click();
+      // Save version to localStorage
+      this._saveVersion(json);
+    }, 100);
+  };
+
+  _buildEditJSON() {
+    const f = this.state.editFields;
+    const week = (this.state.editWeek||0)+1;
+    const mrIdx = this.state.editMrIdx||0;
+    return {
+      week, titleEs:f.titleEs, titleEn:f.titleEn||f.titleEs,
+      type:f.type, skillEs:f.skillEs, skillEn:f.skillEn||f.skillEs,
+      descEs:f.descEs, descEn:f.descEn||f.descEs,
+      microretos:[{
+        id:`w${week}m${mrIdx+1}`,type:f.type,
+        titleEs:f.titleEs,titleEn:f.titleEn||f.titleEs,
+        difficulty:f.difficulty,
+        memorizeTime:f.type==='memory'?f.memorizeTime:undefined,
+        answerTime:f.answerTime,maxAttempts:3,
+        xp:{base:f.xpBase,speedMax:30,perfectBonus:50,challengeComplete:100},
+        badge:f.badge||undefined,
+        items:f.type==='memory'?f.items.map(i=>({name:i.name,categoryEs:i.catEs,categoryEn:i.catEn||i.catEs,initials:i.name.substring(0,2).toUpperCase(),colorKey:i.colorKey})):undefined,
+        questions:f.questions.map((q,qi)=>({id:`q${qi+1}`,textEs:q.textEs,textEn:q.textEn||q.textEs,options:q.options.filter(o=>o.trim()),correctEs:q.correctEs,correctEn:q.correctEs,skillEs:q.skillEs,skillEn:q.skillEn||q.skillEs,explanEs:q.explanEs,explanEn:q.explanEn||q.explanEs})),
+      }],
+    };
+  }
+
+  _saveVersion(json) {
+    const key = `desafio_ver_w${json.week}m${this.state.editMrIdx+1}`;
+    const versions = JSON.parse(localStorage.getItem(key)||'[]');
+    versions.unshift({ts:Date.now(),data:json,label:`v${versions.length+1}`});
+    localStorage.setItem(key, JSON.stringify(versions.slice(0,10)));
+  }
+
+  // ─── CONSTRUCTOR ────────────────────────────────────────────────
+  selectCType = (t) => this.setState({ cType:t, cStep:1, cFields:this.defaultCFields(), cErrors:[], cJSON:'' });
+  cBack = () => this.setState(s=>({ cStep:Math.max(0,s.cStep-1) }));
+  cReset = () => this.setState({ cStep:0, cType:'', cFields:null, cErrors:[], cJSON:'' });
+
+  _setCF(k,v) { this.setState(s=>({ cFields:{...s.cFields,[k]:v} })); }
+  onCWeek=e=>this._setCF('week',e.target.value); onCTitleEs=e=>this._setCF('titleEs',e.target.value);
+  onCTitleEn=e=>this._setCF('titleEn',e.target.value); onCSkillEs=e=>this._setCF('skillEs',e.target.value);
+  onCMrTitle=e=>this._setCF('mrTitleEs',e.target.value); onCDifficulty=e=>this._setCF('difficulty',e.target.value);
+  onCAnsTime=e=>this._setCF('answerTime',parseInt(e.target.value)||20); onCXP=e=>this._setCF('xpBase',parseInt(e.target.value)||50);
+
+  cAddQuestion = () => this.setState(s=>({ cFields:{...s.cFields,questions:[...s.cFields.questions,this.newQuestion()]} }));
+  setCQField(idx,key,val) { this.setState(s=>{ const q=s.cFields.questions.map((x,i)=>i===idx?{...x,[key]:val}:x); return{cFields:{...s.cFields,questions:q}}; }); }
+  setCQOption(idx,optIdx,val) { this.setState(s=>{ const q=s.cFields.questions.map((x,i)=>{ if(i!==idx)return x; const opts=[...x.options]; opts[optIdx]=val; return{...x,options:opts}; }); return{cFields:{...s.cFields,questions:q}}; }); }
+  setCQCorrect(idx,val) { this.setCQField(idx,'correctEs',val); }
+
+  cNextStep = () => {
+    const f = this.state.cFields;
+    const errs = [];
+    if (!f.week) errs.push('El número de semana es obligatorio.');
+    if (!f.titleEs) errs.push('El título es obligatorio.');
+    if (!f.questions.length) errs.push('Agrega al menos 1 pregunta.');
+    f.questions.forEach((q,i) => {
+      if (!q.textEs.trim()) errs.push(`Pregunta ${i+1}: el texto es obligatorio.`);
+      if (!q.correctEs.trim()) errs.push(`Pregunta ${i+1}: marca la respuesta correcta.`);
+    });
+    const json = this._buildCJSON();
+    this.setState({ cStep:2, cErrors:errs, cJSON:JSON.stringify(json,null,2) });
+  };
+
+  _buildCJSON() {
+    const f = this.state.cFields||{};
+    const t = this.state.cType;
+    const week = parseInt(f.week)||99;
+    return {
+      week, titleEs:f.titleEs||'', titleEn:f.titleEn||f.titleEs||'',
+      type:t, skillEs:f.skillEs||'', skillEn:f.skillEs||'',
+      descEs:'', descEn:'',
+      microretos:[{
+        id:`w${week}m1`, type:t, titleEs:f.mrTitleEs||f.titleEs||'', titleEn:f.mrTitleEs||'',
+        difficulty:f.difficulty||'basic',
+        memorizeTime:t==='memory'?f.memorizeTime||10:undefined,
+        answerTime:f.answerTime||20, maxAttempts:3,
+        xp:{base:f.xpBase||50,speedMax:30,perfectBonus:50,challengeComplete:100},
+        questions:(f.questions||[]).map((q,qi)=>({
+          id:`q${qi+1}`,textEs:q.textEs,textEn:q.textEn||q.textEs,
+          options:q.options.filter(o=>o.trim()),
+          correctEs:q.correctEs,correctEn:q.correctEs,
+          skillEs:q.skillEs||'',skillEn:q.skillEs||'',
+          explanEs:q.explanEs||'',explanEn:q.explanEs||'',
+        })),
+      }],
+    };
+  }
+
+  cDownload = () => {
+    const f = this.state.cFields;
+    const week = String(parseInt(f?.week)||99).padStart(2,'0');
+    const blob = new Blob([this.state.cJSON],{type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download=`week${week}.json`; a.click();
+  };
+
+  cCopyJSON = () => { navigator.clipboard?.writeText(this.state.cJSON).then(()=>alert('JSON copiado.')); };
+
+  // ─── MEDIA ──────────────────────────────────────────────────────
+  setMediaFilter = (f) => this.setState({ mediaFilter:f });
+  copyAsset = (item) => {
+    const json = JSON.stringify({name:item.name,categoryEs:item.cat,categoryEn:item.cat,initials:item.initials,colorKey:item.ck});
+    navigator.clipboard?.writeText(json).then(()=>{ this.setState({mediaCopied:true}); setTimeout(()=>this.setState({mediaCopied:false}),2000); });
+  };
+
+  // ─── IMPORT ─────────────────────────────────────────────────────
+  onImportInput = e => this.setState({ importText:e.target.value, importError:false, importSuccess:false });
+  doImport = () => {
+    try {
+      const data = JSON.parse(this.state.importText);
+      if (!data.week) throw new Error('Falta el campo "week"');
+      this.setState(s=>({ loadedWeeks:{...s.loadedWeeks,[(data.week-1)]:data}, importSuccess:true, importError:false, importedWeek:data.week }));
+    } catch(e) { this.setState({ importError:true, importErrorMsg:`Error: ${e.message}`, importSuccess:false }); }
+  };
+  importToEditor = () => {
+    this.doImport();
+    setTimeout(()=>{ if(this.state.importSuccess) this.setState({section:'editor'}); },100);
+  };
+
+  exportAll = (fmt) => {
+    if (fmt==='json') {
+      const data = Object.values(this.state.loadedWeeks);
+      if (!data.length) { alert('Carga al menos una semana primero.'); return; }
+      const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='desafio_banco.json'; a.click();
+    } else { alert(`Exportación ${fmt.toUpperCase()} disponible en producción.`); }
+  };
+
+  // ─── VERSION HISTORY ────────────────────────────────────────────
+  getVersions() {
+    if (!this.state.editWeek == null || !this.state.editMrIdx == null) return [];
+    const key = `desafio_ver_w${(this.state.editWeek||0)+1}m${(this.state.editMrIdx||0)+1}`;
+    try { return JSON.parse(localStorage.getItem(key)||'[]'); } catch { return []; }
+  }
+
+  restoreVersion = (data) => {
+    const mr = data.microretos?.[0];
+    if (!mr) return;
+    const fields = { titleEs:data.titleEs||'',titleEn:data.titleEn||'',skillEs:data.skillEs||'',skillEn:data.skillEn||'',descEs:data.descEs||'',descEn:data.descEn||'',difficulty:mr.difficulty||'basic',type:mr.type||'memory',memorizeTime:mr.memorizeTime||10,answerTime:mr.answerTime||20,xpBase:mr.xp?.base||50,badge:mr.badge||'',tags:'',items:(mr.items||[]).map(i=>({name:i.name,catEs:i.categoryEs,catEn:i.categoryEn||'',colorKey:i.colorKey||'purple'})),questions:(mr.questions||[]).map(q=>({textEs:q.textEs||'',textEn:q.textEn||'',options:q.options||['','','',''],correctEs:q.correctEs||'',skillEs:q.skillEs||'',skillEn:q.skillEn||'',explanEs:q.explanEs||'',explanEn:q.explanEn||''})) };
+    this.setState({ section:'editor', editFields:fields, editErrors:[], editIsValid:false });
+  };
+
+  // ─── RENDER VALS ────────────────────────────────────────────────
+  renderVals() {
+    const s = this.state;
+    const sec = s.section;
+
+    // Sidebar nav
+    const NAV_DEFS = [
+      {id:'library',label:'Biblioteca',sub:'18 semanas',icon:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'},
+      {id:'editor',label:'Editor',sub:'Editar reto',icon:'<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>'},
+      {id:'constructor',label:'Constructor',sub:'Crear desde cero',icon:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>'},
+      {id:'media',label:'Banco Multimedia',sub:'Assets reutilizables',icon:'<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>'},
+      {id:'variants',label:'Variantes',sub:'N versiones / reto',icon:'<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 1 1-2-2V9m0 0h18"/>'},
+      {id:'preview',label:'Vista Previa',sub:'Como lo ve el alumno',icon:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'},
+      {id:'history',label:'Historial',sub:'Versiones guardadas',icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+      {id:'stats',label:'Estadísticas',sub:'Vista del contenido',icon:'<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'},
+      {id:'import-export',label:'Importar / Exportar',sub:'JSON, CSV, ZIP',icon:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>'},
+    ];
+    const navItems = NAV_DEFS.map(n => ({
+      ...n,go:()=>this.setSection(n.id),
+      bg: sec===n.id?'rgba(124,58,237,0.14)':'transparent',
+      tc: sec===n.id?'#a855f7':'#94a3b8',
+      iconBg: sec===n.id?'rgba(124,58,237,0.2)':'rgba(255,255,255,0.05)',
+      iconC: sec===n.id?'#a855f7':'#64748b',
+    }));
+
+    // Screen flags
+    const isBiblioteca   = sec==='library';
+    const isEditor       = sec==='editor';
+    const isConstructor  = sec==='constructor';
+    const isMedia        = sec==='media';
+    const isVariants     = sec==='variants';
+    const isPreview      = sec==='preview';
+    const isHistory      = sec==='history';
+    const isStats        = sec==='stats';
+    const isImportExport = sec==='import-export';
+
+    // Header info
+    const hasBreadcrumb = isEditor && s.editWeek!=null;
+    const breadcrumb = hasBreadcrumb ? `Semana ${s.editWeek+1} › Microreto ${(s.editMrIdx||0)+1}` : '';
+    const loadedCount = Object.keys(s.loadedWeeks).length;
+    const contentStats = `${loadedCount}/18 semanas cargadas`;
+
+    // ── LIBRARY ──
+    const libWeeks = Array.from({length:18},(_,i)=>{
+      const data = s.loadedWeeks[i];
+      const exp = !!s.expandedWeeks[i];
+      const mrs = data?.microretos?.map((mr,mi)=>({
+        n:mi+1, title:mr.titleEs||`Microreto ${mi+1}`,
+        meta:`${mr.questions?.length||0} preguntas · ${mr.answerTime||20}s`,
+        bg: (s.selectedWeek===i&&s.selectedMrIdx===mi)?'rgba(124,58,237,0.12)':'transparent',
+        border: (s.selectedWeek===i&&s.selectedMrIdx===mi)?'rgba(124,58,237,0.28)':'rgba(255,255,255,0.06)',
+        numBg: 'rgba(124,58,237,0.15)', numC:'#a855f7',
+        tc:(s.selectedWeek===i&&s.selectedMrIdx===mi)?'#a855f7':'#94a3b8',
+        open:()=>this.selectMr(i,mi),
+      })) || [{n:1,title:'Cargando…',meta:'',bg:'transparent',border:'rgba(255,255,255,0.06)',numBg:'rgba(255,255,255,0.06)',numC:'#64748b',tc:'#64748b',open:()=>{}},{n:2,title:'',meta:'',bg:'transparent',border:'rgba(255,255,255,0.06)',numBg:'rgba(255,255,255,0.06)',numC:'#64748b',tc:'#64748b',open:()=>{}},{n:3,title:'',meta:'',bg:'transparent',border:'rgba(255,255,255,0.06)',numBg:'rgba(255,255,255,0.06)',numC:'#64748b',tc:'#64748b',open:()=>{}}];
+      return {
+        n:i+1, title:data?.titleEs||this.CHALLENGE_TITLES[i], type:data?.type||this.CHALLENGE_TYPES[i],
+        expanded:exp, arrow:exp?'▾':'▸',
+        bg:exp?'rgba(124,58,237,0.07)':'transparent',
+        border:exp?'rgba(124,58,237,0.2)':'rgba(255,255,255,0.06)',
+        numBg:exp?'rgba(124,58,237,0.2)':'rgba(255,255,255,0.06)',
+        numC:exp?'#a855f7':'#64748b', tc:exp?'#e2e8f0':'#94a3b8',
+        toggle:()=>this.toggleWeek(i),
+        microretos: mrs,
+      };
+    });
+
+    const libHasSelected = s.selectedWeek!=null&&s.selectedMrIdx!=null;
+    const libNoSelected = !libHasSelected;
+    const selData = s.loadedWeeks[s.selectedWeek];
+    const selMr   = selData?.microretos?.[s.selectedMrIdx];
+    const libDetailBreadcrumb = libHasSelected?`Semana ${s.selectedWeek+1} › Microreto ${s.selectedMrIdx+1}`:'';
+    const libDetailTitle = selMr?.titleEs||'';
+    const libDetailFields = selMr ? [
+      {label:'Tipo',value:selMr.type||'—'},
+      {label:'Dificultad',value:selMr.difficulty||'—'},
+      {label:'Tiempo respuesta',value:`${selMr.answerTime||20}s`},
+      {label:'XP Base',value:`${selMr.xp?.base||50} XP`},
+      {label:'Habilidad',value:selData?.skillEs||'—'},
+      {label:'Insignia',value:selMr.badge||'(ninguna)'},
+    ] : [];
+    const libDetailQuestions = (selMr?.questions||[]).map((q,i)=>{
+      const opts = (Array.isArray(q.options)?q.options:[]).map(o=>typeof o==='object'?o.es||'':o);
+      const correct = q.correctEs||'';
+      return { n:i+1, text:q.textEs||'Sin texto', skill:q.skillEs||'',
+        opts: opts.map(o=>({ text:o, bg:o===correct?'rgba(16,185,129,0.12)':'rgba(255,255,255,0.06)', c:o===correct?'#10b981':'#94a3b8', fw:o===correct?'700':'400' })),
+      };
+    });
+    const libQCount = selMr?.questions?.length||0;
+
+    // ── EDITOR ──
+    const ef = s.editFields || this.defaultFields();
+    const efIsMemory = ef.type === 'memory';
+    const typeOptions = this.TYPE_OPTIONS;
+    const ef_titleEs = ef.titleEs; const ef_titleEn = ef.titleEn; const ef_skillEs = ef.skillEs; const ef_skillEn = ef.skillEn;
+    const ef_descEs = ef.descEs; const ef_type = ef.type; const ef_difficulty = ef.difficulty;
+    const ef_answerTime = ef.answerTime; const ef_memorizeTime = ef.memorizeTime;
+    const ef_xpBase = ef.xpBase; const ef_badge = ef.badge; const ef_tags = ef.tags;
+    const efItemCount = ef.items?.length||0;
+    const efQCount = ef.questions?.length||0;
+    const editBreadcrumb = hasBreadcrumb?breadcrumb:'Nuevo microreto';
+
+    const editorItems = (ef.items||[]).map((item,i)=>({
+      name:item.name, catEs:item.catEs, colorKey:item.colorKey,
+      onName:e=>this.setItemField(i,'name',e.target.value),
+      onCat:e=>this.setItemField(i,'catEs',e.target.value),
+      onColor:e=>this.setItemField(i,'colorKey',e.target.value),
+      remove:()=>this.removeItem(i),
+    }));
+
+    const editorQuestions = (ef.questions||[]).map((q,i)=>{
+      const expanded = !!s.editExpanded[i];
+      const opts = q.options.map((o,j)=>({
+        value:o, ph:`Opción ${j+1}`,
+        dotBorder:o===q.correctEs?'#10b981':'rgba(255,255,255,0.2)',
+        dotBg:o===q.correctEs?'#10b981':'transparent',
+        onChange:e=>this.setQOption(i,j,e.target.value),
+        setCorrect:()=>this.setQCorrect(i,o||q.options[j]),
+      }));
+      return {
+        n:i+1, preview:q.textEs||'(sin texto)', previewC:q.textEs?'#e2e8f0':'#475569',
+        expanded, arrow:expanded?'▾':'▸',
+        textEs:q.textEs, textEn:q.textEn, skillEs:q.skillEs, skillEn:q.skillEn, explanEs:q.explanEs,
+        opts, toggle:()=>this.toggleQuestion(i), remove:()=>this.removeQuestion(i),
+        onTextEs:e=>this.setQField(i,'textEs',e.target.value),
+        onTextEn:e=>this.setQField(i,'textEn',e.target.value),
+        onSkillEs:e=>this.setQField(i,'skillEs',e.target.value),
+        onSkillEn:e=>this.setQField(i,'skillEn',e.target.value),
+        onExplanEs:e=>this.setQField(i,'explanEs',e.target.value),
+      };
+    });
+
+    const editHasErrors = s.editErrors.length>0;
+    const editIsValid = s.editIsValid;
+    const editErrors = s.editErrors;
+    const editErrorCount = s.editErrors.length;
+    const editJSONPreview = s.editFields ? JSON.stringify(this._buildEditJSON(),null,2) : '{}';
+
+    // ── CONSTRUCTOR ──
+    const cIsTypeStep     = s.cStep===0;
+    const cIsFormStep     = s.cStep===1;
+    const cIsGenerateStep = s.cStep===2;
+    const cSelectedTypeLabel = this.CONSTRUCTOR_TYPES.find(t=>t.val===s.cType)?.label||'';
+    const cStepDots = [{n:1,label:'Tipo'},{n:2,label:'Formulario'},{n:3,label:'Generar'}].map((d,i)=>({
+      ...d, hasLine:i<2,
+      bg:s.cStep>i?'#7c3aed':s.cStep===i?'rgba(124,58,237,0.2)':'rgba(255,255,255,0.06)',
+      border:s.cStep>=i?'#7c3aed':'rgba(255,255,255,0.12)',
+      tc:s.cStep>i?'white':s.cStep===i?'#a855f7':'#475569',
+      lineBg:s.cStep>i?'#7c3aed':'rgba(255,255,255,0.08)',
+    }));
+
+    const cTypeCards = this.CONSTRUCTOR_TYPES.map(t=>({
+      ...t, select:()=>this.selectCType(t.val),
+      bg:'#12121e', border:'rgba(124,58,237,0.14)',
+      tc:'#e2e8f0', iconBg:'rgba(124,58,237,0.12)',iconC:'#a855f7',
+    }));
+
+    const cf = s.cFields||this.defaultCFields();
+    const cf_week=cf.week; const cf_titleEs=cf.titleEs; const cf_titleEn=cf.titleEn;
+    const cf_skillEs=cf.skillEs; const cf_mrTitleEs=cf.mrTitleEs;
+    const cf_difficulty=cf.difficulty; const cf_answerTime=cf.answerTime; const cf_xpBase=cf.xpBase;
+    const cQCount = cf.questions?.length||0;
+    const cEditorQuestions = (cf.questions||[]).map((q,i)=>{
+      const opts = (q.options||['','','','']).map((o,j)=>({
+        value:o, ph:`Opción ${j+1}`,
+        dotBorder:o===q.correctEs&&o?'#10b981':'rgba(255,255,255,0.2)',
+        dotBg:o===q.correctEs&&o?'#10b981':'transparent',
+        onChange:e=>this.setCQOption(i,j,e.target.value),
+        setCorrect:()=>this.setCQCorrect(i,o),
+      }));
+      return { n:i+1, textEs:q.textEs, explanEs:q.explanEs, opts,
+        onTextEs:e=>this.setCQField(i,'textEs',e.target.value),
+        onExplan:e=>this.setCQField(i,'explanEs',e.target.value),
+      };
+    });
+    const cHasErrors = s.cErrors.length>0;
+    const cNoErrors = s.cStep===2&&s.cErrors.length===0;
+    const cErrors = s.cErrors;
+    const cGeneratedJSON = s.cJSON||'{}';
+    const cGeneratedWeek = cf.week;
+    const cGeneratedQCount = cf.questions?.filter(q=>q.textEs).length||0;
+
+    // ── MEDIA ──
+    const mf = s.mediaFilter;
+    const mediaFilters = ['all','Inteligencia','Personalidad','Proyectivo','Clínico'].map(f=>({
+      label:f==='all'?'Todos':f, set:()=>this.setMediaFilter(f),
+      bg:mf===f?'rgba(124,58,237,0.15)':'transparent',
+      border:mf===f?'rgba(124,58,237,0.3)':'rgba(255,255,255,0.1)',
+      tc:mf===f?'#a855f7':'#64748b',
+    }));
+    const filtered = mf==='all'?this.MEDIA_ITEMS:this.MEDIA_ITEMS.filter(a=>a.cat===mf);
+    const mediaAssets = filtered.map(a=>({
+      ...a, ck2:this.CK[a.ck],
+      iconBg:this.CK[a.ck].iconBg, iconC:this.CK[a.ck].iconC,
+      catBg:this.CK[a.ck].catBg, catC:this.CK[a.ck].catC,
+      border:this.CK[a.ck].border,
+      copy:()=>this.copyAsset(a),
+    }));
+    const mediaCopied = s.mediaCopied;
+
+    // ── STATS ──
+    const statsCards = [
+      {val:18,label:'Semanas',c:'#a855f7',border:'rgba(124,58,237,0.18)'},
+      {val:54,label:'Microretos',c:'#06b6d4',border:'rgba(6,182,212,0.18)'},
+      {val:162,label:'Preguntas',c:'#10b981',border:'rgba(16,185,129,0.18)'},
+      {val:'~6min',label:'Duración Promedio',c:'#f59e0b',border:'rgba(245,158,11,0.18)'},
+    ];
+    const compDistData = [{label:'Memoria Visual',n:3,c:'#7c3aed'},{label:'Caso Clínico',n:3,c:'#06b6d4'},{label:'Observación',n:2,c:'#f59e0b'},{label:'Serie Lógica',n:2,c:'#10b981'},{label:'Otros',n:8,c:'#64748b'}];
+    const maxComp = Math.max(...compDistData.map(d=>d.n));
+    const compDist = compDistData.map(d=>({label:d.label,n:d.n,color:d.c,w:Math.round((d.n/maxComp)*100)+'%'}));
+    const diffBars = [{label:'Básico',n:20,pct:37,c:'#10b981',h:60},{label:'Intermedio',n:24,pct:44,c:'#f59e0b',h:72},{label:'Avanzado',n:10,pct:19,c:'#f43f5e',h:30}];
+
+    // ── IMPORT/EXPORT ──
+    const importError = s.importError; const importErrorMsg = s.importErrorMsg;
+    const importSuccess = s.importSuccess; const importedWeek = s.importedWeek;
+    const importText = s.importText;
+    const exportActions = [
+      {label:'Exportar semanas cargadas como JSON',bg:'rgba(124,58,237,0.1)',border:'rgba(124,58,237,0.25)',tc:'#a855f7',run:()=>this.exportAll('json')},
+      {label:'Exportar ranking como CSV',bg:'rgba(16,185,129,0.1)',border:'rgba(16,185,129,0.25)',tc:'#10b981',run:()=>this.exportAll('csv')},
+      {label:'Exportar banco completo como ZIP',bg:'rgba(6,182,212,0.1)',border:'rgba(6,182,212,0.25)',tc:'#06b6d4',run:()=>this.exportAll('zip')},
+    ];
+
+    // ── PREVIEW ──
+    const previewHasData = !!s.editFields&&!!s.editFields.titleEs;
+    const previewNoData = !previewHasData;
+    const previewTitle = s.editFields?.titleEs||'';
+    const previewType = s.editFields?.type||'';
+    const previewDesc = s.editFields?.descEs||'';
+
+    // ── HISTORY ──
+    const versions = this.getVersions();
+    const versionItems = versions.length ? versions.map((v,i)=>({
+      label:`Versión ${versions.length-i}`, time:new Date(v.ts).toLocaleString(),
+      desc:`${v.data.titleEs||'Sin título'} · ${v.data.microretos?.[0]?.questions?.length||0} preguntas`,
+      dot:i===0?'#10b981':'#475569', border:i===0?'rgba(16,185,129,0.2)':'rgba(255,255,255,0.06)',
+      restore:()=>this.restoreVersion(v.data),
+    })) : [{label:'Sin versiones guardadas',time:'',desc:'Guarda un microreto para ver su historial aquí',dot:'#475569',border:'rgba(255,255,255,0.06)',restore:()=>{}}];
+
+    return {
+      navItems, hasBreadcrumb, breadcrumb, contentStats,
+      isBiblioteca,isEditor,isConstructor,isMedia,isVariants,isPreview,isHistory,isStats,isImportExport,
+      // library
+      libWeeks,libHasSelected,libNoSelected,libDetailBreadcrumb,libDetailTitle,libDetailFields,libDetailQuestions,libQCount,openEditor:this.openEditor,
+      // editor
+      ef_titleEs,ef_titleEn,ef_skillEs,ef_skillEn,ef_descEs,ef_type,ef_difficulty,
+      ef_answerTime,ef_memorizeTime,ef_xpBase,ef_badge,ef_tags,
+      efIsMemory,efItemCount,efQCount,typeOptions,editorItems,editorQuestions,editBreadcrumb,
+      editHasErrors,editIsValid,editErrors,editErrorCount,editJSONPreview,
+      validateEdit:this.validateEdit,saveEdit:this.saveEdit,
+      addItem:this.addItem,addQuestion:this.addQuestion,
+      onTitleEs:this.onTitleEs,onTitleEn:this.onTitleEn,onSkillEs:this.onSkillEs,onSkillEn:this.onSkillEn,
+      onDescEs:this.onDescEs,onType:this.onType,onDifficulty:this.onDifficulty,
+      onAnswerTime:this.onAnswerTime,onMemorizeTime:this.onMemorizeTime,
+      onXPBase:this.onXPBase,onBadge:this.onBadge,onTags:this.onTags,
+      // constructor
+      cIsTypeStep,cIsFormStep,cIsGenerateStep,cSelectedTypeLabel,cStepDots,cTypeCards,
+      cf_week,cf_titleEs,cf_titleEn,cf_skillEs,cf_mrTitleEs,cf_difficulty,cf_answerTime,cf_xpBase,
+      cQCount,cEditorQuestions,cHasErrors,cNoErrors,cErrors,cGeneratedJSON,cGeneratedWeek,cGeneratedQCount,
+      onCWeek:this.onCWeek,onCTitleEs:this.onCTitleEs,onCTitleEn:this.onCTitleEn,onCSkillEs:this.onCSkillEs,
+      onCMrTitle:this.onCMrTitle,onCDifficulty:this.onCDifficulty,onCAnsTime:this.onCAnsTime,onCXP:this.onCXP,
+      cBack:this.cBack,cNextStep:this.cNextStep,cReset:this.cReset,cAddQuestion:this.cAddQuestion,
+      cDownload:this.cDownload,cCopyJSON:this.cCopyJSON,
+      // media
+      mediaFilters,mediaAssets,mediaCopied,
+      // stats
+      statsCards,compDist,diffBars,
+      // import/export
+      importText,importError,importErrorMsg,importSuccess,importedWeek,exportActions,
+      onImportInput:this.onImportInput,doImport:this.doImport,importToEditor:this.importToEditor,
+      // preview
+      previewHasData,previewNoData,previewTitle,previewType,previewDesc,
+      // history
+      versionItems,
+      // stubs
+      goToLib:this.goToLib,
+    };
+  }
+}
+</script>
+</body>
+</html>

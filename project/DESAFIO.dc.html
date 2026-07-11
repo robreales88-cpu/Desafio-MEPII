@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{background:#0a0a14;color:#e2e8f0;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:'Space Grotesk',system-ui,sans-serif;}
+a{color:#a855f7;}a:hover{color:#c084fc;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#0a0a14;}::-webkit-scrollbar-thumb{background:rgba(124,58,237,0.4);border-radius:3px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes xpBurst{0%{transform:scale(0) rotate(-20deg);opacity:0;}60%{transform:scale(1.15) rotate(3deg);opacity:1;}100%{transform:scale(1) rotate(0);opacity:1;}}
+@keyframes badgePop{0%{transform:scale(0) rotate(-30deg);opacity:0;}70%{transform:scale(1.2);opacity:1;}100%{transform:scale(1);opacity:1;}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 12px rgba(124,58,237,0.4);}50%{box-shadow:0 0 28px rgba(124,58,237,0.8),0 0 50px rgba(6,182,212,0.25);}}
+@media(max-width:640px){.dt-nav{display:none!important;}.mob-nav{display:flex!important;}.app-body{padding-bottom:68px!important;}}
+@media(min-width:641px){.mob-nav{display:none!important;}.dt-nav{display:flex!important;}}
+</style>
+<script src="./event-bus.js"></script>
+<script src="./challenge-engine.js"></script>
+<script src="./modules/memory.js"></script>
+<script src="./modules/multiple_choice.js"></script>
+<script src="./api-client.js"></script>
+</helmet>
+
+<div style="display:flex;flex-direction:column;height:100vh;overflow:hidden;">
+
+  <!-- TOP NAV -->
+  <sc-if value="{{ showNav }}" hint-placeholder-val="{{ false }}">
+    <nav style="flex-shrink:0;height:58px;background:rgba(10,10,20,0.96);border-bottom:1px solid rgba(124,58,237,0.18);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 18px;gap:10px;z-index:100;position:relative;">
+      <div style="display:flex;align-items:center;gap:9px;flex-shrink:0;cursor:pointer;" onClick="{{ goDashboard }}">
+        <div style="width:30px;height:30px;background:linear-gradient(135deg,#7c3aed,#06b6d4);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#f1f5f9;letter-spacing:-0.3px;">DESAFÍO</span>
+      </div>
+
+      <div class="dt-nav" style="flex:1;align-items:center;justify-content:center;gap:2px;">
+        <button onClick="{{ goDashboard }}" style="background:{{ navBg_dash }};color:{{ navCol_dash }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>{{ t_dash }}
+        </button>
+        <button onClick="{{ goChallenges }}" style="background:{{ navBg_ch }};color:{{ navCol_ch }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{{ t_challenges }}
+        </button>
+        <button onClick="{{ goRanking }}" style="background:{{ navBg_rk }};color:{{ navCol_rk }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>{{ t_ranking }}
+        </button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+        <button onClick="{{ toggleSound }}" title="{{ t_sound }}" style="background:transparent;border:1px solid rgba(124,58,237,0.25);border-radius:6px;padding:5px 8px;cursor:pointer;color:{{ soundColor }};display:flex;align-items:center;">
+          <sc-if value="{{ soundOn }}" hint-placeholder-val="{{ true }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </sc-if>
+          <sc-if value="{{ soundOff }}" hint-placeholder-val="{{ false }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          </sc-if>
+        </button>
+        <button onClick="{{ toggleLang }}" style="background:transparent;border:1px solid rgba(124,58,237,0.25);border-radius:6px;padding:4px 8px;cursor:pointer;color:#a855f7;font-size:11px;font-weight:700;letter-spacing:0.5px;">{{ langBtn }}</button>
+        <button onClick="{{ goProfile }}" style="background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:3px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:{{ avBg }};border:2px solid #7c3aed;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <svg viewBox="0 0 40 40" width="30" height="30" fill="{{ avFill }}"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#e2e8f0;line-height:1.2;">{{ uNick }}</div>
+            <div style="font-size:10px;color:#a855f7;line-height:1.2;">{{ uLevelLabel }}</div>
+          </div>
+        </button>
+        <button onClick="{{ goTeacher }}" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.28);border-radius:6px;padding:5px 10px;cursor:pointer;color:#f59e0b;font-size:11px;font-weight:600;">{{ t_teacher }}</button>
+      </div>
+    </nav>
+  </sc-if>
+
+  <!-- CONTENT -->
+  <div style="flex:1;overflow-y:auto;overflow-x:hidden;" class="app-body">
+
+    <!-- ===== LANDING ===== -->
+    <sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden;background:#0a0a14;">
+        <div style="position:absolute;top:-200px;left:-150px;width:550px;height:550px;background:radial-gradient(circle,rgba(124,58,237,0.13) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+        <div style="position:absolute;bottom:-100px;right:-100px;width:450px;height:450px;background:radial-gradient(circle,rgba(6,182,212,0.09) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+
+        <div style="width:78px;height:78px;background:linear-gradient(135deg,#7c3aed,#06b6d4);border-radius:20px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;animation:float 3s ease-in-out infinite;box-shadow:0 0 40px rgba(124,58,237,0.4);">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        </div>
+
+        <div style="text-align:center;animation:fadeUp 0.6s ease forwards;max-width:480px;">
+          <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#7c3aed;font-weight:600;margin-bottom:10px;font-family:'Space Grotesk',sans-serif;">{{ t_subtitle }}</div>
+          <h1 style="font-size:clamp(38px,7vw,60px);font-weight:700;line-height:1.05;color:#f1f5f9;letter-spacing:-1.5px;margin-bottom:8px;">DESAFÍO</h1>
+          <h2 style="font-size:clamp(12px,2vw,15px);font-weight:400;color:#64748b;letter-spacing:0.3px;margin-bottom:18px;">Método de Evaluación Psicológica II</h2>
+          <p style="font-size:16px;color:#a855f7;font-style:italic;font-weight:500;margin-bottom:44px;font-family:'Space Grotesk',sans-serif;">Entrena como evaluador. Piensa con criterio.</p>
+
+          <div style="display:flex;justify-content:center;gap:36px;margin-bottom:44px;flex-wrap:wrap;">
+            <div style="text-align:center;"><div style="font-size:30px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">18</div><div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">{{ t_desafios }}</div></div>
+            <div style="width:1px;background:rgba(124,58,237,0.2);"></div>
+            <div style="text-align:center;"><div style="font-size:30px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">54</div><div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">{{ t_microretos }}</div></div>
+            <div style="width:1px;background:rgba(124,58,237,0.2);"></div>
+            <div style="text-align:center;"><div style="font-size:30px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">10</div><div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;">{{ t_insignias }}</div></div>
+          </div>
+
+          <button onClick="{{ goRegister }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:15px 48px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;width:100%;max-width:300px;box-shadow:0 4px 24px rgba(124,58,237,0.45);letter-spacing:0.3px;display:block;margin:0 auto;">{{ t_comenzar }}</button>
+          <button onClick="{{ loginExisting }}" style="margin-top:14px;background:transparent;border:1px solid rgba(124,58,237,0.25);color:#64748b;padding:10px 24px;border-radius:10px;font-size:13px;cursor:pointer;font-family:'Space Grotesk',sans-serif;display:block;margin:14px auto 0;">{{ t_ya_cuenta }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== REGISTER ===== -->
+    <sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:#0a0a14;">
+        <div style="width:100%;max-width:500px;animation:fadeUp 0.4s ease;">
+          <button onClick="{{ goLanding }}" style="background:transparent;border:none;color:#64748b;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:22px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>{{ t_volver }}
+          </button>
+          <h2 style="font-size:26px;font-weight:700;color:#f1f5f9;margin-bottom:6px;">{{ t_crear_perfil }}</h2>
+          <p style="color:#64748b;font-size:14px;margin-bottom:28px;">{{ t_crear_sub }}</p>
+
+          <!-- Avatar picker -->
+          <div style="margin-bottom:24px;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">{{ t_avatar }}</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <sc-for list="{{ avatarOpts }}" as="av" hint-placeholder-count="6">
+                <button onClick="{{ av.pick }}" style="width:50px;height:50px;border-radius:50%;background:{{ av.bg }};border:{{ av.border }};cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all 0.15s;flex-shrink:0;padding:0;">
+                  <svg viewBox="0 0 40 40" width="44" height="44" fill="{{ av.fill }}"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{{ t_nombre }} *</div>
+                <input type="text" value="{{ fName }}" onInput="{{ onFName }}" placeholder="{{ t_nombre_ph }}" style="width:100%;background:#12121e;border:1px solid {{ borderName }};border-radius:10px;padding:10px 13px;color:#e2e8f0;font-size:14px;outline:none;font-family:'Inter',sans-serif;">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">Nickname</div>
+                <input type="text" value="{{ fNick }}" onInput="{{ onFNick }}" placeholder="{{ t_nick_ph }}" style="width:100%;background:#12121e;border:1px solid rgba(124,58,237,0.22);border-radius:10px;padding:10px 13px;color:#e2e8f0;font-size:14px;outline:none;font-family:'Inter',sans-serif;">
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{{ t_email }} *</div>
+              <input type="email" value="{{ fEmail }}" onInput="{{ onFEmail }}" placeholder="{{ t_email_ph }}" style="width:100%;background:#12121e;border:1px solid {{ borderEmail }};border-radius:10px;padding:10px 13px;color:#e2e8f0;font-size:14px;outline:none;font-family:'Inter',sans-serif;">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{{ t_grupo }} *</div>
+                <input type="text" value="{{ fGroup }}" onInput="{{ onFGroup }}" placeholder="Ej: A" style="width:100%;background:#12121e;border:1px solid rgba(124,58,237,0.22);border-radius:10px;padding:10px 13px;color:#e2e8f0;font-size:14px;outline:none;font-family:'Inter',sans-serif;">
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{{ t_seccion }} *</div>
+                <input type="text" value="{{ fSection }}" onInput="{{ onFSection }}" placeholder="Ej: 01" style="width:100%;background:#12121e;border:1px solid rgba(124,58,237,0.22);border-radius:10px;padding:10px 13px;color:#e2e8f0;font-size:14px;outline:none;font-family:'Inter',sans-serif;">
+              </div>
+            </div>
+            <sc-if value="{{ hasFormErr }}" hint-placeholder-val="{{ false }}">
+              <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.28);border-radius:8px;padding:10px 14px;color:#fca5a5;font-size:13px;">{{ formErr }}</div>
+            </sc-if>
+            <button onClick="{{ submitReg }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:14px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;margin-top:4px;box-shadow:0 4px 18px rgba(124,58,237,0.38);">{{ t_comenzar_ent }}</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== DASHBOARD ===== -->
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:780px;margin:0 auto;padding:26px 18px;animation:fadeUp 0.4s ease;">
+
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#12121e,#1a1a2e);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:26px;margin-bottom:18px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-50px;right:-50px;width:220px;height:220px;background:radial-gradient(circle,rgba(124,58,237,0.14),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+            <div style="position:relative;flex-shrink:0;">
+              <div style="width:68px;height:68px;border-radius:50%;background:{{ avBg }};border:3px solid #7c3aed;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 22px rgba(124,58,237,0.38);">
+                <svg viewBox="0 0 40 40" width="58" height="58" fill="{{ avFill }}"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+              </div>
+              <div style="position:absolute;bottom:-3px;right:-3px;background:{{ lvlBadgeBg }};color:white;font-size:9px;font-weight:700;padding:2px 5px;border-radius:5px;font-family:'Space Grotesk',sans-serif;border:2px solid #0a0a14;">Nv{{ uLevel }}</div>
+            </div>
+            <div style="flex:1;min-width:140px;">
+              <div style="font-size:19px;font-weight:700;color:#f1f5f9;line-height:1.2;">{{ uNick }}</div>
+              <div style="font-size:12px;color:#64748b;margin-bottom:8px;">{{ uName }}</div>
+              <div style="font-size:12px;color:#94a3b8;margin-bottom:7px;font-weight:500;">{{ uLevelLabel }} · {{ uXP }} XP</div>
+              <div style="background:#0a0a14;border-radius:6px;height:7px;overflow:hidden;width:min(200px,100%);">
+                <div style="height:100%;border-radius:6px;background:linear-gradient(90deg,#7c3aed,#a855f7);width:{{ xpBarW }};transition:width 0.8s ease;"></div>
+              </div>
+              <div style="font-size:10px;color:#64748b;margin-top:4px;">{{ xpToNext }} XP {{ t_next_lvl }}</div>
+            </div>
+            <div style="text-align:center;flex-shrink:0;">
+              <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">{{ t_ranking }}</div>
+              <div style="font-size:34px;font-weight:700;color:{{ rankColor }};line-height:1;font-family:'Space Grotesk',sans-serif;">#{{ uRank }}</div>
+              <div style="font-size:10px;color:#64748b;">de {{ totalStudents }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats grid -->
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-bottom:18px;">
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:14px;padding:16px;">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_completados }}</div>
+            <div style="font-size:28px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ doneCount }}</div>
+            <div style="font-size:10px;color:#64748b;">/ 18 {{ t_total }}</div>
+          </div>
+          <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:14px;padding:16px;">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">XP {{ t_total }}</div>
+            <div style="font-size:28px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ uXP }}</div>
+            <div style="font-size:10px;color:#64748b;">{{ t_acumulados }}</div>
+          </div>
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:14px;padding:16px;">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_insignias }}</div>
+            <div style="font-size:28px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ badgeCount }}</div>
+            <div style="font-size:10px;color:#64748b;">/ 10 {{ t_total }}</div>
+          </div>
+          <div style="background:#12121e;border:1px solid rgba(16,185,129,0.14);border-radius:14px;padding:16px;">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_tiempo }}</div>
+            <div style="font-size:28px;font-weight:700;color:#10b981;font-family:'Space Grotesk',sans-serif;">{{ timeLabel }}</div>
+            <div style="font-size:10px;color:#64748b;">{{ t_minutos }}</div>
+          </div>
+        </div>
+
+        <!-- Badges row -->
+        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:16px;padding:18px;margin-bottom:18px;">
+          <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">{{ t_mis_insignias }}</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <sc-for list="{{ badgesList }}" as="b" hint-placeholder-count="10">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;opacity:{{ b.op }};">
+                <div style="width:42px;height:42px;border-radius:50%;background:{{ b.bg }};border:2px solid {{ b.border }};display:flex;align-items:center;justify-content:center;">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:{{ b.letterColor }};">{{ b.letter }}</span>
+                </div>
+                <div style="font-size:8px;color:{{ b.tc }};text-align:center;max-width:46px;line-height:1.3;font-weight:500;">{{ b.shortName }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Next challenge CTA -->
+        <div style="background:linear-gradient(135deg,rgba(124,58,237,0.13),rgba(6,182,212,0.08));border:1px solid rgba(124,58,237,0.28);border-radius:16px;padding:20px;margin-bottom:18px;cursor:pointer;" onClick="{{ goChallenges }}">
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <div style="width:50px;height:50px;background:linear-gradient(135deg,#7c3aed,#06b6d4);border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:10px;color:#7c3aed;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:3px;">{{ t_proximo }}</div>
+              <div style="font-size:15px;font-weight:600;color:#f1f5f9;">{{ nextTitle }}</div>
+              <div style="font-size:11px;color:#64748b;margin-top:2px;">{{ t_semana }} {{ nextWeek }} · 3 microretos · ~7 min</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;white-space:nowrap;font-family:'Space Grotesk',sans-serif;flex-shrink:0;">{{ t_ir }}</div>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:14px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <span style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;">{{ t_progreso }}</span>
+            <span style="font-size:15px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ progPct }}%</span>
+          </div>
+          <div style="background:#0a0a14;border-radius:8px;height:9px;overflow:hidden;">
+            <div style="height:100%;border-radius:8px;background:linear-gradient(90deg,#7c3aed,#06b6d4);width:{{ progBarW }};transition:width 1s ease;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;">
+            <span style="font-size:10px;color:#64748b;">{{ doneCount }} {{ t_completados_lc }}</span>
+            <span style="font-size:10px;color:#64748b;">18 {{ t_total }}</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== CHALLENGES LIST ===== -->
+    <sc-if value="{{ isChallenges }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:760px;margin:0 auto;padding:26px 18px;animation:fadeUp 0.4s ease;">
+        <h2 style="font-size:21px;font-weight:700;color:#f1f5f9;margin-bottom:5px;">{{ t_tus_desafios }}</h2>
+        <p style="color:#64748b;font-size:13px;margin-bottom:22px;">{{ t_ch_sub }}</p>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <sc-for list="{{ chList }}" as="ch" hint-placeholder-count="6">
+            <div style="background:{{ ch.cardBg }};border:1px solid {{ ch.borderC }};border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:{{ ch.cursor }};opacity:{{ ch.op }};" onClick="{{ ch.go }}">
+              <div style="width:44px;height:44px;border-radius:11px;background:{{ ch.iconBg }};border:1px solid {{ ch.iconBorder }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <sc-if value="{{ ch.isLocked }}" hint-placeholder-val="{{ false }}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </sc-if>
+                <sc-if value="{{ ch.isDone }}" hint-placeholder-val="{{ false }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </sc-if>
+                <sc-if value="{{ ch.isActive }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#a855f7;">{{ ch.week }}</span>
+                </sc-if>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px;">
+                  <span style="font-size:14px;font-weight:600;color:{{ ch.titleC }};">{{ ch.title }}</span>
+                  <span style="font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:{{ ch.tagBg }};color:{{ ch.tagC }};text-transform:uppercase;letter-spacing:0.5px;">{{ ch.typeLabel }}</span>
+                </div>
+                <div style="font-size:11px;color:#64748b;">{{ t_semana }} {{ ch.week }} · 3 microretos</div>
+                <div style="display:flex;gap:5px;margin-top:7px;">
+                  <sc-for list="{{ ch.dots }}" as="dot" hint-placeholder-count="3">
+                    <div style="width:7px;height:7px;border-radius:50%;background:{{ dot.c }};"></div>
+                  </sc-for>
+                </div>
+              </div>
+              <sc-if value="{{ ch.isDone }}" hint-placeholder-val="{{ false }}">
+                <div style="text-align:right;flex-shrink:0;"><div style="font-size:14px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">+{{ ch.xpEarned }}</div><div style="font-size:9px;color:#64748b;">XP</div></div>
+              </sc-if>
+              <sc-if value="{{ ch.isActive }}" hint-placeholder-val="{{ false }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== CHALLENGE INTRO ===== -->
+    <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:calc(100vh - 58px);display:flex;align-items:center;justify-content:center;padding:36px 18px;animation:fadeUp 0.4s ease;">
+        <div style="width:100%;max-width:500px;">
+          <div style="background:linear-gradient(135deg,#12121e,#1a1a2e);border:1px solid rgba(124,58,237,0.24);border-radius:20px;padding:26px;margin-bottom:14px;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(124,58,237,0.18),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+            <div style="font-size:10px;color:#7c3aed;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:7px;">{{ t_semana }} {{ curWeek }} · {{ curType }}</div>
+            <h2 style="font-size:22px;font-weight:700;color:#f1f5f9;margin-bottom:9px;">{{ curTitle }}</h2>
+            <p style="color:#94a3b8;font-size:13px;line-height:1.65;">{{ curDesc }}</p>
+            <div style="display:flex;gap:22px;margin-top:18px;flex-wrap:wrap;">
+              <div><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">{{ t_habilidad }}</div><div style="font-size:12px;font-weight:600;color:#06b6d4;margin-top:2px;">{{ curSkill }}</div></div>
+              <div><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">{{ t_duracion }}</div><div style="font-size:12px;font-weight:600;color:#a855f7;margin-top:2px;">5–8 {{ t_min }}</div></div>
+              <div><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">{{ t_intentos }}</div><div style="font-size:12px;font-weight:600;color:#f59e0b;margin-top:2px;">3 {{ t_x_micro }}</div></div>
+            </div>
+          </div>
+
+          <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:13px;padding:14px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:7px;margin-bottom:9px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span style="font-size:11px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:0.5px;">{{ t_recuerda }}</span>
+            </div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+              <li style="font-size:12px;color:#94a3b8;display:flex;gap:7px;"><span style="color:#f59e0b;">›</span>{{ t_regla1 }}</li>
+              <li style="font-size:12px;color:#94a3b8;display:flex;gap:7px;"><span style="color:#f59e0b;">›</span>{{ t_regla2 }}</li>
+              <li style="font-size:12px;color:#94a3b8;display:flex;gap:7px;"><span style="color:#f59e0b;">›</span>{{ t_regla3 }}</li>
+            </ul>
+          </div>
+
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:13px;padding:14px;margin-bottom:22px;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Microretos</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <sc-for list="{{ introMrs }}" as="mr" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:11px;padding:9px 12px;background:{{ mr.bg }};border-radius:9px;border:1px solid {{ mr.border }};">
+                  <div style="width:26px;height:26px;border-radius:7px;background:{{ mr.numBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:{{ mr.numC }};font-family:'Space Grotesk',sans-serif;">{{ mr.num }}</div>
+                  <div style="flex:1;"><div style="font-size:12px;font-weight:500;color:{{ mr.titleC }};">{{ mr.title }}</div><div style="font-size:10px;color:#64748b;">{{ mr.status }}</div></div>
+                  <div style="font-size:10px;color:#64748b;">{{ mr.att }} {{ t_intentos_lc }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <button onClick="{{ startMicroreto }}" style="width:100%;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:15px;border-radius:13px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;box-shadow:0 4px 20px rgba(124,58,237,0.42);letter-spacing:0.3px;">{{ t_iniciar }} 1</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== ACTIVE CHALLENGE ===== -->
+    <sc-if value="{{ isActive }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:calc(100vh - 58px);display:flex;flex-direction:column;padding:18px;animation:fadeUp 0.3s ease;max-width:620px;margin:0 auto;width:100%;">
+
+        <!-- Top bar -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
+          <button onClick="{{ abandonChallenge }}" style="background:transparent;border:1px solid rgba(239,68,68,0.28);border-radius:8px;padding:6px 11px;color:#94a3b8;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>{{ t_salir }}
+          </button>
+          <div style="flex:1;display:flex;justify-content:center;align-items:center;gap:6px;">
+            <span style="font-size:10px;color:#64748b;">{{ t_intentos_lc }}:</span>
+            <sc-for list="{{ attDots }}" as="d" hint-placeholder-count="3">
+              <div style="width:9px;height:9px;border-radius:50%;background:{{ d.c }};"></div>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:5px 11px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ timerC }}" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:{{ timerC }};min-width:34px;">{{ timerDisp }}</span>
+          </div>
+        </div>
+
+        <!-- Microreto progress -->
+        <div style="display:flex;justify-content:center;gap:10px;margin-bottom:22px;">
+          <sc-for list="{{ mrIndicators }}" as="ind" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+              <div style="width:32px;height:4px;border-radius:4px;background:{{ ind.c }};"></div>
+              <span style="font-size:8px;color:#64748b;">M{{ ind.n }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- MEMORIZE PHASE -->
+        <sc-if value="{{ isMemorize }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;margin-bottom:18px;">
+            <div style="font-size:10px;color:#7c3aed;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:5px;">{{ t_fase_mem }}</div>
+            <h3 style="font-size:19px;font-weight:700;color:#f1f5f9;margin-bottom:4px;">{{ t_obs_mem }}</h3>
+            <p style="font-size:12px;color:#64748b;">{{ t_mem_sub }}</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:460px;margin:0 auto;width:100%;">
+            <sc-for list="{{ memGrid }}" as="item" hint-placeholder-count="6">
+              <div style="background:{{ item.cardBg }};border:1px solid {{ item.cardBorder }};border-radius:13px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;">
+                <div style="width:36px;height:36px;border-radius:9px;background:{{ item.iconBg }};display:flex;align-items:center;justify-content:center;">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:{{ item.iconC }};">{{ item.initials }}</span>
+                </div>
+                <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#f1f5f9;line-height:1.2;">{{ item.name }}</div>
+                <div style="font-size:9px;color:{{ item.catC }};padding:2px 7px;background:{{ item.catBg }};border-radius:20px;font-weight:600;">{{ item.cat }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:24px;max-width:460px;width:100%;margin-left:auto;margin-right:auto;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:10px;color:#64748b;">{{ t_memorizando }}</span>
+              <span style="font-size:10px;font-weight:600;color:#f59e0b;">{{ memTimeLeft }}s</span>
+            </div>
+            <div style="background:#12121e;border-radius:6px;height:5px;overflow:hidden;">
+              <div style="height:100%;border-radius:6px;background:linear-gradient(90deg,#f59e0b,#fbbf24);width:{{ memBarW }};transition:width 1s linear;"></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- ANSWER PHASE -->
+        <sc-if value="{{ isAnswer }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:fadeUp 0.4s ease;">
+            <div style="text-align:center;margin-bottom:22px;">
+              <div style="font-size:10px;color:#06b6d4;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:5px;">{{ t_pregunta }} {{ qNum }} / {{ qTotal }}</div>
+              <h3 style="font-size:17px;font-weight:600;color:#f1f5f9;line-height:1.45;max-width:420px;margin:0 auto;">{{ qText }}</h3>
+            </div>
+            <div style="display:flex;justify-content:center;gap:7px;margin-bottom:22px;">
+              <sc-for list="{{ qDots }}" as="qd" hint-placeholder-count="3">
+                <div style="width:7px;height:7px;border-radius:50%;background:{{ qd.c }};"></div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;max-width:460px;margin:0 auto;width:100%;">
+              <sc-for list="{{ ansOpts }}" as="opt" hint-placeholder-count="4">
+                <button onClick="{{ opt.pick }}" style="background:{{ opt.bg }};border:1px solid {{ opt.border }};border-radius:11px;padding:13px 16px;text-align:left;cursor:{{ opt.cur }};display:flex;align-items:center;gap:11px;transition:all 0.15s;width:100%;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid {{ opt.dotBorder }};background:{{ opt.dotBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700;color:{{ opt.dotTxt }};font-family:'Space Grotesk',sans-serif;">{{ opt.letter }}</div>
+                  <span style="font-size:13px;font-weight:500;color:{{ opt.txtC }};flex:1;">{{ opt.text }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- FEEDBACK PHASE -->
+        <sc-if value="{{ isFeedback }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:fadeUp 0.3s ease;display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 0;">
+            <div style="width:76px;height:76px;border-radius:50%;background:{{ fbIconBg }};display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 0 28px {{ fbGlow }};">
+              <sc-if value="{{ fbCorrect }}" hint-placeholder-val="{{ true }}">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </sc-if>
+              <sc-if value="{{ fbWrong }}" hint-placeholder-val="{{ false }}">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </sc-if>
+            </div>
+            <div style="font-size:21px;font-weight:700;color:{{ fbTitleC }};margin-bottom:7px;font-family:'Space Grotesk',sans-serif;">{{ fbTitle }}</div>
+            <div style="font-size:13px;font-weight:600;color:#f59e0b;margin-bottom:16px;">{{ fbXPLabel }}</div>
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.2);border-radius:13px;padding:16px;max-width:420px;text-align:left;margin-bottom:22px;width:100%;">
+              <div style="font-size:10px;color:#7c3aed;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_hab_entrenada }}</div>
+              <div style="font-size:13px;font-weight:600;color:#06b6d4;margin-bottom:7px;">{{ fbSkill }}</div>
+              <p style="font-size:12px;color:#94a3b8;line-height:1.65;">{{ fbExplan }}</p>
+            </div>
+            <sc-if value="{{ hasNextQ }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ nextQ }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:13px 34px;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">{{ t_sig_preg }}</button>
+            </sc-if>
+            <sc-if value="{{ isLastQ }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ finishMicroreto }}" style="background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;padding:13px 34px;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">{{ t_terminar }}</button>
+            </sc-if>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+
+    <!-- ===== RESULTS ===== -->
+    <sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:calc(100vh - 58px);display:flex;align-items:center;justify-content:center;padding:36px 18px;animation:fadeUp 0.5s ease;">
+        <div style="width:100%;max-width:460px;text-align:center;">
+          <div style="width:116px;height:116px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 0 44px rgba(124,58,237,0.5);animation:xpBurst 0.6s ease forwards;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:1px;font-weight:600;">+XP</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:700;color:white;line-height:1.1;">{{ resXP }}</div>
+          </div>
+          <h2 style="font-size:24px;font-weight:700;color:#f1f5f9;margin-bottom:7px;">{{ resTitle }}</h2>
+          <p style="color:#94a3b8;font-size:13px;margin-bottom:28px;">{{ resSub }}</p>
+
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.2);border-radius:15px;padding:18px;margin-bottom:16px;text-align:left;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">{{ t_desglose }}</div>
+            <sc-for list="{{ resBreak }}" as="rb" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(124,58,237,0.08);">
+                <span style="font-size:12px;color:#94a3b8;">{{ rb.label }}</span>
+                <span style="font-size:13px;font-weight:600;color:{{ rb.c }};font-family:'Space Grotesk',sans-serif;">{{ rb.val }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{ hasNewBadge }}" hint-placeholder-val="{{ false }}">
+            <div style="background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(251,191,36,0.06));border:1px solid rgba(245,158,11,0.28);border-radius:13px;padding:16px;margin-bottom:16px;animation:badgePop 0.6s ease 0.4s both;">
+              <div style="font-size:10px;color:#f59e0b;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:7px;">{{ t_badge_unl }}</div>
+              <div style="display:flex;align-items:center;gap:13px;">
+                <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(245,158,11,0.4);flex-shrink:0;">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:white;">{{ newBadgeLetter }}</span>
+                </div>
+                <div>
+                  <div style="font-size:15px;font-weight:700;color:#f1f5f9;">{{ newBadgeName }}</div>
+                  <div style="font-size:11px;color:#94a3b8;margin-top:2px;">{{ newBadgeDesc }}</div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <div style="display:flex;gap:9px;flex-wrap:wrap;">
+            <button onClick="{{ goDashboard }}" style="flex:1;background:#12121e;border:1px solid rgba(124,58,237,0.28);color:#a855f7;padding:11px;border-radius:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">{{ t_al_inicio }}</button>
+            <sc-if value="{{ hasNextMr }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ continueNext }}" style="flex:1;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:11px;border-radius:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;box-shadow:0 4px 16px rgba(124,58,237,0.35);">{{ t_sig_micro }}</button>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== RANKING ===== -->
+    <sc-if value="{{ isRanking }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:680px;margin:0 auto;padding:26px 18px;animation:fadeUp 0.4s ease;">
+        <h2 style="font-size:21px;font-weight:700;color:#f1f5f9;margin-bottom:5px;">{{ t_ranking_title }}</h2>
+        <p style="color:#64748b;font-size:13px;margin-bottom:26px;">{{ t_ranking_sub }}</p>
+
+        <!-- Podium Top 3 -->
+        <div style="display:flex;align-items:flex-end;justify-content:center;gap:14px;margin-bottom:28px;">
+          <!-- 2nd -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:7px;">
+            <div style="width:50px;height:50px;border-radius:50%;background:{{ p2bg }};border:3px solid #94a3b8;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:white;font-family:'Space Grotesk',sans-serif;">{{ p2init }}</div>
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;text-align:center;max-width:80px;">{{ p2nick }}</div>
+            <div style="font-size:9px;color:#64748b;text-align:center;max-width:80px;">{{ p2name }}</div>
+            <div style="background:#1e2030;padding:12px 16px 14px;border-radius:8px 8px 0 0;min-width:80px;text-align:center;">
+              <div style="font-size:22px;font-weight:700;color:#94a3b8;font-family:'Space Grotesk',sans-serif;">2</div>
+              <div style="font-size:11px;font-weight:600;color:#94a3b8;">{{ p2xp }} XP</div>
+            </div>
+          </div>
+          <!-- 1st -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:7px;">
+            <div style="width:60px;height:60px;border-radius:50%;background:{{ p1bg }};border:3px solid #f59e0b;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:white;font-family:'Space Grotesk',sans-serif;box-shadow:0 0 20px rgba(245,158,11,0.4);">{{ p1init }}</div>
+            <div style="font-size:13px;font-weight:700;color:#f59e0b;text-align:center;max-width:90px;">{{ p1nick }}</div>
+            <div style="font-size:9px;color:#64748b;text-align:center;max-width:90px;">{{ p1name }}</div>
+            <div style="background:linear-gradient(180deg,rgba(245,158,11,0.15),#1e2030);padding:16px 20px 14px;border-radius:8px 8px 0 0;min-width:90px;text-align:center;">
+              <div style="font-size:28px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">1</div>
+              <div style="font-size:12px;font-weight:700;color:#f59e0b;">{{ p1xp }} XP</div>
+            </div>
+          </div>
+          <!-- 3rd -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:7px;">
+            <div style="width:46px;height:46px;border-radius:50%;background:{{ p3bg }};border:3px solid #cd7f32;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white;font-family:'Space Grotesk',sans-serif;">{{ p3init }}</div>
+            <div style="font-size:10px;font-weight:600;color:#cd7f32;text-align:center;max-width:74px;">{{ p3nick }}</div>
+            <div style="font-size:9px;color:#64748b;text-align:center;max-width:74px;">{{ p3name }}</div>
+            <div style="background:#1a1a28;padding:9px 14px 14px;border-radius:8px 8px 0 0;min-width:74px;text-align:center;">
+              <div style="font-size:20px;font-weight:700;color:#cd7f32;font-family:'Space Grotesk',sans-serif;">3</div>
+              <div style="font-size:10px;font-weight:600;color:#cd7f32;">{{ p3xp }} XP</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;overflow:hidden;">
+          <div style="padding:11px 16px;background:rgba(124,58,237,0.06);display:grid;grid-template-columns:34px 1fr 70px 60px;gap:10px;border-bottom:1px solid rgba(124,58,237,0.1);">
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">#</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_estudiante }}</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:right;">{{ t_nivel }}</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:right;">XP</span>
+          </div>
+          <sc-for list="{{ rkRows }}" as="row" hint-placeholder-count="10">
+            <div style="padding:10px 16px;border-bottom:1px solid rgba(124,58,237,0.06);display:grid;grid-template-columns:34px 1fr 70px 60px;gap:10px;align-items:center;background:{{ row.rowBg }};">
+              <div style="font-size:13px;font-weight:700;color:{{ row.rkC }};font-family:'Space Grotesk',sans-serif;text-align:center;">{{ row.rank }}</div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:26px;height:26px;border-radius:50%;background:{{ row.avBg }};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0;">{{ row.init }}</div>
+                <div><div style="font-size:12px;font-weight:600;color:{{ row.nameC }};">{{ row.nick }}</div><div style="font-size:9px;color:#64748b;">{{ row.name }}</div></div>
+              </div>
+              <div style="text-align:right;font-size:10px;font-weight:500;color:#a855f7;">{{ row.level }}</div>
+              <div style="text-align:right;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:{{ row.xpC }};">{{ row.xp }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ showMyRankFooter }}" hint-placeholder-val="{{ false }}">
+          <div style="background:rgba(124,58,237,0.09);border:1px solid rgba(124,58,237,0.28);border-radius:11px;padding:11px 16px;margin-top:11px;display:grid;grid-template-columns:34px 1fr 70px 60px;gap:10px;align-items:center;">
+            <div style="font-size:13px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;text-align:center;">{{ uRank }}</div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="width:26px;height:26px;border-radius:50%;background:{{ avBg }};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;">{{ uInit }}</div><div><div style="font-size:12px;font-weight:600;color:#a855f7;">{{ uNick }} ({{ t_tu }})</div><div style="font-size:9px;color:#64748b;">{{ uName }}</div></div></div>
+            <div style="text-align:right;font-size:10px;color:#a855f7;">{{ uLevelLabel }}</div>
+            <div style="text-align:right;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#a855f7;">{{ uXP }}</div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ===== PROFILE ===== -->
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:680px;margin:0 auto;padding:26px 18px;animation:fadeUp 0.4s ease;">
+        <div style="background:linear-gradient(135deg,#12121e,#1a1a2e);border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:26px;margin-bottom:18px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;">
+          <div style="width:76px;height:76px;border-radius:50%;background:{{ avBg }};border:3px solid #7c3aed;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(124,58,237,0.38);flex-shrink:0;">
+            <svg viewBox="0 0 40 40" width="64" height="64" fill="{{ avFill }}"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:21px;font-weight:700;color:#f1f5f9;">{{ uNick }}</div>
+            <div style="font-size:12px;color:#64748b;margin-bottom:6px;">{{ uName }}</div>
+            <div style="font-size:11px;color:#94a3b8;margin-bottom:2px;">{{ t_grupo }}: {{ uGroup }} · {{ t_seccion }}: {{ uSection }}</div>
+            <div style="font-size:11px;color:#94a3b8;margin-bottom:9px;">{{ uEmail }}</div>
+            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,0.14);border:1px solid rgba(124,58,237,0.28);border-radius:7px;padding:4px 11px;">
+              <span style="font-size:11px;font-weight:600;color:#a855f7;">{{ uLevelLabel }}</span>
+              <span style="font-size:11px;color:#64748b;">·</span>
+              <span style="font-size:11px;font-weight:600;color:#f1f5f9;">{{ uXP }} XP</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:15px;text-align:center;"><div style="font-size:24px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ doneCount }}</div><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;">{{ t_completados }}</div></div>
+          <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:15px;text-align:center;"><div style="font-size:24px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ badgeCount }}</div><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;">{{ t_insignias }}</div></div>
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:12px;padding:15px;text-align:center;"><div style="font-size:24px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ uRankDisp }}</div><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;">{{ t_ranking }}</div></div>
+        </div>
+
+        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;padding:18px;margin-bottom:18px;">
+          <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">{{ t_todas_ins }}</div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:11px;">
+            <sc-for list="{{ allBadges }}" as="b" hint-placeholder-count="10">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;opacity:{{ b.op }};">
+                <div style="width:46px;height:46px;border-radius:50%;background:{{ b.bg }};border:2px solid {{ b.border }};display:flex;align-items:center;justify-content:center;box-shadow:{{ b.shadow }};">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:{{ b.letterColor }};">{{ b.letter }}</span>
+                </div>
+                <div style="font-size:8px;color:{{ b.tc }};text-align:center;max-width:52px;line-height:1.3;font-weight:500;">{{ b.shortName }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;padding:18px;">
+          <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">{{ t_actividad }}</div>
+          <sc-for list="{{ actLog }}" as="act" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid rgba(124,58,237,0.06);">
+              <div style="width:7px;height:7px;border-radius:50%;background:{{ act.c }};flex-shrink:0;"></div>
+              <div style="flex:1;font-size:12px;color:#94a3b8;">{{ act.text }}</div>
+              <div style="font-size:10px;color:#64748b;white-space:nowrap;">{{ act.time }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== TEACHER PANEL ===== -->
+    <sc-if value="{{ isTeacher }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:880px;margin:0 auto;padding:26px 18px;animation:fadeUp 0.4s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px;">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;">{{ t_panel_docente }}</div>
+            <h2 style="font-size:21px;font-weight:700;color:#f1f5f9;">{{ t_panel_sub }}</h2>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button onClick="{{ doExportCSV }}" style="background:transparent;border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CSV
+            </button>
+            <button onClick="{{ doExportExcel }}" style="background:transparent;border:1px solid rgba(6,182,212,0.3);color:#06b6d4;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/></svg>
+              Excel
+            </button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:22px;">
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_estudiantes }}</div><div style="font-size:26px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ tc_students }}</div></div>
+          <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_xp }}</div><div style="font-size:26px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ tc_avgXP }}</div></div>
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_time }}</div><div style="font-size:26px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ tc_avgTime }}</div></div>
+          <div style="background:#12121e;border:1px solid rgba(239,68,68,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_pendientes }}</div><div style="font-size:26px;font-weight:700;color:#ef4444;font-family:'Space Grotesk',sans-serif;">{{ tc_pending }}</div></div>
+        </div>
+
+        <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;overflow:hidden;margin-bottom:18px;">
+          <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_est_registrados }}</div>
+          <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_estudiante }}</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_nivel }}</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">XP</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_completados }}</span>
+            <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_tiempo_min }}</span>
+          </div>
+          <sc-for list="{{ tcRows }}" as="st" hint-placeholder-count="8">
+            <div style="padding:11px 16px;border-bottom:1px solid rgba(124,58,237,0.06);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;align-items:center;">
+              <div><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ st.name }}</div><div style="font-size:9px;color:#64748b;">{{ st.email }} · G:{{ st.group }}/S:{{ st.section }}</div></div>
+              <div style="text-align:center;font-size:11px;color:#a855f7;font-weight:500;">{{ st.level }}</div>
+              <div style="text-align:center;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#06b6d4;">{{ st.xp }}</div>
+              <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}</div>
+              <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.time }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:5px;">{{ t_integridad }}</div>
+          <div style="font-size:12px;color:#94a3b8;">{{ t_sin_eventos }}</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- Mobile bottom nav -->
+    <nav class="mob-nav" style="display:none;position:fixed;bottom:0;left:0;right:0;height:62px;background:rgba(10,10,20,0.97);border-top:1px solid rgba(124,58,237,0.18);justify-content:space-around;align-items:center;z-index:200;">
+      <sc-if value="{{ showNav }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ goDashboard }}" style="background:transparent;border:none;color:{{ navCol_dash }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          <span style="font-size:8px;font-weight:500;">{{ t_dash }}</span>
+        </button>
+        <button onClick="{{ goChallenges }}" style="background:transparent;border:none;color:{{ navCol_ch }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span style="font-size:8px;font-weight:500;">{{ t_challenges }}</span>
+        </button>
+        <button onClick="{{ goRanking }}" style="background:transparent;border:none;color:{{ navCol_rk }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span style="font-size:8px;font-weight:500;">{{ t_ranking }}</span>
+        </button>
+        <button onClick="{{ goProfile }}" style="background:transparent;border:none;color:{{ navCol_pf }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:8px;font-weight:500;">{{ t_perfil }}</span>
+        </button>
+      </sc-if>
+    </nav>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 800 }
+}">
+class Component extends DCLogic {
+
+  // ─── DATA ───────────────────────────────────────────────────────────────────
+  AVATARS = [
+    { bg: 'linear-gradient(135deg,#4c1d95,#7c3aed)', fill: 'rgba(255,255,255,0.88)' },
+    { bg: 'linear-gradient(135deg,#0e7490,#06b6d4)', fill: 'rgba(255,255,255,0.88)' },
+    { bg: 'linear-gradient(135deg,#92400e,#f59e0b)', fill: 'rgba(255,255,255,0.88)' },
+    { bg: 'linear-gradient(135deg,#065f46,#10b981)', fill: 'rgba(255,255,255,0.88)' },
+    { bg: 'linear-gradient(135deg,#9d174d,#ec4899)', fill: 'rgba(255,255,255,0.88)' },
+    { bg: 'linear-gradient(135deg,#1e3a5f,#3b82f6)', fill: 'rgba(255,255,255,0.88)' },
+  ];
+
+  LEVELS = [
+    { num: 1, label: { es: 'Observador', en: 'Observer' }, min: 0, max: 500, bg: '#1e293b' },
+    { num: 2, label: { es: 'Analista', en: 'Analyst' }, min: 500, max: 1200, bg: '#1e1b4b' },
+    { num: 3, label: { es: 'Evaluador', en: 'Evaluator' }, min: 1200, max: 2500, bg: '#1a2744' },
+    { num: 4, label: { es: 'Especialista', en: 'Specialist' }, min: 2500, max: 4000, bg: '#1c1917' },
+    { num: 5, label: { es: 'Maestro', en: 'Master' }, min: 4000, max: 6000, bg: '#1c0a00' },
+  ];
+
+  BADGES = [
+    { id: 'agility',    letter: 'A', shortName: { es: 'Agilidad\nCognitiva', en: 'Cognitive\nAgility' },    color: '#f59e0b', desc: { es: 'Completaste retos con velocidad', en: 'Completed challenges quickly' } },
+    { id: 'observer',   letter: 'O', shortName: { es: 'Observador\nExperto', en: 'Expert\nObserver' },      color: '#06b6d4', desc: { es: 'Completaste 1 desafío de memoria', en: 'Completed 1 memory challenge' } },
+    { id: 'analyst',    letter: 'S', shortName: { es: 'Analista\nEstratégico', en: 'Strategic\nAnalyst' },  color: '#a855f7', desc: { es: 'Precisión superior al 90%', en: 'Accuracy above 90%' } },
+    { id: 'precision',  letter: 'P', shortName: { es: 'Precisión\nDiagnóstica', en: 'Diagnostic\nPrecision' }, color: '#10b981', desc: { es: 'Puntuación perfecta en un microreto', en: 'Perfect score in a micro-task' } },
+    { id: 'architect',  letter: 'R', shortName: { es: 'Arquitecto\nRazón', en: 'Reasoning\nArchitect' },   color: '#7c3aed', desc: { es: 'Completaste 5 desafíos', en: 'Completed 5 challenges' } },
+    { id: 'specialist', letter: 'E', shortName: { es: 'Especialista\nEval.', en: 'Evaluation\nSpecialist' }, color: '#f43f5e', desc: { es: 'Alcanzaste nivel 3', en: 'Reached level 3' } },
+    { id: 'mind',       letter: 'M', shortName: { es: 'Mente\nAnalítica', en: 'Analytical\nMind' },         color: '#3b82f6', desc: { es: 'Acumulaste 500 XP', en: 'Accumulated 500 XP' } },
+    { id: 'attention',  letter: 'D', shortName: { es: 'Dominio\nAtención', en: 'Attention\nMastery' },      color: '#ec4899', desc: { es: 'Completaste retos de atención', en: 'Completed attention challenges' } },
+    { id: 'resolution', letter: 'R', shortName: { es: 'Resolución\nEficiente', en: 'Efficient\nResolution' }, color: '#14b8a6', desc: { es: 'Resolviste retos bajo el tiempo', en: 'Solved challenges under time' } },
+    { id: 'systematic', letter: 'T', shortName: { es: 'Pensamiento\nSistemático', en: 'Systematic\nThinking' }, color: '#8b5cf6', desc: { es: 'Completaste 10 desafíos', en: 'Completed 10 challenges' } },
+  ];
+
+  COLOR_KEYS = {
+    purple: { bg: 'rgba(124,58,237,0.12)', border: 'rgba(124,58,237,0.3)', iconBg: 'rgba(124,58,237,0.2)', iconC: '#a855f7', catBg: 'rgba(124,58,237,0.15)', catC: '#a855f7' },
+    cyan:   { bg: 'rgba(6,182,212,0.08)',  border: 'rgba(6,182,212,0.25)',  iconBg: 'rgba(6,182,212,0.15)',   iconC: '#06b6d4', catBg: 'rgba(6,182,212,0.12)',   catC: '#06b6d4' },
+    amber:  { bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', iconBg: 'rgba(245,158,11,0.15)',  iconC: '#f59e0b', catBg: 'rgba(245,158,11,0.12)',  catC: '#f59e0b' },
+    green:  { bg: 'rgba(16,185,129,0.08)', border: 'rgba(16,185,129,0.25)', iconBg: 'rgba(16,185,129,0.15)',  iconC: '#10b981', catBg: 'rgba(16,185,129,0.12)',  catC: '#10b981' },
+    red:    { bg: 'rgba(244,63,94,0.08)',  border: 'rgba(244,63,94,0.25)',  iconBg: 'rgba(244,63,94,0.15)',   iconC: '#f43f5e', catBg: 'rgba(244,63,94,0.12)',   catC: '#f43f5e' },
+  };
+
+  MICRORETOS = [
+    {
+      id: 'c1m1', title: { es: 'Identificación de Instrumentos', en: 'Instrument Identification' },
+      memorizeTime: 10, answerTime: 20,
+      items: [
+        { name: 'WAIS-IV', cat: { es: 'Inteligencia', en: 'Intelligence' }, initials: 'WA', ck: 'purple' },
+        { name: 'MMPI-2',  cat: { es: 'Personalidad', en: 'Personality' },  initials: 'MM', ck: 'cyan'   },
+        { name: 'Rorschach',cat:{ es: 'Proyectivo',   en: 'Projective' },   initials: 'RO', ck: 'amber'  },
+        { name: 'Bender',  cat: { es: 'Neuropsicológico', en: 'Neuropsych' },initials:'BN', ck: 'green'  },
+        { name: 'NEO PI-R',cat: { es: 'Personalidad', en: 'Personality' },  initials: 'NE', ck: 'cyan'   },
+        { name: 'Raven',   cat: { es: 'Inteligencia', en: 'Intelligence' },  initials: 'RV', ck: 'purple' },
+      ],
+      questions: [
+        { text: { es: '¿Cuál de estos instrumentos NO estaba en la cuadrícula?', en: 'Which instrument was NOT in the grid?' }, opts: ['WAIS-IV','TAT','Rorschach','Raven'], correct: 'TAT', skill: { es: 'Memoria de reconocimiento', en: 'Recognition memory' }, explan: { es: 'El TAT no fue presentado. El único proyectivo mostrado fue el Rorschach.', en: 'The TAT was not presented. The only projective shown was the Rorschach.' } },
+        { text: { es: '¿Cuántos instrumentos de "Personalidad" estaban en la cuadrícula?', en: 'How many "Personality" instruments were in the grid?' }, opts: ['1','2','3','4'], correct: '2', skill: { es: 'Memoria categorial', en: 'Categorical memory' }, explan: { es: 'Había 2 de Personalidad: MMPI-2 y NEO PI-R.', en: 'There were 2 Personality instruments: MMPI-2 and NEO PI-R.' } },
+        { text: { es: '¿A qué categoría pertenece el "Bender"?', en: 'What category does the "Bender" belong to?' }, opts: [{ es:'Inteligencia',en:'Intelligence' },{ es:'Personalidad',en:'Personality' },{ es:'Neuropsicológico',en:'Neuropsychological' },{ es:'Proyectivo',en:'Projective' }], correct: { es:'Neuropsicológico',en:'Neuropsychological' }, skill: { es: 'Memoria semántica', en: 'Semantic memory' }, explan: { es: 'El Test Gestáltico de Bender evalúa funciones neuropsicológicas visomotoras.', en: 'The Bender Gestalt Test evaluates visuomotor neuropsychological functions.' } },
+      ],
+      baseXP: 50,
+    },
+    {
+      id: 'c1m2', title: { es: 'Memoria Categorial', en: 'Categorical Memory' },
+      memorizeTime: 10, answerTime: 20,
+      items: [
+        { name: 'WISC-V', cat: { es: 'Inteligencia', en: 'Intelligence' }, initials: 'WI', ck: 'purple' },
+        { name: 'BDI-II', cat: { es: 'Clínico',      en: 'Clinical' },      initials: 'BD', ck: 'red'    },
+        { name: 'TAT',    cat: { es: 'Proyectivo',    en: 'Projective' },    initials: 'TA', ck: 'amber'  },
+        { name: '16PF',   cat: { es: 'Personalidad',  en: 'Personality' },   initials: '16', ck: 'cyan'   },
+        { name: 'PAI',    cat: { es: 'Clínico',       en: 'Clinical' },      initials: 'PA', ck: 'red'    },
+        { name: 'MACI',   cat: { es: 'Clínico',       en: 'Clinical' },      initials: 'MA', ck: 'red'    },
+      ],
+      questions: [
+        { text: { es: '¿Cuál de estos instrumentos NO estaba en la cuadrícula?', en: 'Which instrument was NOT in the grid?' }, opts: ['WISC-V','Rorschach','BDI-II','TAT'], correct: 'Rorschach', skill: { es: 'Memoria de reconocimiento', en: 'Recognition memory' }, explan: { es: 'El Rorschach no fue presentado en esta cuadrícula.', en: 'The Rorschach was not presented in this grid.' } },
+        { text: { es: '¿Cuántos instrumentos "Clínicos" estaban en la cuadrícula?', en: 'How many "Clinical" instruments were in the grid?' }, opts: ['1','2','3','4'], correct: '3', skill: { es: 'Memoria categorial', en: 'Categorical memory' }, explan: { es: 'Había 3 clínicos: BDI-II, PAI y MACI.', en: 'There were 3 clinical instruments: BDI-II, PAI, and MACI.' } },
+        { text: { es: '¿A qué categoría pertenece el "TAT"?', en: 'What category does the "TAT" belong to?' }, opts: [{ es:'Inteligencia',en:'Intelligence' },{ es:'Proyectivo',en:'Projective' },{ es:'Clínico',en:'Clinical' },{ es:'Personalidad',en:'Personality' }], correct: { es:'Proyectivo',en:'Projective' }, skill: { es: 'Memoria semántica', en: 'Semantic memory' }, explan: { es: 'El TAT (Test de Apercepción Temática) es un instrumento proyectivo.', en: 'The TAT (Thematic Apperception Test) is a projective instrument.' } },
+      ],
+      baseXP: 60,
+    },
+    {
+      id: 'c1m3', title: { es: 'Detalles y Relaciones', en: 'Details and Relations' },
+      memorizeTime: 8, answerTime: 18,
+      items: [
+        { name: 'HTP',     cat: { es: 'Proyectivo',    en: 'Projective' },   initials: 'HT', ck: 'amber'  },
+        { name: 'Machover',cat: { es: 'Proyectivo',    en: 'Projective' },   initials: 'MC', ck: 'amber'  },
+        { name: 'Zulliger',cat: { es: 'Proyectivo',    en: 'Projective' },   initials: 'ZU', ck: 'amber'  },
+        { name: 'STAI',    cat: { es: 'Ansiedad',      en: 'Anxiety' },      initials: 'ST', ck: 'red'    },
+        { name: 'MIPS',    cat: { es: 'Personalidad',  en: 'Personality' },  initials: 'MI', ck: 'cyan'   },
+        { name: 'K-ABC',   cat: { es: 'Inteligencia',  en: 'Intelligence' }, initials: 'KA', ck: 'purple' },
+      ],
+      questions: [
+        { text: { es: '¿Cuál de estos NO estaba en la cuadrícula?', en: 'Which was NOT in the grid?' }, opts: ['HTP','Rorschach','Machover','STAI'], correct: 'Rorschach', skill: { es: 'Memoria de reconocimiento', en: 'Recognition memory' }, explan: { es: 'El Rorschach no fue presentado en esta cuadrícula de proyectivos.', en: 'The Rorschach was not presented in this projective instruments grid.' } },
+        { text: { es: '¿Cuántos instrumentos proyectivos había en la cuadrícula?', en: 'How many projective instruments were in the grid?' }, opts: ['1','2','3','4'], correct: '3', skill: { es: 'Memoria categorial', en: 'Categorical memory' }, explan: { es: 'Había 3 proyectivos: HTP, Machover y Zulliger.', en: 'There were 3 projective instruments: HTP, Machover, and Zulliger.' } },
+        { text: { es: '¿A qué categoría pertenece el STAI?', en: 'What category does the STAI belong to?' }, opts: [{ es:'Inteligencia',en:'Intelligence' },{ es:'Ansiedad',en:'Anxiety' },{ es:'Proyectivo',en:'Projective' },{ es:'Neuropsicológico',en:'Neuropsychological' }], correct: { es:'Ansiedad',en:'Anxiety' }, skill: { es: 'Memoria semántica', en: 'Semantic memory' }, explan: { es: 'El STAI (State-Trait Anxiety Inventory) evalúa niveles de ansiedad estado-rasgo.', en: 'The STAI (State-Trait Anxiety Inventory) evaluates state-trait anxiety levels.' } },
+      ],
+      baseXP: 70,
+    },
+  ];
+
+  MOCK_STUDENTS = [
+    { name: 'Valentina Torres',  nick: 'ValTorres',  xp: 1250, av: 1, g: 'A', s: '01', time: 142 },
+    { name: 'Sebastián Mora',    nick: 'SebMora',    xp: 1120, av: 2, g: 'A', s: '01', time: 130 },
+    { name: 'Camila Restrepo',   nick: 'CamiR',      xp: 980,  av: 4, g: 'B', s: '02', time: 115 },
+    { name: 'Andrés Patiño',     nick: 'AndrP',      xp: 850,  av: 0, g: 'A', s: '01', time: 98  },
+    { name: 'Isabella García',   nick: 'IsaG',       xp: 720,  av: 3, g: 'B', s: '02', time: 84  },
+    { name: 'Miguel Herrera',    nick: 'MigH',       xp: 650,  av: 5, g: 'A', s: '01', time: 76  },
+    { name: 'Sofía Rodríguez',   nick: 'SofR',       xp: 580,  av: 1, g: 'C', s: '03', time: 68  },
+    { name: 'Tomás Gutiérrez',   nick: 'TomG',       xp: 510,  av: 2, g: 'B', s: '02', time: 60  },
+    { name: 'Mariana Díaz',      nick: 'MarD',       xp: 440,  av: 4, g: 'C', s: '03', time: 52  },
+    { name: 'Felipe Jiménez',    nick: 'FelJ',       xp: 380,  av: 0, g: 'A', s: '01', time: 44  },
+    { name: 'Valentina Cruz',    nick: 'ValCruz',    xp: 310,  av: 3, g: 'C', s: '03', time: 36  },
+    { name: 'Diego Martínez',    nick: 'DieM',       xp: 240,  av: 5, g: 'B', s: '02', time: 28  },
+  ];
+
+  CHALLENGE_TYPES = [
+    { es: 'Memoria Visual', en: 'Visual Memory' }, { es: 'Serie Lógica', en: 'Logic Series' },
+    { es: 'Mini Caso', en: 'Mini Case' }, { es: 'Atención Selectiva', en: 'Selective Attention' },
+    { es: 'Analogías', en: 'Analogies' }, { es: 'Clasificación', en: 'Classification' },
+    { es: 'Observación', en: 'Observation' }, { es: 'Interpretación', en: 'Interpretation' },
+    { es: 'Escape Room', en: 'Escape Room' }, { es: 'Ordenamiento', en: 'Ordering' },
+    { es: 'Fluidez Verbal', en: 'Verbal Fluency' }, { es: 'Búsqueda Visual', en: 'Visual Search' },
+    { es: 'Razonamiento', en: 'Reasoning' }, { es: 'Decisiones', en: 'Decision Making' },
+    { es: 'Velocidad Perceptiva', en: 'Perceptual Speed' }, { es: 'Asociaciones', en: 'Associations' },
+    { es: 'Memoria Visual', en: 'Visual Memory' }, { es: 'Síntesis', en: 'Synthesis' },
+  ];
+
+  CHALLENGE_TITLES = [
+    { es: 'Instrumentos de Evaluación', en: 'Assessment Instruments' },
+    { es: 'Patrones y Secuencias', en: 'Patterns and Sequences' },
+    { es: 'El Caso de Ana', en: "Ana's Case" },
+    { es: 'Foco en el Detalle', en: 'Focus on Detail' },
+    { es: 'Relaciones Conceptuales', en: 'Conceptual Relations' },
+    { es: 'Categorías Diagnósticas', en: 'Diagnostic Categories' },
+    { es: 'Errores y Señales', en: 'Errors and Signals' },
+    { es: 'Resultados e Interpretación', en: 'Results and Interpretation' },
+    { es: 'Fuga del Consultorio', en: 'Escape the Clinic' },
+    { es: 'Proceso de Evaluación', en: 'Assessment Process' },
+    { es: 'Palabras y Conceptos', en: 'Words and Concepts' },
+    { es: 'Mapa Cognitivo', en: 'Cognitive Map' },
+    { es: 'Pensamiento Abstracto', en: 'Abstract Thinking' },
+    { es: 'Dilemas Clínicos', en: 'Clinical Dilemmas' },
+    { es: 'Rapidez Cognitiva', en: 'Cognitive Speed' },
+    { es: 'Red de Constructos', en: 'Constructs Network' },
+    { es: 'Síntesis del Proceso', en: 'Process Synthesis' },
+    { es: 'Integración Final', en: 'Final Integration' },
+  ];
+
+  TR = {
+    es: {
+      t_subtitle: 'Plataforma de Entrenamiento',
+      t_desafios: 'Desafíos', t_microretos: 'Microretos', t_insignias: 'Insignias',
+      t_comenzar: 'Comenzar entrenamiento', t_ya_cuenta: 'Ya tengo cuenta',
+      t_volver: 'Volver', t_crear_perfil: 'Crea tu perfil', t_crear_sub: 'Tu espacio de entrenamiento en la plataforma',
+      t_avatar: 'Elige tu avatar', t_nombre: 'Nombre completo', t_nombre_ph: 'Tu nombre y apellido',
+      t_nick_ph: 'Nombre de jugador (opcional)', t_email: 'Correo electrónico', t_email_ph: 'correo@personal.com',
+      t_grupo: 'Grupo', t_seccion: 'Sección', t_comenzar_ent: 'Comenzar entrenamiento',
+      t_dash: 'Inicio', t_challenges: 'Desafíos', t_ranking: 'Ranking', t_perfil: 'Perfil',
+      t_teacher: 'Docente', t_sound: 'Sonido',
+      t_next_lvl: 'para siguiente nivel', t_total: 'total', t_acumulados: 'acumulados',
+      t_completados: 'Completados', t_tiempo: 'Tiempo', t_minutos: 'minutos',
+      t_mis_insignias: 'Mis insignias', t_proximo: 'Próximo desafío',
+      t_semana: 'Semana', t_ir: 'Ir al reto', t_progreso: 'Progreso general',
+      t_completados_lc: 'completados', t_tus_desafios: 'Tus desafíos',
+      t_ch_sub: 'Completa los desafíos en orden para avanzar',
+      t_habilidad: 'Habilidad', t_duracion: 'Duración', t_min: 'min',
+      t_intentos: 'Intentos', t_x_micro: 'por microreto', t_recuerda: 'Recuerda',
+      t_regla1: 'Máximo 3 intentos por microreto. Al agotarlos, queda bloqueado permanentemente.',
+      t_regla2: 'El tiempo forma parte del cálculo de XP.',
+      t_regla3: 'Cerrar el reto antes de terminar consume un intento.',
+      t_iniciar: 'Iniciar microreto', t_intentos_lc: 'intentos',
+      t_salir: 'Salir', t_fase_mem: 'Fase de Memorización',
+      t_obs_mem: 'Observa y memoriza', t_mem_sub: 'Analiza con cuidado.',
+      t_memorizando: 'Tiempo de memorización',
+      t_pregunta: 'Pregunta', t_sig_preg: 'Siguiente pregunta', t_terminar: 'Terminar microreto',
+      t_hab_entrenada: 'Habilidad entrenada', t_desglose: 'Desglose de puntuación',
+      t_badge_unl: 'Nueva insignia desbloqueada', t_al_inicio: 'Ir al inicio',
+      t_sig_micro: 'Siguiente microreto', t_ranking_title: 'Tabla de posiciones',
+      t_ranking_sub: 'Compara tu progreso con el grupo',
+      t_estudiante: 'Estudiante', t_nivel: 'Nivel', t_tu: 'tú',
+      t_todas_ins: 'Todas las insignias', t_actividad: 'Actividad reciente',
+      t_panel_docente: 'Panel Docente', t_panel_sub: 'Vista general del grupo',
+      t_estudiantes: 'Estudiantes', t_avg_xp: 'XP Promedio',
+      t_avg_time: 'Tiempo Prom.', t_pendientes: 'Pendientes',
+      t_est_registrados: 'Estudiantes registrados', t_tiempo_min: 'Tiempo (min)',
+      t_integridad: 'Eventos de integridad académica',
+      t_sin_eventos: 'No se han registrado eventos de cambio de pestaña en esta sesión.',
+    },
+    en: {
+      t_subtitle: 'Training Platform',
+      t_desafios: 'Challenges', t_microretos: 'Micro-tasks', t_insignias: 'Badges',
+      t_comenzar: 'Start training', t_ya_cuenta: 'I already have an account',
+      t_volver: 'Back', t_crear_perfil: 'Create your profile', t_crear_sub: 'Your training space on the platform',
+      t_avatar: 'Choose your avatar', t_nombre: 'Full name', t_nombre_ph: 'Your first and last name',
+      t_nick_ph: 'Player name (optional)', t_email: 'Email', t_email_ph: 'email@personal.com',
+      t_grupo: 'Group', t_seccion: 'Section', t_comenzar_ent: 'Start training',
+      t_dash: 'Home', t_challenges: 'Challenges', t_ranking: 'Ranking', t_perfil: 'Profile',
+      t_teacher: 'Teacher', t_sound: 'Sound',
+      t_next_lvl: 'to next level', t_total: 'total', t_acumulados: 'accumulated',
+      t_completados: 'Completed', t_tiempo: 'Time', t_minutos: 'minutes',
+      t_mis_insignias: 'My badges', t_proximo: 'Next challenge',
+      t_semana: 'Week', t_ir: 'Go to challenge', t_progreso: 'Overall progress',
+      t_completados_lc: 'completed', t_tus_desafios: 'Your challenges',
+      t_ch_sub: 'Complete challenges in order to advance',
+      t_habilidad: 'Skill', t_duracion: 'Duration', t_min: 'min',
+      t_intentos: 'Attempts', t_x_micro: 'per micro-task', t_recuerda: 'Remember',
+      t_regla1: 'Max 3 attempts per micro-task. Once exhausted, it is permanently locked.',
+      t_regla2: 'Time is part of the XP calculation.',
+      t_regla3: 'Closing the challenge before finishing costs one attempt.',
+      t_iniciar: 'Start micro-task', t_intentos_lc: 'attempts',
+      t_salir: 'Exit', t_fase_mem: 'Memorization Phase',
+      t_obs_mem: 'Observe and memorize', t_mem_sub: 'Analyze carefully.',
+      t_memorizando: 'Memorization time',
+      t_pregunta: 'Question', t_sig_preg: 'Next question', t_terminar: 'Finish micro-task',
+      t_hab_entrenada: 'Skill trained', t_desglose: 'Score breakdown',
+      t_badge_unl: 'New badge unlocked', t_al_inicio: 'Go home',
+      t_sig_micro: 'Next micro-task', t_ranking_title: 'Leaderboard',
+      t_ranking_sub: 'Compare your progress with the group',
+      t_estudiante: 'Student', t_nivel: 'Level', t_tu: 'you',
+      t_todas_ins: 'All badges', t_actividad: 'Recent activity',
+      t_panel_docente: 'Teacher Panel', t_panel_sub: 'Group overview',
+      t_estudiantes: 'Students', t_avg_xp: 'Avg XP',
+      t_avg_time: 'Avg Time', t_pendientes: 'Pending',
+      t_est_registrados: 'Registered students', t_tiempo_min: 'Time (min)',
+      t_integridad: 'Academic integrity events',
+      t_sin_eventos: 'No tab-switch events recorded in this session.',
+    },
+  };
+
+  // ─── STATE ──────────────────────────────────────────────────────────────────
+  state = {
+    screen: 'landing',
+    lang: 'es',
+    soundOn: true,
+    user: null,
+    selAvatar: 0,
+    fName: '', fNick: '', fEmail: '', fGroup: '', fSection: '',
+    formErr: '',
+    // challenge state
+    challengeData: null,
+    loadingChallenge: false,
+    curChIdx: 0,
+    curMrIdx: 0,
+    phase: 'memorize',
+    memTimeLeft: 10,
+    ansTimeLeft: 20,
+    curQIdx: 0,
+    selAnswer: null,
+    isCorrect: null,
+    sessionAnswers: [],
+    sessionXP: 0,
+    curFeedback: null,
+    // results
+    lastMrXP: 0,
+    newBadge: null,
+    resBreak: [],
+    hasNextMr: false,
+  };
+
+  engine = null;
+  audioCtx = null;
+
+  // ─── LIFECYCLE ──────────────────────────────────────────────────────────────
+  componentDidMount() {
+    this.loadUser();
+    document.addEventListener('visibilitychange', this.onVisChange);
+    this._setupEngine();
+  }
+
+  componentWillUnmount() {
+    if (this.engine) this.engine.abandon();
+    window.platformBus && window.platformBus.clear();
+    document.removeEventListener('visibilitychange', this.onVisChange);
+  }
+
+  _setupEngine() {
+    if (!window.ChallengeEngine || !window.platformBus) {
+      console.warn('[DC] ChallengeEngine not loaded yet, retrying…');
+      setTimeout(() => this._setupEngine(), 200);
+      return;
+    }
+    this.engine = new window.ChallengeEngine(window.platformBus);
+    const allMods = [
+      'MemoryModule','MultipleChoiceModule','LogicModule','CaseAnalysisModule',
+      'ObservationModule','ClassificationModule','AnalogyModule','InterpretationModule',
+      'EscapeRoomModule','ProtocolReviewModule','ReasoningModule','PatternModule',
+      'AssociationModule','ReactionModule','InstrumentSelectionModule','VerbalFluencyModule',
+    ];
+    allMods.forEach(name => window[name] && this.engine.registerModule(window[name]));
+
+    const bus = window.platformBus;
+    bus.on('microretoStarted',   this._onMicroretoStarted);
+    bus.on('timerTick',          this._onTimerTick);
+    bus.on('timerExpired',       this._onTimerExpired);
+    bus.on('answerPhaseStarted', this._onAnswerPhaseStarted);
+    bus.on('questionReady',      this._onQuestionReady);
+    bus.on('feedbackReady',      this._onFeedbackReady);
+    bus.on('tabSwitchDetected',  this._onTabSwitch);
+  }
+
+  _onMicroretoStarted = ({ phase }) => {
+    this.setState({ phase, screen: 'challenge-active' });
+  };
+
+  _onTimerTick = ({ timeLeft, phase }) => {
+    if (phase === 'memorize') this.setState({ memTimeLeft: timeLeft });
+    else this.setState({ ansTimeLeft: timeLeft });
+  };
+
+  _onTimerExpired = ({ phase }) => {
+    if (phase === 'memorize') {
+      this.engine.transitionToAnswer();
+    } else {
+      this.engine.submitAnswer('__timeout__');
+    }
+  };
+
+  _onAnswerPhaseStarted = () => {
+    this.setState({ phase: 'answer', curQIdx: 0, selAnswer: null, isCorrect: null });
+  };
+
+  _onQuestionReady = ({ questionIdx }) => {
+    this.setState({ phase: 'answer', curQIdx: questionIdx, selAnswer: null, isCorrect: null });
+  };
+
+  _onFeedbackReady = ({ correct, xp, feedback }) => {
+    this.setState(s => ({
+      phase: 'feedback',
+      isCorrect: correct,
+      curFeedback: feedback,
+      sessionAnswers: [...s.sessionAnswers, { correct, xp }],
+      sessionXP: s.sessionXP + xp,
+    }));
+    if (correct) this.playCorrect(); else this.playWrong();
+  };
+
+  _onTabSwitch = () => {
+    if (this.engine) this.engine.abandon();
+    this.setState({ screen: 'challenges' });
+  };
+
+  onVisChange = () => {
+    if (document.hidden && this.state.screen === 'challenge-active') {
+      if (this.engine) this.engine.registerTabSwitch();
+    }
+  };
+
+  // ─── PERSISTENCE ────────────────────────────────────────────────────────────
+  loadUser() {
+    try {
+      const raw = localStorage.getItem('desafio_user');
+      if (raw) {
+        const user = JSON.parse(raw);
+        this.setState({ user, screen: 'dashboard' });
+      }
+    } catch(e) {}
+  }
+
+  saveUser(user) {
+    try { localStorage.setItem('desafio_user', JSON.stringify(user)); } catch(e) {}
+  }
+
+  defaultUser(form, avatar) {
+    return {
+      name: form.name, email: form.email, nickname: form.nick || form.name.split(' ')[0],
+      group: form.group, section: form.section, avatar,
+      xp: 0, level: 1, totalTime: 0, joinedAt: Date.now(),
+      challenges: Array.from({ length: 18 }, (_, i) => ({
+        idx: i, completed: false, microretos: [
+          { idx: 0, completed: false, attempts: 0, xp: 0, blocked: false },
+          { idx: 1, completed: false, attempts: 0, xp: 0, blocked: false },
+          { idx: 2, completed: false, attempts: 0, xp: 0, blocked: false },
+        ],
+      })),
+      badges: [],
+      activityLog: [],
+    };
+  }
+
+  // ─── NAV ────────────────────────────────────────────────────────────────────
+  goLanding  = () => this.nav('landing');
+  goRegister = () => this.nav('register');
+  loginExisting = () => { if (this.state.user) this.nav('dashboard'); else this.nav('register'); };
+  goDashboard   = () => this.nav('dashboard');
+  goChallenges  = () => this.nav('challenges');
+  goRanking     = () => this.nav('ranking');
+  goProfile     = () => this.nav('profile');
+  goTeacher     = () => this.nav('teacher');
+
+  nav(screen) {
+    clearInterval(this.timerRef);
+    this.setState({ screen });
+  }
+
+  // ─── REGISTER ───────────────────────────────────────────────────────────────
+  onFName    = e => this.setState({ fName: e.target.value, formErr: '' });
+  onFNick    = e => this.setState({ fNick: e.target.value });
+  onFEmail   = e => this.setState({ fEmail: e.target.value, formErr: '' });
+  onFGroup   = e => this.setState({ fGroup: e.target.value });
+  onFSection = e => this.setState({ fSection: e.target.value });
+
+  submitReg = () => {
+    const { fName, fEmail, fGroup, fSection, selAvatar } = this.state;
+    if (!fName.trim()) { this.setState({ formErr: 'Por favor ingresa tu nombre completo.' }); return; }
+    if (!fEmail.trim() || !fEmail.includes('@')) { this.setState({ formErr: 'Por favor ingresa un correo válido.' }); return; }
+    if (!fGroup.trim()) { this.setState({ formErr: 'Por favor ingresa tu grupo.' }); return; }
+    if (!fSection.trim()) { this.setState({ formErr: 'Por favor ingresa tu sección.' }); return; }
+    const user = this.defaultUser({ name: fName, email: fEmail, nick: this.state.fNick, group: fGroup, section: fSection }, selAvatar);
+    this.saveUser(user);
+    this.playXP();
+    // Sync to backend (non-blocking)
+    if (window.desafioAPI) {
+      window.desafioAPI.registro({ nombre: fName, email: fEmail, nickname: this.state.fNick || fName.split(' ')[0], grupo: fGroup, seccion: fSection, avatar: selAvatar });
+      window.desafioAPI.guardarEvento(fEmail, 'REGISTRO', `Nuevo perfil: ${fName}`);
+    }
+    this.setState({ user, screen: 'dashboard' });
+  };
+
+  // ─── LEVEL / XP ─────────────────────────────────────────────────────────────
+  getLevel(xp) {
+    return this.LEVELS.reduce((found, l) => xp >= l.min ? l : found, this.LEVELS[0]);
+  }
+
+  calcXP(correct, timeLeft, maxTime, baseXP) {
+    if (!correct) return 0;
+    const speedBonus = Math.round((timeLeft / maxTime) * 30);
+    return baseXP + speedBonus;
+  }
+
+  // ─── RANKING ────────────────────────────────────────────────────────────────
+  getRankedList() {
+    const user = this.state.user;
+    const all = [...this.MOCK_STUDENTS];
+    if (user) all.push({ name: user.name, nick: user.nickname, xp: user.xp, av: user.avatar, g: user.group, s: user.section, isMe: true });
+    return all.sort((a, b) => b.xp - a.xp);
+  }
+
+  getUserRank() {
+    const ranked = this.getRankedList();
+    const idx = ranked.findIndex(s => s.isMe);
+    return idx >= 0 ? idx + 1 : ranked.length + 1;
+  }
+
+  // ─── CHALLENGE FLOW ─────────────────────────────────────────────────────────
+  openChallenge(idx) {
+    const { user } = this.state;
+    if (!user) return;
+    if (idx > 0 && !user.challenges[idx - 1].completed) return;
+    if (!this.engine) return;
+    this.setState({ loadingChallenge: true });
+    this.engine.loadChallenge(idx + 1)
+      .then(data => this.setState({ challengeData: data, curChIdx: idx, curMrIdx: 0, screen: 'challenge-intro', loadingChallenge: false }))
+      .catch(e => { console.error(e); this.setState({ loadingChallenge: false }); });
+  }
+
+  startMicroreto = () => {
+    const { curChIdx, curMrIdx, user, challengeData, lang } = this.state;
+    if (!challengeData || !this.engine) return;
+    const mr = user.challenges[curChIdx].microretos[curMrIdx];
+    if (mr.blocked) return;
+    this.setState({ sessionAnswers: [], sessionXP: 0, selAnswer: null, isCorrect: null, curFeedback: null });
+    this.engine.startMicroreto(challengeData, curMrIdx, lang);
+  };
+
+  selectAnswer = (answer) => {
+    if (!this.engine || this.state.phase !== 'answer') return;
+    this.setState({ selAnswer: answer });
+    this.engine.submitAnswer(answer);
+  };
+
+  nextQ = () => {
+    if (this.engine) this.engine.nextQuestion();
+  };
+
+  finishMicroreto = () => {
+    if (!this.engine) return;
+    const stats = this.engine.finishMicroreto();
+    if (!stats) return;
+
+    const { curChIdx, curMrIdx, user } = this.state;
+    const updUser = JSON.parse(JSON.stringify(user));
+    const mr = updUser.challenges[curChIdx].microretos[curMrIdx];
+    mr.completed = true;
+    mr.attempts = (mr.attempts || 0) + 1;
+    mr.xp = Math.max(mr.xp || 0, stats.finalXP);
+    updUser.xp += stats.finalXP;
+    updUser.totalTime = (updUser.totalTime || 0) + stats.timeUsed;
+
+    const allMrDone = updUser.challenges[curChIdx].microretos.every(m => m.completed);
+    if (allMrDone) { updUser.challenges[curChIdx].completed = true; updUser.xp += 100; }
+
+    let newBadge = null;
+    if (!updUser.badges.includes('observer')) { updUser.badges.push('observer'); newBadge = 'observer'; }
+    if (!updUser.badges.includes('mind') && updUser.xp >= 500) { updUser.badges.push('mind'); newBadge = newBadge || 'mind'; }
+    if (!updUser.badges.includes('precision') && stats.allCorrect) { updUser.badges.push('precision'); newBadge = newBadge || 'precision'; }
+    if (!updUser.badges.includes('agility') && stats.accuracy === 100 && stats.timeUsed < 30) { updUser.badges.push('agility'); newBadge = newBadge || 'agility'; }
+
+    updUser.activityLog = [{ text: `Microreto ${curMrIdx+1} del Desafío ${curChIdx+1} completado`, time: 'ahora', c: '#10b981' }, ...(updUser.activityLog||[])].slice(0, 10);
+    this.saveUser(updUser);
+    this.playXP();
+    // Sync to backend (non-blocking, queued if offline)
+    if (window.desafioAPI && updUser.email) {
+      window.desafioAPI.guardarProgreso({ email: updUser.email, semana: curChIdx+1, microreto: curMrIdx+1, tipo: this.state.challengeData?.type||'memory', intentos: updUser.challenges[curChIdx].microretos[curMrIdx].attempts, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, xp: stats.finalXP, cambiosPestana: stats.tabSwitches||0 });
+      window.desafioAPI.guardarXP(updUser.email, stats.finalXP);
+      if (newBadge) window.desafioAPI.guardarInsignia(updUser.email, newBadge);
+      window.desafioAPI.guardarEvento(updUser.email, 'MICRORETO_COMPLETADO', `S${curChIdx+1}M${curMrIdx+1} · ${stats.finalXP} XP`);
+    }
+
+    const resBreak = [
+      { label: 'Respuestas correctas', val: `${stats.correct} / ${stats.total}`, c: '#10b981' },
+      { label: 'Precisión', val: `${stats.accuracy}%`, c: '#a855f7' },
+      { label: 'XP ganado', val: `+${stats.baseXP}`, c: '#06b6d4' },
+      { label: stats.allCorrect ? 'Bonus perfecto' : 'Total', val: `+${stats.finalXP + (allMrDone ? 100 : 0)}`, c: '#f59e0b' },
+    ];
+    const hasNextMr = curMrIdx < 2 && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.blocked && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.completed;
+
+    this.setState({ user: updUser, screen: 'results', lastMrXP: stats.finalXP + (allMrDone ? 100 : 0), newBadge, resBreak, hasNextMr });
+  };
+
+  abandonChallenge = () => {
+    if (this.engine) this.engine.abandon();
+    const { curChIdx, curMrIdx, user } = this.state;
+    if (user) {
+      const updUser = JSON.parse(JSON.stringify(user));
+      const mr = updUser.challenges[curChIdx].microretos[curMrIdx];
+      mr.attempts = (mr.attempts || 0) + 1;
+      if (mr.attempts >= 3) mr.blocked = true;
+      this.saveUser(updUser);
+      this.setState({ user: updUser });
+    }
+    this.setState({ screen: 'challenges' });
+  };
+
+  continueNext = () => {
+    this.setState(s => ({ curMrIdx: s.curMrIdx + 1, sessionAnswers: [], sessionXP: 0 }), () => this.startMicroreto());
+  };
+
+  // ─── SOUND ──────────────────────────────────────────────────────────────────
+  initAudio() {
+    if (!this.audioCtx) this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  tone(freq, dur, type = 'sine', gain = 0.25) {
+    if (!this.state.soundOn) return;
+    try {
+      this.initAudio();
+      const o = this.audioCtx.createOscillator();
+      const g = this.audioCtx.createGain();
+      o.connect(g); g.connect(this.audioCtx.destination);
+      o.type = type; o.frequency.value = freq;
+      g.gain.setValueAtTime(gain, this.audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + dur);
+      o.start(); o.stop(this.audioCtx.currentTime + dur);
+    } catch(e) {}
+  }
+
+  playTick()    { this.tone(880, 0.05, 'sine', 0.1); }
+  playCorrect() { [523,659,784].forEach((f,i) => setTimeout(() => this.tone(f,0.12),i*90)); }
+  playWrong()   { this.tone(200,0.15,'sawtooth',0.2); setTimeout(() => this.tone(180,0.15,'sawtooth',0.2),100); }
+  playXP()      { [523,587,659,698,784].forEach((f,i) => setTimeout(() => this.tone(f,0.12,'sine',0.22),i*70)); }
+
+  toggleSound = () => this.setState(s => ({ soundOn: !s.soundOn }));
+  toggleLang  = () => this.setState(s => ({ lang: s.lang === 'es' ? 'en' : 'es' }));
+
+  // ─── EXPORT ─────────────────────────────────────────────────────────────────
+  doExportCSV = () => {
+    const rows = this.getRankedList();
+    const lines = ['Nombre,Nickname,XP,Nivel,Grupo,Sección', ...rows.map((s,i) => `${s.name || s.nick},${s.nick || ''},${s.xp},${this.getLevel(s.xp).label.es},${s.g || ''},${s.s || ''}`)];
+    const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'desafio_resultados.csv'; a.click();
+  };
+
+  doExportExcel = () => alert('En producción se conecta a Google Sheets via Apps Script. Por ahora descarga el CSV.');
+
+  // ─── RENDER VALS ────────────────────────────────────────────────────────────
+  renderVals() {
+    const { screen, lang, soundOn, user, selAvatar, fName, fNick, fEmail, fGroup, fSection,
+      formErr, curChIdx, curMrIdx, phase, memTimeLeft, ansTimeLeft, curQIdx, selAnswer,
+      isCorrect, sessionXP, sessionAnswers, curFeedback, attemptsLeft, lastMrXP, newBadge, hasNextMr, resBreak } = this.state;
+    const T = this.TR[lang];
+    const av = this.AVATARS[user?.avatar || selAvatar || 0];
+
+    // Spread all T keys into return
+    const tKeys = {};
+    Object.keys(T).forEach(k => { tKeys[k] = T[k]; });
+
+    // User
+    const uXP = user?.xp || 0;
+    const lvl = this.getLevel(uXP);
+    const uLevel = lvl.num;
+    const uLevelLabel = lvl.label[lang];
+    const uName = user?.name || '';
+    const uNick = user?.nickname || user?.name?.split(' ')[0] || 'Jugador';
+    const uInit = uNick[0]?.toUpperCase() || 'J';
+    const uGroup = user?.group || '';
+    const uSection = user?.section || '';
+    const uEmail = user?.email || '';
+    const nextLvl = this.LEVELS[Math.min(uLevel - 1 + 1, 4)];
+    const xpInLevel = uXP - lvl.min;
+    const xpRange = lvl.max - lvl.min;
+    const xpBarW = Math.min(100, Math.round((xpInLevel / xpRange) * 100)) + '%';
+    const xpToNext = Math.max(0, lvl.max - uXP);
+
+    // Ranking
+    const ranked = this.getRankedList();
+    const uRank = this.getUserRank();
+    const totalStudents = ranked.length;
+    const rankColor = uRank === 1 ? '#f59e0b' : uRank <= 3 ? '#94a3b8' : '#a855f7';
+    const uRankDisp = '#' + uRank;
+
+    // Challenges
+    const doneChallenges = user?.challenges?.filter(c => c.completed) || [];
+    const doneCount = doneChallenges.length;
+    const progPct = Math.round((doneCount / 18) * 100);
+    const progBarW = progPct + '%';
+    const nextChIdx = user ? user.challenges.findIndex(c => !c.completed) : 0;
+    const nextTitle = nextChIdx >= 0 ? this.CHALLENGE_TITLES[nextChIdx][lang] : '-';
+    const nextWeek = nextChIdx + 1;
+
+    // Badges
+    const earnedBadges = user?.badges || [];
+    const badgeCount = earnedBadges.length;
+    const badgesList = this.BADGES.map(b => {
+      const earned = earnedBadges.includes(b.id);
+      return {
+        letter: b.letter, shortName: b.shortName[lang],
+        op: earned ? '1' : '0.3',
+        bg: earned ? `rgba(${this.hexToRgb(b.color)},0.2)` : 'rgba(255,255,255,0.04)',
+        border: earned ? b.color : 'rgba(255,255,255,0.1)',
+        letterColor: earned ? b.color : '#475569',
+        tc: earned ? b.color : '#475569',
+        shadow: earned ? `0 0 12px ${b.color}44` : 'none',
+      };
+    });
+
+    // Time
+    const totalSecs = user?.totalTime || 0;
+    const timeLabel = Math.round(totalSecs / 60).toString();
+
+    // Nav active states
+    const navActiveBg = 'rgba(124,58,237,0.18)';
+    const navActiveC = '#a855f7';
+    const navDefaultBg = 'transparent';
+    const navDefaultC = '#64748b';
+    const navBg_dash = screen === 'dashboard' ? navActiveBg : navDefaultBg;
+    const navCol_dash = screen === 'dashboard' ? navActiveC : navDefaultC;
+    const navBg_ch   = screen === 'challenges' ? navActiveBg : navDefaultBg;
+    const navCol_ch  = screen === 'challenges' ? navActiveC : navDefaultC;
+    const navBg_rk   = screen === 'ranking'    ? navActiveBg : navDefaultBg;
+    const navCol_rk  = screen === 'ranking'    ? navActiveC : navDefaultC;
+    const navCol_pf  = screen === 'profile'    ? navActiveC : navDefaultC;
+
+    // Level badge bg
+    const lvlColors = ['#1e293b','#1e1b4b','#1a2744','#1c1917','#1c0a00'];
+    const lvlBadgeBg = `linear-gradient(135deg,${['#334155','#7c3aed','#0ea5e9','#b45309','#7c2d12'][uLevel-1]},${['#1e293b','#a855f7','#06b6d4','#f59e0b','#ef4444'][uLevel-1]})`;
+
+    // Challenges list
+    const chList = Array.from({ length: 18 }, (_, i) => {
+      const chData = user?.challenges?.[i];
+      const isDone = chData?.completed || false;
+      const isActive = !isDone && (i === 0 || (user?.challenges?.[i-1]?.completed));
+      const isLocked = !isDone && !isActive;
+      const typData = this.CHALLENGE_TYPES[i];
+      const allXP = chData?.microretos?.reduce((s, m) => s + m.xp, 0) || 0;
+      const mrDots = (chData?.microretos || [{},{},{}]).map(m => ({
+        c: m.completed ? '#10b981' : m.blocked ? '#ef4444' : 'rgba(255,255,255,0.12)',
+      }));
+      return {
+        week: i + 1, title: this.CHALLENGE_TITLES[i][lang],
+        typeLabel: typData[lang],
+        isDone, isActive, isLocked,
+        cardBg: isDone ? '#12121e' : isActive ? '#14142a' : '#0f0f1a',
+        borderC: isDone ? 'rgba(16,185,129,0.2)' : isActive ? 'rgba(124,58,237,0.3)' : 'rgba(255,255,255,0.05)',
+        cursor: isLocked ? 'not-allowed' : 'pointer',
+        op: isLocked ? '0.4' : '1',
+        iconBg: isDone ? 'rgba(16,185,129,0.12)' : isActive ? 'rgba(124,58,237,0.12)' : 'rgba(255,255,255,0.04)',
+        iconBorder: isDone ? 'rgba(16,185,129,0.2)' : isActive ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.08)',
+        titleC: isDone ? '#e2e8f0' : isActive ? '#f1f5f9' : '#475569',
+        tagBg: isActive ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.06)',
+        tagC: isActive ? '#a855f7' : '#475569',
+        xpEarned: allXP,
+        dots: mrDots,
+        go: isLocked ? () => {} : () => this.openChallenge(i),
+      };
+    });
+
+    // Intro — reads from loaded challengeData JSON
+    const cd2 = this.state.challengeData;
+    const curTitle = cd2 ? (lang==='es' ? cd2.titleEs : cd2.titleEn) : (this.CHALLENGE_TITLES[curChIdx]?.[lang] || '');
+    const curType  = cd2 ? (lang==='es' ? cd2.skillEs : cd2.skillEn) : (this.CHALLENGE_TYPES[curChIdx]?.[lang] || '');
+    const curDesc  = cd2 ? (lang==='es' ? cd2.descEs  : cd2.descEn)  : '';
+    const curSkill = cd2 ? (lang==='es' ? (cd2.skillEs || '') : (cd2.skillEn || '')) : '';
+    const curWeek  = curChIdx + 1;
+    const introMrs = [0, 1, 2].map(i => {
+      const mr     = user?.challenges?.[curChIdx]?.microretos?.[i];
+      const mrJson = cd2?.microretos?.[i];
+      const title  = mrJson ? (lang==='es' ? mrJson.titleEs : mrJson.titleEn) : `Microreto ${i+1}`;
+      return {
+        num: i + 1, title,
+        status: mr?.completed ? T.t_completados : mr?.blocked ? (lang==='es'?'Bloqueado':'Locked') : (lang==='es'?'Disponible':'Available'),
+        att: Math.max(0, 3 - (mr?.attempts || 0)),
+        bg:    mr?.completed ? 'rgba(16,185,129,0.07)' : i === curMrIdx ? 'rgba(124,58,237,0.1)' : '#12121e',
+        border:mr?.completed ? 'rgba(16,185,129,0.18)' : i === curMrIdx ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.06)',
+        numBg: mr?.completed ? 'rgba(16,185,129,0.18)' : i === curMrIdx ? 'rgba(124,58,237,0.2)'  : 'rgba(255,255,255,0.06)',
+        numC:  mr?.completed ? '#10b981' : i === curMrIdx ? '#a855f7' : '#64748b',
+        titleC:mr?.completed ? '#10b981' : i === curMrIdx ? '#e2e8f0' : '#64748b',
+      };
+    });
+
+    // Active challenge — driven by ChallengeEngine + JSON data
+    const cd = this.state.challengeData;
+    const mrJson = cd?.microretos?.[curMrIdx];
+    const maxMemTime = mrJson?.memorizeTime || 10;
+    const maxAnsTime = mrJson?.answerTime || 20;
+    const totalQs = mrJson?.questions?.length || 3;
+
+    const mrIndicators = [0, 1, 2].map(i => ({
+      n: i + 1,
+      c: i < curMrIdx ? '#10b981' : i === curMrIdx ? '#7c3aed' : 'rgba(255,255,255,0.12)',
+    }));
+
+    const curMrAtts = user?.challenges?.[curChIdx]?.microretos?.[curMrIdx]?.attempts || 0;
+    const attsLeft = Math.max(0, 3 - curMrAtts);
+    const attDots = [0, 1, 2].map(i => ({ c: i < attsLeft ? '#7c3aed' : 'rgba(255,255,255,0.1)' }));
+
+    const isMemorize = phase === 'memorize';
+    const isAnswer   = phase === 'answer';
+    const isFeedback = phase === 'feedback';
+    const timerVal  = isMemorize ? memTimeLeft : ansTimeLeft;
+    const timerDisp = timerVal < 10 ? `0:0${timerVal}` : `0:${timerVal}`;
+    const timerC    = timerVal <= 5 ? '#ef4444' : '#94a3b8';
+    const memBarW   = maxMemTime > 0 ? Math.round((memTimeLeft / maxMemTime) * 100) + '%' : '0%';
+
+    // Memory grid — comes from engine (reads JSON items)
+    const memGrid = this.engine ? this.engine.getMemoryItems(lang) : [];
+
+    // Current question — comes from engine (reads JSON questions)
+    const engQ  = this.engine ? this.engine.getCurrentQuestion(lang) : null;
+    const qText = engQ?.text || '';
+    const qNum  = curQIdx + 1;
+    const qTotal = totalQs;
+    const qDots = Array.from({ length: totalQs }, (_, i) => ({
+      c: i < curQIdx ? '#10b981' : i === curQIdx ? '#7c3aed' : 'rgba(255,255,255,0.12)',
+    }));
+
+    // Answer options
+    const rawOpts = engQ?.options || [];
+    const selText = selAnswer ? (typeof selAnswer === 'object' ? (lang==='es'?selAnswer.es:selAnswer.en) : selAnswer) : null;
+
+    // Determine correct option text from JSON for feedback highlight
+    const qJsonCorrectEs = mrJson?.questions?.[curQIdx]?.correctEs || '';
+    const qJsonCorrectEn = mrJson?.questions?.[curQIdx]?.correctEn || qJsonCorrectEs;
+    const correctText = lang === 'es' ? qJsonCorrectEs : qJsonCorrectEn;
+
+    const ansOpts = rawOpts.map((opt, i) => {
+      const optText   = typeof opt === 'object' ? (lang==='es'?opt.es:opt.en) : opt;
+      const isSelected = selText === optText;
+      const isTheCorrect = optText === correctText || optText === qJsonCorrectEs || optText === qJsonCorrectEn;
+      let bg = '#12121e', border = 'rgba(255,255,255,0.08)', dotBorder = 'rgba(255,255,255,0.2)', dotBg = 'transparent', dotTxt = '#94a3b8', txtC = '#e2e8f0';
+      if (isFeedback) {
+        if (isTheCorrect) { bg='rgba(16,185,129,0.12)'; border='rgba(16,185,129,0.3)'; dotBorder='#10b981'; dotBg='#10b981'; dotTxt='white'; }
+        if (isSelected && !isTheCorrect) { bg='rgba(239,68,68,0.1)'; border='rgba(239,68,68,0.3)'; dotBorder='#ef4444'; dotBg='#ef4444'; dotTxt='white'; txtC='#94a3b8'; }
+      } else if (isSelected) {
+        bg='rgba(124,58,237,0.15)'; border='rgba(124,58,237,0.4)'; dotBorder='#7c3aed'; dotBg='#7c3aed'; dotTxt='white';
+      }
+      return {
+        letter: 'ABCD'[i], text: optText,
+        pick: isFeedback ? () => {} : () => this.selectAnswer(opt),
+        cur: isFeedback ? 'default' : 'pointer',
+        bg, border, dotBorder, dotBg, dotTxt, txtC,
+      };
+    });
+
+    // Feedback — from engine event data
+    const fbCorrect = isCorrect === true;
+    const fbWrong   = isCorrect === false;
+    const lastAns   = sessionAnswers[sessionAnswers.length - 1] || {};
+    const fbXPLabel = fbCorrect ? `+${lastAns.xp || 0} XP` : '+0 XP';
+    const fbIconBg  = fbCorrect ? 'linear-gradient(135deg,#10b981,#059669)' : 'linear-gradient(135deg,#ef4444,#dc2626)';
+    const fbGlow    = fbCorrect ? 'rgba(16,185,129,0.4)' : 'rgba(239,68,68,0.4)';
+    const fbTitleC  = fbCorrect ? '#10b981' : '#ef4444';
+    const fbTitle   = fbCorrect ? (lang==='es'?'¡Correcto!':'Correct!') : (lang==='es'?'Incorrecto':'Incorrect');
+    const fbSkill   = curFeedback?.skill || '';
+    const fbExplan  = curFeedback?.explanation || '';
+    const hasNextQ  = curQIdx < totalQs - 1;
+    const isLastQ   = curQIdx === totalQs - 1;
+
+    // Results
+    const resXP = lastMrXP;
+    const resTitle = resXP >= 200 ? (lang==='es'?'¡Desafío brillante!':'Brilliant challenge!') : resXP >= 100 ? (lang==='es'?'¡Bien hecho!':'Well done!') : (lang==='es'?'Completado':'Completed');
+    const resSub = lang==='es' ? 'Has ganado experiencia. ¡Sigue avanzando!' : 'You earned experience. Keep going!';
+    const badgeData = newBadge ? this.BADGES.find(b => b.id === newBadge) : null;
+    const hasNewBadge = !!badgeData;
+    const newBadgeLetter = badgeData?.letter || '';
+    const newBadgeName = badgeData?.shortName?.[lang]?.replace('\n',' ') || '';
+    const newBadgeDesc = badgeData?.desc?.[lang] || '';
+
+    // Ranking screen
+    const rkSorted = this.getRankedList();
+    const top3 = rkSorted.slice(0, 3);
+    const podium = [
+      { idx: 1, av: top3[1], rank: 2 },
+      { idx: 0, av: top3[0], rank: 1 },
+      { idx: 2, av: top3[2], rank: 3 },
+    ];
+    const p = (idx) => {
+      const s = rkSorted[idx] || {};
+      return { init: (s.nick || s.name || '?')[0].toUpperCase(), nick: s.nick || s.name, name: s.name || '', xp: s.xp || 0, bg: this.AVATARS[s.av || 0]?.bg || 'linear-gradient(135deg,#4c1d95,#7c3aed)' };
+    };
+    const p1 = p(0), p2 = p(1), p3 = p(2);
+
+    const showMyRankFooter = uRank > 10;
+    const rkRows = rkSorted.slice(0, 10).map((s, i) => {
+      const rank = i + 1;
+      const isMe = s.isMe;
+      const rkC = rank === 1 ? '#f59e0b' : rank <= 3 ? '#94a3b8' : '#64748b';
+      return {
+        rank, rkC, init: (s.nick || s.name || '?')[0].toUpperCase(),
+        nick: s.nick || s.name, name: s.name || '',
+        avBg: this.AVATARS[s.av || 0]?.bg || 'linear-gradient(135deg,#4c1d95,#7c3aed)',
+        level: this.getLevel(s.xp).label[lang],
+        xp: s.xp, xpC: isMe ? '#a855f7' : '#e2e8f0',
+        nameC: isMe ? '#a855f7' : '#e2e8f0',
+        rowBg: isMe ? 'rgba(124,58,237,0.07)' : 'transparent',
+      };
+    });
+
+    // All badges (for profile)
+    const allBadges = this.BADGES.map(b => {
+      const earned = earnedBadges.includes(b.id);
+      return {
+        letter: b.letter, shortName: b.shortName[lang],
+        op: earned ? '1' : '0.25',
+        bg: earned ? `rgba(${this.hexToRgb(b.color)},0.18)` : 'rgba(255,255,255,0.04)',
+        border: earned ? b.color : 'rgba(255,255,255,0.08)',
+        letterColor: earned ? b.color : '#334155',
+        tc: earned ? '#e2e8f0' : '#334155',
+        shadow: earned ? `0 0 10px ${b.color}55` : 'none',
+      };
+    });
+
+    // Activity log
+    const actLog = (user?.activityLog || [{ text: lang==='es'?'Cuenta creada':'Account created', time: 'hoy', c:'#a855f7' }]).map(a => ({...a}));
+
+    // Teacher
+    const tc_students = rkSorted.length;
+    const tc_avgXP = Math.round(rkSorted.reduce((s, r) => s + r.xp, 0) / (rkSorted.length || 1));
+    const tc_avgTime = Math.round(this.MOCK_STUDENTS.reduce((s, r) => s + r.time, 0) / this.MOCK_STUDENTS.length);
+    const tc_pending = rkSorted.filter(s => s.xp === 0).length;
+    const tcRows = rkSorted.map(s => ({
+      name: s.name || s.nick, email: (s.name || '').toLowerCase().replace(' ','.')+'@edu.sv',
+      group: s.g || '-', section: s.s || '-',
+      level: this.getLevel(s.xp).label[lang],
+      xp: s.xp, done: Math.floor(s.xp / 180), time: s.time || Math.floor(s.xp / 8),
+    }));
+
+    return {
+      ...tKeys,
+      // screen flags
+      showNav: !['landing','register'].includes(screen),
+      isLanding: screen === 'landing',
+      isRegister: screen === 'register',
+      isDashboard: screen === 'dashboard',
+      isChallenges: screen === 'challenges',
+      isIntro: screen === 'challenge-intro',
+      isActive: screen === 'challenge-active',
+      isResults: screen === 'results',
+      isRanking: screen === 'ranking',
+      isProfile: screen === 'profile',
+      isTeacher: screen === 'teacher',
+      // lang/sound
+      langBtn: lang === 'es' ? 'EN' : 'ES', soundOn, soundOff: !soundOn,
+      soundColor: soundOn ? '#a855f7' : '#475569',
+      // user
+      uNick, uName, uInit, uXP, uLevel, uLevelLabel, uGroup, uSection, uEmail,
+      uRank, uRankDisp, rankColor, totalStudents,
+      avBg: av.bg, avFill: av.fill, avFill: av.fill,
+      xpBarW, xpToNext, lvlBadgeBg,
+      // dashboard
+      doneCount, progPct, progBarW, nextTitle, nextWeek, timeLabel, badgeCount, badgesList,
+      // nav
+      navBg_dash, navCol_dash, navBg_ch, navCol_ch, navBg_rk, navCol_rk, navCol_pf,
+      // challenges list
+      chList,
+      // intro
+      curTitle, curType, curDesc, curSkill, curWeek, introMrs,
+      // active
+      mrIndicators, attDots,
+      isMemorize, isAnswer, isFeedback,
+      timerDisp, timerC, memBarW, memTimeLeft,
+      memGrid, qText, qNum, qTotal, qDots, ansOpts,
+      fbCorrect, fbWrong, fbIconBg, fbGlow, fbTitleC, fbTitle, fbSkill, fbExplan, fbXPLabel,
+      hasNextQ, isLastQ,
+      // results
+      resXP, resTitle, resSub, resBreak: resBreak || [], hasNewBadge,
+      newBadgeLetter, newBadgeName, newBadgeDesc, hasNextMr: !!hasNextMr,
+      // ranking
+      p1init: p1.init, p1nick: p1.nick, p1name: p1.name, p1xp: p1.xp, p1bg: p1.bg,
+      p2init: p2.init, p2nick: p2.nick, p2name: p2.name, p2xp: p2.xp, p2bg: p2.bg,
+      p3init: p3.init, p3nick: p3.nick, p3name: p3.name, p3xp: p3.xp, p3bg: p3.bg,
+      rkRows, showMyRankFooter,
+      // profile
+      allBadges, actLog,
+      // teacher
+      tc_students, tc_avgXP, tc_avgTime, tc_pending, tcRows,
+      // navigation handlers
+      goLanding: this.goLanding, goRegister: this.goRegister, loginExisting: this.loginExisting,
+      goDashboard: this.goDashboard, goChallenges: this.goChallenges,
+      goRanking: this.goRanking, goProfile: this.goProfile, goTeacher: this.goTeacher,
+      toggleSound: this.toggleSound, toggleLang: this.toggleLang,
+      onFName: this.onFName, onFNick: this.onFNick, onFEmail: this.onFEmail,
+      onFGroup: this.onFGroup, onFSection: this.onFSection,
+      fName, fNick, fEmail, fGroup, fSection,
+      hasFormErr: !!formErr, formErr,
+      borderName: fName ? 'rgba(124,58,237,0.35)' : formErr && !fName ? 'rgba(239,68,68,0.5)' : 'rgba(124,58,237,0.22)',
+      borderEmail: fEmail ? 'rgba(124,58,237,0.35)' : formErr && !fEmail ? 'rgba(239,68,68,0.5)' : 'rgba(124,58,237,0.22)',
+      submitReg: this.submitReg,
+      avatarOpts: this.AVATARS.map((a, i) => ({
+        bg: a.bg, fill: a.fill,
+        border: i === selAvatar ? '3px solid #7c3aed' : '2px solid transparent',
+        pick: () => this.setState({ selAvatar: i }),
+      })),
+      startMicroreto: this.startMicroreto,
+      abandonChallenge: this.abandonChallenge,
+      nextQ: this.nextQ,
+      finishMicroreto: this.finishMicroreto,
+      continueNext: this.continueNext,
+      doExportCSV: this.doExportCSV, doExportExcel: this.doExportExcel,
+    };
+  }
+
+  hexToRgb(hex) {
+    const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return r ? `${parseInt(r[1],16)},${parseInt(r[2],16)},${parseInt(r[3],16)}` : '124,58,237';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+{
+  "week": 1,
+  "type": "memory",
+  "titleEs": "Instrumentos de Evaluación",
+  "titleEn": "Assessment Instruments",
+  "skillEs": "Memoria Visual",
+  "skillEn": "Visual Memory",
+  "descEs": "Observa y memoriza instrumentos de evaluación psicológica. Pon a prueba tu capacidad de retención y reconocimiento.",
+  "descEn": "Observe and memorize psychological assessment instruments. Test your retention and recognition abilities.",
+  "microretos": [
+    {
+      "id": "w1m1",
+      "type": "memory",
+      "titleEs": "Identificación de Instrumentos",
+      "titleEn": "Instrument Identification",
+      "difficulty": "basic",
+      "memorizeTime": 10,
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 30,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "badge": "observer",
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Raven",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "RV",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos instrumentos NO estaba en la cuadrícula?",
+          "textEn": "Which instrument was NOT in the grid?",
+          "options": [
+            "WAIS-IV",
+            "TAT",
+            "Rorschach",
+            "Raven"
+          ],
+          "correctEs": "TAT",
+          "correctEn": "TAT",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "El TAT no fue presentado. El único proyectivo mostrado fue el Rorschach.",
+          "explanEn": "The TAT was not presented. The only projective shown was the Rorschach."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuántos instrumentos de 'Personalidad' estaban en la cuadrícula?",
+          "textEn": "How many 'Personality' instruments were in the grid?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Había 2 de Personalidad: MMPI-2 y NEO PI-R.",
+          "explanEn": "There were 2 Personality instruments: MMPI-2 and NEO PI-R."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿A qué categoría pertenece el 'Bender'?",
+          "textEn": "What category does the 'Bender' belong to?",
+          "options": [
+            {
+              "es": "Inteligencia",
+              "en": "Intelligence"
+            },
+            {
+              "es": "Personalidad",
+              "en": "Personality"
+            },
+            {
+              "es": "Neuropsicológico",
+              "en": "Neuropsychological"
+            },
+            {
+              "es": "Proyectivo",
+              "en": "Projective"
+            }
+          ],
+          "correctEs": "Neuropsicológico",
+          "correctEn": "Neuropsychological",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El Test Gestáltico de Bender evalúa funciones neuropsicológicas visomotoras.",
+          "explanEn": "The Bender Gestalt Test evaluates visuomotor neuropsychological functions."
+        }
+      ]
+    },
+    {
+      "id": "w1m2",
+      "type": "memory",
+      "titleEs": "Memoria Categorial",
+      "titleEn": "Categorical Memory",
+      "difficulty": "intermediate",
+      "memorizeTime": 10,
+      "answerTime": 20,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 60,
+        "speedMax": 30,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "badge": "observer",
+      "items": [
+        {
+          "name": "WISC-V",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WI",
+          "colorKey": "purple"
+        },
+        {
+          "name": "BDI-II",
+          "categoryEs": "Clínico",
+          "categoryEn": "Clinical",
+          "initials": "BD",
+          "colorKey": "red"
+        },
+        {
+          "name": "TAT",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "TA",
+          "colorKey": "amber"
+        },
+        {
+          "name": "16PF",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "16",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "PAI",
+          "categoryEs": "Clínico",
+          "categoryEn": "Clinical",
+          "initials": "PA",
+          "colorKey": "red"
+        },
+        {
+          "name": "MACI",
+          "categoryEs": "Clínico",
+          "categoryEn": "Clinical",
+          "initials": "MA",
+          "colorKey": "red"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos instrumentos NO estaba en la cuadrícula?",
+          "textEn": "Which instrument was NOT in the grid?",
+          "options": [
+            "WISC-V",
+            "Rorschach",
+            "BDI-II",
+            "TAT"
+          ],
+          "correctEs": "Rorschach",
+          "correctEn": "Rorschach",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "El Rorschach no fue presentado en esta cuadrícula.",
+          "explanEn": "The Rorschach was not presented in this grid."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuántos instrumentos 'Clínicos' estaban en la cuadrícula?",
+          "textEn": "How many 'Clinical' instruments were in the grid?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Había 3 clínicos: BDI-II, PAI y MACI.",
+          "explanEn": "There were 3 clinical instruments: BDI-II, PAI, and MACI."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿A qué categoría pertenece el TAT?",
+          "textEn": "What category does the TAT belong to?",
+          "options": [
+            {
+              "es": "Inteligencia",
+              "en": "Intelligence"
+            },
+            {
+              "es": "Proyectivo",
+              "en": "Projective"
+            },
+            {
+              "es": "Clínico",
+              "en": "Clinical"
+            },
+            {
+              "es": "Personalidad",
+              "en": "Personality"
+            }
+          ],
+          "correctEs": "Proyectivo",
+          "correctEn": "Projective",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El TAT (Test de Apercepción Temática) es un instrumento proyectivo.",
+          "explanEn": "The TAT (Thematic Apperception Test) is a projective instrument."
+        }
+      ]
+    },
+    {
+      "id": "w1m3",
+      "type": "memory",
+      "titleEs": "Detalles y Relaciones",
+      "titleEn": "Details and Relations",
+      "difficulty": "advanced",
+      "memorizeTime": 8,
+      "answerTime": 18,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 70,
+        "speedMax": 30,
+        "perfectBonus": 60,
+        "challengeComplete": 100
+      },
+      "badge": "precision",
+      "items": [
+        {
+          "name": "HTP",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "HT",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Machover",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "MC",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Zulliger",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "ZU",
+          "colorKey": "amber"
+        },
+        {
+          "name": "STAI",
+          "categoryEs": "Ansiedad",
+          "categoryEn": "Anxiety",
+          "initials": "ST",
+          "colorKey": "red"
+        },
+        {
+          "name": "MIPS",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MI",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿Cuál de estos NO estaba en la cuadrícula?",
+          "textEn": "Which was NOT in the grid?",
+          "options": [
+            "HTP",
+            "Rorschach",
+            "Machover",
+            "STAI"
+          ],
+          "correctEs": "Rorschach",
+          "correctEn": "Rorschach",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "El Rorschach no fue presentado en esta cuadrícula.",
+          "explanEn": "The Rorschach was not presented in this grid."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuántos instrumentos proyectivos había en la cuadrícula?",
+          "textEn": "How many projective instruments were in the grid?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Había 3 proyectivos: HTP, Machover y Zulliger.",
+          "explanEn": "There were 3 projective instruments: HTP, Machover, and Zulliger."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿A qué categoría pertenece el STAI?",
+          "textEn": "What category does the STAI belong to?",
+          "options": [
+            {
+              "es": "Inteligencia",
+              "en": "Intelligence"
+            },
+            {
+              "es": "Ansiedad",
+              "en": "Anxiety"
+            },
+            {
+              "es": "Proyectivo",
+              "en": "Projective"
+            },
+            {
+              "es": "Neuropsicológico",
+              "en": "Neuropsychological"
+            }
+          ],
+          "correctEs": "Ansiedad",
+          "correctEn": "Anxiety",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El STAI evalúa niveles de ansiedad estado-rasgo.",
+          "explanEn": "The STAI (State-Trait Anxiety Inventory) evaluates state-trait anxiety levels."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "week": 3,
+  "type": "case_analysis",
+  "titleEs": "El Caso de Ana",
+  "titleEn": "Ana's Case",
+  "skillEs": "Análisis de Casos",
+  "skillEn": "Case Analysis",
+  "descEs": "Analiza un caso clínico y selecciona los instrumentos y procedimientos más adecuados para la evaluación.",
+  "descEn": "Analyze a clinical case and select the most appropriate instruments and procedures for the assessment.",
+  "microretos": [
+    {
+      "id": "w3m1",
+      "type": "case_analysis",
+      "titleEs": "Selección de Instrumentos",
+      "titleEn": "Instrument Selection",
+      "difficulty": "basic",
+      "answerTime": 30,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 60,
+        "speedMax": 20,
+        "perfectBonus": 60,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "contextEs": "Ana, 35 años, acude a consulta con tristeza persistente de 3 meses, pérdida de interés y fatiga. Su médico sospecha un trastorno depresivo.",
+          "contextEn": "Ana, 35, comes to the clinic with persistent sadness for 3 months, loss of interest, and fatigue. Her doctor suspects a depressive disorder.",
+          "textEs": "¿Cuál es el instrumento más adecuado para evaluar la severidad de los síntomas depresivos de Ana?",
+          "textEn": "What is the most appropriate instrument to assess the severity of Ana's depressive symptoms?",
+          "options": [
+            "WAIS-IV",
+            "BDI-II",
+            "Rorschach",
+            "STAI"
+          ],
+          "correctEs": "BDI-II",
+          "correctEn": "BDI-II",
+          "skillEs": "Selección instrumental",
+          "skillEn": "Instrument selection",
+          "explanEs": "El BDI-II (Inventario de Depresión de Beck) es el instrumento validado para medir la severidad de síntomas depresivos.",
+          "explanEn": "The BDI-II (Beck Depression Inventory) is the validated instrument for measuring the severity of depressive symptoms."
+        },
+        {
+          "id": "q2",
+          "contextEs": "Ana también refiere dificultades laborales y bajo rendimiento. Se quiere descartar problemas cognitivos.",
+          "contextEn": "Ana also reports work difficulties and low performance. Cognitive problems need to be ruled out.",
+          "textEs": "¿Qué instrumento evaluaría las capacidades cognitivas de Ana?",
+          "textEn": "What instrument would assess Ana's cognitive abilities?",
+          "options": [
+            "MMPI-2",
+            "BDI-II",
+            "WAIS-IV",
+            "TAT"
+          ],
+          "correctEs": "WAIS-IV",
+          "correctEn": "WAIS-IV",
+          "skillEs": "Selección instrumental",
+          "skillEn": "Instrument selection",
+          "explanEs": "El WAIS-IV es el instrumento estándar para la evaluación de inteligencia y capacidades cognitivas en adultos.",
+          "explanEn": "The WAIS-IV is the standard instrument for assessing intelligence and cognitive abilities in adults."
+        },
+        {
+          "id": "q3",
+          "contextEs": "El psicólogo desea explorar también la personalidad y posibles comorbilidades de Ana.",
+          "contextEn": "The psychologist also wants to explore Ana's personality and possible comorbidities.",
+          "textEs": "¿Qué instrumento de personalidad sería el más apropiado para Ana?",
+          "textEn": "What personality instrument would be most appropriate for Ana?",
+          "options": [
+            "WISC-V",
+            "MMPI-2",
+            "K-ABC",
+            "Bender"
+          ],
+          "correctEs": "MMPI-2",
+          "correctEn": "MMPI-2",
+          "skillEs": "Selección instrumental",
+          "skillEn": "Instrument selection",
+          "explanEs": "El MMPI-2 es el inventario de personalidad multidimensional más usado clínicamente y evalúa múltiples escalas de psicopatología.",
+          "explanEn": "The MMPI-2 is the most clinically used multidimensional personality inventory and assesses multiple psychopathology scales."
+        }
+      ]
+    },
+    {
+      "id": "w3m2",
+      "type": "case_analysis",
+      "titleEs": "Proceso de Evaluación",
+      "titleEn": "Assessment Process",
+      "difficulty": "intermediate",
+      "answerTime": 30,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 65,
+        "speedMax": 20,
+        "perfectBonus": 55,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "contextEs": "Antes de comenzar la evaluación formal de Ana, el psicólogo debe realizar una serie de pasos preparatorios.",
+          "contextEn": "Before beginning Ana's formal assessment, the psychologist must complete a series of preparatory steps.",
+          "textEs": "¿Cuál es el primer paso en el proceso de evaluación psicológica?",
+          "textEn": "What is the first step in the psychological assessment process?",
+          "options": [
+            {
+              "es": "Aplicar pruebas",
+              "en": "Apply tests"
+            },
+            {
+              "es": "Entrevista inicial",
+              "en": "Initial interview"
+            },
+            {
+              "es": "Interpretar resultados",
+              "en": "Interpret results"
+            },
+            {
+              "es": "Redactar informe",
+              "en": "Write report"
+            }
+          ],
+          "correctEs": "Entrevista inicial",
+          "correctEn": "Entrevista inicial",
+          "skillEs": "Secuencia evaluativa",
+          "skillEn": "Assessment sequence",
+          "explanEs": "La entrevista inicial es siempre el primer paso para recoger la demanda, historia clínica y establecer el rapport.",
+          "explanEn": "The initial interview is always the first step to collect the referral, clinical history, and establish rapport."
+        },
+        {
+          "id": "q2",
+          "contextEs": "El psicólogo ha obtenido las puntuaciones del BDI-II y WAIS-IV de Ana.",
+          "contextEn": "The psychologist has obtained Ana's BDI-II and WAIS-IV scores.",
+          "textEs": "¿Qué debe hacer el psicólogo después de obtener las puntuaciones brutas?",
+          "textEn": "What should the psychologist do after obtaining raw scores?",
+          "options": [
+            {
+              "es": "Redactar el informe directamente",
+              "en": "Write the report directly"
+            },
+            {
+              "es": "Convertir a puntuaciones normativas",
+              "en": "Convert to normative scores"
+            },
+            {
+              "es": "Realizar más pruebas",
+              "en": "Conduct more tests"
+            },
+            {
+              "es": "Informar al paciente",
+              "en": "Inform the patient"
+            }
+          ],
+          "correctEs": "Convertir a puntuaciones normativas",
+          "correctEn": "Convertir a puntuaciones normativas",
+          "skillEs": "Procedimiento psicométrico",
+          "skillEn": "Psychometric procedure",
+          "explanEs": "Las puntuaciones brutas deben convertirse a puntuaciones normativas (percentiles, escalas T, CI) para su interpretación.",
+          "explanEn": "Raw scores must be converted to normative scores (percentiles, T-scales, IQ) for interpretation."
+        },
+        {
+          "id": "q3",
+          "contextEs": "Al finalizar la evaluación, el psicólogo debe comunicar los resultados a Ana.",
+          "contextEn": "At the end of the assessment, the psychologist must communicate the results to Ana.",
+          "textEs": "¿Cómo se denomina la sesión en que se comunican los resultados al evaluado?",
+          "textEn": "What is the session where results are communicated to the evaluated person called?",
+          "options": [
+            "Entrevista inicial",
+            "Sesión de devolución",
+            "Junta clínica",
+            "Supervisión"
+          ],
+          "correctEs": "Sesión de devolución",
+          "correctEn": "Sesión de devolución",
+          "skillEs": "Ética y procedimiento",
+          "skillEn": "Ethics and procedure",
+          "explanEs": "La sesión de devolución es la instancia ética y profesional en que se comunican los resultados al evaluado.",
+          "explanEn": "The feedback session is the ethical and professional instance where results are communicated to the evaluated person."
+        }
+      ]
+    },
+    {
+      "id": "w3m3",
+      "type": "case_analysis",
+      "titleEs": "Interpretación e Informe",
+      "titleEn": "Interpretation and Report",
+      "difficulty": "advanced",
+      "answerTime": 28,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 70,
+        "speedMax": 20,
+        "perfectBonus": 60,
+        "challengeComplete": 100
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "contextEs": "El BDI-II de Ana obtuvo una puntuación de 28.",
+          "contextEn": "Ana's BDI-II score was 28.",
+          "textEs": "Una puntuación de 28 en el BDI-II indica:",
+          "textEn": "A score of 28 on the BDI-II indicates:",
+          "options": [
+            {
+              "es": "Depresión mínima",
+              "en": "Minimal depression"
+            },
+            {
+              "es": "Depresión leve",
+              "en": "Mild depression"
+            },
+            {
+              "es": "Depresión moderada",
+              "en": "Moderate depression"
+            },
+            {
+              "es": "Depresión grave",
+              "en": "Severe depression"
+            }
+          ],
+          "correctEs": "Depresión moderada",
+          "correctEn": "Depresión moderada",
+          "skillEs": "Interpretación del BDI-II",
+          "skillEn": "BDI-II interpretation",
+          "explanEs": "Puntuaciones entre 20-28 en el BDI-II indican depresión moderada. Grave sería 29 o más.",
+          "explanEn": "Scores between 20-28 on the BDI-II indicate moderate depression. Severe would be 29 or more."
+        },
+        {
+          "id": "q2",
+          "contextEs": "En el WAIS-IV, Ana obtuvo un CI Total de 95.",
+          "contextEn": "On the WAIS-IV, Ana obtained a Full Scale IQ of 95.",
+          "textEs": "Un CI de 95 se ubica en el rango:",
+          "textEn": "An IQ of 95 falls in the range:",
+          "options": [
+            {
+              "es": "Límite",
+              "en": "Borderline"
+            },
+            {
+              "es": "Media",
+              "en": "Average"
+            },
+            {
+              "es": "Superior",
+              "en": "Superior"
+            },
+            {
+              "es": "Muy superior",
+              "en": "Very superior"
+            }
+          ],
+          "correctEs": "Media",
+          "correctEn": "Media",
+          "skillEs": "Interpretación del CI",
+          "skillEn": "IQ interpretation",
+          "explanEs": "Un CI entre 90-109 corresponde al rango Medio (Media) según la clasificación del WAIS-IV.",
+          "explanEn": "An IQ between 90-109 falls in the Average (Media) range according to WAIS-IV classification."
+        },
+        {
+          "id": "q3",
+          "contextEs": "Al redactar el informe de Ana, el psicólogo debe organizar la información de manera estructurada.",
+          "contextEn": "When writing Ana's report, the psychologist must organize the information in a structured way.",
+          "textEs": "¿Qué sección del informe describe el motivo de consulta y los síntomas actuales?",
+          "textEn": "What section of the report describes the reason for consultation and current symptoms?",
+          "options": [
+            "Conclusiones",
+            "Anamnesis y motivo de consulta",
+            "Resultados de pruebas",
+            "Recomendaciones"
+          ],
+          "correctEs": "Anamnesis y motivo de consulta",
+          "correctEn": "Anamnesis y motivo de consulta",
+          "skillEs": "Estructura del informe",
+          "skillEn": "Report structure",
+          "explanEs": "La sección de Anamnesis y motivo de consulta recoge la historia clínica, síntomas y demanda del paciente.",
+          "explanEn": "The Anamnesis and reason for consultation section collects the clinical history, symptoms, and patient demand."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "week": 17,
+  "type": "memory",
+  "titleEs": "Síntesis del Proceso",
+  "titleEn": "Process Synthesis",
+  "skillEs": "Memoria Visual",
+  "skillEn": "Visual Memory",
+  "descEs": "Entrena la habilidad de Memoria Visual mediante memorización visual.",
+  "descEn": "Train your Visual Memory skill through visual memorization.",
+  "microretos": [
+    {
+      "id": "w17m1",
+      "type": "memory",
+      "titleEs": "Microreto 1",
+      "titleEn": "Micro-task 1",
+      "difficulty": "basic",
+      "answerTime": 25,
+      "memorizeTime": 10,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
+          "textEn": "What category does the NEO PI-R belong to?",
+          "options": [
+            "Inteligencia",
+            "Personalidad",
+            "Neuropsicológico",
+            "Proyectivo"
+          ],
+          "correctEs": "Personalidad",
+          "correctEn": "Personalidad",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
+          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
+          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "options": [
+            "MMPI-2",
+            "TAT",
+            "Bender",
+            "NEO PI-R"
+          ],
+          "correctEs": "Bender",
+          "correctEn": "Bender",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
+          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Qué tipo de instrumento es el STAI?",
+          "textEn": "What type of instrument is the STAI?",
+          "options": [
+            "Proyectivo",
+            "De inteligencia",
+            "De ansiedad",
+            "De personalidad"
+          ],
+          "correctEs": "De ansiedad",
+          "correctEn": "De ansiedad",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
+          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+        }
+      ]
+    },
+    {
+      "id": "w17m2",
+      "type": "memory",
+      "titleEs": "Microreto 2",
+      "titleEn": "Micro-task 2",
+      "difficulty": "intermediate",
+      "answerTime": 22,
+      "memorizeTime": 9,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 60,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
+          "textEn": "What category does the NEO PI-R belong to?",
+          "options": [
+            "Inteligencia",
+            "Personalidad",
+            "Neuropsicológico",
+            "Proyectivo"
+          ],
+          "correctEs": "Personalidad",
+          "correctEn": "Personalidad",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
+          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
+          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "options": [
+            "MMPI-2",
+            "TAT",
+            "Bender",
+            "NEO PI-R"
+          ],
+          "correctEs": "Bender",
+          "correctEn": "Bender",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
+          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Qué tipo de instrumento es el STAI?",
+          "textEn": "What type of instrument is the STAI?",
+          "options": [
+            "Proyectivo",
+            "De inteligencia",
+            "De ansiedad",
+            "De personalidad"
+          ],
+          "correctEs": "De ansiedad",
+          "correctEn": "De ansiedad",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
+          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+        }
+      ]
+    },
+    {
+      "id": "w17m3",
+      "type": "memory",
+      "titleEs": "Microreto 3",
+      "titleEn": "Micro-task 3",
+      "difficulty": "advanced",
+      "answerTime": 20,
+      "memorizeTime": 8,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 70,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
+          "textEn": "What category does the NEO PI-R belong to?",
+          "options": [
+            "Inteligencia",
+            "Personalidad",
+            "Neuropsicológico",
+            "Proyectivo"
+          ],
+          "correctEs": "Personalidad",
+          "correctEn": "Personalidad",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
+          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+        },
+        {
+          "id": "q2",
+          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
+          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "options": [
+            "MMPI-2",
+            "TAT",
+            "Bender",
+            "NEO PI-R"
+          ],
+          "correctEs": "Bender",
+          "correctEn": "Bender",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
+          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+        },
+        {
+          "id": "q3",
+          "textEs": "¿Qué tipo de instrumento es el STAI?",
+          "textEn": "What type of instrument is the STAI?",
+          "options": [
+            "Proyectivo",
+            "De inteligencia",
+            "De ansiedad",
+            "De personalidad"
+          ],
+          "correctEs": "De ansiedad",
+          "correctEn": "De ansiedad",
+          "skillEs": "Clasificación de instrumentos",
+          "skillEn": "Instrument classification",
+          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
+          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+        }
+      ]
+    }
+  ]
+}

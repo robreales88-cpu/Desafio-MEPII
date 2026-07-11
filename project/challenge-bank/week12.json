@@ -1,0 +1,351 @@
+{
+  "week": 12,
+  "type": "memory",
+  "titleEs": "Mapa Cognitivo",
+  "titleEn": "Cognitive Map",
+  "skillEs": "Memoria Visual",
+  "skillEn": "Visual Memory",
+  "descEs": "Entrena la habilidad de Memoria Visual mediante memorización visual.",
+  "descEn": "Train your Visual Memory skill through visual memorization.",
+  "microretos": [
+    {
+      "id": "w12m1",
+      "type": "memory",
+      "titleEs": "Microreto 1",
+      "titleEn": "Micro-task 1",
+      "difficulty": "basic",
+      "answerTime": 25,
+      "memorizeTime": 10,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 50,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
+          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "options": [
+            "Ansiedad",
+            "Depresión",
+            "Inteligencia",
+            "Personalidad"
+          ],
+          "correctEs": "Depresión",
+          "correctEn": "Depresión",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
+          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+        },
+        {
+          "id": "q2",
+          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
+          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "options": [
+            "Niños",
+            "Ancianos",
+            "Adolescentes",
+            "Bebés"
+          ],
+          "correctEs": "Niños",
+          "correctEn": "Niños",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
+          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+        },
+        {
+          "id": "q3",
+          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
+          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "options": [
+            "Series numéricas",
+            "Láminas con escenas",
+            "Dibujos de figuras",
+            "Frases incompletas"
+          ],
+          "correctEs": "Láminas con escenas",
+          "correctEn": "Láminas con escenas",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
+          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+        }
+      ]
+    },
+    {
+      "id": "w12m2",
+      "type": "memory",
+      "titleEs": "Microreto 2",
+      "titleEn": "Micro-task 2",
+      "difficulty": "intermediate",
+      "answerTime": 22,
+      "memorizeTime": 9,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 60,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
+          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "options": [
+            "Ansiedad",
+            "Depresión",
+            "Inteligencia",
+            "Personalidad"
+          ],
+          "correctEs": "Depresión",
+          "correctEn": "Depresión",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
+          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+        },
+        {
+          "id": "q2",
+          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
+          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "options": [
+            "Niños",
+            "Ancianos",
+            "Adolescentes",
+            "Bebés"
+          ],
+          "correctEs": "Niños",
+          "correctEn": "Niños",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
+          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+        },
+        {
+          "id": "q3",
+          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
+          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "options": [
+            "Series numéricas",
+            "Láminas con escenas",
+            "Dibujos de figuras",
+            "Frases incompletas"
+          ],
+          "correctEs": "Láminas con escenas",
+          "correctEn": "Láminas con escenas",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
+          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+        }
+      ]
+    },
+    {
+      "id": "w12m3",
+      "type": "memory",
+      "titleEs": "Microreto 3",
+      "titleEn": "Micro-task 3",
+      "difficulty": "advanced",
+      "answerTime": 20,
+      "memorizeTime": 8,
+      "maxAttempts": 3,
+      "xp": {
+        "base": 70,
+        "speedMax": 25,
+        "perfectBonus": 50,
+        "challengeComplete": 100
+      },
+      "items": [
+        {
+          "name": "WAIS-IV",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "WA",
+          "colorKey": "purple"
+        },
+        {
+          "name": "MMPI-2",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "MM",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "Rorschach",
+          "categoryEs": "Proyectivo",
+          "categoryEn": "Projective",
+          "initials": "RO",
+          "colorKey": "amber"
+        },
+        {
+          "name": "Bender",
+          "categoryEs": "Neuropsicológico",
+          "categoryEn": "Neuropsych",
+          "initials": "BN",
+          "colorKey": "green"
+        },
+        {
+          "name": "NEO PI-R",
+          "categoryEs": "Personalidad",
+          "categoryEn": "Personality",
+          "initials": "NE",
+          "colorKey": "cyan"
+        },
+        {
+          "name": "K-ABC",
+          "categoryEs": "Inteligencia",
+          "categoryEn": "Intelligence",
+          "initials": "KA",
+          "colorKey": "purple"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
+          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "options": [
+            "Ansiedad",
+            "Depresión",
+            "Inteligencia",
+            "Personalidad"
+          ],
+          "correctEs": "Depresión",
+          "correctEn": "Depresión",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
+          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+        },
+        {
+          "id": "q2",
+          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
+          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "options": [
+            "Niños",
+            "Ancianos",
+            "Adolescentes",
+            "Bebés"
+          ],
+          "correctEs": "Niños",
+          "correctEn": "Niños",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
+          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+        },
+        {
+          "id": "q3",
+          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
+          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "options": [
+            "Series numéricas",
+            "Láminas con escenas",
+            "Dibujos de figuras",
+            "Frases incompletas"
+          ],
+          "correctEs": "Láminas con escenas",
+          "correctEn": "Láminas con escenas",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
+          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+        }
+      ]
+    }
+  ]
+}
