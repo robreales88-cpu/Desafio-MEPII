@@ -5,14 +5,16 @@
   "titleEn": "Visual Memory and Attention",
   "skillEs": "Atención Sostenida",
   "skillEn": "Sustained Attention",
-  "descEs": "Entrena tu capacidad para retener y reconocer información visual. Identifica patrones, detecta cambios y clasifica instrumentos de evaluación de la atención y la memoria.",
-  "descEn": "Train your ability to retain and recognize visual information. Identify patterns, detect changes and classify attention and memory assessment instruments.",
+  "descEs": "Entrena tu capacidad para retener y reconocer información visual. Identifica patrones, detecta cambios y clasifica procesos cognitivos fundamentales para la evaluación psicológica.",
+  "descEn": "Train your ability to retain and recognize visual information. Identify patterns, detect changes and classify key cognitive processes for psychological assessment.",
   "microretos": [
     {
       "id": "w2m1",
       "type": "memory",
       "titleEs": "Secuencia Visual",
       "titleEn": "Visual Sequence",
+      "descEs": "Observa con atención la cuadrícula. Tienes 12 segundos para memorizar los procesos cognitivos y sus categorías antes de que desaparezcan.",
+      "descEn": "Carefully observe the grid. You have 12 seconds to memorize the cognitive processes and their categories before they disappear.",
       "difficulty": "basic",
       "memorizeTime": 12,
       "answerTime": 40,
@@ -25,54 +27,59 @@
       },
       "badge": "observer",
       "items": [
-        { "name": "CPT-3",    "categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "CP", "colorKey": "cyan"   },
-        { "name": "Conners-3","categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "CO", "colorKey": "cyan"   },
-        { "name": "ROCF",     "categoryEs": "Memoria Visual", "categoryEn": "Visual Memory", "initials": "RC", "colorKey": "green"  },
-        { "name": "CVLT",     "categoryEs": "Memoria Verbal", "categoryEn": "Verbal Memory", "initials": "CV", "colorKey": "green"  },
-        { "name": "TRAIL-B",  "categoryEs": "Ejecutivo",      "categoryEn": "Executive",     "initials": "TR", "colorKey": "purple" },
-        { "name": "BRIEF",    "categoryEs": "Ejecutivo",      "categoryEn": "Executive",     "initials": "BR", "colorKey": "purple" }
+        { "name": "Atención Sostenida",     "categoryEs": "Atencional", "categoryEn": "Attentional", "initials": "AS", "colorKey": "cyan"   },
+        { "name": "Atención Selectiva",     "categoryEs": "Atencional", "categoryEn": "Attentional", "initials": "AE", "colorKey": "cyan"   },
+        { "name": "Memoria Visual",         "categoryEs": "Mnésico",    "categoryEn": "Mnesic",      "initials": "MV", "colorKey": "green"  },
+        { "name": "Memoria Verbal",         "categoryEs": "Mnésico",    "categoryEn": "Mnesic",      "initials": "MM", "colorKey": "green"  },
+        { "name": "Control Ejecutivo",      "categoryEs": "Ejecutivo",  "categoryEn": "Executive",   "initials": "CE", "colorKey": "purple" },
+        { "name": "Flexibilidad Cognitiva", "categoryEs": "Ejecutivo",  "categoryEn": "Executive",   "initials": "FC", "colorKey": "purple" }
       ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos instrumentos NO estaba en la cuadrícula?",
-          "textEn": "Which of these instruments was NOT in the grid?",
-          "options": ["CPT-3", "WCST", "Conners-3", "TRAIL-B"],
-          "correctEs": "WCST",
-          "correctEn": "WCST",
+          "textEs": "¿Cuál de estos procesos NO estaba en la cuadrícula?",
+          "textEn": "Which of these processes was NOT in the grid?",
+          "options": [
+            "Atención Sostenida",
+            "Organización Espacial",
+            "Memoria Verbal",
+            "Control Ejecutivo"
+          ],
+          "correctEs": "Organización Espacial",
+          "correctEn": "Organización Espacial",
           "skillEs": "Memoria de reconocimiento",
           "skillEn": "Recognition memory",
-          "explanEs": "El WCST (Wisconsin Card Sorting Test) no fue presentado en esta cuadrícula.",
-          "explanEn": "The WCST (Wisconsin Card Sorting Test) was not presented in this grid."
+          "explanEs": "La Organización Espacial no fue presentada en esta secuencia. Tu memoria de reconocimiento te permite detectar lo que estuvo ausente — una habilidad clave en la evaluación clínica.",
+          "explanEn": "Spatial Organization was not presented in this sequence. Your recognition memory allows you to detect what was absent — a key skill in clinical assessment."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuántos instrumentos de 'Atención' estaban en la cuadrícula?",
-          "textEn": "How many 'Attention' instruments were in the grid?",
+          "textEs": "¿Cuántos procesos de tipo 'Atencional' estaban en la cuadrícula?",
+          "textEn": "How many 'Attentional' processes were in the grid?",
           "options": ["1", "2", "3", "4"],
           "correctEs": "2",
           "correctEn": "2",
           "skillEs": "Memoria categorial",
           "skillEn": "Categorical memory",
-          "explanEs": "Había 2 instrumentos de Atención: CPT-3 y Conners-3.",
-          "explanEn": "There were 2 Attention instruments: CPT-3 and Conners-3."
+          "explanEs": "Dos procesos atencionales: Atención Sostenida y Atención Selectiva. Distinguir categorías en la memoria activa el pensamiento organizado, esencial para sistematizar hallazgos clínicos.",
+          "explanEn": "Two attentional processes: Sustained Attention and Selective Attention. Distinguishing categories in memory activates organized thinking, essential for systematizing clinical findings."
         },
         {
           "id": "q3",
-          "textEs": "¿A qué categoría pertenece el TRAIL-B?",
-          "textEn": "What category does the TRAIL-B belong to?",
+          "textEs": "¿A qué tipo de proceso pertenece la Flexibilidad Cognitiva?",
+          "textEn": "What type of process does Cognitive Flexibility belong to?",
           "options": [
-            { "es": "Memoria Visual", "en": "Visual Memory" },
-            { "es": "Atención",       "en": "Attention"     },
-            { "es": "Ejecutivo",      "en": "Executive"     },
-            { "es": "Clínico",        "en": "Clinical"      }
+            { "es": "Atencional", "en": "Attentional" },
+            { "es": "Mnésico",    "en": "Mnesic"      },
+            { "es": "Ejecutivo",  "en": "Executive"   },
+            { "es": "Perceptual", "en": "Perceptual"  }
           ],
           "correctEs": "Ejecutivo",
           "correctEn": "Executive",
           "skillEs": "Memoria semántica",
           "skillEn": "Semantic memory",
-          "explanEs": "El Trail Making Test parte B evalúa funciones ejecutivas como la flexibilidad cognitiva y la memoria de trabajo.",
-          "explanEn": "The Trail Making Test Part B evaluates executive functions such as cognitive flexibility and working memory."
+          "explanEs": "La Flexibilidad Cognitiva es una función ejecutiva que permite alternar entre perspectivas o tareas. Reconocerla como función ejecutiva refuerza tu mapa conceptual del funcionamiento cognitivo.",
+          "explanEn": "Cognitive Flexibility is an executive function that allows switching between perspectives or tasks. Recognizing it as an executive function reinforces your conceptual map of cognitive functioning."
         }
       ]
     },
@@ -81,6 +88,8 @@
       "type": "memory",
       "titleEs": "Ubicación Correcta",
       "titleEn": "Correct Location",
+      "descEs": "Ahora el reto aumenta. Memoriza la nueva cuadrícula con precisión: deberás identificar qué procesos cambiaron respecto al desafío anterior.",
+      "descEn": "Now the challenge increases. Precisely memorize the new grid: you must identify which processes changed compared to the previous challenge.",
       "difficulty": "intermediate",
       "memorizeTime": 12,
       "answerTime": 45,
@@ -93,62 +102,69 @@
       },
       "badge": "observer",
       "items": [
-        { "name": "VMI",    "categoryEs": "Visomotor",      "categoryEn": "Visuomotor",    "initials": "VM", "colorKey": "amber"  },
-        { "name": "Rey-15", "categoryEs": "Memoria Visual", "categoryEn": "Visual Memory", "initials": "RL", "colorKey": "green"  },
-        { "name": "WCST",   "categoryEs": "Ejecutivo",      "categoryEn": "Executive",     "initials": "WC", "colorKey": "purple" },
-        { "name": "D2",     "categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "D2", "colorKey": "cyan"   },
-        { "name": "SNAP-IV","categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "SN", "colorKey": "cyan"   },
-        { "name": "SCL-90", "categoryEs": "Clínico",        "categoryEn": "Clinical",      "initials": "SC", "colorKey": "red"    }
+        { "name": "Integración Visomotora", "categoryEs": "Perceptual",  "categoryEn": "Perceptual",  "initials": "IV", "colorKey": "amber"  },
+        { "name": "Organización Espacial",  "categoryEs": "Perceptual",  "categoryEn": "Perceptual",  "initials": "OE", "colorKey": "amber"  },
+        { "name": "Inhibición Cognitiva",   "categoryEs": "Ejecutivo",   "categoryEn": "Executive",   "initials": "IC", "colorKey": "purple" },
+        { "name": "Atención Dividida",      "categoryEs": "Atencional",  "categoryEn": "Attentional", "initials": "AD", "colorKey": "cyan"   },
+        { "name": "Memoria Visual Inmediata","categoryEs": "Mnésico",    "categoryEn": "Mnesic",      "initials": "MI", "colorKey": "green"  },
+        { "name": "Discriminación Visual",  "categoryEs": "Perceptual",  "categoryEn": "Perceptual",  "initials": "DV", "colorKey": "amber"  }
       ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos instrumentos NO estaba en la cuadrícula?",
-          "textEn": "Which of these instruments was NOT in the grid?",
-          "options": ["D2", "CPT-3", "VMI", "SNAP-IV"],
-          "correctEs": "CPT-3",
-          "correctEn": "CPT-3",
+          "textEs": "¿Cuál de estos procesos NO estaba en la cuadrícula?",
+          "textEn": "Which of these processes was NOT in the grid?",
+          "options": [
+            "Atención Dividida",
+            "Atención Sostenida",
+            "Inhibición Cognitiva",
+            "Discriminación Visual"
+          ],
+          "correctEs": "Atención Sostenida",
+          "correctEn": "Atención Sostenida",
           "skillEs": "Memoria de reconocimiento",
           "skillEn": "Recognition memory",
-          "explanEs": "El CPT-3 no fue presentado en esta cuadrícula; formó parte del microreto anterior.",
-          "explanEn": "The CPT-3 was not presented in this grid; it was part of the previous challenge."
+          "explanEs": "La Atención Sostenida perteneció al microreto anterior, no a este. Tu memoria distingue entre lo reciente y lo anterior — habilidad que en clínica se llama discriminación temporal de estímulos.",
+          "explanEn": "Sustained Attention belonged to the previous challenge, not this one. Your memory distinguishes between recent and prior stimuli — a skill called temporal stimulus discrimination in clinical settings."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuántos instrumentos de 'Atención' estaban en la cuadrícula?",
-          "textEn": "How many 'Attention' instruments were in the grid?",
+          "textEs": "¿Cuántos procesos de tipo 'Perceptual' estaban en la cuadrícula?",
+          "textEn": "How many 'Perceptual' processes were in the grid?",
           "options": ["1", "2", "3", "4"],
-          "correctEs": "2",
-          "correctEn": "2",
+          "correctEs": "3",
+          "correctEn": "3",
           "skillEs": "Memoria categorial",
           "skillEn": "Categorical memory",
-          "explanEs": "Había 2 instrumentos de Atención: D2 y SNAP-IV.",
-          "explanEn": "There were 2 Attention instruments: D2 and SNAP-IV."
+          "explanEs": "Tres procesos perceptuales: Integración Visomotora, Organización Espacial y Discriminación Visual. Agrupar por categoría es una estrategia de memoria activa que mejora la retención a largo plazo.",
+          "explanEn": "Three perceptual processes: Visuomotor Integration, Spatial Organization and Visual Discrimination. Grouping by category is an active memory strategy that improves long-term retention."
         },
         {
           "id": "q3",
-          "textEs": "¿A qué categoría pertenece el VMI?",
-          "textEn": "What category does the VMI belong to?",
+          "textEs": "¿A qué tipo de proceso pertenece la Inhibición Cognitiva?",
+          "textEn": "What type of process does Cognitive Inhibition belong to?",
           "options": [
-            { "es": "Clínico",   "en": "Clinical"    },
-            { "es": "Ejecutivo", "en": "Executive"   },
-            { "es": "Atención",  "en": "Attention"   },
-            { "es": "Visomotor", "en": "Visuomotor"  }
+            { "es": "Perceptual",  "en": "Perceptual"  },
+            { "es": "Mnésico",     "en": "Mnesic"      },
+            { "es": "Atencional",  "en": "Attentional" },
+            { "es": "Ejecutivo",   "en": "Executive"   }
           ],
-          "correctEs": "Visomotor",
-          "correctEn": "Visuomotor",
+          "correctEs": "Ejecutivo",
+          "correctEn": "Executive",
           "skillEs": "Memoria semántica",
           "skillEn": "Semantic memory",
-          "explanEs": "El VMI (Beery-Buktenica Developmental Test) evalúa la integración visomotora, coordinando percepción visual y movimiento motor.",
-          "explanEn": "The VMI (Beery-Buktenica Developmental Test) assesses visuomotor integration, coordinating visual perception with motor movement."
+          "explanEs": "La Inhibición Cognitiva es una función ejecutiva que permite suprimir respuestas automáticas no pertinentes. Identificarla correctamente indica comprensión del modelo de funcionamiento ejecutivo.",
+          "explanEn": "Cognitive Inhibition is an executive function that allows suppression of non-relevant automatic responses. Correctly identifying it indicates understanding of the executive functioning model."
         }
       ]
     },
     {
       "id": "w2m3",
       "type": "multiple_choice",
-      "titleEs": "Patrón Perdido",
-      "titleEn": "Missing Pattern",
+      "titleEs": "Detective de Patrones",
+      "titleEn": "Pattern Detective",
+      "descEs": "Conviértete en detective cognitivo: analiza cada serie y descubre el proceso mental que completa el patrón oculto.",
+      "descEn": "Become a cognitive detective: analyze each series and discover the mental process that completes the hidden pattern.",
       "difficulty": "advanced",
       "answerTime": 60,
       "maxAttempts": 3,
@@ -162,44 +178,54 @@
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Qué instrumento completa la serie? CPT-3 → Atención, Conners-3 → Atención, D2 → Atención, ___ → Atención",
-          "textEn": "Which instrument completes the series? CPT-3 → Attention, Conners-3 → Attention, D2 → Attention, ___ → Attention",
-          "options": ["MMPI-2", "SNAP-IV", "HTP", "BDI-II"],
-          "correctEs": "SNAP-IV",
-          "correctEn": "SNAP-IV",
+          "textEs": "¿Qué proceso cognitivo completa la serie? Atención Sostenida → mantener foco, Atención Selectiva → filtrar estímulos, Atención Dividida → procesar simultáneamente, ___ → alternar entre tareas",
+          "textEn": "Which cognitive process completes the series? Sustained Attention → maintain focus, Selective Attention → filter stimuli, Divided Attention → process simultaneously, ___ → switch between tasks",
+          "options": [
+            "Memoria Visual",
+            "Flexibilidad Cognitiva",
+            "Procesamiento Rápido",
+            "Discriminación Visual"
+          ],
+          "correctEs": "Flexibilidad Cognitiva",
+          "correctEn": "Flexibilidad Cognitiva",
           "skillEs": "Reconocimiento de patrones",
           "skillEn": "Pattern recognition",
-          "explanEs": "El SNAP-IV evalúa síntomas de TDAH y trastornos de atención, completando la serie junto al CPT-3, Conners-3 y D2.",
-          "explanEn": "The SNAP-IV assesses ADHD symptoms and attention disorders, completing the series alongside CPT-3, Conners-3 and D2."
+          "explanEs": "La Flexibilidad Cognitiva completa la serie porque permite alternar entre tareas o perspectivas mentales. Junto con la Atención Sostenida, Selectiva y Dividida, conforma el mapa completo de los procesos atencionales y ejecutivos.",
+          "explanEn": "Cognitive Flexibility completes the series because it allows switching between mental tasks or perspectives. Together with Sustained, Selective and Divided Attention, it forms the complete map of attentional and executive processes."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál instrumento NO pertenece al grupo de evaluación de memoria? ROCF, CVLT, BAI, Rey-AVLT",
-          "textEn": "Which instrument does NOT belong to the memory assessment group? ROCF, CVLT, BAI, Rey-AVLT",
-          "options": ["ROCF", "CVLT", "BAI", "Rey-AVLT"],
-          "correctEs": "BAI",
-          "correctEn": "BAI",
+          "textEs": "¿Cuál proceso NO pertenece al grupo de habilidades mnésicas? Memoria Visual, Memoria Verbal, Memoria de Trabajo, Atención Dividida",
+          "textEn": "Which process does NOT belong to the mnesic skills group? Visual Memory, Verbal Memory, Working Memory, Divided Attention",
+          "options": [
+            "Memoria Visual",
+            "Memoria Verbal",
+            "Memoria de Trabajo",
+            "Atención Dividida"
+          ],
+          "correctEs": "Atención Dividida",
+          "correctEn": "Atención Dividida",
           "skillEs": "Atención selectiva",
           "skillEn": "Selective attention",
-          "explanEs": "El BAI (Beck Anxiety Inventory) mide síntomas de ansiedad, no evalúa memoria. El ROCF, CVLT y Rey-AVLT son instrumentos de evaluación de memoria.",
-          "explanEn": "The BAI (Beck Anxiety Inventory) measures anxiety symptoms, not memory. ROCF, CVLT and Rey-AVLT are memory assessment instruments."
+          "explanEs": "La Atención Dividida es un proceso atencional, no mnésico. Distinguir entre categorías cognitivas evita errores diagnósticos frecuentes al seleccionar baterías de evaluación.",
+          "explanEn": "Divided Attention is an attentional process, not a mnesic one. Distinguishing between cognitive categories prevents common diagnostic errors when selecting assessment batteries."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué categoría comparten el D2, el CPT-3 y el Conners-3?",
-          "textEn": "What category do the D2, CPT-3 and Conners-3 share?",
+          "textEs": "¿Qué tipo de proceso comparten la Atención Sostenida, la Atención Selectiva y la Atención Dividida?",
+          "textEn": "What type of process do Sustained Attention, Selective Attention and Divided Attention share?",
           "options": [
-            { "es": "Inteligencia", "en": "Intelligence" },
-            { "es": "Atención",     "en": "Attention"    },
-            { "es": "Memoria",      "en": "Memory"       },
-            { "es": "Proyectivo",   "en": "Projective"   }
+            { "es": "Ejecutivo",  "en": "Executive"   },
+            { "es": "Atencional", "en": "Attentional" },
+            { "es": "Mnésico",    "en": "Mnesic"      },
+            { "es": "Perceptual", "en": "Perceptual"  }
           ],
-          "correctEs": "Atención",
-          "correctEn": "Attention",
+          "correctEs": "Atencional",
+          "correctEn": "Attentional",
           "skillEs": "Memoria semántica",
           "skillEn": "Semantic memory",
-          "explanEs": "El D2, el CPT-3 (Conners' Continuous Performance Test) y el Conners-3 son instrumentos diseñados para evaluar la atención y detectar déficits atencionales.",
-          "explanEn": "The D2, CPT-3 (Conners' Continuous Performance Test) and Conners-3 are instruments designed to assess attention and detect attentional deficits."
+          "explanEs": "Las tres son modalidades del proceso atencional: Sostenida regula la duración del foco, Selectiva filtra la información relevante y Dividida distribuye los recursos. Comprender estas diferencias es esencial para una evaluación neuropsicológica precisa.",
+          "explanEn": "All three are modalities of the attentional process: Sustained regulates focus duration, Selective filters relevant information and Divided distributes resources. Understanding these differences is essential for accurate neuropsychological assessment."
         }
       ]
     }
