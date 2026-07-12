@@ -167,6 +167,21 @@
       return this.post('subirBanco', { adminEmail, adminToken, weekJson });
     }
 
+    /** Load schedule for all 18 weeks — public, no auth required. */
+    async getCalendario() {
+      return this.get('calendario', {}, 60);
+    }
+
+    /** Update a week's schedule entry using docente student token (no ADMIN_TOKEN needed). */
+    async updateCalendario(email, token, semana, fields) {
+      return this.post('docenteAction', { email, token, action: 'calendarioUpdate', semana, fields });
+    }
+
+    /** Teacher panel data using student token — docentes only (see Code.gs getTeacherPanel). */
+    async getTeacherPanel(email, token, page = 0, query = '') {
+      return this.get('teacherPanel', { email, token, page, query }, 15);
+    }
+
     async ping() {
       return this.get('ping', {}, 0);
     }

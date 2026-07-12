@@ -304,6 +304,9 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                     <div style="width:7px;height:7px;border-radius:50%;background:{{ dot.c }};"></div>
                   </sc-for>
                 </div>
+                <sc-if value="{{ ch.hasScheduleLabel }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:10px;color:#f59e0b;margin-top:4px;font-weight:500;">{{ ch.scheduleLabel }}</div>
+                </sc-if>
               </div>
               <sc-if value="{{ ch.isDone }}" hint-placeholder-val="{{ false }}">
                 <div style="text-align:right;flex-shrink:0;"><div style="font-size:14px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">+{{ ch.xpEarned }}</div><div style="font-size:9px;color:#64748b;">XP</div></div>
@@ -716,9 +719,43 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
             </sc-for>
           </div>
 
-          <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:13px 15px;">
+          <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:13px 15px;margin-bottom:16px;">
             <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:5px;">{{ t_integridad }}</div>
             <div style="font-size:12px;color:#94a3b8;">{{ t_sin_eventos }}</div>
+          </div>
+
+          <!-- Academic Calendar section -->
+          <div>
+            <button onClick="{{ toggleCalendar }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.28);border-radius:9px;padding:9px 16px;font-size:12px;font-weight:600;color:#a855f7;cursor:pointer;display:flex;align-items:center;gap:7px;margin-bottom:14px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              {{ t_cal_toggle }}
+            </button>
+            <sc-if value="{{ calendarSection }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:15px;overflow:hidden;">
+                <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_calendario }}</div>
+                <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
+                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">S</span>
+                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_challenges }}</span>
+                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_inicio }}</span>
+                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_fin }}</span>
+                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_estado }}</span>
+                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_acciones }}</span>
+                </div>
+                <sc-for list="{{ calendarRows }}" as="cr" hint-placeholder-count="18">
+                  <div style="padding:9px 16px;border-bottom:1px solid rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;align-items:center;">
+                    <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
+                    <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
+                    <input type="date" value="{{ cr.fechaInicio }}" onInput="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid rgba(124,58,237,0.2);border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <input type="date" value="{{ cr.fechaFin }}" onInput="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid rgba(124,58,237,0.2);border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
+                    <div style="display:flex;gap:4px;">
+                      <button onClick="{{ cr.activate }}" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#10b981;cursor:pointer;">{{ t_cal_activar }}</button>
+                      <button onClick="{{ cr.close }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#ef4444;cursor:pointer;">{{ t_cal_cerrar }}</button>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
           </div>
         </sc-if>
       </div>
@@ -937,6 +974,9 @@ class Component extends DCLogic {
       t_est_registrados: 'Estudiantes registrados', t_tiempo_min: 'Tiempo (min)',
       t_integridad: 'Eventos de integridad académica',
       t_sin_eventos: 'No se han registrado eventos de cambio de pestaña en esta sesión.',
+      t_calendario: 'Calendario Académico', t_cal_toggle: 'Calendario Académico',
+      t_cal_inicio: 'Inicio', t_cal_fin: 'Fin', t_cal_estado: 'Estado',
+      t_cal_acciones: 'Acciones', t_cal_activar: 'Activar', t_cal_cerrar: 'Cerrar',
     },
     en: {
       t_subtitle: 'Training Platform',
@@ -976,6 +1016,9 @@ class Component extends DCLogic {
       t_est_registrados: 'Registered students', t_tiempo_min: 'Time (min)',
       t_integridad: 'Academic integrity events',
       t_sin_eventos: 'No tab-switch events recorded in this session.',
+      t_calendario: 'Academic Calendar', t_cal_toggle: 'Academic Calendar',
+      t_cal_inicio: 'Start', t_cal_fin: 'End', t_cal_estado: 'Status',
+      t_cal_acciones: 'Actions', t_cal_activar: 'Activate', t_cal_cerrar: 'Close',
     },
   };
 
@@ -1012,6 +1055,8 @@ class Component extends DCLogic {
     // teacher panel access gate
     teacherAuthed: false,
     teacherEmail: '', teacherToken: '', teacherAuthErr: '', teacherData: null,
+    // schedule + calendar section (Sprint Final)
+    schedule: {}, calendarSection: false,
   };
 
   engine = null;
@@ -1022,6 +1067,7 @@ class Component extends DCLogic {
     this.loadUser();
     document.addEventListener('visibilitychange', this.onVisChange);
     this._setupEngine();
+    this._loadSchedule();
   }
 
   componentWillUnmount() {
@@ -1110,8 +1156,10 @@ class Component extends DCLogic {
       const raw = localStorage.getItem('desafio_user');
       if (raw) {
         const user = JSON.parse(raw);
-        this.setState({ user, screen: 'dashboard' });
-        this._reconcileWithServer(user);
+        const isDocente = user.role === 'docente';
+        this.setState({ user, screen: isDocente ? 'teacher' : 'dashboard', teacherAuthed: isDocente });
+        if (isDocente) this._loadTeacherData(user);
+        else this._reconcileWithServer(user);
       }
     } catch(e) {}
     this._refreshRanking();
@@ -1148,6 +1196,33 @@ class Component extends DCLogic {
       if (res && res.ok) this.setState({ remoteRanking: res.ranking || [] });
     }).catch(() => {});
   }
+
+  _loadSchedule() {
+    if (!window.desafioAPI) return;
+    window.desafioAPI.getCalendario().then(res => {
+      if (res && res.ok) this.setState({ schedule: res.schedule || {} });
+    }).catch(() => {});
+  }
+
+  _loadTeacherData(user) {
+    if (!window.desafioAPI || !user?.email || !user?.token) return;
+    window.desafioAPI.getTeacherPanel(user.email, user.token).then(res => {
+      if (res && res.ok) this.setState({ teacherData: res, teacherAuthErr: '' });
+    }).catch(() => {});
+  }
+
+  updateSchedule = (weekNum, field, value) => {
+    const { user } = this.state;
+    if (!user?.token || !user?.email) return;
+    const prevSch = (this.state.schedule || {})[weekNum] || {};
+    const updated = { ...prevSch, [field]: value };
+    this.setState({ schedule: { ...this.state.schedule, [weekNum]: updated } });
+    if (!window.desafioAPI) return;
+    window.desafioAPI.updateCalendario(user.email, user.token, weekNum, { [field]: value })
+      .catch(() => this.setState({ schedule: { ...this.state.schedule, [weekNum]: prevSch } }));
+  };
+
+  toggleCalendar = () => this.setState(s => ({ calendarSection: !s.calendarSection }));
 
   defaultUser(form, avatar) {
     return {
@@ -1226,9 +1301,11 @@ class Component extends DCLogic {
       window.desafioAPI.registro({ nombre: fName, email: fEmail, nickname: this.state.fNick || fName.split(' ')[0], grupo: fGroup, seccion: fSection, avatar: selAvatar })
         .then(res => {
           if (res && res.ok && res.token) {
-            const withToken = { ...this.state.user, token: res.token };
+            const isDocente = res.role === 'docente';
+            const withToken = { ...this.state.user, token: res.token, role: res.role || 'estudiante' };
             this.saveUser(withToken);
-            this.setState({ user: withToken });
+            this.setState({ user: withToken, ...(isDocente ? { screen: 'teacher', teacherAuthed: true } : {}) });
+            if (isDocente) this._loadTeacherData(withToken);
           }
         }).catch(() => {});
       window.desafioAPI.guardarEvento(fEmail, 'REGISTRO', `Nuevo perfil: ${fName}`);
@@ -1516,12 +1593,28 @@ class Component extends DCLogic {
     const lvlColors = ['#1e293b','#1e1b4b','#1a2744','#1c1917','#1c0a00'];
     const lvlBadgeBg = `linear-gradient(135deg,${['#334155','#7c3aed','#0ea5e9','#b45309','#7c2d12'][uLevel-1]},${['#1e293b','#a855f7','#06b6d4','#f59e0b','#ef4444'][uLevel-1]})`;
 
-    // Challenges list
+    // Challenges list — schedule overlay: if a week has schedule data it overrides
+    // the linear completion-based lock; fallback to linear when no schedule is set.
+    const _sch = this.state.schedule || {};
     const chList = Array.from({ length: 18 }, (_, i) => {
       const chData = user?.challenges?.[i];
       const isDone = chData?.completed || false;
-      const isActive = !isDone && (i === 0 || (user?.challenges?.[i-1]?.completed));
-      const isLocked = !isDone && !isActive;
+      const sch = _sch[i + 1];
+      let isActive, isLocked, scheduleLabel;
+      if (sch && (sch.fechaInicio || sch.fechaFin || (sch.estado && sch.estado !== 'pendiente'))) {
+        const now = Date.now();
+        const start = sch.fechaInicio ? new Date(sch.fechaInicio).getTime() : null;
+        const end   = sch.fechaFin   ? new Date(sch.fechaFin).getTime()    : null;
+        const est   = sch.estado;
+        if (isDone) { isActive = false; isLocked = false; }
+        else if (est === 'activo' || (start && end && now >= start && now <= end)) { isActive = true; isLocked = false; }
+        else if (est === 'cerrado' || est === 'expirado' || (end && now > end)) { isActive = false; isLocked = true; scheduleLabel = lang === 'es' ? 'Cerrado' : 'Closed'; }
+        else if (est === 'futuro' || (start && now < start)) { isActive = false; isLocked = true; scheduleLabel = (lang === 'es' ? 'Disponible: ' : 'Available: ') + (sch.fechaInicio || '').slice(0, 10); }
+        else { isActive = !isDone && (i === 0 || !!user?.challenges?.[i-1]?.completed); isLocked = !isDone && !isActive; }
+      } else {
+        isActive = !isDone && (i === 0 || !!user?.challenges?.[i-1]?.completed);
+        isLocked = !isDone && !isActive;
+      }
       const typData = this.CHALLENGE_TYPES[i];
       const allXP = chData?.microretos?.reduce((s, m) => s + m.xp, 0) || 0;
       const mrDots = (chData?.microretos || [{},{},{}]).map(m => ({
@@ -1531,6 +1624,7 @@ class Component extends DCLogic {
         week: i + 1, title: this.CHALLENGE_TITLES[i][lang],
         typeLabel: typData[lang],
         isDone, isActive, isLocked,
+        scheduleLabel: scheduleLabel || '', hasScheduleLabel: !!scheduleLabel,
         cardBg: isDone ? '#12121e' : isActive ? '#14142a' : '#0f0f1a',
         borderC: isDone ? 'rgba(16,185,129,0.2)' : isActive ? 'rgba(124,58,237,0.3)' : 'rgba(255,255,255,0.05)',
         cursor: isLocked ? 'not-allowed' : 'pointer',
@@ -1727,6 +1821,34 @@ class Component extends DCLogic {
       xp: Number(u.XP) || 0, done: u.completados || 0, time: Math.round((u.tiempoTotal || 0) / 60),
     }));
 
+    const calendarSection = this.state.calendarSection;
+    const _schMap = this.state.schedule || {};
+    const calendarRows = teacherAuthed ? Array.from({ length: 18 }, (_, i) => {
+      const weekNum = i + 1;
+      const sch = _schMap[weekNum] || {};
+      const estado = sch.estado || 'pendiente';
+      const estadoLabels = {
+        pendiente: lang === 'es' ? 'Pendiente' : 'Pending',
+        futuro: lang === 'es' ? 'Programado' : 'Scheduled',
+        activo: lang === 'es' ? 'Activo' : 'Active',
+        cerrado: lang === 'es' ? 'Cerrado' : 'Closed',
+        expirado: lang === 'es' ? 'Expirado' : 'Expired',
+      };
+      const estadoColor = estado === 'activo' ? '#10b981' : (estado === 'cerrado' || estado === 'expirado') ? '#ef4444' : estado === 'futuro' ? '#a855f7' : '#64748b';
+      return {
+        week: weekNum,
+        title: this.CHALLENGE_TITLES[i][lang],
+        fechaInicio: sch.fechaInicio || '',
+        fechaFin: sch.fechaFin || '',
+        estadoLabel: estadoLabels[estado] || estado,
+        estadoColor,
+        setStart: (e) => this.updateSchedule(weekNum, 'fechaInicio', e.target.value),
+        setEnd: (e) => this.updateSchedule(weekNum, 'fechaFin', e.target.value),
+        activate: () => this.updateSchedule(weekNum, 'estado', 'activo'),
+        close: () => this.updateSchedule(weekNum, 'estado', 'cerrado'),
+      };
+    }) : [];
+
     return {
       ...tKeys,
       // screen flags
@@ -1780,6 +1902,7 @@ class Component extends DCLogic {
       hasTeacherAuthErr, teacherAuthErr,
       onTeacherEmail: this.onTeacherEmail, onTeacherToken: this.onTeacherToken,
       teacherLogin: this.teacherLogin,
+      calendarSection, calendarRows, toggleCalendar: this.toggleCalendar,
       // navigation handlers
       goLanding: this.goLanding, goRegister: this.goRegister, loginExisting: this.loginExisting,
       goDashboard: this.goDashboard, goChallenges: this.goChallenges,

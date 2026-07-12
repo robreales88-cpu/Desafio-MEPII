@@ -60,6 +60,7 @@ const SHEETS = {
   EVENTOS     : '05_EVENTOS',
   ANALITICA   : '06_ANALITICA',
   RESPUESTAS  : '07_RESPUESTAS',
+  CALENDARIO  : '08_CALENDARIO',
 };
 
 const HEADERS = {
@@ -70,6 +71,7 @@ const HEADERS = {
   EVENTOS     : ['Actor','Evento','Detalle','Fecha','Navegador'],
   ANALITICA   : ['Metrica','Valor','Periodo','Fecha'],
   RESPUESTAS  : ['Semana','Microreto','PreguntaIdx','CorrectaEs','CorrectaEn','XPBase','XPSpeedMax','XPPerfectBonus','TiempoRespuesta'],
+  CALENDARIO  : ['Semana','FechaInicio','FechaFin','Estado','ActualizadoPor','UltimaActualizacion'],
 };
 
 // ══════════════════════════════════════════════════════════════════
@@ -90,6 +92,7 @@ function doPost(e) {
       case 'guardarInsignia' : return respond(guardarInsignia(body));
       case 'guardarEvento'   : return respond(guardarEvento(body));
       case 'adminAction'     : return respond(adminAction(body));
+      case 'docenteAction'   : return respond(docenteAction(body));
       case 'subirBanco'      : return respond(subirBanco(body));
       default: return respond({ ok: false, error: 'Acción no reconocida: ' + action });
     }
@@ -109,6 +112,8 @@ function doGet(e) {
       case 'perfil'        : return respond(getPerfil(e.parameter));
       case 'desafio'       : return respond(getDesafio(e.parameter));
       case 'admin'         : return respond(getAdminData(e.parameter));
+      case 'calendario'    : return respond(getCalendario(e.parameter));
+      case 'teacherPanel'  : return respond(getTeacherPanel(e.parameter));
       case 'ping'          : return respond({ ok: true, version: CONFIG.VERSION, ts: new Date().toISOString() });
       default: return respond({ ok: false, error: 'Acción no reconocida: ' + action });
     }
@@ -188,7 +193,8 @@ function registro(data) {
   if (existing) {
     // Do not hand another student's profile/token to whoever merely knows their email.
     if (tokensMatch(data.token, existing.Token)) {
-      return { ok: true, action: 'login', user: sanitizeUser(existing), token: existing.Token };
+      const role = CONFIG.ADMIN_EMAILS.includes(email) ? 'docente' : 'estudiante';
+      return { ok: true, action: 'login', user: sanitizeUser(existing), token: existing.Token, role };
     }
     return {
       ok: false,
@@ -211,6 +217,7 @@ function registro(data) {
     ok: true, action: 'registro',
     user: { ID: id, Correo: email, Nombre: data.nombre, Nickname: data.nickname, Avatar: data.avatar, Grupo: data.grupo, Seccion: data.seccion, Nivel: lvl, XP: 0, Estado: 'activo' },
     token,
+    role: CONFIG.ADMIN_EMAILS.includes(email) ? 'docente' : 'estudiante',
   };
 }
 
@@ -222,7 +229,8 @@ function login(data) {
 
   updateRow(auth.sheet, auth.rows, r => r.Correo === auth.user.Correo, { UltimoAcceso: new Date().toISOString() });
   logEvento(auth.user.Correo, 'LOGIN', '', data.ua || '');
-  return { ok: true, user: sanitizeUser(auth.user), token: auth.user.Token };
+  const role = CONFIG.ADMIN_EMAILS.includes(auth.user.Correo) ? 'docente' : 'estudiante';
+  return { ok: true, user: sanitizeUser(auth.user), token: auth.user.Token, role };
 }
 
 /** Save microreto progress. Recomputes correctas/incorrectas from the answer key when available. */
@@ -311,6 +319,7 @@ function adminAction(data) {
     case 'activarEstudiante':    return adminSetEstado(data.adminEmail, data.targetEmail, 'activo');
     case 'resetXP':              return adminResetXP(data.adminEmail, data.targetEmail);
     case 'editarEstudiante':     return adminEditarEstudiante(data.adminEmail, data.targetEmail, data.fields);
+    case 'calendarioUpdate':     return adminUpdateCalendario(data.adminEmail, data.semana, data.fields);
     default: return { ok: false, error: 'Acción admin desconocida' };
   }
 }
@@ -498,6 +507,60 @@ function getAdminData(params) {
   };
 }
 
+/** Public schedule data — students use this to determine which weeks are accessible. */
+function getCalendario(params) {
+  const rows = sheetToObjects(getSheet(SHEETS.CALENDARIO));
+  const schedule = {};
+  rows.forEach(r => {
+    schedule[Number(r.Semana)] = {
+      semana     : Number(r.Semana),
+      fechaInicio: r.FechaInicio || '',
+      fechaFin   : r.FechaFin || '',
+      estado     : r.Estado || 'pendiente',
+    };
+  });
+  return { ok: true, schedule };
+}
+
+/** Teacher panel data — uses student token to authenticate docentes without exposing ADMIN_TOKEN. */
+function getTeacherPanel(params) {
+  const auth = requireStudent(params.email, params.token);
+  if (!auth.ok) return auth;
+  if (!CONFIG.ADMIN_EMAILS.includes(auth.user.Correo)) return { ok: false, error: 'No autorizado' };
+  return getAdminData({ ...params, adminEmail: auth.user.Correo, adminToken: CONFIG.ADMIN_TOKEN });
+}
+
+/** Docente admin actions authenticated via student token (not shared ADMIN_TOKEN). */
+function docenteAction(data) {
+  const auth = requireStudent(data.email, data.token);
+  if (!auth.ok) return auth;
+  if (!CONFIG.ADMIN_EMAILS.includes(auth.user.Correo)) return { ok: false, error: 'No autorizado' };
+  switch (data.action) {
+    case 'calendarioUpdate': return adminUpdateCalendario(auth.user.Correo, data.semana, data.fields);
+    default: return { ok: false, error: 'Acción docente desconocida' };
+  }
+}
+
+/** Upsert a week's schedule entry in 08_CALENDARIO. */
+function adminUpdateCalendario(adminEmail, semana, fields) {
+  if (!semana) return { ok: false, error: 'Semana requerida' };
+  const sheet = getSheet(SHEETS.CALENDARIO);
+  const rows  = sheetToObjects(sheet);
+  const now   = new Date().toISOString();
+  const existing = rows.find(r => Number(r.Semana) === Number(semana));
+  if (existing) {
+    const updates = { ActualizadoPor: adminEmail, UltimaActualizacion: now };
+    if (fields.fechaInicio != null) updates.FechaInicio = fields.fechaInicio;
+    if (fields.fechaFin    != null) updates.FechaFin    = fields.fechaFin;
+    if (fields.estado      != null) updates.Estado      = fields.estado;
+    updateRow(sheet, rows, r => Number(r.Semana) === Number(semana), updates);
+  } else {
+    sheet.appendRow([Number(semana), fields.fechaInicio || '', fields.fechaFin || '', fields.estado || 'pendiente', adminEmail, now]);
+  }
+  logEvento(adminEmail, 'CALENDARIO_UPDATE', `Semana ${semana} → ${JSON.stringify(fields)}`, '');
+  return { ok: true };
+}
+
 // ══════════════════════════════════════════════════════════════════
 // ADMIN HELPERS
 // ══════════════════════════════════════════════════════════════════
@@ -662,5 +725,16 @@ function respond(data) {
 
 function initSheets() {
   Object.values(SHEETS).forEach(name => getSheet(name));
+  initCalendario();
   Logger.log('✅ Sheets inicializados correctamente.');
+}
+
+/** Seed 08_CALENDARIO with 18 empty rows (one per week) if the sheet is empty. */
+function initCalendario() {
+  const sheet = getSheet(SHEETS.CALENDARIO);
+  if (sheetToObjects(sheet).length > 0) return;
+  for (let i = 1; i <= 18; i++) {
+    sheet.appendRow([i, '', '', 'pendiente', '', '']);
+  }
+  Logger.log('✅ Calendario inicializado con 18 semanas.');
 }
