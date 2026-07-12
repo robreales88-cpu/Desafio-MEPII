@@ -1,226 +1,205 @@
 {
   "week": 2,
-  "type": "logic",
-  "titleEs": "Patrones y Secuencias",
-  "titleEn": "Patterns and Sequences",
-  "skillEs": "Razonamiento Lógico",
-  "skillEn": "Logical Reasoning",
-  "descEs": "Identifica patrones y completa series lógicas relacionadas con la evaluación psicológica.",
-  "descEn": "Identify patterns and complete logical series related to psychological assessment.",
+  "type": "memory",
+  "titleEs": "Memoria Visual y Atención",
+  "titleEn": "Visual Memory and Attention",
+  "skillEs": "Atención Sostenida",
+  "skillEn": "Sustained Attention",
+  "descEs": "Entrena tu capacidad para retener y reconocer información visual. Identifica patrones, detecta cambios y clasifica instrumentos de evaluación de la atención y la memoria.",
+  "descEn": "Train your ability to retain and recognize visual information. Identify patterns, detect changes and classify attention and memory assessment instruments.",
   "microretos": [
     {
       "id": "w2m1",
-      "type": "logic",
-      "titleEs": "Series Conceptuales",
-      "titleEn": "Conceptual Series",
+      "type": "memory",
+      "titleEs": "Secuencia Visual",
+      "titleEn": "Visual Sequence",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
-        "base": 55,
-        "speedMax": 25,
+        "base": 50,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "CPT-3",    "categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "CP", "colorKey": "cyan"   },
+        { "name": "Conners-3","categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "CO", "colorKey": "cyan"   },
+        { "name": "ROCF",     "categoryEs": "Memoria Visual", "categoryEn": "Visual Memory", "initials": "RC", "colorKey": "green"  },
+        { "name": "CVLT",     "categoryEs": "Memoria Verbal", "categoryEn": "Verbal Memory", "initials": "CV", "colorKey": "green"  },
+        { "name": "TRAIL-B",  "categoryEs": "Ejecutivo",      "categoryEn": "Executive",     "initials": "TR", "colorKey": "purple" },
+        { "name": "BRIEF",    "categoryEs": "Ejecutivo",      "categoryEn": "Executive",     "initials": "BR", "colorKey": "purple" }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "WAIS-IV → Wechsler. MMPI-2 → ___?",
-          "textEn": "WAIS-IV → Wechsler. MMPI-2 → ___?",
-          "options": [
-            "Rorschach",
-            "Hathaway y McKinley",
-            "Binet",
-            "Cattell"
-          ],
-          "correctEs": "Hathaway y McKinley",
-          "correctEn": "Hathaway y McKinley",
-          "skillEs": "Razonamiento relacional",
-          "skillEn": "Relational reasoning",
-          "explanEs": "El MMPI-2 fue desarrollado por Hathaway y McKinley, así como el WAIS fue desarrollado por Wechsler.",
-          "explanEn": "The MMPI-2 was developed by Hathaway and McKinley, just as the WAIS was developed by Wechsler."
+          "textEs": "¿Cuál de estos instrumentos NO estaba en la cuadrícula?",
+          "textEn": "Which of these instruments was NOT in the grid?",
+          "options": ["CPT-3", "WCST", "Conners-3", "TRAIL-B"],
+          "correctEs": "WCST",
+          "correctEn": "WCST",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "El WCST (Wisconsin Card Sorting Test) no fue presentado en esta cuadrícula.",
+          "explanEn": "The WCST (Wisconsin Card Sorting Test) was not presented in this grid."
         },
         {
           "id": "q2",
-          "textEs": "Proyectivo → TAT. Neuropsicológico → ___?",
-          "textEn": "Projective → TAT. Neuropsychological → ___?",
-          "options": [
-            "NEO PI-R",
-            "Rorschach",
-            "Bender",
-            "MMPI-2"
-          ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación instrumental",
-          "skillEn": "Instrumental classification",
-          "explanEs": "El Bender es el instrumento neuropsicológico, así como el TAT es un instrumento proyectivo.",
-          "explanEn": "The Bender is the neuropsychological instrument, just as the TAT is a projective instrument."
+          "textEs": "¿Cuántos instrumentos de 'Atención' estaban en la cuadrícula?",
+          "textEn": "How many 'Attention' instruments were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Había 2 instrumentos de Atención: CPT-3 y Conners-3.",
+          "explanEn": "There were 2 Attention instruments: CPT-3 and Conners-3."
         },
         {
           "id": "q3",
-          "textEs": "Niños → WISC-V. Adultos → ___?",
-          "textEn": "Children → WISC-V. Adults → ___?",
+          "textEs": "¿A qué categoría pertenece el TRAIL-B?",
+          "textEn": "What category does the TRAIL-B belong to?",
           "options": [
-            "WAIS-IV",
-            "K-ABC",
-            "TAT",
-            "Bender"
+            { "es": "Memoria Visual", "en": "Visual Memory" },
+            { "es": "Atención",       "en": "Attention"     },
+            { "es": "Ejecutivo",      "en": "Executive"     },
+            { "es": "Clínico",        "en": "Clinical"      }
           ],
-          "correctEs": "WAIS-IV",
-          "correctEn": "WAIS-IV",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WAIS-IV es la versión para adultos de la escala de Wechsler, mientras que el WISC-V es para niños.",
-          "explanEn": "The WAIS-IV is the adult version of the Wechsler scale, while the WISC-V is for children."
+          "correctEs": "Ejecutivo",
+          "correctEn": "Executive",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El Trail Making Test parte B evalúa funciones ejecutivas como la flexibilidad cognitiva y la memoria de trabajo.",
+          "explanEn": "The Trail Making Test Part B evaluates executive functions such as cognitive flexibility and working memory."
         }
       ]
     },
     {
       "id": "w2m2",
-      "type": "logic",
-      "titleEs": "Secuencias Históricas",
-      "titleEn": "Historical Sequences",
+      "type": "memory",
+      "titleEs": "Ubicación Correcta",
+      "titleEn": "Correct Location",
       "difficulty": "intermediate",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 45,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "VMI",    "categoryEs": "Visomotor",      "categoryEn": "Visuomotor",    "initials": "VM", "colorKey": "amber"  },
+        { "name": "Rey-15", "categoryEs": "Memoria Visual", "categoryEn": "Visual Memory", "initials": "RL", "colorKey": "green"  },
+        { "name": "WCST",   "categoryEs": "Ejecutivo",      "categoryEn": "Executive",     "initials": "WC", "colorKey": "purple" },
+        { "name": "D2",     "categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "D2", "colorKey": "cyan"   },
+        { "name": "SNAP-IV","categoryEs": "Atención",       "categoryEn": "Attention",     "initials": "SN", "colorKey": "cyan"   },
+        { "name": "SCL-90", "categoryEs": "Clínico",        "categoryEn": "Clinical",      "initials": "SC", "colorKey": "red"    }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "Binet-Simon (1905) → Stanford-Binet → ___?",
-          "textEn": "Binet-Simon (1905) → Stanford-Binet → ___?",
-          "options": [
-            "Rorschach",
-            "WAIS",
-            "TAT",
-            "Bender"
-          ],
-          "correctEs": "WAIS",
-          "correctEn": "WAIS",
-          "skillEs": "Razonamiento histórico",
-          "skillEn": "Historical reasoning",
-          "explanEs": "La evolución de las pruebas de inteligencia va de Binet-Simon al Stanford-Binet y luego al WAIS de Wechsler.",
-          "explanEn": "The evolution of intelligence tests goes from Binet-Simon to Stanford-Binet and then to the Wechsler WAIS."
+          "textEs": "¿Cuál de estos instrumentos NO estaba en la cuadrícula?",
+          "textEn": "Which of these instruments was NOT in the grid?",
+          "options": ["D2", "CPT-3", "VMI", "SNAP-IV"],
+          "correctEs": "CPT-3",
+          "correctEn": "CPT-3",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "El CPT-3 no fue presentado en esta cuadrícula; formó parte del microreto anterior.",
+          "explanEn": "The CPT-3 was not presented in this grid; it was part of the previous challenge."
         },
         {
           "id": "q2",
-          "textEs": "Entrevista → Historia clínica → Aplicación de pruebas → ___?",
-          "textEn": "Interview → Clinical history → Test application → ___?",
-          "options": [
-            "Diagnóstico",
-            "Corrección e interpretación",
-            "Informe",
-            "Devolución"
-          ],
-          "correctEs": "Corrección e interpretación",
-          "correctEn": "Corrección e interpretación",
-          "skillEs": "Secuencia del proceso evaluativo",
-          "skillEn": "Assessment process sequence",
-          "explanEs": "Después de aplicar las pruebas, el siguiente paso es la corrección e interpretación de los resultados.",
-          "explanEn": "After applying the tests, the next step is scoring and interpretation of results."
+          "textEs": "¿Cuántos instrumentos de 'Atención' estaban en la cuadrícula?",
+          "textEn": "How many 'Attention' instruments were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Había 2 instrumentos de Atención: D2 y SNAP-IV.",
+          "explanEn": "There were 2 Attention instruments: D2 and SNAP-IV."
         },
         {
           "id": "q3",
-          "textEs": "Validez → Fiabilidad → ___? (propiedades psicométricas)",
-          "textEn": "Validity → Reliability → ___? (psychometric properties)",
+          "textEs": "¿A qué categoría pertenece el VMI?",
+          "textEn": "What category does the VMI belong to?",
           "options": [
-            "Estandarización",
-            "Baremación",
-            "Sensibilidad",
-            "Especificidad"
+            { "es": "Clínico",   "en": "Clinical"    },
+            { "es": "Ejecutivo", "en": "Executive"   },
+            { "es": "Atención",  "en": "Attention"   },
+            { "es": "Visomotor", "en": "Visuomotor"  }
           ],
-          "correctEs": "Estandarización",
-          "correctEn": "Estandarización",
-          "skillEs": "Razonamiento psicométrico",
-          "skillEn": "Psychometric reasoning",
-          "explanEs": "Las propiedades psicométricas fundamentales incluyen validez, fiabilidad y estandarización.",
-          "explanEn": "The fundamental psychometric properties include validity, reliability, and standardization."
+          "correctEs": "Visomotor",
+          "correctEn": "Visuomotor",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El VMI (Beery-Buktenica Developmental Test) evalúa la integración visomotora, coordinando percepción visual y movimiento motor.",
+          "explanEn": "The VMI (Beery-Buktenica Developmental Test) assesses visuomotor integration, coordinating visual perception with motor movement."
         }
       ]
     },
     {
       "id": "w2m3",
-      "type": "logic",
-      "titleEs": "Patrones Diagnósticos",
-      "titleEn": "Diagnostic Patterns",
+      "type": "multiple_choice",
+      "titleEs": "Patrón Perdido",
+      "titleEn": "Missing Pattern",
       "difficulty": "advanced",
-      "answerTime": 22,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "BDI → Depresión. BAI → ___?",
-          "textEn": "BDI → Depression. BAI → ___?",
-          "options": [
-            "Ansiedad",
-            "Personalidad",
-            "Inteligencia",
-            "Psicosis"
-          ],
-          "correctEs": "Ansiedad",
-          "correctEn": "Ansiedad",
-          "skillEs": "Razonamiento instrumental",
-          "skillEn": "Instrumental reasoning",
-          "explanEs": "El BAI (Beck Anxiety Inventory) mide ansiedad, mientras el BDI mide depresión.",
-          "explanEn": "The BAI (Beck Anxiety Inventory) measures anxiety, while the BDI measures depression."
+          "textEs": "¿Qué instrumento completa la serie? CPT-3 → Atención, Conners-3 → Atención, D2 → Atención, ___ → Atención",
+          "textEn": "Which instrument completes the series? CPT-3 → Attention, Conners-3 → Attention, D2 → Attention, ___ → Attention",
+          "options": ["MMPI-2", "SNAP-IV", "HTP", "BDI-II"],
+          "correctEs": "SNAP-IV",
+          "correctEn": "SNAP-IV",
+          "skillEs": "Reconocimiento de patrones",
+          "skillEn": "Pattern recognition",
+          "explanEs": "El SNAP-IV evalúa síntomas de TDAH y trastornos de atención, completando la serie junto al CPT-3, Conners-3 y D2.",
+          "explanEn": "The SNAP-IV assesses ADHD symptoms and attention disorders, completing the series alongside CPT-3, Conners-3 and D2."
         },
         {
           "id": "q2",
-          "textEs": "Escala T (MMPI): 50 = promedio. 70 = ___?",
-          "textEn": "T-scale (MMPI): 50 = average. 70 = ___?",
-          "options": [
-            "Normal",
-            "Límite clínico",
-            "Desviación significativa",
-            "Perfil inválido"
-          ],
-          "correctEs": "Desviación significativa",
-          "correctEn": "Desviación significativa",
-          "skillEs": "Interpretación normativa",
-          "skillEn": "Normative interpretation",
-          "explanEs": "En las escalas T, una puntuación de 70 indica una desviación estadísticamente significativa (2 desviaciones típicas sobre la media).",
-          "explanEn": "On T-scales, a score of 70 indicates a statistically significant deviation (2 standard deviations above the mean)."
+          "textEs": "¿Cuál instrumento NO pertenece al grupo de evaluación de memoria? ROCF, CVLT, BAI, Rey-AVLT",
+          "textEn": "Which instrument does NOT belong to the memory assessment group? ROCF, CVLT, BAI, Rey-AVLT",
+          "options": ["ROCF", "CVLT", "BAI", "Rey-AVLT"],
+          "correctEs": "BAI",
+          "correctEn": "BAI",
+          "skillEs": "Atención selectiva",
+          "skillEn": "Selective attention",
+          "explanEs": "El BAI (Beck Anxiety Inventory) mide síntomas de ansiedad, no evalúa memoria. El ROCF, CVLT y Rey-AVLT son instrumentos de evaluación de memoria.",
+          "explanEn": "The BAI (Beck Anxiety Inventory) measures anxiety symptoms, not memory. ROCF, CVLT and Rey-AVLT are memory assessment instruments."
         },
         {
           "id": "q3",
-          "textEs": "CI 115-129: Inteligencia ___?",
-          "textEn": "IQ 115-129: ___ Intelligence?",
+          "textEs": "¿Qué categoría comparten el D2, el CPT-3 y el Conners-3?",
+          "textEn": "What category do the D2, CPT-3 and Conners-3 share?",
           "options": [
-            {
-              "es": "Media",
-              "en": "Average"
-            },
-            {
-              "es": "Superior",
-              "en": "Superior"
-            },
-            {
-              "es": "Muy superior",
-              "en": "Very superior"
-            },
-            {
-              "es": "Límite",
-              "en": "Borderline"
-            }
+            { "es": "Inteligencia", "en": "Intelligence" },
+            { "es": "Atención",     "en": "Attention"    },
+            { "es": "Memoria",      "en": "Memory"       },
+            { "es": "Proyectivo",   "en": "Projective"   }
           ],
-          "correctEs": "Superior",
-          "correctEn": "Superior",
-          "skillEs": "Interpretación del CI",
-          "skillEn": "IQ interpretation",
-          "explanEs": "Un CI entre 115 y 129 corresponde a Inteligencia Superior según la clasificación WAIS.",
-          "explanEn": "An IQ between 115 and 129 corresponds to Superior Intelligence according to WAIS classification."
+          "correctEs": "Atención",
+          "correctEn": "Attention",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "El D2, el CPT-3 (Conners' Continuous Performance Test) y el Conners-3 son instrumentos diseñados para evaluar la atención y detectar déficits atencionales.",
+          "explanEn": "The D2, CPT-3 (Conners' Continuous Performance Test) and Conners-3 are instruments designed to assess attention and detect attentional deficits."
         }
       ]
     }
