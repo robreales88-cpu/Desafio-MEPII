@@ -1,280 +1,227 @@
 {
   "week": 3,
-  "type": "case_analysis",
-  "titleEs": "El Caso de Ana",
-  "titleEn": "Ana's Case",
-  "skillEs": "Análisis de Casos",
-  "skillEn": "Case Analysis",
-  "descEs": "Analiza un caso clínico y selecciona los instrumentos y procedimientos más adecuados para la evaluación.",
-  "descEn": "Analyze a clinical case and select the most appropriate instruments and procedures for the assessment.",
+  "type": "memory",
+  "titleEs": "Razonamiento Abstracto",
+  "titleEn": "Abstract Reasoning",
+  "skillEs": "Razonamiento Abstracto",
+  "skillEn": "Abstract Reasoning",
+  "descEs": "Entrena la capacidad de reconocer patrones, construir analogías y completar secuencias conceptuales. Habilidades que estructuran el pensamiento clínico desde la primera evaluación.",
+  "descEn": "Train your ability to recognize patterns, build analogies and complete conceptual sequences — skills that shape clinical thinking from the very first assessment.",
   "microretos": [
     {
       "id": "w3m1",
-      "type": "case_analysis",
-      "titleEs": "Selección de Instrumentos",
-      "titleEn": "Instrument Selection",
+      "type": "memory",
+      "titleEs": "Series Visuales",
+      "titleEn": "Visual Series",
+      "descEs": "Observa la cuadrícula durante 12 segundos. Memoriza cada operación del pensamiento y la categoría a la que pertenece antes de que desaparezcan.",
+      "descEn": "Study the grid for 12 seconds. Memorize each thinking operation and the category it belongs to before they disappear.",
       "difficulty": "basic",
-      "answerTime": 30,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
-        "base": 60,
-        "speedMax": 20,
-        "perfectBonus": 60,
+        "base": 50,
+        "speedMax": 30,
+        "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Inducción",     "categoryEs": "Razonamiento", "categoryEn": "Reasoning", "initials": "ID", "colorKey": "purple" },
+        { "name": "Deducción",     "categoryEs": "Razonamiento", "categoryEn": "Reasoning", "initials": "DD", "colorKey": "purple" },
+        { "name": "Abstracción",   "categoryEs": "Razonamiento", "categoryEn": "Reasoning", "initials": "AB", "colorKey": "purple" },
+        { "name": "Analogía",      "categoryEs": "Pensamiento",  "categoryEn": "Thinking",  "initials": "AN", "colorKey": "cyan"   },
+        { "name": "Síntesis",      "categoryEs": "Pensamiento",  "categoryEn": "Thinking",  "initials": "SI", "colorKey": "cyan"   },
+        { "name": "Clasificación", "categoryEs": "Pensamiento",  "categoryEn": "Thinking",  "initials": "CL", "colorKey": "cyan"   }
+      ],
       "questions": [
         {
           "id": "q1",
-          "contextEs": "Ana, 35 años, acude a consulta con tristeza persistente de 3 meses, pérdida de interés y fatiga. Su médico sospecha un trastorno depresivo.",
-          "contextEn": "Ana, 35, comes to the clinic with persistent sadness for 3 months, loss of interest, and fatigue. Her doctor suspects a depressive disorder.",
-          "textEs": "¿Cuál es el instrumento más adecuado para evaluar la severidad de los síntomas depresivos de Ana?",
-          "textEn": "What is the most appropriate instrument to assess the severity of Ana's depressive symptoms?",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "WAIS-IV",
-            "BDI-II",
-            "Rorschach",
-            "STAI"
+            "Inducción",
+            "Generalización",
+            "Abstracción",
+            "Síntesis"
           ],
-          "correctEs": "BDI-II",
-          "correctEn": "BDI-II",
-          "skillEs": "Selección instrumental",
-          "skillEn": "Instrument selection",
-          "explanEs": "El BDI-II (Inventario de Depresión de Beck) es el instrumento validado para medir la severidad de síntomas depresivos.",
-          "explanEn": "The BDI-II (Beck Depression Inventory) is the validated instrument for measuring the severity of depressive symptoms."
+          "correctEs": "Generalización",
+          "correctEn": "Generalización",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "Generalización no fue presentada en esta cuadrícula. Tu memoria de reconocimiento te permite detectar ausencias, una habilidad fundamental para identificar omisiones en el historial clínico de un paciente.",
+          "explanEn": "Generalization was not presented in this grid. Recognition memory lets you detect absences — a fundamental skill for identifying omissions in a patient's clinical history."
         },
         {
           "id": "q2",
-          "contextEs": "Ana también refiere dificultades laborales y bajo rendimiento. Se quiere descartar problemas cognitivos.",
-          "contextEn": "Ana also reports work difficulties and low performance. Cognitive problems need to be ruled out.",
-          "textEs": "¿Qué instrumento evaluaría las capacidades cognitivas de Ana?",
-          "textEn": "What instrument would assess Ana's cognitive abilities?",
-          "options": [
-            "MMPI-2",
-            "BDI-II",
-            "WAIS-IV",
-            "TAT"
-          ],
-          "correctEs": "WAIS-IV",
-          "correctEn": "WAIS-IV",
-          "skillEs": "Selección instrumental",
-          "skillEn": "Instrument selection",
-          "explanEs": "El WAIS-IV es el instrumento estándar para la evaluación de inteligencia y capacidades cognitivas en adultos.",
-          "explanEn": "The WAIS-IV is the standard instrument for assessing intelligence and cognitive abilities in adults."
+          "textEs": "¿Cuántas operaciones de tipo 'Razonamiento' estaban en la cuadrícula?",
+          "textEn": "How many 'Reasoning' operations were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Tres operaciones de Razonamiento: Inducción, Deducción y Abstracción. Agrupar conceptos por categoría es una estrategia de memoria activa que también usarás al organizar hallazgos de una batería evaluativa.",
+          "explanEn": "Three Reasoning operations: Induction, Deduction and Abstraction. Grouping concepts by category is an active memory strategy you will also use when organizing findings from an assessment battery."
         },
         {
           "id": "q3",
-          "contextEs": "El psicólogo desea explorar también la personalidad y posibles comorbilidades de Ana.",
-          "contextEn": "The psychologist also wants to explore Ana's personality and possible comorbidities.",
-          "textEs": "¿Qué instrumento de personalidad sería el más apropiado para Ana?",
-          "textEn": "What personality instrument would be most appropriate for Ana?",
+          "textEs": "¿A qué categoría pertenece la Analogía?",
+          "textEn": "What category does Analogy belong to?",
           "options": [
-            "WISC-V",
-            "MMPI-2",
-            "K-ABC",
-            "Bender"
+            { "es": "Razonamiento", "en": "Reasoning"   },
+            { "es": "Pensamiento",  "en": "Thinking"    },
+            { "es": "Conceptual",   "en": "Conceptual"  },
+            { "es": "Mnésico",      "en": "Mnesic"      }
           ],
-          "correctEs": "MMPI-2",
-          "correctEn": "MMPI-2",
-          "skillEs": "Selección instrumental",
-          "skillEn": "Instrument selection",
-          "explanEs": "El MMPI-2 es el inventario de personalidad multidimensional más usado clínicamente y evalúa múltiples escalas de psicopatología.",
-          "explanEn": "The MMPI-2 is the most clinically used multidimensional personality inventory and assesses multiple psychopathology scales."
+          "correctEs": "Pensamiento",
+          "correctEn": "Thinking",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "La Analogía es una operación del Pensamiento: establece relaciones estructurales entre conceptos distintos. Junto con la Síntesis y la Clasificación, conforma las herramientas del pensamiento que organizan la información clínica.",
+          "explanEn": "Analogy is a Thinking operation: it establishes structural relations between distinct concepts. Together with Synthesis and Classification, it forms the thinking tools that organize clinical information."
         }
       ]
     },
     {
       "id": "w3m2",
-      "type": "case_analysis",
-      "titleEs": "Proceso de Evaluación",
-      "titleEn": "Assessment Process",
+      "type": "multiple_choice",
+      "titleEs": "Analogías",
+      "titleEn": "Analogies",
+      "descEs": "Las analogías revelan cómo relacionas conceptos entre sí. Cada par A:B te exige encontrar el mismo tipo de relación en el par C:D.",
+      "descEn": "Analogies reveal how you relate concepts to each other. Each A:B pair requires you to find the same type of relationship in the C:D pair.",
       "difficulty": "intermediate",
-      "answerTime": 30,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
-        "base": 65,
-        "speedMax": 20,
-        "perfectBonus": 55,
+        "base": 60,
+        "speedMax": 30,
+        "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "contextEs": "Antes de comenzar la evaluación formal de Ana, el psicólogo debe realizar una serie de pasos preparatorios.",
-          "contextEn": "Before beginning Ana's formal assessment, the psychologist must complete a series of preparatory steps.",
-          "textEs": "¿Cuál es el primer paso en el proceso de evaluación psicológica?",
-          "textEn": "What is the first step in the psychological assessment process?",
+          "textEs": "Atención Sostenida : Tiempo :: Memoria Visual : ___",
+          "textEn": "Sustained Attention : Time :: Visual Memory : ___",
           "options": [
-            {
-              "es": "Aplicar pruebas",
-              "en": "Apply tests"
-            },
-            {
-              "es": "Entrevista inicial",
-              "en": "Initial interview"
-            },
-            {
-              "es": "Interpretar resultados",
-              "en": "Interpret results"
-            },
-            {
-              "es": "Redactar informe",
-              "en": "Write report"
-            }
+            "Espacio Visual",
+            "Tiempo Visual",
+            "Codificación Temporal",
+            "Procesamiento Verbal"
           ],
-          "correctEs": "Entrevista inicial",
-          "correctEn": "Entrevista inicial",
-          "skillEs": "Secuencia evaluativa",
-          "skillEn": "Assessment sequence",
-          "explanEs": "La entrevista inicial es siempre el primer paso para recoger la demanda, historia clínica y establecer el rapport.",
-          "explanEn": "The initial interview is always the first step to collect the referral, clinical history, and establish rapport."
+          "correctEs": "Espacio Visual",
+          "correctEn": "Espacio Visual",
+          "skillEs": "Razonamiento analógico",
+          "skillEn": "Analogical reasoning",
+          "explanEs": "La Atención Sostenida se despliega a través del tiempo; la Memoria Visual opera sobre el espacio visual. Reconocer estas relaciones funcionales entrena el razonamiento analógico aplicado a la evaluación neuropsicológica.",
+          "explanEn": "Sustained Attention unfolds over time; Visual Memory operates over visual space. Recognizing these functional relations trains the analogical reasoning applied to neuropsychological assessment."
         },
         {
           "id": "q2",
-          "contextEs": "El psicólogo ha obtenido las puntuaciones del BDI-II y WAIS-IV de Ana.",
-          "contextEn": "The psychologist has obtained Ana's BDI-II and WAIS-IV scores.",
-          "textEs": "¿Qué debe hacer el psicólogo después de obtener las puntuaciones brutas?",
-          "textEn": "What should the psychologist do after obtaining raw scores?",
+          "textEs": "Razonamiento Inductivo : de casos a regla :: Razonamiento Deductivo : ___",
+          "textEn": "Inductive Reasoning : from cases to rule :: Deductive Reasoning : ___",
           "options": [
-            {
-              "es": "Redactar el informe directamente",
-              "en": "Write the report directly"
-            },
-            {
-              "es": "Convertir a puntuaciones normativas",
-              "en": "Convert to normative scores"
-            },
-            {
-              "es": "Realizar más pruebas",
-              "en": "Conduct more tests"
-            },
-            {
-              "es": "Informar al paciente",
-              "en": "Inform the patient"
-            }
+            "de regla a caso específico",
+            "de síntomas a hipótesis",
+            "de hipótesis a variables",
+            "de datos a observación"
           ],
-          "correctEs": "Convertir a puntuaciones normativas",
-          "correctEn": "Convertir a puntuaciones normativas",
-          "skillEs": "Procedimiento psicométrico",
-          "skillEn": "Psychometric procedure",
-          "explanEs": "Las puntuaciones brutas deben convertirse a puntuaciones normativas (percentiles, escalas T, CI) para su interpretación.",
-          "explanEn": "Raw scores must be converted to normative scores (percentiles, T-scales, IQ) for interpretation."
+          "correctEs": "de regla a caso específico",
+          "correctEn": "de regla a caso específico",
+          "skillEs": "Distinción de formas de razonamiento",
+          "skillEn": "Distinguishing reasoning forms",
+          "explanEs": "El razonamiento inductivo construye reglas generales a partir de casos particulares; el deductivo aplica una regla ya establecida a un caso concreto. Esta distinción es clave en la construcción y prueba de hipótesis diagnósticas.",
+          "explanEn": "Inductive reasoning builds general rules from particular cases; deductive applies an established rule to a specific case. This distinction is key in constructing and testing diagnostic hypotheses."
         },
         {
           "id": "q3",
-          "contextEs": "Al finalizar la evaluación, el psicólogo debe comunicar los resultados a Ana.",
-          "contextEn": "At the end of the assessment, the psychologist must communicate the results to Ana.",
-          "textEs": "¿Cómo se denomina la sesión en que se comunican los resultados al evaluado?",
-          "textEn": "What is the session where results are communicated to the evaluated person called?",
+          "textEs": "¿Qué par de términos tiene la misma relación que 'Síntesis : Integración'?",
+          "textEn": "Which pair of terms has the same relationship as 'Synthesis : Integration'?",
           "options": [
-            "Entrevista inicial",
-            "Sesión de devolución",
-            "Junta clínica",
-            "Supervisión"
+            { "es": "Análisis : Descomposición",  "en": "Analysis : Decomposition"    },
+            { "es": "Atención : Memoria",          "en": "Attention : Memory"           },
+            { "es": "Percepción : Conducta",        "en": "Perception : Behavior"        },
+            { "es": "Emoción : Cognición",          "en": "Emotion : Cognition"          }
           ],
-          "correctEs": "Sesión de devolución",
-          "correctEn": "Sesión de devolución",
-          "skillEs": "Ética y procedimiento",
-          "skillEn": "Ethics and procedure",
-          "explanEs": "La sesión de devolución es la instancia ética y profesional en que se comunican los resultados al evaluado.",
-          "explanEn": "The feedback session is the ethical and professional instance where results are communicated to the evaluated person."
+          "correctEs": "Análisis : Descomposición",
+          "correctEn": "Analysis : Decomposition",
+          "skillEs": "Relaciones conceptuales",
+          "skillEn": "Conceptual relationships",
+          "explanEs": "Síntesis e Integración son procesos opuestos-complementarios, al igual que Análisis y Descomposición. Identificar relaciones simétricas entre conceptos fortalece el razonamiento clínico comparativo.",
+          "explanEn": "Synthesis and Integration are opposite-complementary processes, just as Analysis and Decomposition are. Identifying symmetrical relations between concepts strengthens comparative clinical reasoning."
         }
       ]
     },
     {
       "id": "w3m3",
-      "type": "case_analysis",
-      "titleEs": "Interpretación e Informe",
-      "titleEn": "Interpretation and Report",
+      "type": "multiple_choice",
+      "titleEs": "Detective de Secuencias",
+      "titleEn": "Sequence Detective",
+      "descEs": "El pensamiento clínico avanza en pasos ordenados. Tu misión: identificar qué proceso falta para completar cada secuencia cognitiva.",
+      "descEn": "Clinical thinking advances in ordered steps. Your mission: identify which process is missing to complete each cognitive sequence.",
       "difficulty": "advanced",
-      "answerTime": 28,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 20,
+        "speedMax": 30,
         "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "contextEs": "El BDI-II de Ana obtuvo una puntuación de 28.",
-          "contextEn": "Ana's BDI-II score was 28.",
-          "textEs": "Una puntuación de 28 en el BDI-II indica:",
-          "textEn": "A score of 28 on the BDI-II indicates:",
+          "textEs": "¿Qué proceso completa la secuencia? Observación → Registro → Análisis → ___",
+          "textEn": "Which process completes the sequence? Observation → Recording → Analysis → ___",
           "options": [
-            {
-              "es": "Depresión mínima",
-              "en": "Minimal depression"
-            },
-            {
-              "es": "Depresión leve",
-              "en": "Mild depression"
-            },
-            {
-              "es": "Depresión moderada",
-              "en": "Moderate depression"
-            },
-            {
-              "es": "Depresión grave",
-              "en": "Severe depression"
-            }
+            "Interpretación",
+            "Diagnóstico",
+            "Codificación",
+            "Almacenamiento"
           ],
-          "correctEs": "Depresión moderada",
-          "correctEn": "Depresión moderada",
-          "skillEs": "Interpretación del BDI-II",
-          "skillEn": "BDI-II interpretation",
-          "explanEs": "Puntuaciones entre 20-28 en el BDI-II indican depresión moderada. Grave sería 29 o más.",
-          "explanEn": "Scores between 20-28 on the BDI-II indicate moderate depression. Severe would be 29 or more."
+          "correctEs": "Interpretación",
+          "correctEn": "Interpretación",
+          "skillEs": "Secuencia del proceso evaluativo",
+          "skillEn": "Assessment process sequence",
+          "explanEs": "Tras observar, registrar y analizar los datos, el siguiente paso es la Interpretación: atribuir significado clínico a los hallazgos. Esta secuencia es la columna vertebral del método de evaluación psicológica.",
+          "explanEn": "After observing, recording and analyzing data, the next step is Interpretation: attributing clinical meaning to the findings. This sequence is the backbone of the psychological assessment method."
         },
         {
           "id": "q2",
-          "contextEs": "En el WAIS-IV, Ana obtuvo un CI Total de 95.",
-          "contextEn": "On the WAIS-IV, Ana obtained a Full Scale IQ of 95.",
-          "textEs": "Un CI de 95 se ubica en el rango:",
-          "textEn": "An IQ of 95 falls in the range:",
+          "textEs": "¿Qué proceso completa la secuencia? Síntoma → Hipótesis → Evaluación → ___",
+          "textEn": "Which process completes the sequence? Symptom → Hypothesis → Assessment → ___",
           "options": [
-            {
-              "es": "Límite",
-              "en": "Borderline"
-            },
-            {
-              "es": "Media",
-              "en": "Average"
-            },
-            {
-              "es": "Superior",
-              "en": "Superior"
-            },
-            {
-              "es": "Muy superior",
-              "en": "Very superior"
-            }
+            "Diagnóstico",
+            "Informe",
+            "Registro",
+            "Análisis"
           ],
-          "correctEs": "Media",
-          "correctEn": "Media",
-          "skillEs": "Interpretación del CI",
-          "skillEn": "IQ interpretation",
-          "explanEs": "Un CI entre 90-109 corresponde al rango Medio (Media) según la clasificación del WAIS-IV.",
-          "explanEn": "An IQ between 90-109 falls in the Average (Media) range according to WAIS-IV classification."
+          "correctEs": "Diagnóstico",
+          "correctEn": "Diagnóstico",
+          "skillEs": "Razonamiento clínico hipotético-deductivo",
+          "skillEn": "Hypothetico-deductive clinical reasoning",
+          "explanEs": "El ciclo clínico avanza de Síntoma a Hipótesis, de Hipótesis a Evaluación y de Evaluación a Diagnóstico. Comprender esta cadena entrena el razonamiento hipotético-deductivo que guía toda evaluación psicológica.",
+          "explanEn": "The clinical cycle moves from Symptom to Hypothesis, from Hypothesis to Assessment and from Assessment to Diagnosis. Understanding this chain trains the hypothetico-deductive reasoning that guides every psychological assessment."
         },
         {
           "id": "q3",
-          "contextEs": "Al redactar el informe de Ana, el psicólogo debe organizar la información de manera estructurada.",
-          "contextEn": "When writing Ana's report, the psychologist must organize the information in a structured way.",
-          "textEs": "¿Qué sección del informe describe el motivo de consulta y los síntomas actuales?",
-          "textEn": "What section of the report describes the reason for consultation and current symptoms?",
+          "textEs": "¿Qué proceso completa la secuencia? Percepción → Atención → Codificación → Almacenamiento → ___",
+          "textEn": "Which process completes the sequence? Perception → Attention → Encoding → Storage → ___",
           "options": [
-            "Conclusiones",
-            "Anamnesis y motivo de consulta",
-            "Resultados de pruebas",
-            "Recomendaciones"
+            { "es": "Recuperación",   "en": "Retrieval"      },
+            { "es": "Procesamiento",  "en": "Processing"     },
+            { "es": "Clasificación",  "en": "Classification" },
+            { "es": "Interpretación", "en": "Interpretation" }
           ],
-          "correctEs": "Anamnesis y motivo de consulta",
-          "correctEn": "Anamnesis y motivo de consulta",
-          "skillEs": "Estructura del informe",
-          "skillEn": "Report structure",
-          "explanEs": "La sección de Anamnesis y motivo de consulta recoge la historia clínica, síntomas y demanda del paciente.",
-          "explanEn": "The Anamnesis and reason for consultation section collects the clinical history, symptoms, and patient demand."
+          "correctEs": "Recuperación",
+          "correctEn": "Retrieval",
+          "skillEs": "Modelo de procesamiento de la memoria",
+          "skillEn": "Memory processing model",
+          "explanEs": "El modelo clásico de la memoria cierra con la Recuperación: acceder a la información almacenada cuando se necesita. Conocer esta secuencia completa permite seleccionar qué etapa evaluar según el perfil de dificultades del paciente.",
+          "explanEn": "The classic memory model closes with Retrieval: accessing stored information when needed. Knowing this complete sequence allows selecting which stage to assess based on the patient's difficulty profile."
         }
       ]
     }

@@ -1,214 +1,227 @@
 {
   "week": 4,
-  "type": "observation",
-  "titleEs": "Foco en el Detalle",
-  "titleEn": "Focus on Detail",
-  "skillEs": "Observación",
-  "skillEn": "Observation",
-  "descEs": "Entrena la habilidad de Observación mediante preguntas interactivas.",
-  "descEn": "Train your Observation skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Clasificación Conceptual",
+  "titleEn": "Conceptual Classification",
+  "skillEs": "Clasificación Conceptual",
+  "skillEn": "Conceptual Classification",
+  "descEs": "Organiza funciones cognitivas en sus categorías correctas, identifica la categoría oculta de un grupo y detecta el concepto intruso. Clasificar con precisión es la base del pensamiento diagnóstico.",
+  "descEn": "Organize cognitive functions into their correct categories, identify the hidden category of a group and detect the intruder concept. Classifying precisely is the foundation of diagnostic thinking.",
   "microretos": [
     {
       "id": "w4m1",
-      "type": "observation",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Agrupa Correctamente",
+      "titleEn": "Group Correctly",
+      "descEs": "Tienes 12 segundos para memorizar cada función cognitiva y el sistema al que pertenece. Después de que la cuadrícula desaparezca, deberás clasificar desde la memoria.",
+      "descEn": "You have 12 seconds to memorize each cognitive function and the system it belongs to. After the grid disappears, you must classify from memory.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Planificación",      "categoryEs": "Función Ejecutiva", "categoryEn": "Executive Function", "initials": "PL", "colorKey": "purple" },
+        { "name": "Inhibición",         "categoryEs": "Función Ejecutiva", "categoryEn": "Executive Function", "initials": "IH", "colorKey": "purple" },
+        { "name": "Codificación",       "categoryEs": "Memoria",           "categoryEn": "Memory",             "initials": "CO", "colorKey": "green"  },
+        { "name": "Recuperación",       "categoryEs": "Memoria",           "categoryEn": "Memory",             "initials": "RC", "colorKey": "green"  },
+        { "name": "Umbral Sensorial",   "categoryEs": "Percepción",        "categoryEn": "Perception",         "initials": "US", "colorKey": "amber"  },
+        { "name": "Figura-Fondo",       "categoryEs": "Percepción",        "categoryEn": "Perception",         "initials": "FF", "colorKey": "amber"  }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Planificación",
+            "Consolidación",
+            "Recuperación",
+            "Figura-Fondo"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Consolidación",
+          "correctEn": "Consolidación",
+          "skillEs": "Memoria de reconocimiento",
+          "skillEn": "Recognition memory",
+          "explanEs": "Consolidación no apareció en esta cuadrícula, aunque es un proceso de memoria real. Tu memoria de reconocimiento distingue lo que fue presentado de lo que solo es familiar — distinción crítica en la evaluación de la memoria declarativa.",
+          "explanEn": "Consolidation did not appear in this grid, even though it is a real memory process. Recognition memory distinguishes what was presented from what is merely familiar — a critical distinction in assessing declarative memory."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
-          "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
-          ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "textEs": "¿Cuántos procesos de tipo 'Función Ejecutiva' estaban en la cuadrícula?",
+          "textEn": "How many 'Executive Function' processes were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Dos funciones ejecutivas: Planificación e Inhibición. Reconocer qué procesos pertenecen al sistema ejecutivo permite seleccionar las pruebas adecuadas cuando se sospecha disfunción frontal.",
+          "explanEn": "Two executive functions: Planning and Inhibition. Recognizing which processes belong to the executive system allows selecting the right tests when frontal dysfunction is suspected."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "¿A qué categoría pertenece Figura-Fondo?",
+          "textEn": "What category does Figure-Ground belong to?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Memoria",           "en": "Memory"            },
+            { "es": "Función Ejecutiva", "en": "Executive Function" },
+            { "es": "Percepción",        "en": "Perception"         },
+            { "es": "Atención",          "en": "Attention"          }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Percepción",
+          "correctEn": "Perception",
+          "skillEs": "Memoria semántica",
+          "skillEn": "Semantic memory",
+          "explanEs": "Figura-Fondo es un proceso perceptual que permite distinguir el estímulo relevante del fondo. Junto con el Umbral Sensorial, forma parte de la base perceptual sobre la que operan la atención y la memoria.",
+          "explanEn": "Figure-Ground is a perceptual process that allows distinguishing the relevant stimulus from its background. Together with Sensory Threshold, it forms the perceptual base upon which attention and memory operate."
         }
       ]
     },
     {
       "id": "w4m2",
-      "type": "observation",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Categoría Oculta",
+      "titleEn": "Hidden Category",
+      "descEs": "Se te presentan grupos de procesos cognitivos sin etiqueta. Tu tarea: identificar el concepto que los agrupa a todos bajo una misma categoría.",
+      "descEn": "You are presented with groups of cognitive processes without a label. Your task: identify the concept that groups them all under the same category.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "¿Qué concepto agrupa a: Planificación, Monitoreo, Actualización y Control Inhibitorio?",
+          "textEn": "Which concept groups: Planning, Monitoring, Updating and Inhibitory Control?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Funciones Ejecutivas",
+            "Procesos Atencionales",
+            "Funciones Mnésicas",
+            "Procesos Perceptuales"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Funciones Ejecutivas",
+          "correctEn": "Funciones Ejecutivas",
+          "skillEs": "Clasificación de funciones cognitivas",
+          "skillEn": "Cognitive function classification",
+          "explanEs": "Planificación, Monitoreo, Actualización y Control Inhibitorio son las cuatro funciones ejecutivas nucleares según el modelo de Miyake y colaboradores. Identificarlas correctamente orienta la selección de baterías de evaluación frontal.",
+          "explanEn": "Planning, Monitoring, Updating and Inhibitory Control are the four core executive functions according to Miyake and colleagues' model. Correctly identifying them guides selection of frontal assessment batteries."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "¿Qué tienen en común: Memoria Episódica, Memoria Semántica y Memoria Procedimental?",
+          "textEn": "What do Episodic Memory, Semantic Memory and Procedural Memory have in common?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "Son tipos de memoria a largo plazo",
+            "Son tipos de atención",
+            "Son funciones ejecutivas",
+            "Son procesos perceptuales"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "Son tipos de memoria a largo plazo",
+          "correctEn": "Son tipos de memoria a largo plazo",
+          "skillEs": "Taxonomía de la memoria",
+          "skillEn": "Memory taxonomy",
+          "explanEs": "Los tres son subsistemas de la memoria a largo plazo: la Episódica guarda experiencias personales, la Semántica conocimiento general y la Procedimental habilidades automatizadas. Esta taxonomía guía la selección de pruebas según el tipo de memoria comprometida.",
+          "explanEn": "All three are subsystems of long-term memory: Episodic stores personal experiences, Semantic stores general knowledge and Procedural stores automated skills. This taxonomy guides test selection based on which memory type is compromised."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "¿Qué categoría agrupa: Discriminación, Figura-Fondo, Cierre y Constancia perceptual?",
+          "textEn": "Which category groups: Discrimination, Figure-Ground, Closure and Perceptual Constancy?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Procesos Perceptuales",  "en": "Perceptual Processes"   },
+            { "es": "Funciones Ejecutivas",   "en": "Executive Functions"    },
+            { "es": "Procesos Atencionales",  "en": "Attentional Processes"  },
+            { "es": "Procesos Mnésicos",      "en": "Mnesic Processes"       }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Procesos Perceptuales",
+          "correctEn": "Perceptual Processes",
+          "skillEs": "Organización perceptual",
+          "skillEn": "Perceptual organization",
+          "explanEs": "Discriminación, Figura-Fondo, Cierre y Constancia son operaciones del sistema perceptual que permiten construir representaciones estables del entorno. Dificultades en estos procesos pueden observarse en evaluaciones visoperceptivas y neuropsicológicas.",
+          "explanEn": "Discrimination, Figure-Ground, Closure and Constancy are operations of the perceptual system that allow building stable representations of the environment. Difficulties in these processes can be observed in visuoperceptual and neuropsychological assessments."
         }
       ]
     },
     {
       "id": "w4m3",
-      "type": "observation",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Intruso Conceptual",
+      "titleEn": "Conceptual Intruder",
+      "descEs": "En cada grupo hay un concepto que no pertenece. Identifica el intruso con precisión: una clasificación errónea puede llevar a una batería evaluativa incorrecta.",
+      "descEn": "In each group there is one concept that does not belong. Identify the intruder precisely — a misclassification can lead to an incorrect assessment battery.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "¿Cuál NO es una etapa del procesamiento de la memoria? Codificación, Almacenamiento, Recuperación, Inhibición",
+          "textEn": "Which is NOT a stage of memory processing? Encoding, Storage, Retrieval, Inhibition",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Codificación",
+            "Almacenamiento",
+            "Recuperación",
+            "Inhibición"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Inhibición",
+          "correctEn": "Inhibición",
+          "skillEs": "Modelo de procesamiento de la memoria",
+          "skillEn": "Memory processing model",
+          "explanEs": "Codificación, Almacenamiento y Recuperación son las tres etapas clásicas del procesamiento de la memoria. La Inhibición es una función ejecutiva que suprime respuestas automáticas — no una etapa de la memoria, aunque interactúa con ella.",
+          "explanEn": "Encoding, Storage and Retrieval are the three classic stages of memory processing. Inhibition is an executive function that suppresses automatic responses — not a memory stage, although it interacts with it."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "¿Cuál NO es una función ejecutiva? Planificación, Monitoreo, Control Inhibitorio, Discriminación Visual",
+          "textEn": "Which is NOT an executive function? Planning, Monitoring, Inhibitory Control, Visual Discrimination",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "Planificación",
+            "Monitoreo",
+            "Control Inhibitorio",
+            "Discriminación Visual"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "Discriminación Visual",
+          "correctEn": "Discriminación Visual",
+          "skillEs": "Clasificación de funciones cognitivas",
+          "skillEn": "Cognitive function classification",
+          "explanEs": "Planificación, Monitoreo y Control Inhibitorio son funciones ejecutivas del lóbulo frontal. La Discriminación Visual es un proceso perceptual del sistema visual. Confundirlos puede derivar en hipótesis diagnósticas incorrectas.",
+          "explanEn": "Planning, Monitoring and Inhibitory Control are frontal lobe executive functions. Visual Discrimination is a perceptual process of the visual system. Confusing them can lead to incorrect diagnostic hypotheses."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "¿Cuál de estos NO es un proceso del razonamiento clínico-evaluativo? Hipótesis, Diagnóstico, Memorización, Interpretación",
+          "textEn": "Which of these is NOT a process of clinical-evaluative reasoning? Hypothesis, Diagnosis, Memorization, Interpretation",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Hipótesis",      "en": "Hypothesis"      },
+            { "es": "Diagnóstico",    "en": "Diagnosis"       },
+            { "es": "Memorización",   "en": "Memorization"    },
+            { "es": "Interpretación", "en": "Interpretation"  }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Memorización",
+          "correctEn": "Memorization",
+          "skillEs": "Razonamiento clínico",
+          "skillEn": "Clinical reasoning",
+          "explanEs": "Hipótesis, Diagnóstico e Interpretación son pasos del razonamiento clínico-evaluativo. La Memorización es un proceso cognitivo del evaluado, no una acción del evaluador. Distinguir quién realiza cada proceso evita errores metodológicos en el diseño de la evaluación.",
+          "explanEn": "Hypothesis, Diagnosis and Interpretation are steps of clinical-evaluative reasoning. Memorization is a cognitive process of the examinee, not an action of the evaluator. Distinguishing who performs each process prevents methodological errors in assessment design."
         }
       ]
     }

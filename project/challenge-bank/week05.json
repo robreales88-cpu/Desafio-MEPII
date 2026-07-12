@@ -1,214 +1,223 @@
 {
   "week": 5,
-  "type": "analogy",
-  "titleEs": "Relaciones Conceptuales",
-  "titleEn": "Conceptual Relations",
-  "skillEs": "Analogías",
-  "skillEn": "Analogies",
-  "descEs": "Entrena la habilidad de Analogías mediante preguntas interactivas.",
-  "descEn": "Train your Analogies skill through interactive questions.",
+  "type": "multiple_choice",
+  "titleEs": "Observación y Detección de Errores",
+  "titleEn": "Observation and Error Detection",
+  "skillEs": "Detección de Errores",
+  "skillEn": "Error Detection",
+  "descEs": "Un evaluador preciso no solo aplica instrumentos: detecta errores conceptuales, distingue procesos similares y revisa protocolos con ojo crítico. Esta semana entrenas esa mirada.",
+  "descEn": "A precise evaluator does not only apply instruments: they detect conceptual errors, distinguish similar processes and review protocols with a critical eye. This week you train that gaze.",
   "microretos": [
     {
       "id": "w5m1",
-      "type": "analogy",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "multiple_choice",
+      "titleEs": "Encuentra el Error",
+      "titleEn": "Find the Error",
+      "descEs": "Cada pregunta contiene afirmaciones sobre procesos cognitivos. Una de ellas tiene un error conceptual. Identifícala con precisión.",
+      "descEn": "Each question contains statements about cognitive processes. One of them has a conceptual error. Identify it precisely.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Cuál de estas afirmaciones contiene un error conceptual?",
+          "textEn": "Which of these statements contains a conceptual error?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "La atención sostenida permite mantener el foco durante el tiempo necesario",
+            "La inhibición cognitiva activa respuestas automáticas",
+            "La memoria de trabajo retiene información de forma temporal",
+            "La codificación convierte la experiencia en representación mental"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "La inhibición cognitiva activa respuestas automáticas",
+          "correctEn": "La inhibición cognitiva activa respuestas automáticas",
+          "skillEs": "Detección de errores conceptuales",
+          "skillEn": "Conceptual error detection",
+          "explanEs": "La inhibición cognitiva hace exactamente lo contrario: suprime las respuestas automáticas no pertinentes para permitir una conducta dirigida por objetivos. Confundir inhibición con activación es un error frecuente que altera la interpretación de perfiles cognitivos.",
+          "explanEn": "Cognitive inhibition does exactly the opposite: it suppresses non-relevant automatic responses to allow goal-directed behavior. Confusing inhibition with activation is a frequent error that distorts the interpretation of cognitive profiles."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "¿Cuál es el error en la siguiente afirmación? 'La Memoria de Trabajo almacena la información de forma permanente para su uso posterior'",
+          "textEn": "What is the error in the following statement? 'Working Memory stores information permanently for later use'",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "La Memoria de Trabajo es temporal, no permanente",
+            "La Memoria de Trabajo no almacena ningún tipo de información",
+            "La Memoria de Trabajo solo procesa información de tipo verbal",
+            "La Memoria de Trabajo no existe como constructo validado"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "La Memoria de Trabajo es temporal, no permanente",
+          "correctEn": "La Memoria de Trabajo es temporal, no permanente",
+          "skillEs": "Comprensión de sistemas de memoria",
+          "skillEn": "Memory systems comprehension",
+          "explanEs": "La Memoria de Trabajo es, por definición, un sistema de capacidad limitada que mantiene la información activa de manera temporal. El almacenamiento permanente corresponde a la memoria a largo plazo. Esta distinción es fundamental en la evaluación de dificultades de aprendizaje.",
+          "explanEn": "Working Memory is, by definition, a limited-capacity system that keeps information temporarily active. Permanent storage corresponds to long-term memory. This distinction is fundamental in assessing learning difficulties."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿Cuál es el error en este procedimiento de registro? 'Observo al paciente, interpreto lo que veo y luego anoto mis observaciones'",
+          "textEn": "What is the error in this recording procedure? 'I observe the patient, interpret what I see and then note my observations'",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "El registro debe hacerse antes de interpretar",                                  "en": "Recording should happen before interpreting"                          },
+            { "es": "Observar es innecesario si se usa un instrumento estandarizado",                 "en": "Observing is unnecessary if a standardized instrument is used"          },
+            { "es": "La interpretación siempre debe ser subjetiva en la evaluación clínica",          "en": "Interpretation should always be subjective in clinical assessment"       },
+            { "es": "El procedimiento descrito es correcto y no contiene errores",                    "en": "The described procedure is correct and contains no errors"              }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "El registro debe hacerse antes de interpretar",
+          "correctEn": "Recording should happen before interpreting",
+          "skillEs": "Objetividad en el registro de datos",
+          "skillEn": "Objectivity in data recording",
+          "explanEs": "El principio de objetividad exige registrar lo observado antes de interpretarlo: primero se anota la conducta tal como ocurre, luego se le atribuye significado. Invertir este orden contamina el registro con inferencias previas y reduce la validez de los datos.",
+          "explanEn": "The objectivity principle requires recording what is observed before interpreting it: first the behavior is noted as it occurs, then meaning is attributed. Reversing this order contaminates the record with prior inferences and reduces data validity."
         }
       ]
     },
     {
       "id": "w5m2",
-      "type": "analogy",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Diferencias Relevantes",
+      "titleEn": "Relevant Differences",
+      "descEs": "Procesos que parecen similares tienen diferencias funcionales precisas. Identificarlas evita errores de selección instrumental y mejora la precisión diagnóstica.",
+      "descEn": "Processes that seem similar have precise functional differences. Identifying them prevents instrument selection errors and improves diagnostic precision.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Cuál es la diferencia clave entre Atención Selectiva y Atención Dividida?",
+          "textEn": "What is the key difference between Selective Attention and Divided Attention?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "La Selectiva filtra estímulos; la Dividida distribuye recursos entre varios",
+            "La Selectiva es más rápida que la Dividida en todas las tareas",
+            "La Selectiva opera en niños; la Dividida opera exclusivamente en adultos",
+            "No existe diferencia funcional entre ambas"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "La Selectiva filtra estímulos; la Dividida distribuye recursos entre varios",
+          "correctEn": "La Selectiva filtra estímulos; la Dividida distribuye recursos entre varios",
+          "skillEs": "Diferenciación de tipos de atención",
+          "skillEn": "Differentiation of attention types",
+          "explanEs": "La Atención Selectiva orienta los recursos hacia estímulos relevantes ignorando los irrelevantes. La Atención Dividida distribuye esos recursos entre dos o más tareas simultáneas. Confundirlas lleva a elegir tareas de evaluación que miden el proceso equivocado.",
+          "explanEn": "Selective Attention directs resources toward relevant stimuli while ignoring irrelevant ones. Divided Attention distributes those resources across two or more simultaneous tasks. Confusing them leads to choosing assessment tasks that measure the wrong process."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "¿Cuál es la diferencia entre Memoria Episódica y Memoria Semántica?",
+          "textEn": "What is the difference between Episodic Memory and Semantic Memory?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "La Episódica almacena eventos personales contextualizados; la Semántica almacena conocimiento general",
+            "La Episódica es de corto plazo; la Semántica es de largo plazo",
+            "La Episódica procesa imágenes; la Semántica procesa exclusivamente palabras",
+            "No hay diferencia funcional relevante entre ambas"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "La Episódica almacena eventos personales contextualizados; la Semántica almacena conocimiento general",
+          "correctEn": "La Episódica almacena eventos personales contextualizados; la Semántica almacena conocimiento general",
+          "skillEs": "Taxonomía de la memoria a largo plazo",
+          "skillEn": "Long-term memory taxonomy",
+          "explanEs": "La Memoria Episódica codifica eventos autobiográficos con su contexto espacio-temporal ('qué hice ayer'). La Memoria Semántica almacena conocimiento general descontextualizado ('la capital de Francia'). Ambas son declarativas, pero su afectación diferencial orienta el diagnóstico.",
+          "explanEn": "Episodic Memory encodes autobiographical events with their spatiotemporal context ('what I did yesterday'). Semantic Memory stores decontextualized general knowledge ('the capital of France'). Both are declarative, but their differential impairment guides diagnosis."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿Cuál es la diferencia entre razonamiento inductivo y deductivo en el contexto de la evaluación clínica?",
+          "textEn": "What is the difference between inductive and deductive reasoning in the context of clinical assessment?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "El inductivo parte de síntomas para construir hipótesis; el deductivo aplica criterios diagnósticos a un caso",  "en": "Inductive starts from symptoms to build hypotheses; deductive applies diagnostic criteria to a case"     },
+            { "es": "El inductivo usa pruebas proyectivas; el deductivo usa pruebas de rendimiento",                                 "en": "Inductive uses projective tests; deductive uses performance tests"                                      },
+            { "es": "El inductivo es más válido que el deductivo en cualquier contexto clínico",                                    "en": "Inductive is more valid than deductive in any clinical context"                                         },
+            { "es": "No hay diferencia práctica entre ambos en evaluación psicológica",                                             "en": "There is no practical difference between both in psychological assessment"                             }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "El inductivo parte de síntomas para construir hipótesis; el deductivo aplica criterios diagnósticos a un caso",
+          "correctEn": "Inductive starts from symptoms to build hypotheses; deductive applies diagnostic criteria to a case",
+          "skillEs": "Aplicación clínica del razonamiento",
+          "skillEn": "Clinical application of reasoning",
+          "explanEs": "En clínica, el razonamiento inductivo parte de síntomas observados para construir hipótesis diagnósticas. El deductivo aplica criterios ya establecidos a un caso concreto para confirmar o descartar. Ambos se combinan en la práctica evaluativa y su distinción previene sesgos de confirmación.",
+          "explanEn": "In clinical practice, inductive reasoning starts from observed symptoms to build diagnostic hypotheses. Deductive reasoning applies established criteria to a specific case to confirm or rule out. Both combine in evaluative practice and their distinction prevents confirmation biases."
         }
       ]
     },
     {
       "id": "w5m3",
-      "type": "analogy",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Revisión de Protocolo",
+      "titleEn": "Protocol Review",
+      "descEs": "Se te presentan situaciones del proceso evaluativo. Identifica qué principio metodológico está en juego y cuál sería la respuesta técnicamente correcta.",
+      "descEn": "You are presented with situations from the assessment process. Identify which methodological principle is at stake and what would be the technically correct response.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Un evaluador empieza a interpretar las respuestas del examinado mientras este todavía está respondiendo. ¿Qué principio evaluativo se está violando?",
+          "textEn": "An evaluator begins interpreting the examinee's responses while they are still answering. Which assessment principle is being violated?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "El principio de objetividad en el registro de datos",
+            "El principio de confiabilidad del instrumento",
+            "El principio de validez de constructo",
+            "El principio de estandarización de normas"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "El principio de objetividad en el registro de datos",
+          "correctEn": "El principio de objetividad en el registro de datos",
+          "skillEs": "Principios metodológicos de la evaluación",
+          "skillEn": "Assessment methodological principles",
+          "explanEs": "Interpretar antes de completar el registro viola la objetividad: el evaluador contamina los datos con sus propias expectativas. El registro debe ser neutro y completo antes de pasar a la interpretación, para no introducir sesgos que comprometan la validez de los resultados.",
+          "explanEn": "Interpreting before completing recording violates objectivity: the evaluator contaminates data with their own expectations. Recording must be neutral and complete before moving to interpretation, to avoid introducing biases that compromise the validity of results."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "Un evaluador aplica el mismo instrumento dos veces al mismo paciente en la misma semana. ¿Cuál es el principal riesgo metodológico?",
+          "textEn": "An evaluator applies the same instrument twice to the same patient in the same week. What is the main methodological risk?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "Introduce el efecto de práctica, afectando la validez de la segunda aplicación",
+            "Aumenta automáticamente la confiabilidad de los resultados obtenidos",
+            "Permite comparar la estabilidad temporal de la puntuación del paciente",
+            "No existe riesgo metodológico si el evaluador es experto en el instrumento"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "Introduce el efecto de práctica, afectando la validez de la segunda aplicación",
+          "correctEn": "Introduce el efecto de práctica, afectando la validez de la segunda aplicación",
+          "skillEs": "Control de amenazas a la validez",
+          "skillEn": "Validity threat control",
+          "explanEs": "El efecto de práctica ocurre cuando la exposición previa al instrumento mejora artificialmente el rendimiento en la reaplicación, independientemente del constructo que se mide. Para comparar puntuaciones con legitimidad, se requiere respetar los intervalos de aplicación establecidos en el manual.",
+          "explanEn": "The practice effect occurs when prior exposure to the instrument artificially improves performance on reapplication, regardless of the construct being measured. To legitimately compare scores, the application intervals established in the manual must be respected."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿Cuál de las siguientes afirmaciones sobre confiabilidad y validez es correcta?",
+          "textEn": "Which of the following statements about reliability and validity is correct?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Un instrumento puede ser confiable sin ser válido para un propósito específico",      "en": "An instrument can be reliable without being valid for a specific purpose"           },
+            { "es": "Un instrumento válido siempre es confiable para cualquier propósito evaluativo",     "en": "A valid instrument is always reliable for any assessment purpose"                   },
+            { "es": "La confiabilidad implica automáticamente validez para el constructo medido",         "en": "Reliability automatically implies validity for the measured construct"               },
+            { "es": "Confiabilidad y validez son conceptos equivalentes en psicometría",                  "en": "Reliability and validity are equivalent concepts in psychometrics"                  }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Un instrumento puede ser confiable sin ser válido para un propósito específico",
+          "correctEn": "An instrument can be reliable without being valid for a specific purpose",
+          "skillEs": "Psicometría aplicada",
+          "skillEn": "Applied psychometrics",
+          "explanEs": "La confiabilidad (consistencia de las mediciones) es condición necesaria pero no suficiente para la validez (que el instrumento mide lo que afirma medir). Un instrumento puede medir consistentemente algo que no es el constructo de interés. Esta distinción es esencial al seleccionar o adaptar instrumentos para una población específica.",
+          "explanEn": "Reliability (consistency of measurements) is a necessary but not sufficient condition for validity (that the instrument measures what it claims to measure). An instrument can consistently measure something that is not the construct of interest. This distinction is essential when selecting or adapting instruments for a specific population."
         }
       ]
     }
