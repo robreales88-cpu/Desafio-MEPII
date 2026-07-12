@@ -1,214 +1,227 @@
 {
   "week": 18,
-  "type": "case_analysis",
-  "titleEs": "Integración Final",
-  "titleEn": "Final Integration",
-  "skillEs": "Integración",
-  "skillEn": "Integration",
-  "descEs": "Entrena la habilidad de Integración mediante preguntas interactivas.",
-  "descEn": "Train your Integration skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Desafío Final del Evaluador",
+  "titleEn": "Final Evaluator Challenge",
+  "skillEs": "Desafío Final del Evaluador",
+  "skillEn": "Final Evaluator Challenge",
+  "descEs": "Has llegado al cierre del Banco Maestro. Este desafío final integra todas las competencias desarrolladas durante el curso: atención, memoria, observación, razonamiento, clasificación, integración de información, interpretación, toma de decisiones y criterio profesional. No es simplemente más difícil — es más integrador.",
+  "descEn": "You have reached the closing of the Master Bank. This final challenge integrates all the competencies developed during the course: attention, memory, observation, reasoning, classification, information integration, interpretation, decision-making, and professional judgment. It is not simply harder — it is more integrative.",
   "microretos": [
     {
       "id": "w18m1",
-      "type": "case_analysis",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Misión Final",
+      "titleEn": "Final Mission",
+      "descEs": "Memoriza las habilidades del evaluador experto y las etapas del proceso de evaluación. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the expert evaluator's skills and the stages of the assessment process. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Observación Activa",           "categoryEs": "Habilidad del Evaluador", "categoryEn": "Evaluator Skill", "initials": "OA", "colorKey": "purple" },
+        { "name": "Razonamiento Clínico",          "categoryEs": "Habilidad del Evaluador", "categoryEn": "Evaluator Skill", "initials": "RC", "colorKey": "purple" },
+        { "name": "Criterio Ético",                "categoryEs": "Habilidad del Evaluador", "categoryEn": "Evaluator Skill", "initials": "CE", "colorKey": "purple" },
+        { "name": "Recogida de Datos",             "categoryEs": "Etapa del Proceso",       "categoryEn": "Process Stage",   "initials": "RD", "colorKey": "amber"  },
+        { "name": "Análisis e Interpretación",     "categoryEs": "Etapa del Proceso",       "categoryEn": "Process Stage",   "initials": "AI", "colorKey": "amber"  },
+        { "name": "Comunicación de Resultados",    "categoryEs": "Etapa del Proceso",       "categoryEn": "Process Stage",   "initials": "CR", "colorKey": "amber"  }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Razonamiento Clínico",
+            "Diagnóstico Diferencial",
+            "Recogida de Datos",
+            "Criterio Ético"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Diagnóstico Diferencial",
+          "correctEn": "Diagnóstico Diferencial",
+          "skillEs": "Memoria integradora del proceso de evaluación psicológica",
+          "skillEn": "Integrative memory of the psychological assessment process",
+          "explanEs": "Diagnóstico Diferencial es un proceso clínico relevante pero no estaba en esta cuadrícula. La capacidad de distinguir lo presentado de lo meramente familiar tiene valor más allá de la memoria: es exactamente el tipo de precisión que un informe psicológico riguroso requiere.",
+          "explanEn": "Differential Diagnosis is a relevant clinical process but was not in this grid. The ability to distinguish what was presented from what is merely familiar has value beyond memory: it is exactly the type of precision that a rigorous psychological report requires."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
-          "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
-          ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "textEs": "¿Cuántos elementos de la categoría 'Habilidad del Evaluador' estaban en la cuadrícula?",
+          "textEn": "How many 'Evaluator Skill' elements were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial integradora",
+          "skillEn": "Integrative categorical memory",
+          "explanEs": "Tres Habilidades del Evaluador: Observación Activa, Razonamiento Clínico y Criterio Ético. Las tres fueron desarrolladas a lo largo del curso y definen el perfil del evaluador competente. Observar sin razonar es insuficiente; razonar sin criterio ético es peligroso.",
+          "explanEn": "Three Evaluator Skills: Active Observation, Clinical Reasoning, and Ethical Judgment. All three were developed throughout the course and define the profile of the competent evaluator. Observing without reasoning is insufficient; reasoning without ethical judgment is dangerous."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿A qué categoría pertenece 'Análisis e Interpretación'?",
+          "textEn": "What category does 'Analysis and Interpretation' belong to?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Habilidad del Evaluador", "en": "Evaluator Skill" },
+            { "es": "Etapa del Proceso",       "en": "Process Stage"   },
+            { "es": "Principio Ético",         "en": "Ethical Principle" },
+            { "es": "Fuente de Datos",         "en": "Data Source"     }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Etapa del Proceso",
+          "correctEn": "Process Stage",
+          "skillEs": "Clasificación integradora del proceso evaluativo",
+          "skillEn": "Integrative classification of the assessment process",
+          "explanEs": "Análisis e Interpretación es una Etapa del Proceso: ocurre después de la Recogida de Datos y antes de la Comunicación de Resultados. Es la etapa donde las habilidades del evaluador se despliegan con mayor intensidad — aquí es donde los datos se convierten en conocimiento clínico.",
+          "explanEn": "Analysis and Interpretation is a Process Stage: it occurs after Data Collection and before Communication of Results. It is the stage where the evaluator's skills are deployed with greatest intensity — here is where data becomes clinical knowledge."
         }
       ]
     },
     {
       "id": "w18m2",
-      "type": "case_analysis",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Laboratorio del Evaluador",
+      "titleEn": "Evaluator's Laboratory",
+      "descEs": "Se presentan situaciones clínicas que requieren aplicar simultáneamente múltiples habilidades: observación, integración de información y razonamiento. Este es tu laboratorio profesional.",
+      "descEn": "Clinical situations are presented that require simultaneously applying multiple skills: observation, information integration, and reasoning. This is your professional laboratory.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 55,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Durante una entrevista de evaluación, observas que la persona evita el contacto visual, responde de forma monosilábica y se mueve constantemente en la silla. ¿Qué habilidad estás ejerciendo al registrar esto de forma sistemática?",
+          "textEn": "During an assessment interview, you notice that the person avoids eye contact, responds monosyllabically, and moves constantly in the chair. What skill are you exercising by systematically recording this?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Observación activa y sistemática del comportamiento en sesión",
+            "Diagnóstico clínico inmediato basado en señales no verbales",
+            "Aplicación del principio de objetividad al registro de datos",
+            "Análisis de la coherencia entre conducta verbal y no verbal"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Observación activa y sistemática del comportamiento en sesión",
+          "correctEn": "Observación activa y sistemática del comportamiento en sesión",
+          "skillEs": "Observación conductual en contexto clínico",
+          "skillEn": "Behavioral observation in clinical context",
+          "explanEs": "Registrar de forma sistemática conductas observables — postura, contacto visual, patrón de respuesta — es observación activa. Estos datos no son diagnósticos en sí mismos, pero son la materia prima del análisis clínico posterior. La observación sin registro sistemático pierde su valor evaluativo.",
+          "explanEn": "Systematically recording observable behaviors — posture, eye contact, response pattern — is active observation. These data are not diagnostic in themselves, but they are the raw material of subsequent clinical analysis. Observation without systematic recording loses its evaluative value."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "Tienes datos de tres fuentes que son parcialmente contradictorios: el autoinforme señala bienestar, la observación clínica indica malestar significativo, y el informante familiar reporta cambios conductuales recientes. ¿Qué estrategia cognitiva aplica el evaluador competente?",
+          "textEn": "You have data from three sources that are partially contradictory: the self-report indicates well-being, clinical observation indicates significant distress, and the family informant reports recent behavioral changes. What cognitive strategy does the competent evaluator apply?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "Integración de información con análisis de discrepancias entre fuentes",
+            "Selección de la fuente más objetiva y descarte de las demás",
+            "Suspensión del proceso hasta que las fuentes sean consistentes entre sí",
+            "Promediación de los datos para obtener una imagen equilibrada del caso"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "Integración de información con análisis de discrepancias entre fuentes",
+          "correctEn": "Integración de información con análisis de discrepancias entre fuentes",
+          "skillEs": "Integración de información bajo condiciones de discrepancia",
+          "skillEn": "Information integration under discrepancy conditions",
+          "explanEs": "Las discrepancias entre fuentes no son un obstáculo — son información. El evaluador competente analiza por qué las fuentes difieren: puede reflejar cambios evolutivos, diferencias de perspectiva o sesgos de informante. Esta integración analítica es una de las habilidades más sofisticadas del proceso evaluativo.",
+          "explanEn": "Discrepancies between sources are not an obstacle — they are information. The competent evaluator analyzes why sources differ: it may reflect evolutionary changes, perspective differences, or informant biases. This analytical integration is one of the most sophisticated skills of the assessment process."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Al final de un proceso de evaluación complejo, el evaluador tiene múltiples hipótesis con distintos niveles de sustento empírico. ¿Cuál es el paso metodológico correcto?",
+          "textEn": "At the end of a complex assessment process, the evaluator has multiple hypotheses with different levels of empirical support. What is the correct methodological step?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Jerarquizar las hipótesis según el nivel de evidencia disponible y comunicar el grado de certeza de cada conclusión",                               "en": "Rank hypotheses by level of available evidence and communicate the degree of certainty of each conclusion"                                         },
+            { "es": "Presentar únicamente la hipótesis con mayor sustento y omitir las alternativas para no generar confusión",                                      "en": "Present only the hypothesis with the greatest support and omit the alternatives to avoid confusion"                                                  },
+            { "es": "Solicitar al evaluado que elija la hipótesis que le parece más coherente con su experiencia",                                                   "en": "Ask the evaluated person to choose the hypothesis that seems most consistent with their experience"                                                  },
+            { "es": "Presentar todas las hipótesis como igualmente válidas para respetar la incertidumbre del proceso",                                             "en": "Present all hypotheses as equally valid to respect the uncertainty of the process"                                                                  }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Jerarquizar las hipótesis según el nivel de evidencia disponible y comunicar el grado de certeza de cada conclusión",
+          "correctEn": "Rank hypotheses by level of available evidence and communicate the degree of certainty of each conclusion",
+          "skillEs": "Razonamiento clínico bajo incertidumbre y comunicación de certeza",
+          "skillEn": "Clinical reasoning under uncertainty and communication of certainty",
+          "explanEs": "Jerarquizar hipótesis por nivel de evidencia es la síntesis del razonamiento clínico: requiere análisis, comparación y metacognición. Comunicar el grado de certeza de cada conclusión es lo que convierte un buen análisis en un informe profesionalmente útil y éticamente responsable.",
+          "explanEn": "Ranking hypotheses by level of evidence is the synthesis of clinical reasoning: it requires analysis, comparison, and metacognition. Communicating the degree of certainty of each conclusion is what transforms a good analysis into a professionally useful and ethically responsible report."
         }
       ]
     },
     {
       "id": "w18m3",
-      "type": "case_analysis",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Gran Desafío Final",
+      "titleEn": "Grand Final Challenge",
+      "descEs": "El cierre del Banco Maestro. Cada pregunta integra competencias de semanas anteriores: memoria, observación, razonamiento, ética, interpretación y criterio profesional. Este es el reto del evaluador que estás en proceso de convertirte.",
+      "descEn": "The closing of the Master Bank. Each question integrates competencies from previous weeks: memory, observation, reasoning, ethics, interpretation, and professional judgment. This is the challenge of the evaluator you are in the process of becoming.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 70,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Un evaluador experto sabe cuándo los datos son suficientes para concluir y cuándo se necesita más información, sin necesidad de una regla externa que lo indique. Esta capacidad de autorregulación cognitiva en el proceso evaluativo recibe el nombre de:",
+          "textEn": "An expert evaluator knows when data is sufficient to conclude and when more information is needed, without needing an external rule to indicate it. This cognitive self-regulation capacity in the assessment process is called:",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            { "es": "Monitoreo metacognitivo del proceso evaluativo",      "en": "Metacognitive monitoring of the assessment process" },
+            { "es": "Intuición clínica basada en la experiencia acumulada", "en": "Clinical intuition based on accumulated experience"  },
+            { "es": "Criterio normativo de suficiencia de datos",           "en": "Normative criterion of data sufficiency"             },
+            { "es": "Heurística de cierre diagnóstico",                     "en": "Diagnostic closure heuristic"                        }
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Monitoreo metacognitivo del proceso evaluativo",
+          "correctEn": "Metacognitive monitoring of the assessment process",
+          "skillEs": "Metacognición aplicada al proceso evaluativo",
+          "skillEn": "Metacognition applied to the assessment process",
+          "explanEs": "El monitoreo metacognitivo es la capacidad de observar y regular el propio proceso de razonamiento. En la evaluación, permite al profesional reconocer cuándo está operando bajo supuestos no verificados, cuándo la evidencia es suficiente y cuándo el cierre sería prematuro. Es una habilidad que se desarrolla con práctica reflexiva, no solo con experiencia.",
+          "explanEn": "Metacognitive monitoring is the capacity to observe and regulate one's own reasoning process. In assessment, it allows the professional to recognize when they are operating under unverified assumptions, when evidence is sufficient, and when closure would be premature. It is a skill developed through reflective practice, not just experience."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "En una evaluación psicológica, triangular fuentes de información tiene como objetivo principal:",
+          "textEn": "In a psychological assessment, triangulating sources of information has as its main objective:",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "Aumentar la validez de las conclusiones al verificar que los hallazgos son consistentes a través de múltiples perspectivas y métodos",
+            "Reducir el tiempo del proceso al confirmar rápidamente la primera hipótesis formulada",
+            "Cumplir el requisito formal de usar al menos tres instrumentos en toda evaluación",
+            "Garantizar que el evaluado no pueda contradecir los resultados al presentar múltiples fuentes"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "Aumentar la validez de las conclusiones al verificar que los hallazgos son consistentes a través de múltiples perspectivas y métodos",
+          "correctEn": "Aumentar la validez de las conclusiones al verificar que los hallazgos son consistentes a través de múltiples perspectivas y métodos",
+          "skillEs": "Comprensión profunda de la triangulación como estrategia metodológica",
+          "skillEn": "Deep understanding of triangulation as a methodological strategy",
+          "explanEs": "La triangulación no es un requisito formal ni una estrategia de defensa — es una herramienta epistemológica. Al verificar que los hallazgos emergen desde múltiples perspectivas independientes, se reduce el riesgo de que una sola fuente contaminada o sesgada distorsione todo el proceso.",
+          "explanEn": "Triangulation is not a formal requirement nor a defensive strategy — it is an epistemological tool. By verifying that findings emerge from multiple independent perspectives, the risk of a single contaminated or biased source distorting the entire process is reduced."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Una estudiante de último año realiza su primera evaluación supervisada. Aplica correctamente las técnicas, pero redacta conclusiones que van claramente más allá de lo que los datos permiten inferir. ¿Qué habilidad profesional necesita desarrollar con mayor urgencia?",
+          "textEn": "A final-year student conducts their first supervised assessment. They correctly apply the techniques, but write conclusions that clearly go beyond what the data allows to infer. What professional skill do they most urgently need to develop?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "El criterio clínico para establecer los límites de las inferencias válidas a partir de la evidencia disponible", "en": "The clinical judgment to establish the limits of valid inferences from the available evidence" },
+            { "es": "La capacidad de aplicar más técnicas e instrumentos para obtener más datos que sustenten sus conclusiones",        "en": "The ability to apply more techniques and instruments to obtain more data to support their conclusions"    },
+            { "es": "La habilidad para redactar informes de forma más cautelosa usando lenguaje hedged y provisional",               "en": "The skill to write reports more cautiously using hedged and provisional language"                            },
+            { "es": "El conocimiento teórico más profundo sobre los constructos psicológicos que está evaluando",                    "en": "Deeper theoretical knowledge about the psychological constructs being assessed"                           }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "El criterio clínico para establecer los límites de las inferencias válidas a partir de la evidencia disponible",
+          "correctEn": "The clinical judgment to establish the limits of valid inferences from the available evidence",
+          "skillEs": "Criterio clínico para la precisión inferencial",
+          "skillEn": "Clinical judgment for inferential precision",
+          "explanEs": "Saber hasta dónde pueden llegar las conclusiones es tan importante como saber cómo obtener los datos. El error de esta estudiante no es técnico ni teórico — es de calibración inferencial. Desarrollar el criterio para reconocer los límites de la evidencia disponible es la habilidad que distingue al evaluador novato del evaluador experto.",
+          "explanEn": "Knowing how far conclusions can go is as important as knowing how to obtain the data. This student's error is not technical or theoretical — it is inferential calibration. Developing the judgment to recognize the limits of available evidence is the skill that distinguishes the novice evaluator from the expert evaluator."
         }
       ]
     }

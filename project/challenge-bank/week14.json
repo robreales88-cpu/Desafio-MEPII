@@ -1,214 +1,227 @@
 {
   "week": 14,
-  "type": "case_analysis",
-  "titleEs": "Dilemas Clínicos",
-  "titleEn": "Clinical Dilemmas",
-  "skillEs": "Análisis clínico",
-  "skillEn": "Clinical analysis",
-  "descEs": "Entrena la habilidad de Análisis clínico mediante preguntas interactivas.",
-  "descEn": "Train your Clinical analysis skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Integración de Casos de Evaluación",
+  "titleEn": "Integration of Assessment Cases",
+  "skillEs": "Integración de Casos de Evaluación",
+  "skillEn": "Integration of Assessment Cases",
+  "descEs": "Analizar un caso requiere identificar qué datos son relevantes, cómo se relacionan entre sí y qué estrategia de evaluación los integra mejor. Esta semana entrenas esa capacidad de lectura clínica integrada.",
+  "descEn": "Analyzing a case requires identifying which data are relevant, how they relate to each other, and which assessment strategy best integrates them. This week you train that integrated clinical reading capacity.",
   "microretos": [
     {
       "id": "w14m1",
-      "type": "case_analysis",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Analiza el Caso",
+      "titleEn": "Analyze the Case",
+      "descEs": "Memoriza los elementos del caso clínico y la categoría a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the clinical case elements and the category each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Edad y Escolaridad",         "categoryEs": "Dato Contextual",  "categoryEn": "Contextual Data",  "initials": "EC", "colorKey": "amber"  },
+        { "name": "Nivel Socioeconómico",        "categoryEs": "Dato Contextual",  "categoryEn": "Contextual Data",  "initials": "NS", "colorKey": "amber"  },
+        { "name": "Dificultad de Concentración", "categoryEs": "Signo Clínico",    "categoryEn": "Clinical Sign",    "initials": "DC", "colorKey": "purple" },
+        { "name": "Fatiga Crónica",              "categoryEs": "Signo Clínico",    "categoryEn": "Clinical Sign",    "initials": "FC", "colorKey": "purple" },
+        { "name": "Apoyo Familiar",              "categoryEs": "Factor Protector", "categoryEn": "Protective Factor","initials": "AF", "colorKey": "green"  },
+        { "name": "Motivación al Cambio",        "categoryEs": "Factor Protector", "categoryEn": "Protective Factor","initials": "MC", "colorKey": "green"  }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Apoyo Familiar",
+            "Antecedente Hereditario",
+            "Edad y Escolaridad",
+            "Fatiga Crónica"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Antecedente Hereditario",
+          "correctEn": "Antecedente Hereditario",
+          "skillEs": "Memoria de reconocimiento aplicada a casos clínicos",
+          "skillEn": "Applied recognition memory for clinical cases",
+          "explanEs": "Antecedente Hereditario es un dato clínico real pero no estaba en esta cuadrícula. La capacidad de distinguir lo presentado de lo meramente plausible es esencial tanto en la memoria clínica como en la lectura rigurosa de expedientes.",
+          "explanEn": "Hereditary Background is a real clinical datum but was not in this grid. The ability to distinguish what was presented from what is merely plausible is essential both in clinical memory and in the rigorous reading of case files."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
-          "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
-          ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "textEs": "¿Cuántos elementos de la categoría 'Signo Clínico' estaban en la cuadrícula?",
+          "textEn": "How many 'Clinical Sign' elements were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial aplicada",
+          "skillEn": "Applied categorical memory",
+          "explanEs": "Dos Signos Clínicos: Dificultad de Concentración y Fatiga Crónica. Ambos son indicadores funcionales observables que guían la formulación de hipótesis — no son diagnósticos en sí mismos, sino datos que orientan la exploración evaluativa.",
+          "explanEn": "Two Clinical Signs: Difficulty Concentrating and Chronic Fatigue. Both are observable functional indicators that guide hypothesis formulation — they are not diagnoses themselves, but data that orient the evaluative exploration."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "¿A qué categoría pertenece 'Nivel Socioeconómico'?",
+          "textEn": "What category does 'Socioeconomic Level' belong to?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Dato Contextual",  "en": "Contextual Data"   },
+            { "es": "Signo Clínico",    "en": "Clinical Sign"     },
+            { "es": "Factor Protector", "en": "Protective Factor" },
+            { "es": "Fuente Instrumental", "en": "Instrumental Source" }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Dato Contextual",
+          "correctEn": "Contextual Data",
+          "skillEs": "Clasificación semántica de datos clínicos",
+          "skillEn": "Semantic classification of clinical data",
+          "explanEs": "El Nivel Socioeconómico es un Dato Contextual: condiciona el acceso a recursos, la comprensión del estrés ambiental y la interpretación de síntomas. Ignorarlo puede llevar a conclusiones clínicas descontextualizadas.",
+          "explanEn": "Socioeconomic Level is a Contextual Datum: it conditions access to resources, understanding of environmental stress, and symptom interpretation. Ignoring it can lead to decontextualized clinical conclusions."
         }
       ]
     },
     {
       "id": "w14m2",
-      "type": "case_analysis",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Información Relevante",
+      "titleEn": "Relevant Information",
+      "descEs": "Frente a un caso clínico, no toda la información tiene el mismo peso. Identifica cuál es el dato más relevante para guiar el proceso evaluativo.",
+      "descEn": "Faced with a clinical case, not all information carries the same weight. Identify which data is most relevant to guide the assessment process.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Para formular una hipótesis sobre dificultades atencionales en un adolescente, ¿qué dato es más relevante recoger en primera instancia?",
+          "textEn": "To formulate a hypothesis about attentional difficulties in an adolescent, which data is most relevant to collect first?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Descripción conductual de las dificultades en contextos escolar y familiar",
+            "La opinión general del tutor sobre el carácter del estudiante",
+            "El historial médico completo desde el nacimiento",
+            "Los resultados académicos de los últimos tres años"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Descripción conductual de las dificultades en contextos escolar y familiar",
+          "correctEn": "Descripción conductual de las dificultades en contextos escolar y familiar",
+          "skillEs": "Priorización de datos clínicamente relevantes",
+          "skillEn": "Prioritization of clinically relevant data",
+          "explanEs": "La descripción conductual específica en múltiples contextos es el punto de partida más sólido: permite operacionalizar la dificultad, verificar si es transversal o situacional, y orientar la selección de técnicas evaluativas.",
+          "explanEn": "Specific behavioral description in multiple contexts is the most solid starting point: it allows operationalizing the difficulty, verifying whether it is cross-contextual or situational, and guiding the selection of assessment techniques."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "En un caso donde la persona reporta sentirse 'bien' pero su comportamiento durante la sesión sugiere malestar significativo, ¿qué dato tiene mayor peso clínico?",
+          "textEn": "In a case where the person reports feeling 'fine' but their behavior during the session suggests significant distress, which data carries greater clinical weight?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "El dato conductual observado directamente por el evaluador",
+            "El autoinforme verbal, porque refleja la experiencia subjetiva",
+            "Ambos tienen el mismo peso y deben promediarse",
+            "Ninguno, porque la contradicción invalida la sesión"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "El dato conductual observado directamente por el evaluador",
+          "correctEn": "El dato conductual observado directamente por el evaluador",
+          "skillEs": "Análisis crítico de fuentes de datos",
+          "skillEn": "Critical analysis of data sources",
+          "explanEs": "La conducta observable tiene alto valor clínico porque es menos susceptible a sesgos de deseabilidad social. La discrepancia entre autoinforme y conducta observada no invalida el proceso — es en sí misma un hallazgo clínico relevante que debe registrarse y explorarse.",
+          "explanEn": "Observable behavior has high clinical value because it is less susceptible to social desirability biases. The discrepancy between self-report and observed behavior does not invalidate the process — it is itself a relevant clinical finding that must be recorded and explored."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Un evaluador recibe tres informes previos con información parcialmente contradictoria sobre el mismo caso. ¿Cuál es el paso clínico más adecuado?",
+          "textEn": "An evaluator receives three prior reports with partially contradictory information about the same case. What is the most appropriate clinical step?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Triangular las fuentes y registrar las discrepancias como dato clínicamente relevante",    "en": "Triangulate sources and record discrepancies as a clinically relevant finding"              },
+            { "es": "Descartar los dos informes más antiguos y trabajar únicamente con el más reciente",        "en": "Discard the two older reports and work only with the most recent one"                      },
+            { "es": "Promediar la información para obtener una descripción neutral del caso",                   "en": "Average the information to obtain a neutral case description"                             },
+            { "es": "Solicitar un cuarto informe que resuelva la contradicción antes de continuar",             "en": "Request a fourth report to resolve the contradiction before continuing"                   }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Triangular las fuentes y registrar las discrepancias como dato clínicamente relevante",
+          "correctEn": "Triangulate sources and record discrepancies as a clinically relevant finding",
+          "skillEs": "Integración crítica de fuentes múltiples",
+          "skillEn": "Critical integration of multiple sources",
+          "explanEs": "La triangulación de fuentes no busca eliminar las contradicciones sino analizarlas: una discrepancia entre informes puede reflejar cambios evolutivos del caso, sesgos del informante o diferencias metodológicas. Registrarla como dato es un acto de rigor clínico.",
+          "explanEn": "Triangulation of sources does not seek to eliminate contradictions but to analyze them: a discrepancy between reports may reflect evolutionary changes in the case, informant biases, or methodological differences. Recording it as data is an act of clinical rigor."
         }
       ]
     },
     {
       "id": "w14m3",
-      "type": "case_analysis",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Decide la Mejor Estrategia",
+      "titleEn": "Choose the Best Strategy",
+      "descEs": "Cada caso clínico requiere una estrategia evaluativa. A partir de la información presentada, decide cuál es la aproximación más fundamentada.",
+      "descEn": "Each clinical case requires an assessment strategy. Based on the information presented, decide which is the most grounded approach.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Un estudiante universitario es referido por bajo rendimiento académico sostenido. No hay historial clínico previo. ¿Qué estrategia de evaluación integra mejor las múltiples dimensiones del caso?",
+          "textEn": "A university student is referred for sustained low academic performance. There is no prior clinical history. Which assessment strategy best integrates the multiple dimensions of the case?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Entrevista semi-estructurada, observación conductual y revisión del historial académico como punto de partida",
+            "Aplicar directamente una batería psicométrica completa para identificar déficits",
+            "Derivar el caso a neuropsicología antes de iniciar cualquier evaluación propia",
+            "Solicitar un autoinforme escrito y tomar decisiones a partir de él"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Entrevista semi-estructurada, observación conductual y revisión del historial académico como punto de partida",
+          "correctEn": "Entrevista semi-estructurada, observación conductual y revisión del historial académico como punto de partida",
+          "skillEs": "Selección estratégica de técnicas evaluativas",
+          "skillEn": "Strategic selection of assessment techniques",
+          "explanEs": "Sin historial previo, comenzar con una entrevista, observación directa y revisión documental permite construir una imagen inicial del caso sin asumir hipótesis diagnósticas prematuras. La batería psicométrica es un paso posterior, guiado por los hallazgos de esta fase inicial.",
+          "explanEn": "Without prior history, starting with an interview, direct observation, and document review allows building an initial picture of the case without assuming premature diagnostic hypotheses. The psychometric battery is a subsequent step, guided by the findings of this initial phase."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Al analizar un caso, el evaluador observa que los datos de tres fuentes distintas (entrevista, observación y autoinforme) apuntan en la misma dirección. ¿Qué indica esta convergencia?",
+          "textEn": "When analyzing a case, the evaluator observes that data from three different sources (interview, observation, and self-report) point in the same direction. What does this convergence indicate?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Que la hipótesis de trabajo tiene mayor sustento y puede sostenerse con mayor confianza clínica",
+            "Que el proceso está completo y se puede emitir un diagnóstico definitivo",
+            "Que no es necesario recoger más información porque ya hay suficiente",
+            "Que el caso carece de complejidad y puede ser manejado sin supervisión"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Que la hipótesis de trabajo tiene mayor sustento y puede sostenerse con mayor confianza clínica",
+          "correctEn": "Que la hipótesis de trabajo tiene mayor sustento y puede sostenerse con mayor confianza clínica",
+          "skillEs": "Interpretación de convergencia entre fuentes",
+          "skillEn": "Interpretation of source convergence",
+          "explanEs": "La convergencia entre fuentes aumenta la validez de las hipótesis, pero no equivale a certeza diagnóstica ni elimina la necesidad de seguir explorando. Un buen evaluador usa la convergencia como señal de robustez, no como permiso para cerrar prematuramente el proceso.",
+          "explanEn": "Convergence between sources increases the validity of hypotheses, but does not equal diagnostic certainty nor eliminate the need to continue exploring. A good evaluator uses convergence as a signal of robustness, not as permission to close the process prematurely."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Un caso presenta alta complejidad y los datos disponibles aún son insuficientes para formular conclusiones. ¿Qué acción es metodológicamente correcta?",
+          "textEn": "A case presents high complexity and the available data are still insufficient to formulate conclusions. Which action is methodologically correct?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Ampliar la evaluación con fuentes adicionales antes de formular conclusiones definitivas",                                   "en": "Expand the assessment with additional sources before formulating definitive conclusions"                                  },
+            { "es": "Emitir una conclusión provisional para no prolongar innecesariamente el proceso",                                           "en": "Issue a provisional conclusion to avoid unnecessarily prolonging the process"                                              },
+            { "es": "Comunicar la incertidumbre al referente sin ninguna hipótesis de trabajo",                                                  "en": "Communicate the uncertainty to the referral source without any working hypothesis"                                         },
+            { "es": "Solicitar al evaluado que complete un autoinforme más extenso para tomar decisiones con base en ese solo instrumento",      "en": "Ask the evaluated person to complete a more extensive self-report to make decisions based on that single instrument alone"  }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Ampliar la evaluación con fuentes adicionales antes de formular conclusiones definitivas",
+          "correctEn": "Expand the assessment with additional sources before formulating definitive conclusions",
+          "skillEs": "Toma de decisiones metodológica ante incertidumbre",
+          "skillEn": "Methodological decision-making under uncertainty",
+          "explanEs": "Cuando los datos son insuficientes, la respuesta técnica es ampliar la evaluación, no forzar conclusiones. Un evaluador competente reconoce los límites de su inferencia y actúa en consecuencia — ese reconocimiento es parte del criterio profesional, no una debilidad.",
+          "explanEn": "When data are insufficient, the technical response is to expand the assessment, not force conclusions. A competent evaluator recognizes the limits of their inference and acts accordingly — that recognition is part of professional judgment, not a weakness."
         }
       ]
     }

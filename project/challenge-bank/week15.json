@@ -1,214 +1,227 @@
 {
   "week": 15,
-  "type": "reaction",
-  "titleEs": "Rapidez Cognitiva",
-  "titleEn": "Cognitive Speed",
-  "skillEs": "Velocidad de respuesta",
-  "skillEn": "Response speed",
-  "descEs": "Entrena la habilidad de Velocidad de respuesta mediante preguntas interactivas.",
-  "descEn": "Train your Response speed skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Resolución de Problemas en Evaluación",
+  "titleEn": "Problem Solving in Assessment",
+  "skillEs": "Resolución de Problemas en Evaluación",
+  "skillEn": "Problem Solving in Assessment",
+  "descEs": "Todo proceso evaluativo enfrenta errores, sesgos y limitaciones. Reconocerlos a tiempo y saber cómo corregirlos es una habilidad profesional crítica. Esta semana entrenas esa capacidad de diagnóstico y corrección procedimental.",
+  "descEn": "Every assessment process faces errors, biases, and limitations. Recognizing them in time and knowing how to correct them is a critical professional skill. This week you train that procedural diagnosis and correction capacity.",
   "microretos": [
     {
       "id": "w15m1",
-      "type": "reaction",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Detecta el Problema",
+      "titleEn": "Detect the Problem",
+      "descEs": "Memoriza los tipos de problemas evaluativos y un ejemplo de cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the types of assessment problems and one example of each. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Aplicación sin Consentimiento", "categoryEs": "Error Metodológico",   "categoryEn": "Methodological Error", "initials": "AS", "colorKey": "cyan"   },
+        { "name": "Instrucciones Modificadas",     "categoryEs": "Error Metodológico",   "categoryEn": "Methodological Error", "initials": "IM", "colorKey": "cyan"   },
+        { "name": "Efecto Halo",                   "categoryEs": "Sesgo del Evaluador",  "categoryEn": "Evaluator Bias",       "initials": "EH", "colorKey": "purple" },
+        { "name": "Sesgo de Confirmación",         "categoryEs": "Sesgo del Evaluador",  "categoryEn": "Evaluator Bias",       "initials": "SC", "colorKey": "purple" },
+        { "name": "Fuente Única",                  "categoryEs": "Limitación de Datos",  "categoryEn": "Data Limitation",      "initials": "FU", "colorKey": "amber"  },
+        { "name": "Tiempo Insuficiente",           "categoryEs": "Limitación de Datos",  "categoryEn": "Data Limitation",      "initials": "TI", "colorKey": "amber"  }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Efecto Halo",
+            "Interpretación Subjetiva",
+            "Fuente Única",
+            "Instrucciones Modificadas"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Interpretación Subjetiva",
+          "correctEn": "Interpretación Subjetiva",
+          "skillEs": "Memoria de reconocimiento en procesos evaluativos",
+          "skillEn": "Recognition memory in assessment processes",
+          "explanEs": "Interpretación Subjetiva es un problema evaluativo real pero no estaba en esta cuadrícula. Mantener este tipo de distinción activa es clave para detectar con precisión los sesgos que emergen en la práctica clínica.",
+          "explanEn": "Subjective Interpretation is a real assessment problem but was not in this grid. Keeping this type of distinction active is key to precisely detecting the biases that emerge in clinical practice."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
-          "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
-          ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "textEs": "¿Cuántos elementos de la categoría 'Error Metodológico' estaban en la cuadrícula?",
+          "textEn": "How many 'Methodological Error' elements were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial de errores procedimentales",
+          "skillEn": "Categorical memory of procedural errors",
+          "explanEs": "Dos Errores Metodológicos: Aplicación sin Consentimiento e Instrucciones Modificadas. Ambos afectan directamente la validez del proceso: el primero viola principios éticos fundamentales; el segundo altera las condiciones de estandarización y hace inválida cualquier comparación normativa.",
+          "explanEn": "Two Methodological Errors: Application without Consent and Modified Instructions. Both directly affect the validity of the process: the first violates fundamental ethical principles; the second alters standardization conditions and renders any normative comparison invalid."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿A qué categoría pertenece 'Sesgo de Confirmación'?",
+          "textEn": "What category does 'Confirmation Bias' belong to?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Error Metodológico",  "en": "Methodological Error" },
+            { "es": "Sesgo del Evaluador", "en": "Evaluator Bias"       },
+            { "es": "Limitación de Datos", "en": "Data Limitation"      },
+            { "es": "Factor Contextual",   "en": "Contextual Factor"    }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Sesgo del Evaluador",
+          "correctEn": "Evaluator Bias",
+          "skillEs": "Identificación de fuentes de sesgo en evaluación",
+          "skillEn": "Identification of bias sources in assessment",
+          "explanEs": "El Sesgo de Confirmación ocurre cuando el evaluador busca e interpreta selectivamente los datos que confirman su hipótesis previa, ignorando evidencia contraria. Es uno de los errores cognitivos más frecuentes en la práctica clínica y el más difícil de detectar en uno mismo.",
+          "explanEn": "Confirmation Bias occurs when the evaluator selectively seeks and interprets data that confirms their prior hypothesis, ignoring contrary evidence. It is one of the most frequent cognitive errors in clinical practice and the hardest to detect in oneself."
         }
       ]
     },
     {
       "id": "w15m2",
-      "type": "reaction",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Corrige el Procedimiento",
+      "titleEn": "Correct the Procedure",
+      "descEs": "Se describe un problema metodológico dentro de un proceso de evaluación. Identifica qué ocurrió y cuál es la corrección técnica más adecuada.",
+      "descEn": "A methodological problem within an assessment process is described. Identify what happened and what is the most appropriate technical correction.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Un evaluador nota que durante la sesión el ambiente fue muy ruidoso e interrumpido constantemente. ¿Cuál es la acción técnica correcta?",
+          "textEn": "An evaluator notices that during the session the environment was very noisy and constantly interrupted. What is the correct technical action?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Documentar las condiciones y planificar una sesión de reevaluación bajo condiciones controladas",
+            "Ignorar el problema si el evaluado no lo mencionó directamente",
+            "Aplicar una corrección estadística a los resultados para ajustar el efecto del ruido",
+            "Continuar el proceso y confiar en que las normas del instrumento absorben ese tipo de variación"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Documentar las condiciones y planificar una sesión de reevaluación bajo condiciones controladas",
+          "correctEn": "Documentar las condiciones y planificar una sesión de reevaluación bajo condiciones controladas",
+          "skillEs": "Gestión de condiciones de aplicación",
+          "skillEn": "Management of application conditions",
+          "explanEs": "Las condiciones de aplicación forman parte de la validez del proceso. Documentarlas y reevaluar cuando fueron inadecuadas protege la interpretación de los resultados. Ignorarlas o normalizarlas introduce error sistemático que compromete la utilidad clínica del informe.",
+          "explanEn": "Application conditions are part of the process validity. Documenting them and reassessing when they were inadequate protects the interpretation of results. Ignoring or normalizing them introduces systematic error that compromises the clinical utility of the report."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "Durante una entrevista, el evaluador hace preguntas del tipo '¿No es cierto que te has sentido muy ansioso últimamente?' en lugar de preguntas abiertas. ¿Qué problema metodológico describe esta situación?",
+          "textEn": "During an interview, the evaluator asks questions like 'Isn't it true that you've been feeling very anxious lately?' instead of open-ended questions. What methodological problem does this situation describe?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "Sesgo del entrevistador por preguntas directivas que contaminan la información recolectada",
+            "Un error administrativo que no afecta el contenido clínico de la entrevista",
+            "Efecto halo, porque el evaluador tiene una imagen preformada del caso",
+            "Limitación de datos por falta de fuentes alternativas"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "Sesgo del entrevistador por preguntas directivas que contaminan la información recolectada",
+          "correctEn": "Sesgo del entrevistador por preguntas directivas que contaminan la información recolectada",
+          "skillEs": "Identificación de sesgos en la técnica de entrevista",
+          "skillEn": "Identification of biases in interview technique",
+          "explanEs": "Las preguntas directivas sugieren la respuesta esperada y eliminan la posibilidad de explorar libremente la experiencia del evaluado. Este tipo de sesgo no solo contamina la entrevista: también puede generar un efecto de sugestión que distorsione el autoinforme posterior.",
+          "explanEn": "Directive questions suggest the expected answer and eliminate the possibility of freely exploring the evaluated person's experience. This type of bias not only contaminates the interview: it can also generate a suggestion effect that distorts subsequent self-reporting."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Los resultados de dos técnicas aplicadas al mismo caso son contradictorios entre sí. ¿Cuál es el procedimiento técnico correcto?",
+          "textEn": "The results of two techniques applied to the same case contradict each other. What is the correct technical procedure?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Aplicar una tercera fuente de información para identificar cuál de los datos es más consistente con el contexto clínico",    "en": "Apply a third source of information to identify which data is most consistent with the clinical context"    },
+            { "es": "Conservar únicamente el resultado del instrumento con mayor evidencia de validez y descartar el otro",                       "en": "Keep only the result of the instrument with greater validity evidence and discard the other"                 },
+            { "es": "Promediar ambos resultados para obtener una estimación más equilibrada",                                                    "en": "Average both results to obtain a more balanced estimate"                                                    },
+            { "es": "Declarar el caso como no evaluable y derivarlo a un especialista sin emitir ninguna hipótesis",                             "en": "Declare the case as non-evaluable and refer it to a specialist without issuing any hypothesis"               }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Aplicar una tercera fuente de información para identificar cuál de los datos es más consistente con el contexto clínico",
+          "correctEn": "Apply a third source of information to identify which data is most consistent with the clinical context",
+          "skillEs": "Resolución de contradicciones entre fuentes evaluativas",
+          "skillEn": "Resolution of contradictions between assessment sources",
+          "explanEs": "Ante resultados contradictorios, la triangulación con una tercera fuente permite identificar cuál de los datos es más representativo del funcionamiento real del evaluado. Descartar o promediar sin análisis es una solución artificial que compromete la validez de las conclusiones.",
+          "explanEn": "Faced with contradictory results, triangulation with a third source allows identifying which data is most representative of the evaluated person's actual functioning. Discarding or averaging without analysis is an artificial solution that compromises the validity of conclusions."
         }
       ]
     },
     {
       "id": "w15m3",
-      "type": "reaction",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Decide la Acción Correcta",
+      "titleEn": "Decide the Correct Action",
+      "descEs": "Cada situación presenta un conflicto técnico o ético dentro de un proceso de evaluación. Identifica la acción profesionalmente correcta.",
+      "descEn": "Each situation presents a technical or ethical conflict within an assessment process. Identify the professionally correct action.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Un evaluador descubre que el consentimiento informado fue firmado sin que la persona comprendiera realmente los objetivos del proceso. ¿Qué debe hacer?",
+          "textEn": "An evaluator discovers that the informed consent was signed without the person truly understanding the objectives of the process. What should they do?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Detener el proceso, explicar nuevamente los objetivos y obtener un consentimiento válido antes de continuar",
+            "Continuar el proceso, porque la firma ya fue obtenida y tiene validez legal suficiente",
+            "Completar la evaluación y aclarar los objetivos en la sesión de devolución",
+            "Solicitar a la institución que valide retroactivamente el consentimiento existente"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Detener el proceso, explicar nuevamente los objetivos y obtener un consentimiento válido antes de continuar",
+          "correctEn": "Detener el proceso, explicar nuevamente los objetivos y obtener un consentimiento válido antes de continuar",
+          "skillEs": "Aplicación del principio de consentimiento informado",
+          "skillEn": "Application of the informed consent principle",
+          "explanEs": "El consentimiento informado requiere comprensión real, no solo firma. Continuar con un consentimiento defectuoso viola el principio de autonomía y puede invalidar todo el proceso evaluativo. Detener, aclarar y reconsentir es la única respuesta éticamente correcta.",
+          "explanEn": "Informed consent requires real understanding, not just a signature. Continuing with a defective consent violates the autonomy principle and can invalidate the entire assessment process. Stopping, clarifying, and reconsenting is the only ethically correct response."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "Durante la evaluación, la persona revela que tiene pensamientos de hacerle daño a un familiar específico. ¿Qué principio ético guía la acción del evaluador en este contexto?",
+          "textEn": "During the assessment, the person reveals they have thoughts of harming a specific family member. What ethical principle guides the evaluator's action in this context?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "El principio de no maleficencia puede justificar romper la confidencialidad cuando existe riesgo grave e inminente para terceros",
+            "La confidencialidad es absoluta y no admite ninguna excepción bajo ninguna circunstancia",
+            "El evaluador debe ignorar la información si no hay denuncia formal previa por parte del familiar",
+            "El evaluador solo puede actuar si el riesgo es hacia sí mismo, no hacia terceros"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "El principio de no maleficencia puede justificar romper la confidencialidad cuando existe riesgo grave e inminente para terceros",
+          "correctEn": "El principio de no maleficencia puede justificar romper la confidencialidad cuando existe riesgo grave e inminente para terceros",
+          "skillEs": "Resolución de conflictos éticos en evaluación",
+          "skillEn": "Resolution of ethical conflicts in assessment",
+          "explanEs": "La confidencialidad no es absoluta: cuando existe riesgo grave e inminente para terceros, el deber de protección prevalece. Esta decisión debe tomarse con responsabilidad, documentarse y, cuando sea posible, consultarse con supervisión antes de actuar.",
+          "explanEn": "Confidentiality is not absolute: when there is serious and imminent risk to third parties, the duty to protect prevails. This decision must be made responsibly, documented, and when possible, consulted with supervision before acting."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Un evaluador recibe presión institucional para emitir un diagnóstico antes de completar el proceso. ¿Cuál es la postura técnica y ética correcta?",
+          "textEn": "An evaluator receives institutional pressure to issue a diagnosis before completing the process. What is the correct technical and ethical stance?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "El evaluador debe resistir esa presión: una conclusión prematura sin evidencia suficiente viola los principios de objetividad y beneficencia", "en": "The evaluator must resist that pressure: a premature conclusion without sufficient evidence violates the principles of objectivity and beneficence" },
+            { "es": "Ceder a la presión institucional si quien la ejerce tiene autoridad formal sobre el evaluador",                                               "en": "Yield to institutional pressure if the one exerting it has formal authority over the evaluator"                                               },
+            { "es": "Emitir un diagnóstico provisional con la advertencia de que podría cambiar al finalizar el proceso",                                        "en": "Issue a provisional diagnosis with the caveat that it could change when the process is complete"                                               },
+            { "es": "Reportar la situación externamente sin intentar resolver el conflicto de forma interna primero",                                            "en": "Report the situation externally without first attempting to resolve the conflict internally"                                                  }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "El evaluador debe resistir esa presión: una conclusión prematura sin evidencia suficiente viola los principios de objetividad y beneficencia",
+          "correctEn": "The evaluator must resist that pressure: a premature conclusion without sufficient evidence violates the principles of objectivity and beneficence",
+          "skillEs": "Criterio ético ante presiones institucionales",
+          "skillEn": "Ethical judgment under institutional pressure",
+          "explanEs": "La autoridad institucional no valida una práctica técnicamente incorrecta. Emitir conclusiones diagnósticas sin evidencia suficiente puede causar daño real a la persona evaluada. El evaluador tiene la obligación profesional de proteger la integridad del proceso por encima de las presiones externas.",
+          "explanEn": "Institutional authority does not validate a technically incorrect practice. Issuing diagnostic conclusions without sufficient evidence can cause real harm to the evaluated person. The evaluator has the professional obligation to protect the integrity of the process above external pressures."
         }
       ]
     }

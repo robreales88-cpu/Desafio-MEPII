@@ -1,214 +1,227 @@
 {
   "week": 16,
-  "type": "association",
-  "titleEs": "Red de Constructos",
-  "titleEn": "Constructs Network",
-  "skillEs": "Asociación",
-  "skillEn": "Association",
-  "descEs": "Entrena la habilidad de Asociación mediante preguntas interactivas.",
-  "descEn": "Train your Association skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Pensamiento Crítico y Ética Profesional",
+  "titleEn": "Critical Thinking and Professional Ethics",
+  "skillEs": "Pensamiento Crítico y Ética Profesional",
+  "skillEn": "Critical Thinking and Professional Ethics",
+  "descEs": "El ejercicio profesional de la evaluación psicológica exige criterio clínico y ético al mismo tiempo. Esta semana entrenas la capacidad de reconocer principios éticos en acción y tomar decisiones responsables ante dilemas reales.",
+  "descEn": "The professional practice of psychological assessment demands clinical and ethical judgment simultaneously. This week you train the capacity to recognize ethical principles in action and make responsible decisions in real dilemmas.",
   "microretos": [
     {
       "id": "w16m1",
-      "type": "association",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Dilema Ético",
+      "titleEn": "Ethical Dilemma",
+      "descEs": "Memoriza los principios éticos del proceso evaluativo y la categoría a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the ethical principles of the assessment process and the category each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Confidencialidad",        "categoryEs": "Principio de Protección",       "categoryEn": "Principle of Protection",       "initials": "CF", "colorKey": "green" },
+        { "name": "Consentimiento Informado","categoryEs": "Principio de Protección",       "categoryEn": "Principle of Protection",       "initials": "CI", "colorKey": "green" },
+        { "name": "No Maleficencia",         "categoryEs": "Principio de Protección",       "categoryEn": "Principle of Protection",       "initials": "NM", "colorKey": "green" },
+        { "name": "Beneficencia",            "categoryEs": "Principio de Responsabilidad",  "categoryEn": "Principle of Responsibility",   "initials": "BN", "colorKey": "amber" },
+        { "name": "Competencia Profesional", "categoryEs": "Principio de Responsabilidad",  "categoryEn": "Principle of Responsibility",   "initials": "CP", "colorKey": "amber" },
+        { "name": "Objetividad",             "categoryEs": "Principio de Responsabilidad",  "categoryEn": "Principle of Responsibility",   "initials": "OB", "colorKey": "amber" }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
             "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Autonomía Profesional",
+            "Beneficencia",
+            "No Maleficencia"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Autonomía Profesional",
+          "correctEn": "Autonomía Profesional",
+          "skillEs": "Memoria de reconocimiento de principios éticos",
+          "skillEn": "Recognition memory of ethical principles",
+          "explanEs": "Autonomía Profesional es un concepto relevante en ética aplicada pero no estaba en esta cuadrícula. La distinción precisa entre lo que fue presentado y lo que parece familiar es también una habilidad crítica en la lectura de códigos deontológicos.",
+          "explanEn": "Professional Autonomy is a relevant concept in applied ethics but was not in this grid. The precise distinction between what was presented and what seems familiar is also a critical skill in reading deontological codes."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
-          "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
-          ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "textEs": "¿Cuántos elementos de la categoría 'Principio de Protección' estaban en la cuadrícula?",
+          "textEn": "How many 'Principle of Protection' elements were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial de principios éticos",
+          "skillEn": "Categorical memory of ethical principles",
+          "explanEs": "Tres Principios de Protección: Confidencialidad, Consentimiento Informado y No Maleficencia. Los tres forman el núcleo de la protección del evaluado y deben estar resueltos antes de iniciar cualquier proceso. Su ausencia o vulneración no es un error técnico — es una falla ética.",
+          "explanEn": "Three Principles of Protection: Confidentiality, Informed Consent, and Non-maleficence. The three form the core of evaluated person protection and must be resolved before starting any process. Their absence or violation is not a technical error — it is an ethical failure."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "¿A qué categoría pertenece 'Beneficencia'?",
+          "textEn": "What category does 'Beneficence' belong to?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Principio de Protección",      "en": "Principle of Protection"      },
+            { "es": "Principio de Responsabilidad", "en": "Principle of Responsibility"  },
+            { "es": "Marco Ético Externo",          "en": "External Ethical Framework"   },
+            { "es": "Criterio de Calidad Técnica",  "en": "Technical Quality Criterion"  }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Principio de Responsabilidad",
+          "correctEn": "Principle of Responsibility",
+          "skillEs": "Clasificación de principios éticos en evaluación",
+          "skillEn": "Classification of ethical principles in assessment",
+          "explanEs": "La Beneficencia pertenece a los Principios de Responsabilidad: obliga al evaluador a actuar en beneficio activo de la persona evaluada, no solo a evitar el daño. Junto con Competencia Profesional y Objetividad, define el estándar de desempeño que se exige al profesional.",
+          "explanEn": "Beneficence belongs to the Principles of Responsibility: it obliges the evaluator to act in active benefit of the evaluated person, not just to avoid harm. Together with Professional Competence and Objectivity, it defines the performance standard required of the professional."
         }
       ]
     },
     {
       "id": "w16m2",
-      "type": "association",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "¿Qué Harías?",
+      "titleEn": "What Would You Do?",
+      "descEs": "Se describen situaciones profesionales con carga ética. Identifica cuál es la acción que mejor refleja los principios deontológicos en juego.",
+      "descEn": "Professional situations with ethical weight are described. Identify which action best reflects the deontological principles at play.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "Una institución te solicita compartir el perfil psicológico de una persona evaluada sin que esta haya autorizado explícitamente esa divulgación. ¿Qué acción es éticamente correcta?",
+          "textEn": "An institution asks you to share the psychological profile of an evaluated person without that person having explicitly authorized that disclosure. What action is ethically correct?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Declinar compartir la información y explicar que se requiere el consentimiento explícito de la persona evaluada",
+            "Compartir el perfil omitiendo los datos más sensibles para proteger parcialmente la privacidad",
+            "Compartirlo si la institución tiene una relación formal con el evaluado, porque eso equivale a consentimiento implícito",
+            "Consultar a un colega si la solicitud parece razonable y actuar según su recomendación"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Declinar compartir la información y explicar que se requiere el consentimiento explícito de la persona evaluada",
+          "correctEn": "Declinar compartir la información y explicar que se requiere el consentimiento explícito de la persona evaluada",
+          "skillEs": "Aplicación del principio de confidencialidad",
+          "skillEn": "Application of the confidentiality principle",
+          "explanEs": "La confidencialidad no admite excepciones por relaciones institucionales implícitas. Compartir información sin consentimiento explícito viola la privacidad del evaluado y puede generar daños reales. La relación contractual entre institución y evaluado no sustituye al consentimiento informado para divulgación de información clínica.",
+          "explanEn": "Confidentiality does not admit exceptions for implicit institutional relationships. Sharing information without explicit consent violates the privacy of the evaluated person and can cause real harm. The contractual relationship between institution and evaluated person does not replace informed consent for disclosure of clinical information."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "Durante el proceso de evaluación, el evaluador advierte que sus conclusiones preliminares coinciden con lo que la institución que lo contrató esperaba. ¿Qué principio ético debe activarse en este momento?",
+          "textEn": "During the assessment process, the evaluator notices that their preliminary conclusions match what the hiring institution expected. What ethical principle should be activated at this point?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "La objetividad del proceso evaluativo, que exige que las conclusiones respondan a los datos y no a presiones externas",
+            "La beneficencia, porque coincidir con las expectativas institucionales puede favorecer al evaluado",
+            "La competencia profesional, porque la coincidencia refleja una buena comprensión del caso",
+            "No es necesario activar ningún principio; la coincidencia es una validación natural de las hipótesis"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "La objetividad del proceso evaluativo, que exige que las conclusiones respondan a los datos y no a presiones externas",
+          "correctEn": "La objetividad del proceso evaluativo, que exige que las conclusiones respondan a los datos y no a presiones externas",
+          "skillEs": "Reconocimiento del riesgo de sesgo institucional",
+          "skillEn": "Recognition of institutional bias risk",
+          "explanEs": "Cuando las conclusiones coinciden con las expectativas del contratante, el riesgo de sesgo de confirmación o de complacencia institucional es elevado. La objetividad exige que el evaluador examine activamente si los datos realmente sostienen esa conclusión o si existe contaminación motivacional.",
+          "explanEn": "When conclusions match the contractor's expectations, the risk of confirmation bias or institutional compliance is high. Objectivity requires the evaluator to actively examine whether the data truly supports that conclusion or whether motivational contamination exists."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "Una persona evaluada solicita directamente al evaluador acceso a sus propios resultados, sin pasar por la institución que ordenó la evaluación. ¿Qué consideración ética aplica?",
+          "textEn": "An evaluated person directly asks the evaluator for access to their own results, without going through the institution that ordered the assessment. What ethical consideration applies?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "La persona evaluada tiene derecho a conocer sus propios resultados; el evaluador debe proveerlos con la explicación contextual adecuada", "en": "The evaluated person has the right to know their own results; the evaluator must provide them with appropriate contextual explanation" },
+            { "es": "Los resultados pertenecen a la institución contratante y el evaluado no tiene derecho directo a ellos",                                 "en": "The results belong to the hiring institution and the evaluated person has no direct right to them"                                   },
+            { "es": "El evaluador solo puede facilitar los resultados si la institución lo autoriza explícitamente",                                        "en": "The evaluator can only provide results if the institution explicitly authorizes it"                                                   },
+            { "es": "El acceso a resultados debe esperar a la sesión de devolución institucional programada",                                              "en": "Access to results must wait for the scheduled institutional feedback session"                                                          }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "La persona evaluada tiene derecho a conocer sus propios resultados; el evaluador debe proveerlos con la explicación contextual adecuada",
+          "correctEn": "The evaluated person has the right to know their own results; the evaluator must provide them with appropriate contextual explanation",
+          "skillEs": "Reconocimiento del derecho del evaluado a sus datos",
+          "skillEn": "Recognition of the evaluated person's right to their data",
+          "explanEs": "El derecho a conocer los propios resultados es un principio de autonomía y transparencia. Los resultados no 'pertenecen' a la institución en el sentido de poder ocultarlos al evaluado. El evaluador tiene la responsabilidad de comunicarlos de forma contextualizada y accesible.",
+          "explanEn": "The right to know one's own results is a principle of autonomy and transparency. Results do not 'belong' to the institution in the sense of being able to withhold them from the evaluated person. The evaluator has the responsibility to communicate them in a contextualized and accessible manner."
         }
       ]
     },
     {
       "id": "w16m3",
-      "type": "association",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "La Mejor Decisión",
+      "titleEn": "The Best Decision",
+      "descEs": "Dilemas éticos complejos donde dos principios entran en tensión. Analiza cada situación y elige la decisión profesional más fundamentada.",
+      "descEn": "Complex ethical dilemmas where two principles come into tension. Analyze each situation and choose the most grounded professional decision.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "Un evaluador percibe que sus conclusiones clínicas podrían perjudicar laboralmente a la persona evaluada, aunque los datos son claros y el proceso fue riguroso. ¿Qué debe hacer?",
+          "textEn": "An evaluator perceives that their clinical conclusions could professionally harm the evaluated person, although the data is clear and the process was rigorous. What should they do?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Comunicar los hallazgos con rigor técnico y sensibilidad ética, sugiriendo recursos de apoyo acordes con los resultados",
+            "Suavizar las conclusiones para proteger a la persona evaluada de consecuencias laborales negativas",
+            "Omitir los hallazgos más comprometedores y presentar únicamente lo que no genera riesgo para el evaluado",
+            "Negarse a emitir el informe si este puede ser usado en su contra"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Comunicar los hallazgos con rigor técnico y sensibilidad ética, sugiriendo recursos de apoyo acordes con los resultados",
+          "correctEn": "Comunicar los hallazgos con rigor técnico y sensibilidad ética, sugiriendo recursos de apoyo acordes con los resultados",
+          "skillEs": "Equilibrio entre rigor técnico y protección del evaluado",
+          "skillEn": "Balance between technical rigor and protection of the evaluated person",
+          "explanEs": "Manipular los hallazgos para proteger al evaluado vulnera la objetividad y puede generar daño mayor al ocultarse un problema real. El evaluador puede y debe comunicar los resultados con sensibilidad, contextualizarlos y acompañarlos de recomendaciones — pero no puede alterarlos.",
+          "explanEn": "Manipulating findings to protect the evaluated person undermines objectivity and can generate greater harm by concealing a real problem. The evaluator can and should communicate results with sensitivity, contextualize them, and accompany them with recommendations — but cannot alter them."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "Un evaluador enfrenta un caso donde la confidencialidad y la protección de un tercero en riesgo entran en conflicto directo. ¿Qué principio orienta la decisión?",
+          "textEn": "An evaluator faces a case where confidentiality and the protection of a third party at risk come into direct conflict. Which principle guides the decision?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "La protección de la vida ante un riesgo grave e inminente puede justificar la ruptura de la confidencialidad, pero debe documentarse y consultarse",
+            "La confidencialidad siempre prevalece porque es la base del vínculo terapéutico y evaluativo",
+            "El evaluador debe derivar el caso sin actuar porque no le corresponde tomar esa decisión",
+            "Solo el juez o la autoridad competente puede ordenar la ruptura de la confidencialidad"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "La protección de la vida ante un riesgo grave e inminente puede justificar la ruptura de la confidencialidad, pero debe documentarse y consultarse",
+          "correctEn": "La protección de la vida ante un riesgo grave e inminente puede justificar la ruptura de la confidencialidad, pero debe documentarse y consultarse",
+          "skillEs": "Resolución de conflictos entre principios éticos",
+          "skillEn": "Resolution of conflicts between ethical principles",
+          "explanEs": "Los principios éticos no tienen una jerarquía fija, pero el riesgo grave e inminente para la vida activa un deber de protección que puede justificar excepciones a la confidencialidad. Esta decisión debe tomarse con criterio, documentarse y, cuando sea posible, consultarse con supervisión o apoyo legal.",
+          "explanEn": "Ethical principles do not have a fixed hierarchy, but serious and imminent risk to life activates a duty of protection that can justify exceptions to confidentiality. This decision must be made with judgment, documented, and when possible, consulted with supervision or legal support."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "Un colega evaluador comparte resultados de un paciente en un grupo profesional de mensajería, sin nombre pero con información clínica suficiente para que el paciente sea reconocible. ¿Cuál es la acción correcta del profesional que observa esto?",
+          "textEn": "A colleague evaluator shares a patient's results in a professional messaging group, without a name but with enough clinical information for the patient to be recognizable. What is the correct action for the professional who observes this?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Señalar al colega que incluso sin nombre explícito, la información reconocible viola la confidencialidad y debe ser tratada en canales formales y protegidos", "en": "Point out to the colleague that even without an explicit name, recognizable information violates confidentiality and must be handled through formal, protected channels" },
+            { "es": "Ignorar la situación porque el colega no usó datos identificatorios directos como nombre o DNI",                                                              "en": "Ignore the situation because the colleague did not use direct identifying data such as name or ID"                                                                    },
+            { "es": "Reportar el caso a las autoridades institucionales de inmediato sin hablar primero con el colega",                                                         "en": "Report the case to institutional authorities immediately without first speaking with the colleague"                                                                   },
+            { "es": "Participar en la discusión del caso y ofrecer opiniones clínicas, porque el contexto profesional lo justifica",                                           "en": "Participate in the case discussion and offer clinical opinions, because the professional context justifies it"                                                         }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Señalar al colega que incluso sin nombre explícito, la información reconocible viola la confidencialidad y debe ser tratada en canales formales y protegidos",
+          "correctEn": "Point out to the colleague that even without an explicit name, recognizable information violates confidentiality and must be handled through formal, protected channels",
+          "skillEs": "Responsabilidad profesional ante infracciones éticas de colegas",
+          "skillEn": "Professional responsibility in the face of colleagues' ethical infractions",
+          "explanEs": "La confidencialidad no depende de la presencia del nombre: si la información permite identificar al paciente, constituye una violación. Señalarlo al colega de forma directa es la primera acción responsable — protege al paciente, educa al colega y promueve una cultura de ética profesional.",
+          "explanEn": "Confidentiality does not depend on the presence of a name: if the information allows the patient to be identified, it constitutes a violation. Pointing it out to the colleague directly is the first responsible action — it protects the patient, educates the colleague, and promotes a culture of professional ethics."
         }
       ]
     }

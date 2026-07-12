@@ -1,349 +1,227 @@
 {
   "week": 17,
   "type": "memory",
-  "titleEs": "Síntesis del Proceso",
-  "titleEn": "Process Synthesis",
-  "skillEs": "Memoria Visual",
-  "skillEn": "Visual Memory",
-  "descEs": "Entrena la habilidad de Memoria Visual mediante memorización visual.",
-  "descEn": "Train your Visual Memory skill through visual memorization.",
+  "titleEs": "Integración Profesional",
+  "titleEn": "Professional Integration",
+  "skillEs": "Integración Profesional",
+  "skillEn": "Professional Integration",
+  "descEs": "El evaluador experto combina observación, análisis, razonamiento y toma de decisiones dentro de un proceso fluido. Esta semana entrenas la integración de esas capacidades en escenarios de práctica profesional.",
+  "descEn": "The expert evaluator combines observation, analysis, reasoning, and decision-making within a fluid process. This week you train the integration of those capacities in professional practice scenarios.",
   "microretos": [
     {
       "id": "w17m1",
       "type": "memory",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "titleEs": "Caso Integrador",
+      "titleEn": "Integrative Case",
+      "descEs": "Memoriza los tipos de datos clínicos y la categoría a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the types of clinical data and the category each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
-      "memorizeTime": 10,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "items": [
-        {
-          "name": "WAIS-IV",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "WA",
-          "colorKey": "purple"
-        },
-        {
-          "name": "MMPI-2",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "MM",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "Rorschach",
-          "categoryEs": "Proyectivo",
-          "categoryEn": "Projective",
-          "initials": "RO",
-          "colorKey": "amber"
-        },
-        {
-          "name": "Bender",
-          "categoryEs": "Neuropsicológico",
-          "categoryEn": "Neuropsych",
-          "initials": "BN",
-          "colorKey": "green"
-        },
-        {
-          "name": "NEO PI-R",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "NE",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "K-ABC",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "KA",
-          "colorKey": "purple"
-        }
+        { "name": "Conducta en Sesión",    "categoryEs": "Dato Observacional", "categoryEn": "Observational Data", "initials": "CS", "colorKey": "cyan"   },
+        { "name": "Expresión Emocional",   "categoryEs": "Dato Observacional", "categoryEn": "Observational Data", "initials": "EE", "colorKey": "cyan"   },
+        { "name": "Patrón de Respuestas",  "categoryEs": "Dato Analítico",     "categoryEn": "Analytical Data",    "initials": "PR", "colorKey": "purple" },
+        { "name": "Coherencia Interna",    "categoryEs": "Dato Analítico",     "categoryEn": "Analytical Data",    "initials": "CO", "colorKey": "purple" },
+        { "name": "Hipótesis de Trabajo",  "categoryEs": "Decisión Clínica",   "categoryEn": "Clinical Decision",  "initials": "HT", "colorKey": "amber"  },
+        { "name": "Plan de Evaluación",    "categoryEs": "Decisión Clínica",   "categoryEn": "Clinical Decision",  "initials": "PE", "colorKey": "amber"  }
       ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Conducta en Sesión",
+            "Diagnóstico Formal",
+            "Hipótesis de Trabajo",
+            "Coherencia Interna"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Diagnóstico Formal",
+          "correctEn": "Diagnóstico Formal",
+          "skillEs": "Memoria de reconocimiento aplicada al proceso clínico",
+          "skillEn": "Applied recognition memory for the clinical process",
+          "explanEs": "Diagnóstico Formal es un concepto clínico importante pero no estaba en esta cuadrícula. La distinción entre Hipótesis de Trabajo y Diagnóstico Formal es clínicamente relevante: la hipótesis orienta la evaluación; el diagnóstico es su producto final, cuando la evidencia lo justifica.",
+          "explanEn": "Formal Diagnosis is an important clinical concept but was not in this grid. The distinction between Working Hypothesis and Formal Diagnosis is clinically relevant: the hypothesis guides the assessment; the diagnosis is its final product, when the evidence justifies it."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
-          "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
-          ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "textEs": "¿Cuántos elementos de la categoría 'Dato Analítico' estaban en la cuadrícula?",
+          "textEn": "How many 'Analytical Data' elements were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial del proceso evaluativo integrado",
+          "skillEn": "Categorical memory of the integrated assessment process",
+          "explanEs": "Dos Datos Analíticos: Patrón de Respuestas y Coherencia Interna. Ambos se obtienen no por observación directa sino por el procesamiento activo del evaluador: requieren comparar, contrastar y buscar consistencia a través de múltiples puntos de datos.",
+          "explanEn": "Two Analytical Data: Response Pattern and Internal Coherence. Both are obtained not by direct observation but by the evaluator's active processing: they require comparing, contrasting, and seeking consistency across multiple data points."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "¿A qué categoría pertenece 'Hipótesis de Trabajo'?",
+          "textEn": "What category does 'Working Hypothesis' belong to?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Dato Observacional", "en": "Observational Data" },
+            { "es": "Dato Analítico",     "en": "Analytical Data"    },
+            { "es": "Decisión Clínica",   "en": "Clinical Decision"  },
+            { "es": "Marco Teórico",      "en": "Theoretical Framework" }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Decisión Clínica",
+          "correctEn": "Clinical Decision",
+          "skillEs": "Clasificación del proceso clínico integrado",
+          "skillEn": "Classification of the integrated clinical process",
+          "explanEs": "La Hipótesis de Trabajo es una Decisión Clínica: es el resultado de procesar los datos observacionales y analíticos para formular una dirección evaluativa. No es un dato — es una interpretación activa que guía los pasos siguientes del proceso.",
+          "explanEn": "The Working Hypothesis is a Clinical Decision: it is the result of processing observational and analytical data to formulate an evaluative direction. It is not a datum — it is an active interpretation that guides the next steps of the process."
         }
       ]
     },
     {
       "id": "w17m2",
-      "type": "memory",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Evidencia vs Opinión",
+      "titleEn": "Evidence vs Opinion",
+      "descEs": "En la práctica profesional, distinguir entre afirmaciones basadas en evidencia y opiniones clínicas no fundamentadas es una habilidad crítica. Identifica cuál es cuál.",
+      "descEn": "In professional practice, distinguishing between evidence-based statements and ungrounded clinical opinions is a critical skill. Identify which is which.",
       "difficulty": "intermediate",
-      "answerTime": 22,
-      "memorizeTime": 9,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
-      "items": [
-        {
-          "name": "WAIS-IV",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "WA",
-          "colorKey": "purple"
-        },
-        {
-          "name": "MMPI-2",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "MM",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "Rorschach",
-          "categoryEs": "Proyectivo",
-          "categoryEn": "Projective",
-          "initials": "RO",
-          "colorKey": "amber"
-        },
-        {
-          "name": "Bender",
-          "categoryEs": "Neuropsicológico",
-          "categoryEn": "Neuropsych",
-          "initials": "BN",
-          "colorKey": "green"
-        },
-        {
-          "name": "NEO PI-R",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "NE",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "K-ABC",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "KA",
-          "colorKey": "purple"
-        }
-      ],
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Un evaluador concluye que 'el paciente claramente tiene baja autoestima' basándose únicamente en la impresión general de la entrevista inicial. ¿Qué tipo de afirmación es?",
+          "textEn": "An evaluator concludes that 'the patient clearly has low self-esteem' based solely on the general impression of the initial interview. What type of statement is this?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Una opinión clínica no sustentada, porque no deriva de datos sistemáticos ni de criterios verificables",
+            "Una hipótesis válida, porque la entrevista es una fuente de datos legítima en la evaluación",
+            "Una conclusión prematura pero aceptable si el evaluador tiene experiencia suficiente",
+            "Una inferencia diagnóstica correcta si la impresión es fuerte y coherente"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Una opinión clínica no sustentada, porque no deriva de datos sistemáticos ni de criterios verificables",
+          "correctEn": "Una opinión clínica no sustentada, porque no deriva de datos sistemáticos ni de criterios verificables",
+          "skillEs": "Distinción entre evidencia y opinión clínica",
+          "skillEn": "Distinction between evidence and clinical opinion",
+          "explanEs": "La experiencia clínica no sustituye la evidencia sistemática. Una impresión general, aunque sea de un evaluador experto, es una hipótesis de exploración — no una conclusión. La baja autoestima es un constructo que requiere operacionalización, datos convergentes y criterios explícitos.",
+          "explanEn": "Clinical experience does not replace systematic evidence. A general impression, even from an expert evaluator, is an exploratory hypothesis — not a conclusion. Low self-esteem is a construct that requires operationalization, converging data, and explicit criteria."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "¿Cuál de las siguientes es una afirmación basada en evidencia dentro de un proceso de evaluación psicológica?",
+          "textEn": "Which of the following is an evidence-based statement within a psychological assessment process?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "El evaluado presenta dificultades de memoria operativa consistentes con el patrón observado en tres fuentes distintas",
+            "El evaluado parece tener problemas de concentración según lo que transmite en la entrevista",
+            "Definitivamente se trata de un caso de ansiedad generalizada basándose en la tensión observada en sesión",
+            "El evaluado tiene una personalidad difícil, lo que explica sus dificultades interpersonales"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "El evaluado presenta dificultades de memoria operativa consistentes con el patrón observado en tres fuentes distintas",
+          "correctEn": "El evaluado presenta dificultades de memoria operativa consistentes con el patrón observado en tres fuentes distintas",
+          "skillEs": "Identificación de afirmaciones clínicas basadas en evidencia",
+          "skillEn": "Identification of evidence-based clinical statements",
+          "explanEs": "Una afirmación basada en evidencia se caracteriza por referenciar datos concretos, fuentes identificables y patrones verificables. La convergencia entre tres fuentes distintas es exactamente el tipo de sustento que convierte una hipótesis en una conclusión clínicamente sólida.",
+          "explanEn": "An evidence-based statement is characterized by referencing concrete data, identifiable sources, and verifiable patterns. Convergence between three different sources is exactly the type of support that turns a hypothesis into a clinically sound conclusion."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "En un informe psicológico, el evaluador escribe: 'Se percibe resistencia emocional, lo que sugiere evasión deliberada de los temas abordados.' ¿Qué problema metodológico presenta esta afirmación?",
+          "textEn": "In a psychological report, the evaluator writes: 'Emotional resistance is perceived, suggesting deliberate evasion of the topics addressed.' What methodological problem does this statement present?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Mezcla observación conductual con inferencia motivacional sin evidencia que sustente la atribución de intencionalidad",                 "en": "It mixes behavioral observation with motivational inference without evidence to support the attribution of intentionality"                },
+            { "es": "Ninguno; la percepción del evaluador experto es suficiente base para incluir ese tipo de afirmación en un informe",                  "en": "None; the expert evaluator's perception is sufficient basis to include that type of statement in a report"                              },
+            { "es": "El único problema es el uso de lenguaje demasiado técnico que puede dificultar la comprensión del informe",                          "en": "The only problem is the use of overly technical language that may hinder understanding of the report"                                    },
+            { "es": "Es una afirmación válida si se sustenta con datos de otras fuentes en otra sección del informe",                                     "en": "It is a valid statement if supported by data from other sources in another section of the report"                                        }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Mezcla observación conductual con inferencia motivacional sin evidencia que sustente la atribución de intencionalidad",
+          "correctEn": "It mixes behavioral observation with motivational inference without evidence to support the attribution of intentionality",
+          "skillEs": "Análisis crítico de la precisión inferencial en informes",
+          "skillEn": "Critical analysis of inferential precision in reports",
+          "explanEs": "Observar una conducta y atribuirle una motivación son dos operaciones distintas. 'Resistencia emocional' puede describir una conducta observable; 'evasión deliberada' implica intención. Mezclar ambas sin evidencia es un error inferencial que puede sesgar la interpretación del caso.",
+          "explanEn": "Observing a behavior and attributing motivation to it are two distinct operations. 'Emotional resistance' can describe an observable behavior; 'deliberate evasion' implies intention. Mixing both without evidence is an inferential error that can bias the interpretation of the case."
         }
       ]
     },
     {
       "id": "w17m3",
-      "type": "memory",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Conclusión Profesional",
+      "titleEn": "Professional Conclusion",
+      "descEs": "A partir de información clínica compleja, formula o evalúa conclusiones profesionales. El criterio aquí es la precisión inferencial: no más ni menos de lo que los datos permiten concluir.",
+      "descEn": "Based on complex clinical information, formulate or evaluate professional conclusions. The criterion here is inferential precision: no more and no less than what the data allows to conclude.",
       "difficulty": "advanced",
-      "answerTime": 20,
-      "memorizeTime": 8,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
-      "items": [
-        {
-          "name": "WAIS-IV",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "WA",
-          "colorKey": "purple"
-        },
-        {
-          "name": "MMPI-2",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "MM",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "Rorschach",
-          "categoryEs": "Proyectivo",
-          "categoryEn": "Projective",
-          "initials": "RO",
-          "colorKey": "amber"
-        },
-        {
-          "name": "Bender",
-          "categoryEs": "Neuropsicológico",
-          "categoryEn": "Neuropsych",
-          "initials": "BN",
-          "colorKey": "green"
-        },
-        {
-          "name": "NEO PI-R",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "NE",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "K-ABC",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "KA",
-          "colorKey": "purple"
-        }
-      ],
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Un adolescente de 16 años muestra habilidades verbales altas y dificultades severas en el procesamiento visual-espacial, con impacto directo en su rendimiento en matemáticas. ¿Cuál es la conclusión profesional más adecuada?",
+          "textEn": "A 16-year-old adolescent shows high verbal abilities and severe difficulties in visual-spatial processing, with a direct impact on their mathematics performance. What is the most appropriate professional conclusion?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "El perfil sugiere explorar la presencia de un perfil cognitivo disarmónico con implicaciones específicas en el aprendizaje matemático",
+            "El adolescente tiene un trastorno de aprendizaje que debe ser diagnosticado y reportado de inmediato",
+            "Las dificultades matemáticas se explican por falta de esfuerzo dado que las habilidades verbales son altas",
+            "El perfil cognitivo está dentro del rango normal y no requiere evaluación adicional"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "El perfil sugiere explorar la presencia de un perfil cognitivo disarmónico con implicaciones específicas en el aprendizaje matemático",
+          "correctEn": "El perfil sugiere explorar la presencia de un perfil cognitivo disarmónico con implicaciones específicas en el aprendizaje matemático",
+          "skillEs": "Formulación de conclusiones proporcionales a la evidencia",
+          "skillEn": "Formulation of conclusions proportional to the evidence",
+          "explanEs": "Un perfil disarmónico — altas habilidades en una dimensión y dificultades severas en otra — es un hallazgo significativo que orienta la evaluación, pero no equivale automáticamente a un diagnóstico. La conclusión correcta abre la exploración sin cerrarla prematuramente con una etiqueta clínica.",
+          "explanEn": "A disharmonic profile — high abilities in one dimension and severe difficulties in another — is a significant finding that guides the assessment, but does not automatically equal a diagnosis. The correct conclusion opens exploration without closing it prematurely with a clinical label."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Los datos de una evaluación apuntan hacia una hipótesis, pero el evaluador reconoce que varias preguntas clave no fueron respondidas durante el proceso. ¿Cuál es la acción profesionalmente correcta?",
+          "textEn": "The data from an assessment point toward a hypothesis, but the evaluator recognizes that several key questions were not answered during the process. What is the professionally correct action?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Formular la hipótesis de trabajo de manera provisional y señalar explícitamente las preguntas pendientes que requieren evaluación complementaria",
+            "Esperar a que todas las preguntas estén respondidas antes de comunicar cualquier hallazgo",
+            "Omitir las preguntas sin respuesta en el informe para no debilitar la credibilidad de las conclusiones",
+            "Responder las preguntas pendientes con inferencias lógicas basadas en los datos disponibles"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Formular la hipótesis de trabajo de manera provisional y señalar explícitamente las preguntas pendientes que requieren evaluación complementaria",
+          "correctEn": "Formular la hipótesis de trabajo de manera provisional y señalar explícitamente las preguntas pendientes que requieren evaluación complementaria",
+          "skillEs": "Comunicación honesta de los límites del proceso evaluativo",
+          "skillEn": "Honest communication of the limits of the assessment process",
+          "explanEs": "Señalar explícitamente lo que no pudo responderse es un acto de rigor profesional, no de debilidad. Las preguntas pendientes forman parte de la información clínicamente útil: orientan el seguimiento, protegen al evaluado de conclusiones apresuradas y preservan la validez del informe.",
+          "explanEn": "Explicitly noting what could not be answered is an act of professional rigor, not weakness. Pending questions are part of clinically useful information: they guide follow-up, protect the evaluated person from hasty conclusions, and preserve the validity of the report."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Tras un proceso de evaluación completo, el evaluador redacta conclusiones claras y bien fundamentadas, pero omite por completo las limitaciones del proceso. ¿Qué efecto tiene esta omisión en el informe?",
+          "textEn": "After a complete assessment process, the evaluator writes clear and well-founded conclusions but completely omits the limitations of the process. What effect does this omission have on the report?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Afecta la validez del informe porque las conclusiones se presentan con un nivel de certeza que los datos no justifican plenamente",          "en": "It affects the validity of the report because conclusions are presented with a level of certainty that the data do not fully justify"              },
+            { "es": "No tiene efecto negativo si las conclusiones son técnicamente correctas y el proceso fue riguroso",                                          "en": "It has no negative effect if the conclusions are technically correct and the process was rigorous"                                               },
+            { "es": "Mejora la claridad del informe porque evita que el destinatario se confunda con información periférica",                                    "en": "It improves the clarity of the report because it prevents the recipient from getting confused with peripheral information"                       },
+            { "es": "Es aceptable omitirlas si el evaluador considera que no afectaron significativamente los resultados",                                       "en": "It is acceptable to omit them if the evaluator considers that they did not significantly affect the results"                                      }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Afecta la validez del informe porque las conclusiones se presentan con un nivel de certeza que los datos no justifican plenamente",
+          "correctEn": "It affects the validity of the report because conclusions are presented with a level of certainty that the data do not fully justify",
+          "skillEs": "Evaluación de la completitud y honestidad del informe psicológico",
+          "skillEn": "Evaluation of the completeness and honesty of the psychological report",
+          "explanEs": "Las limitaciones no debilitan el informe — lo hacen más honesto y útil. Un informe sin limitaciones declara implícitamente una certeza que pocas veces es realista. Los destinatarios del informe toman decisiones basadas en él: merecen saber el grado de confianza que le pueden asignar.",
+          "explanEn": "Limitations do not weaken the report — they make it more honest and useful. A report without limitations implicitly declares a certainty that is rarely realistic. Report recipients make decisions based on it: they deserve to know the degree of confidence they can assign to it."
         }
       ]
     }
