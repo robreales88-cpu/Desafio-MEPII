@@ -112,6 +112,10 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
 
           <button onClick="{{ goRegister }}" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:15px 48px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;width:100%;max-width:300px;box-shadow:0 4px 24px rgba(124,58,237,0.45);letter-spacing:0.3px;display:block;margin:0 auto;">{{ t_comenzar }}</button>
           <button onClick="{{ loginExisting }}" style="margin-top:14px;background:transparent;border:1px solid rgba(124,58,237,0.25);color:#64748b;padding:10px 24px;border-radius:10px;font-size:13px;cursor:pointer;font-family:'Space Grotesk',sans-serif;display:block;margin:14px auto 0;">{{ t_ya_cuenta }}</button>
+          <button onClick="{{ goTeacher }}" style="margin-top:10px;background:transparent;border:none;color:#64748b;padding:8px;font-size:12px;cursor:pointer;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:5px;margin:10px auto 0;opacity:0.6;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            {{ t_acceso_docente }}
+          </button>
         </div>
       </div>
     </sc-if>
@@ -945,7 +949,7 @@ class Component extends DCLogic {
       t_nick_ph: 'Nombre de jugador (opcional)', t_email: 'Correo electrónico', t_email_ph: 'correo@personal.com',
       t_grupo: 'Grupo', t_seccion: 'Sección', t_comenzar_ent: 'Comenzar entrenamiento',
       t_dash: 'Inicio', t_challenges: 'Desafíos', t_ranking: 'Ranking', t_perfil: 'Perfil',
-      t_teacher: 'Docente', t_sound: 'Sonido',
+      t_teacher: 'Docente', t_sound: 'Sonido', t_acceso_docente: 'Acceso Docente',
       t_next_lvl: 'para siguiente nivel', t_total: 'total', t_acumulados: 'acumulados',
       t_completados: 'Completados', t_tiempo: 'Tiempo', t_minutos: 'minutos',
       t_mis_insignias: 'Mis insignias', t_proximo: 'Próximo desafío',
@@ -987,7 +991,7 @@ class Component extends DCLogic {
       t_nick_ph: 'Player name (optional)', t_email: 'Email', t_email_ph: 'email@personal.com',
       t_grupo: 'Group', t_seccion: 'Section', t_comenzar_ent: 'Start training',
       t_dash: 'Home', t_challenges: 'Challenges', t_ranking: 'Ranking', t_perfil: 'Profile',
-      t_teacher: 'Teacher', t_sound: 'Sound',
+      t_teacher: 'Teacher', t_sound: 'Sound', t_acceso_docente: 'Teacher Access',
       t_next_lvl: 'to next level', t_total: 'total', t_acumulados: 'accumulated',
       t_completados: 'Completed', t_tiempo: 'Time', t_minutos: 'minutes',
       t_mis_insignias: 'My badges', t_proximo: 'Next challenge',
