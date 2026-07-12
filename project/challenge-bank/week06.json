@@ -1,214 +1,227 @@
 {
   "week": 6,
-  "type": "classification",
-  "titleEs": "Categorías Diagnósticas",
-  "titleEn": "Diagnostic Categories",
-  "skillEs": "Clasificación",
-  "skillEn": "Classification",
-  "descEs": "Entrena la habilidad de Clasificación mediante preguntas interactivas.",
-  "descEn": "Train your Classification skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Selección de Instrumentos de Evaluación",
+  "titleEn": "Assessment Instrument Selection",
+  "skillEs": "Selección de Instrumentos",
+  "skillEn": "Instrument Selection",
+  "descEs": "Elegir el instrumento adecuado no es azar: depende del objetivo clínico, las características del caso y las propiedades psicométricas del instrumento. Esta semana entrenas ese criterio.",
+  "descEn": "Choosing the right instrument is not random: it depends on the clinical objective, case characteristics and the instrument's psychometric properties. This week you train that judgment.",
   "microretos": [
     {
       "id": "w6m1",
-      "type": "classification",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "El Instrumento Correcto",
+      "titleEn": "The Right Instrument",
+      "descEs": "Memoriza los criterios clave para seleccionar un instrumento y la categoría técnica a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the key criteria for selecting an instrument and the technical category each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Objetivo de Medición",        "categoryEs": "Criterio Técnico",       "categoryEn": "Technical Criterion",     "initials": "OM", "colorKey": "purple" },
+        { "name": "Población Objetivo",           "categoryEs": "Criterio Técnico",       "categoryEn": "Technical Criterion",     "initials": "PO", "colorKey": "purple" },
+        { "name": "Validez del Instrumento",      "categoryEs": "Criterio Psicométrico",  "categoryEn": "Psychometric Criterion",  "initials": "VI", "colorKey": "cyan"   },
+        { "name": "Confiabilidad del Instrumento","categoryEs": "Criterio Psicométrico",  "categoryEn": "Psychometric Criterion",  "initials": "CI", "colorKey": "cyan"   },
+        { "name": "Contexto de Aplicación",       "categoryEs": "Criterio Contextual",    "categoryEn": "Contextual Criterion",    "initials": "CA", "colorKey": "amber"  },
+        { "name": "Tiempo Disponible",            "categoryEs": "Criterio Contextual",    "categoryEn": "Contextual Criterion",    "initials": "TD", "colorKey": "amber"  }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "¿Cuál de estos criterios NO estaba en la cuadrícula?",
+          "textEn": "Which of these criteria was NOT in the grid?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Objetivo de Medición",
+            "Normas de Estandarización",
+            "Validez del Instrumento",
+            "Tiempo Disponible"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Normas de Estandarización",
+          "correctEn": "Normas de Estandarización",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "Normas de Estandarización es un concepto real y relevante en psicometría, pero no estaba en esta cuadrícula. Distinguir lo que se presentó de lo que es simplemente familiar es una habilidad de reconocimiento que también aplica cuando revisas un protocolo de evaluación.",
+          "explanEn": "Standardization Norms is a real and relevant psychometric concept, but it was not in this grid. Distinguishing what was presented from what is merely familiar is a recognition skill that also applies when reviewing an assessment protocol."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
-          "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
-          ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "textEs": "¿Cuántos criterios de tipo 'Psicométrico' estaban en la cuadrícula?",
+          "textEn": "How many 'Psychometric' criteria were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Dos criterios psicométricos: Validez del Instrumento y Confiabilidad del Instrumento. Ambos son exigencias mínimas antes de seleccionar cualquier instrumento — un instrumento sin evidencia de validez y confiabilidad no debería usarse en evaluación clínica.",
+          "explanEn": "Two psychometric criteria: Instrument Validity and Instrument Reliability. Both are minimum requirements before selecting any instrument — an instrument without validity and reliability evidence should not be used in clinical assessment."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "¿A qué categoría pertenece Tiempo Disponible?",
+          "textEn": "What category does Available Time belong to?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Criterio Técnico",       "en": "Technical Criterion"     },
+            { "es": "Criterio Psicométrico",  "en": "Psychometric Criterion"  },
+            { "es": "Criterio Contextual",    "en": "Contextual Criterion"    },
+            { "es": "Criterio Ético",         "en": "Ethical Criterion"       }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Criterio Contextual",
+          "correctEn": "Contextual Criterion",
+          "skillEs": "Memoria semántica aplicada",
+          "skillEn": "Applied semantic memory",
+          "explanEs": "El Tiempo Disponible es un criterio contextual que condiciona la viabilidad del instrumento. Junto con el Contexto de Aplicación, forma parte de los factores prácticos que deben considerarse antes de cualquier decisión de selección instrumental.",
+          "explanEn": "Available Time is a contextual criterion that conditions the instrument's feasibility. Together with Application Context, it is part of the practical factors that must be considered before any instrument selection decision."
         }
       ]
     },
     {
       "id": "w6m2",
-      "type": "classification",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "¿Qué Evalúa?",
+      "titleEn": "What Does It Assess?",
+      "descEs": "A partir de la descripción de una tarea o escala, identifica el constructo que está siendo medido. El criterio de selección parte siempre de saber qué se necesita evaluar.",
+      "descEn": "From the description of a task or scale, identify the construct being measured. The selection criterion always starts from knowing what needs to be assessed.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Una escala de autorregistro cuantifica la frecuencia, intensidad y duración de episodios de preocupación excesiva a lo largo de dos semanas. ¿Qué constructo evalúa?",
+          "textEn": "A self-report scale quantifies the frequency, intensity and duration of excessive worry episodes over two weeks. What construct does it assess?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Ansiedad rasgo",
+            "Memoria de trabajo",
+            "Razonamiento inductivo",
+            "Habilidad visomotora"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Ansiedad rasgo",
+          "correctEn": "Ansiedad rasgo",
+          "skillEs": "Correspondencia constructo-instrumento",
+          "skillEn": "Construct-instrument correspondence",
+          "explanEs": "Una escala que mide la tendencia estable a preocuparse en múltiples contextos evalúa la ansiedad como rasgo, no como estado transitorio. Identificar si se mide un estado o un rasgo determina qué tipo de instrumento y qué marco temporal son pertinentes.",
+          "explanEn": "A scale measuring the stable tendency to worry across multiple contexts assesses anxiety as a trait, not a transient state. Identifying whether a state or trait is being measured determines which type of instrument and which time frame are relevant."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Una tarea solicita al evaluado replicar un diseño geométrico complejo copiándolo primero y luego reproduciéndolo de memoria. ¿Qué habilidad mide?",
+          "textEn": "A task asks the examinee to replicate a complex geometric design by first copying it and then reproducing it from memory. What skill does it measure?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Organización visoespacial y memoria visual",
+            "Comprensión verbal y semántica",
+            "Razonamiento numérico inductivo",
+            "Velocidad de procesamiento auditivo"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Organización visoespacial y memoria visual",
+          "correctEn": "Organización visoespacial y memoria visual",
+          "skillEs": "Análisis funcional de tareas evaluativas",
+          "skillEn": "Functional analysis of assessment tasks",
+          "explanEs": "La copia mide organización visoespacial y planificación perceptual; la reproducción diferida mide memoria visual. Cuando una tarea tiene dos fases, evalúa constructos diferentes en cada una — esto debe reflejarse en cómo se interpreta y reporta el resultado.",
+          "explanEn": "Copying measures visuospatial organization and perceptual planning; delayed reproduction measures visual memory. When a task has two phases, it assesses different constructs in each — this must be reflected in how the result is interpreted and reported."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Una tarea computarizada requiere responder ante estímulos objetivo y suprimir la respuesta ante estímulos distractor presentados aleatoriamente. ¿Qué constructo mide principalmente?",
+          "textEn": "A computerized task requires responding to target stimuli and suppressing the response to randomly presented distractor stimuli. What construct does it primarily measure?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Control inhibitorio y atención sostenida",  "en": "Inhibitory control and sustained attention" },
+            { "es": "Memoria episódica y semántica",             "en": "Episodic and semantic memory"               },
+            { "es": "Razonamiento analógico abstracto",          "en": "Abstract analogical reasoning"              },
+            { "es": "Velocidad de procesamiento verbal",         "en": "Verbal processing speed"                    }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Control inhibitorio y atención sostenida",
+          "correctEn": "Inhibitory control and sustained attention",
+          "skillEs": "Identificación de constructos evaluativos",
+          "skillEn": "Identification of assessment constructs",
+          "explanEs": "La tarea exige mantener el foco durante un período prolongado (atención sostenida) y suprimir respuestas automáticas ante distractores (control inhibitorio). Reconocer qué procesos se activan en cada tarea es indispensable para justificar la selección de instrumentos.",
+          "explanEn": "The task requires maintaining focus over an extended period (sustained attention) and suppressing automatic responses to distractors (inhibitory control). Recognizing which processes are activated in each task is essential to justify instrument selection."
         }
       ]
     },
     {
       "id": "w6m3",
-      "type": "classification",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Decisión Profesional",
+      "titleEn": "Professional Decision",
+      "descEs": "Frente a un caso clínico con datos reales, debes seleccionar la estrategia evaluativa más adecuada. No hay una sola respuesta correcta intuitiva: necesitas razonar.",
+      "descEn": "Faced with a clinical case with real data, you must select the most appropriate assessment strategy. There is no single intuitive correct answer: you need to reason.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "El objetivo de evaluación es medir la capacidad para mantener información activa mientras se realizan otras operaciones mentales simultáneas. ¿Qué dominio cognitivo debe priorizarse?",
+          "textEn": "The assessment objective is to measure the ability to keep information active while performing other simultaneous mental operations. Which cognitive domain should be prioritized?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Memoria de trabajo",
+            "Atención selectiva",
+            "Razonamiento inductivo",
+            "Percepción visomotora"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Memoria de trabajo",
+          "correctEn": "Memoria de trabajo",
+          "skillEs": "Correspondencia objetivo-dominio evaluativo",
+          "skillEn": "Objective-assessment domain correspondence",
+          "explanEs": "La Memoria de Trabajo es el sistema que mantiene información en estado activo mientras se procesa simultáneamente otra información. Es el dominio específico requerido por el objetivo descrito. Confundirla con Atención Selectiva es frecuente, pero son constructos diferenciados con diferentes herramientas de evaluación.",
+          "explanEn": "Working Memory is the system that keeps information active while simultaneously processing other information. It is the specific domain required by the described objective. Confusing it with Selective Attention is common, but they are differentiated constructs with different assessment tools."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Un evaluador dispone de 20 minutos y debe priorizar una evaluación en un paciente que refiere dificultad para detener respuestas impulsivas que le generan conflictos interpersonales. ¿Qué función cognitiva evalúa primero?",
+          "textEn": "An evaluator has 20 minutes and must prioritize an assessment for a patient who reports difficulty stopping impulsive responses that create interpersonal conflicts. Which cognitive function is assessed first?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Inhibición cognitiva",
+            "Memoria semántica",
+            "Percepción auditiva",
+            "Codificación visual"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Inhibición cognitiva",
+          "correctEn": "Inhibición cognitiva",
+          "skillEs": "Priorización evaluativa según hipótesis",
+          "skillEn": "Assessment prioritization according to hypothesis",
+          "explanEs": "La queja principal es la incapacidad de suprimir respuestas impulsivas, que es el correlato conductual de la inhibición cognitiva. Priorizar el dominio más directamente relacionado con la hipótesis clínica hace que la evaluación sea eficiente aunque el tiempo sea limitado.",
+          "explanEn": "The main complaint is the inability to suppress impulsive responses, which is the behavioral correlate of cognitive inhibition. Prioritizing the domain most directly related to the clinical hypothesis makes assessment efficient even when time is limited."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Un instrumento fue estandarizado en adultos de entre 25 y 65 años. Un evaluador lo aplica a un paciente de 70 años sin adaptar la interpretación. ¿Cuál es el principal riesgo metodológico?",
+          "textEn": "An instrument was standardized on adults aged 25 to 65. An evaluator applies it to a 70-year-old patient without adapting the interpretation. What is the main methodological risk?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Las normas pueden no ser representativas del paciente, comprometiendo la validez interpretativa",  "en": "The norms may not be representative of the patient, compromising interpretive validity"     },
+            { "es": "El instrumento producirá automáticamente puntuaciones más altas que las reales",                "en": "The instrument will automatically produce higher scores than real ones"                       },
+            { "es": "El instrumento deja de ser confiable por la edad del evaluado",                                "en": "The instrument stops being reliable because of the examinee's age"                           },
+            { "es": "No existe riesgo si el evaluador tiene experiencia clínica suficiente",                        "en": "There is no risk if the evaluator has sufficient clinical experience"                         }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Las normas pueden no ser representativas del paciente, comprometiendo la validez interpretativa",
+          "correctEn": "The norms may not be representative of the patient, compromising interpretive validity",
+          "skillEs": "Aplicabilidad de normas y límites de generalización",
+          "skillEn": "Norm applicability and generalization limits",
+          "explanEs": "Los baremos se construyen con la muestra de estandarización. Aplicarlos a una población fuera del rango normativo introduce sesgo interpretativo: una puntuación 'baja' podría ser adecuada para la edad del paciente si se comparara con normas actualizadas para ese grupo. La experiencia clínica no reemplaza las normas adecuadas.",
+          "explanEn": "Norms are built from the standardization sample. Applying them to a population outside the normative range introduces interpretive bias: a 'low' score might be adequate for the patient's age if compared with updated norms for that group. Clinical experience does not replace adequate norms."
         }
       ]
     }

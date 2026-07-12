@@ -1,214 +1,227 @@
 {
   "week": 8,
-  "type": "interpretation",
-  "titleEs": "Resultados e Interpretación",
-  "titleEn": "Results and Interpretation",
-  "skillEs": "Interpretación",
-  "skillEn": "Interpretation",
-  "descEs": "Entrena la habilidad de Interpretación mediante preguntas interactivas.",
-  "descEn": "Train your Interpretation skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Proceso de Evaluación Psicológica",
+  "titleEn": "Psychological Assessment Process",
+  "skillEs": "Proceso Evaluativo",
+  "skillEn": "Assessment Process",
+  "descEs": "La evaluación psicológica no es una suma de pruebas: es un proceso ordenado con lógica, ética y criterio clínico. Esta semana reconoces cada fase y aprendes a tomar decisiones dentro de ellas.",
+  "descEn": "Psychological assessment is not a sum of tests: it is an ordered process with logic, ethics and clinical judgment. This week you recognize each phase and learn to make decisions within them.",
   "microretos": [
     {
       "id": "w8m1",
-      "type": "interpretation",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Ordena el Proceso",
+      "titleEn": "Order the Process",
+      "descEs": "Memoriza las fases del proceso evaluativo y la subfase a la que pertenece cada una. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the phases of the assessment process and the sub-phase each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Recepción de la Demanda",     "categoryEs": "Exploración",  "categoryEn": "Exploration",  "initials": "RD", "colorKey": "amber"  },
+        { "name": "Entrevista Inicial",           "categoryEs": "Exploración",  "categoryEn": "Exploration",  "initials": "EI", "colorKey": "amber"  },
+        { "name": "Hipótesis Diagnóstica",        "categoryEs": "Planificación","categoryEn": "Planning",     "initials": "HD", "colorKey": "cyan"   },
+        { "name": "Selección de Instrumentos",   "categoryEs": "Planificación","categoryEn": "Planning",     "initials": "SI", "colorKey": "cyan"   },
+        { "name": "Aplicación de Instrumentos",  "categoryEs": "Ejecución",    "categoryEn": "Execution",    "initials": "AI", "colorKey": "purple" },
+        { "name": "Devolución de Resultados",    "categoryEs": "Ejecución",    "categoryEn": "Execution",    "initials": "DR", "colorKey": "purple" }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "¿Cuál de estas fases NO estaba en la cuadrícula?",
+          "textEn": "Which of these phases was NOT in the grid?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Entrevista Inicial",
+            "Redacción del Informe",
+            "Hipótesis Diagnóstica",
+            "Devolución de Resultados"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Redacción del Informe",
+          "correctEn": "Redacción del Informe",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "La Redacción del Informe es una fase real del proceso evaluativo, pero no estaba en esta cuadrícula. Notar su ausencia es relevante: recordar qué etapas componen el proceso completo evita que fases críticas queden fuera de la planificación.",
+          "explanEn": "Report Writing is a real phase of the assessment process, but it was not in this grid. Noticing its absence is relevant: remembering which stages make up the complete process prevents critical phases from being left out of planning."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
-          "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
-          ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "textEs": "¿Cuántas fases de tipo 'Exploración' estaban en la cuadrícula?",
+          "textEn": "How many 'Exploration' phases were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Dos fases de Exploración: Recepción de la Demanda y Entrevista Inicial. Ambas preceden a cualquier decisión técnica — sin explorar la demanda y el contexto del paciente, las hipótesis diagnósticas carecen de base clínica.",
+          "explanEn": "Two Exploration phases: Reception of the Referral and Initial Interview. Both precede any technical decision — without exploring the patient's referral and context, diagnostic hypotheses lack clinical grounding."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "¿A qué subfase pertenece la Hipótesis Diagnóstica?",
+          "textEn": "Which sub-phase does the Diagnostic Hypothesis belong to?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Exploración",   "en": "Exploration"  },
+            { "es": "Planificación", "en": "Planning"     },
+            { "es": "Ejecución",     "en": "Execution"    },
+            { "es": "Devolución",    "en": "Feedback"     }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Planificación",
+          "correctEn": "Planning",
+          "skillEs": "Memoria semántica del proceso evaluativo",
+          "skillEn": "Semantic memory of the assessment process",
+          "explanEs": "La Hipótesis Diagnóstica pertenece a la fase de Planificación: es el puente entre lo que se exploró en la entrevista y lo que se decide evaluar formalmente. Sin hipótesis previa, la selección de instrumentos se vuelve aleatoria e ineficiente.",
+          "explanEn": "The Diagnostic Hypothesis belongs to the Planning phase: it is the bridge between what was explored in the interview and what is formally decided to assess. Without a prior hypothesis, instrument selection becomes random and inefficient."
         }
       ]
     },
     {
       "id": "w8m2",
-      "type": "interpretation",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "¿Qué Sigue?",
+      "titleEn": "What's Next?",
+      "descEs": "Se te describe un punto específico del proceso evaluativo. Identifica cuál es el siguiente paso lógico y éticamente correcto para continuar.",
+      "descEn": "You are described a specific point in the assessment process. Identify what is the logically and ethically correct next step to continue.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "El psicólogo completó la entrevista inicial y formuló la hipótesis de trabajo. ¿Cuál es el siguiente paso lógico?",
+          "textEn": "The psychologist completed the initial interview and formulated the working hypothesis. What is the logical next step?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Seleccionar los instrumentos más pertinentes para contrastar la hipótesis",
+            "Redactar el informe psicológico con los datos disponibles",
+            "Solicitar retroactivamente la firma del consentimiento informado",
+            "Aplicar cualquier instrumento disponible en la consulta"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Seleccionar los instrumentos más pertinentes para contrastar la hipótesis",
+          "correctEn": "Seleccionar los instrumentos más pertinentes para contrastar la hipótesis",
+          "skillEs": "Secuencia lógica del proceso evaluativo",
+          "skillEn": "Logical sequence of the assessment process",
+          "explanEs": "La hipótesis orienta la selección de instrumentos: cada herramienta elegida debe ser pertinente para contrastar o refutar lo planteado. Aplicar instrumentos sin hipótesis previa genera datos sin dirección clínica; redactar un informe antes de evaluar viola el proceso por completo.",
+          "explanEn": "The hypothesis guides instrument selection: each chosen tool must be relevant to test or refute what was proposed. Applying instruments without a prior hypothesis generates directionless clinical data; writing a report before assessing violates the process entirely."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "El evaluador aplicó todos los instrumentos y convirtió las puntuaciones brutas a puntuaciones normativas. ¿Qué sigue?",
+          "textEn": "The evaluator applied all instruments and converted raw scores to normative scores. What comes next?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Interpretar los datos en función de la hipótesis y el contexto del caso",
+            "Repetir la aplicación para confirmar la estabilidad de los resultados",
+            "Notificar los resultados directamente a la institución sin análisis previo",
+            "Archivar las puntuaciones sin mayor elaboración clínica"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Interpretar los datos en función de la hipótesis y el contexto del caso",
+          "correctEn": "Interpretar los datos en función de la hipótesis y el contexto del caso",
+          "skillEs": "Secuencia de análisis e interpretación",
+          "skillEn": "Analysis and interpretation sequence",
+          "explanEs": "La conversión a puntajes normativos habilita la comparación, pero no produce significado clínico por sí sola. El siguiente paso es integrar los datos con la hipótesis de trabajo, el historial y el contexto para construir conclusiones fundamentadas.",
+          "explanEn": "Conversion to normative scores enables comparison, but does not produce clinical meaning on its own. The next step is integrating the data with the working hypothesis, history and context to build grounded conclusions."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "El psicólogo ha interpretado los resultados y redactado el informe. ¿Qué acción ética es necesaria antes de cerrar el proceso?",
+          "textEn": "The psychologist has interpreted the results and written the report. What ethical action is necessary before closing the process?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Realizar la sesión de devolución para comunicar los resultados al evaluado o su representante",  "en": "Conduct the feedback session to communicate results to the examinee or their representative"  },
+            { "es": "Enviar el informe directamente a la institución solicitante sin informar al paciente",           "en": "Send the report directly to the requesting institution without informing the patient"          },
+            { "es": "Destruir los protocolos de evaluación para proteger la confidencialidad del paciente",          "en": "Destroy the assessment protocols to protect the patient's confidentiality"                    },
+            { "es": "Guardar el informe sin comunicar resultados si estos son desfavorables para el paciente",       "en": "Store the report without communicating results if they are unfavorable to the patient"         }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Realizar la sesión de devolución para comunicar los resultados al evaluado o su representante",
+          "correctEn": "Conduct the feedback session to communicate results to the examinee or their representative",
+          "skillEs": "Ética del cierre evaluativo",
+          "skillEn": "Ethics of assessment closure",
+          "explanEs": "La sesión de devolución es un derecho del evaluado y una obligación deontológica del evaluador: toda persona tiene derecho a conocer los resultados de su propia evaluación. Enviar el informe a terceros sin informar al paciente o guardar resultados desfavorables viola los principios de autonomía y beneficencia.",
+          "explanEn": "The feedback session is a right of the examinee and a deontological obligation of the evaluator: every person has the right to know the results of their own assessment. Sending the report to third parties without informing the patient, or withholding unfavorable results, violates the principles of autonomy and beneficence."
         }
       ]
     },
     {
       "id": "w8m3",
-      "type": "interpretation",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Decisión Ética",
+      "titleEn": "Ethical Decision",
+      "descEs": "La evaluación psicológica genera situaciones donde el criterio técnico y el ético deben operar juntos. Identifica la actuación profesional más adecuada en cada escenario.",
+      "descEn": "Psychological assessment generates situations where technical and ethical judgment must operate together. Identify the most appropriate professional action in each scenario.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Un padre solicita el informe completo de su hijo de 16 años. El adolescente ha pedido expresamente confidencialidad sobre su proceso. ¿Cuál es la actuación más adecuada?",
+          "textEn": "A father requests the full report of his 16-year-old son. The adolescent has expressly requested confidentiality over his process. What is the most appropriate action?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Dialogar con ambas partes sobre qué información puede compartirse, priorizando el bienestar del adolescente",
+            "Entregar el informe completo al padre por ser el tutor legal responsable",
+            "Negar toda información al padre sin dar ninguna explicación",
+            "Cancelar el proceso de evaluación para evitar el conflicto entre partes"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Dialogar con ambas partes sobre qué información puede compartirse, priorizando el bienestar del adolescente",
+          "correctEn": "Dialogar con ambas partes sobre qué información puede compartirse, priorizando el bienestar del adolescente",
+          "skillEs": "Gestión ética de conflictos de confidencialidad",
+          "skillEn": "Ethical management of confidentiality conflicts",
+          "explanEs": "La tutela legal no anula la autonomía progresiva del adolescente ni el principio de confidencialidad. La actuación ética más adecuada es facilitar el diálogo para acordar qué información puede compartirse sin comprometer la relación terapéutica ni el bienestar del evaluado.",
+          "explanEn": "Legal guardianship does not override the adolescent's progressive autonomy or the confidentiality principle. The most appropriate ethical action is to facilitate dialogue to agree on what information can be shared without compromising the therapeutic relationship or the examinee's wellbeing."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Durante la evaluación, el evaluado revela información que sugiere un riesgo serio e inminente para su propia seguridad. Existe un acuerdo de confidencialidad previo. ¿Qué hace el evaluador?",
+          "textEn": "During the assessment, the examinee reveals information suggesting a serious and imminent risk to their own safety. A prior confidentiality agreement exists. What does the evaluator do?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Rompe la confidencialidad de forma parcial y notifica a quien corresponda según el protocolo de riesgo",
+            "Mantiene la confidencialidad absoluta porque el acuerdo previo así lo establece",
+            "Suspende la evaluación sin tomar ninguna acción de protección",
+            "Solicita un permiso escrito al evaluado antes de tomar cualquier medida"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Rompe la confidencialidad de forma parcial y notifica a quien corresponda según el protocolo de riesgo",
+          "correctEn": "Rompe la confidencialidad de forma parcial y notifica a quien corresponda según el protocolo de riesgo",
+          "skillEs": "Límites éticos de la confidencialidad",
+          "skillEn": "Ethical limits of confidentiality",
+          "explanEs": "La confidencialidad tiene límites éticos y legales reconocidos: cuando existe riesgo serio e inminente para la vida, el deber de protección prevalece sobre el acuerdo de confidencialidad. Esta excepción es un principio deontológico universal, no una violación del contrato profesional.",
+          "explanEn": "Confidentiality has recognized ethical and legal limits: when there is a serious and imminent risk to life, the duty of protection prevails over the confidentiality agreement. This exception is a universal deontological principle, not a breach of the professional contract."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Un colega solicita una copia del informe de un paciente compartido. El paciente no ha firmado ninguna autorización para transferir información a terceros. ¿Cuál es la actuación ética?",
+          "textEn": "A colleague requests a copy of the report for a shared patient. The patient has not signed any authorization to transfer information to third parties. What is the ethical action?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Solicitar al paciente la autorización explícita antes de compartir cualquier información",    "en": "Request explicit authorization from the patient before sharing any information"         },
+            { "es": "Compartir el informe porque el colega también es un profesional de salud autorizado",       "en": "Share the report because the colleague is also an authorized health professional"        },
+            { "es": "Enviar solo un resumen verbal al colega para evitar el documento escrito",                  "en": "Send only a verbal summary to the colleague to avoid the written document"               },
+            { "es": "Negar la información al colega sin explicar el motivo para proteger la privacidad",         "en": "Deny the information to the colleague without explaining the reason to protect privacy"   }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Solicitar al paciente la autorización explícita antes de compartir cualquier información",
+          "correctEn": "Request explicit authorization from the patient before sharing any information",
+          "skillEs": "Consentimiento informado para transferencia de información",
+          "skillEn": "Informed consent for information transfer",
+          "explanEs": "La condición profesional del colega no sustituye el consentimiento del paciente. Toda transferencia de información clínica a terceros — incluyendo otros profesionales de salud — requiere autorización explícita del evaluado. El resumen verbal tiene el mismo estatus legal que el documento escrito.",
+          "explanEn": "The colleague's professional status does not substitute for the patient's consent. All transfer of clinical information to third parties — including other health professionals — requires explicit authorization from the examinee. A verbal summary has the same legal status as a written document."
         }
       ]
     }

@@ -1,214 +1,227 @@
 {
   "week": 7,
-  "type": "observation",
-  "titleEs": "Errores y Señales",
-  "titleEn": "Errors and Signals",
-  "skillEs": "Detección de errores",
-  "skillEn": "Error detection",
-  "descEs": "Entrena la habilidad de Detección de errores mediante preguntas interactivas.",
-  "descEn": "Train your Error detection skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Interpretación de Resultados",
+  "titleEn": "Results Interpretation",
+  "skillEs": "Interpretación de Resultados",
+  "skillEn": "Results Interpretation",
+  "descEs": "Interpretar resultados no es leer números: es atribuir significado clínico con prudencia. Esta semana entrenas a distinguir lo que los datos dicen de lo que solo parece decir.",
+  "descEn": "Interpreting results is not reading numbers: it is attributing clinical meaning with caution. This week you train to distinguish what the data says from what it only seems to say.",
   "microretos": [
     {
       "id": "w7m1",
-      "type": "observation",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Lee el Perfil",
+      "titleEn": "Read the Profile",
+      "descEs": "Memoriza los indicadores del perfil cognitivo y la categoría a la que pertenece cada uno. En 12 segundos la cuadrícula desaparecerá y deberás recuperarlos.",
+      "descEn": "Memorize the cognitive profile indicators and the category each belongs to. In 12 seconds the grid will disappear and you must retrieve them.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Dificultad de Atención", "categoryEs": "Área Cognitiva",  "categoryEn": "Cognitive Area",  "initials": "DA", "colorKey": "cyan"  },
+        { "name": "Dificultad de Memoria",  "categoryEs": "Área Cognitiva",  "categoryEn": "Cognitive Area",  "initials": "DM", "colorKey": "cyan"  },
+        { "name": "Dificultad Ejecutiva",   "categoryEs": "Área Cognitiva",  "categoryEn": "Cognitive Area",  "initials": "DE", "colorKey": "cyan"  },
+        { "name": "Rendimiento Adecuado",   "categoryEs": "Interpretación",  "categoryEn": "Interpretation", "initials": "RA", "colorKey": "green" },
+        { "name": "Rendimiento Bajo",       "categoryEs": "Interpretación",  "categoryEn": "Interpretation", "initials": "RB", "colorKey": "green" },
+        { "name": "Rendimiento Alto",       "categoryEs": "Interpretación",  "categoryEn": "Interpretation", "initials": "RL", "colorKey": "green" }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "¿Cuál de estos indicadores NO estaba en la cuadrícula?",
+          "textEn": "Which of these indicators was NOT in the grid?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Dificultad de Atención",
+            "Dificultad de Lenguaje",
+            "Dificultad Ejecutiva",
+            "Rendimiento Bajo"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Dificultad de Lenguaje",
+          "correctEn": "Dificultad de Lenguaje",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "Dificultad de Lenguaje es un área cognitiva real, pero no estaba en este perfil. Saber qué dominios se evaluaron y cuáles no es tan importante como los propios resultados — omitir un dominio puede llevar a hipótesis diagnósticas incompletas.",
+          "explanEn": "Language Difficulty is a real cognitive area, but it was not in this profile. Knowing which domains were assessed and which were not is as important as the results themselves — omitting a domain can lead to incomplete diagnostic hypotheses."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
-          "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
-          ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "textEs": "¿Cuántos indicadores de tipo 'Interpretación' estaban en la cuadrícula?",
+          "textEn": "How many 'Interpretation' indicators were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Tres niveles de interpretación: Rendimiento Adecuado, Rendimiento Bajo y Rendimiento Alto. Tener claro el rango normativo de cada nivel evita que puntuaciones dentro del promedio se informen erróneamente como problemas clínicos.",
+          "explanEn": "Three interpretation levels: Adequate Performance, Low Performance and High Performance. Knowing the normative range of each level prevents scores within the average from being incorrectly reported as clinical problems."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "¿A qué categoría pertenece Dificultad de Memoria?",
+          "textEn": "What category does Memory Difficulty belong to?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Interpretación",         "en": "Interpretation"         },
+            { "es": "Área Cognitiva",          "en": "Cognitive Area"         },
+            { "es": "Señal Clínica",           "en": "Clinical Signal"        },
+            { "es": "Criterio Psicométrico",   "en": "Psychometric Criterion" }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Área Cognitiva",
+          "correctEn": "Cognitive Area",
+          "skillEs": "Memoria semántica aplicada",
+          "skillEn": "Applied semantic memory",
+          "explanEs": "Dificultad de Memoria es un Área Cognitiva — el dominio específico que está comprometido. Distinguir entre el área cognitiva afectada y el nivel de afectación (interpretación) es fundamental para estructurar hipótesis y redactar informes con precisión.",
+          "explanEn": "Memory Difficulty is a Cognitive Area — the specific domain that is compromised. Distinguishing between the affected cognitive area and the level of impairment (interpretation) is fundamental for structuring hypotheses and writing reports with precision."
         }
       ]
     },
     {
       "id": "w7m2",
-      "type": "observation",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Conclusión Correcta",
+      "titleEn": "Correct Conclusion",
+      "descEs": "Se te presenta un conjunto de datos de evaluación. De las opciones disponibles, selecciona la conclusión que está mejor respaldada por los datos — sin ir más allá de lo que estos permiten inferir.",
+      "descEn": "You are presented with a set of assessment data. From the available options, select the conclusion best supported by the data — without going beyond what they allow to infer.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "Un evaluado de 22 años muestra rendimiento bajo en recuerdo libre pero dentro del promedio en reconocimiento de la misma información. ¿Cuál es la conclusión más adecuada?",
+          "textEn": "A 22-year-old examinee shows low performance in free recall but average performance in recognition of the same information. What is the most appropriate conclusion?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Hay una dificultad específica en la recuperación de información, no en el almacenamiento",
+            "El paciente presenta deterioro cognitivo generalizado",
+            "La memoria visual está completamente intacta",
+            "El proceso de codificación está totalmente alterado"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Hay una dificultad específica en la recuperación de información, no en el almacenamiento",
+          "correctEn": "Hay una dificultad específica en la recuperación de información, no en el almacenamiento",
+          "skillEs": "Interpretación diferencial de perfiles de memoria",
+          "skillEn": "Differential interpretation of memory profiles",
+          "explanEs": "Si el reconocimiento es adecuado, la información fue almacenada correctamente. El problema se localiza en la etapa de recuperación: acceder voluntariamente a lo almacenado. Esta distinción orienta la hipótesis diagnóstica y el tipo de intervención.",
+          "explanEn": "If recognition is adequate, the information was stored correctly. The problem is localized in the retrieval stage: voluntarily accessing what is stored. This distinction guides the diagnostic hypothesis and the type of intervention."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "Un perfil muestra todas las puntuaciones dentro del rango promedio, con variaciones entre escalas dentro de lo esperado estadísticamente. ¿Qué conclusión es apropiada?",
+          "textEn": "A profile shows all scores within the average range, with inter-scale variations within statistically expected ranges. What conclusion is appropriate?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "El desempeño cognitivo global es consistente con el rango esperado para la edad",
+            "El paciente tiene un perfil cognitivo superior al promedio",
+            "Se detecta una alteración específica en memoria de trabajo",
+            "El perfil indica disfunción ejecutiva de grado moderado"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "El desempeño cognitivo global es consistente con el rango esperado para la edad",
+          "correctEn": "El desempeño cognitivo global es consistente con el rango esperado para la edad",
+          "skillEs": "Interpretación normativa de perfiles",
+          "skillEn": "Normative interpretation of profiles",
+          "explanEs": "Un perfil homogéneo dentro del promedio, con variaciones inter-escala esperadas, no sustenta ningún diagnóstico de dificultad cognitiva. La variabilidad inter-escala es estadísticamente normal y no debe interpretarse como patología sin criterios adicionales.",
+          "explanEn": "A homogeneous profile within the average, with expected inter-scale variations, does not support any diagnosis of cognitive difficulty. Inter-scale variability is statistically normal and should not be interpreted as pathology without additional criteria."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "Un paciente obtiene puntuaciones elevadas en velocidad de procesamiento pero bajas en planificación y organización de secuencias. ¿Cuál es la conclusión metodológicamente más adecuada?",
+          "textEn": "A patient obtains high scores in processing speed but low scores in planning and sequence organization. What is the methodologically most appropriate conclusion?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Hay una discrepancia entre velocidad de procesamiento y planificación que requiere análisis diferencial",  "en": "There is a discrepancy between processing speed and planning that requires differential analysis" },
+            { "es": "El paciente tiene un trastorno de la función ejecutiva confirmado diagnósticamente",                       "en": "The patient has a diagnostically confirmed executive function disorder"                           },
+            { "es": "Las puntuaciones altas en velocidad compensan las bajas en planificación en el perfil global",            "en": "High processing speed scores compensate for low planning scores in the overall profile"           },
+            { "es": "El perfil es ininterpretable porque existen discrepancias entre escalas",                                 "en": "The profile is uninterpretable because there are discrepancies between scales"                    }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Hay una discrepancia entre velocidad de procesamiento y planificación que requiere análisis diferencial",
+          "correctEn": "There is a discrepancy between processing speed and planning that requires differential analysis",
+          "skillEs": "Interpretación cautelosa de discrepancias",
+          "skillEn": "Cautious interpretation of discrepancies",
+          "explanEs": "Una discrepancia estadísticamente significativa entre dominios es un hallazgo que requiere análisis adicional, no un diagnóstico. Las discrepancias perfilan hipótesis, pero no las confirman por sí solas — se requiere convergencia con datos conductuales, de historia clínica y otros instrumentos.",
+          "explanEn": "A statistically significant discrepancy between domains is a finding that requires further analysis, not a diagnosis. Discrepancies shape hypotheses, but do not confirm them alone — convergence with behavioral data, clinical history and other instruments is required."
         }
       ]
     },
     {
       "id": "w7m3",
-      "type": "observation",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Evita el Error",
+      "titleEn": "Avoid the Error",
+      "descEs": "Cada situación presenta una interpretación de resultados. Tu tarea: detectar el error de razonamiento o la inferencia que va más allá de lo que los datos permiten.",
+      "descEn": "Each situation presents an interpretation of results. Your task: detect the reasoning error or the inference that goes beyond what the data allows.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "Una evaluadora obtiene un percentil 45 en memoria verbal y escribe en el informe: 'El paciente presenta dificultades significativas de memoria verbal'. ¿Cuál es el error?",
+          "textEn": "An evaluator obtains a percentile 45 in verbal memory and writes in the report: 'The patient presents significant verbal memory difficulties'. What is the error?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Percentil 45 está dentro del rango promedio y no indica dificultad significativa",
+            "No se puede interpretar un percentil sin conocer el puntaje bruto original",
+            "La memoria verbal no puede evaluarse con un único procedimiento",
+            "La afirmación es correcta: percentil 45 corresponde a bajo rendimiento"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Percentil 45 está dentro del rango promedio y no indica dificultad significativa",
+          "correctEn": "Percentil 45 está dentro del rango promedio y no indica dificultad significativa",
+          "skillEs": "Lectura correcta de percentiles",
+          "skillEn": "Correct percentile reading",
+          "explanEs": "El percentil 45 indica que el evaluado supera al 45% de su grupo normativo — valor dentro del rango promedio (percentiles 25–75). Interpretar como 'dificultad significativa' un percentil promedio es un error de lectura normativa que puede generar alarma clínica sin fundamento.",
+          "explanEn": "Percentile 45 indicates the examinee outperforms 45% of their normative group — a value within the average range (percentiles 25–75). Interpreting an average percentile as a 'significant difficulty' is a normative reading error that can generate unfounded clinical alarm."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "Un psicólogo interpreta una puntuación baja en control inhibitorio como evidencia de 'falta de esfuerzo o motivación del paciente'. ¿Qué error comete?",
+          "textEn": "A psychologist interprets a low score in inhibitory control as evidence of 'lack of effort or motivation from the patient'. What error is being made?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "Atribuye una causa motivacional a un dato cognitivo sin respaldo evaluativo",
+            "Realiza una conversión incorrecta del puntaje bruto a puntuación normativa",
+            "Viola el principio de confiabilidad al usar solo un instrumento",
+            "No hay error: es una inferencia clínica metodológicamente válida"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "Atribuye una causa motivacional a un dato cognitivo sin respaldo evaluativo",
+          "correctEn": "Atribuye una causa motivacional a un dato cognitivo sin respaldo evaluativo",
+          "skillEs": "Distinción entre dato y atribución causal",
+          "skillEn": "Distinction between data and causal attribution",
+          "explanEs": "Una puntuación baja en control inhibitorio es un dato cognitivo — informa sobre el rendimiento, no sobre la causa. Atribuir motivación requiere evidencia convergente de validez de esfuerzo. Inferir causa desde el resultado sin respaldo es un sesgo de interpretación que puede dañar al paciente.",
+          "explanEn": "A low score in inhibitory control is a cognitive data point — it informs about performance, not its cause. Attributing motivation requires convergent effort validity evidence. Inferring cause from the result without support is an interpretive bias that can harm the patient."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "Un perfil muestra memoria episódica severamente baja, con memoria semántica y procedimental dentro del promedio. ¿Cuál es la inferencia más adecuada?",
+          "textEn": "A profile shows severely low episodic memory, with semantic and procedural memory within the average range. What is the most appropriate inference?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "El patrón sugiere afectación selectiva de memoria episódica, no deterioro generalizado",    "en": "The pattern suggests selective impairment of episodic memory, not generalized deterioration"   },
+            { "es": "El resultado indica deterioro cognitivo severo en todos los dominios de memoria",          "en": "The result indicates severe cognitive decline in all memory domains"                           },
+            { "es": "El perfil es inconsistente y los resultados deben invalidarse",                           "en": "The profile is inconsistent and the results must be invalidated"                             },
+            { "es": "La memoria semántica intacta descarta cualquier diagnóstico relacionado con la memoria",  "en": "Intact semantic memory rules out any memory-related diagnosis"                               }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "El patrón sugiere afectación selectiva de memoria episódica, no deterioro generalizado",
+          "correctEn": "The pattern suggests selective impairment of episodic memory, not generalized deterioration",
+          "skillEs": "Interpretación diferencial de sistemas de memoria",
+          "skillEn": "Differential interpretation of memory systems",
+          "explanEs": "La disociación entre memoria episódica comprometida y memoria semántica y procedimental intactas es un perfil neuropsicológicamente informativo que orienta hacia hipótesis específicas. No es inconsistencia — es un patrón diferencial que requiere análisis, no invalidación.",
+          "explanEn": "The dissociation between impaired episodic memory and intact semantic and procedural memory is a neuropsychologically informative profile that points toward specific hypotheses. It is not inconsistency — it is a differential pattern that requires analysis, not invalidation."
         }
       ]
     }
