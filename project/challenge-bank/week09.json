@@ -1,214 +1,227 @@
 {
   "week": 9,
-  "type": "escape_room",
-  "titleEs": "Fuga del Consultorio",
-  "titleEn": "Escape the Clinic",
-  "skillEs": "Resolución de problemas",
-  "skillEn": "Problem solving",
-  "descEs": "Entrena la habilidad de Resolución de problemas mediante preguntas interactivas.",
-  "descEn": "Train your Problem solving skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Fluidez Verbal y Organización Semántica",
+  "titleEn": "Verbal Fluency and Semantic Organization",
+  "skillEs": "Fluidez Verbal y Organización Semántica",
+  "skillEn": "Verbal Fluency and Semantic Organization",
+  "descEs": "Organizar conceptos por categorías semánticas es una habilidad central en la evaluación clínica: permite generar hipótesis con rapidez y precisión verbal. Esta semana entrenas esa capacidad bajo presión.",
+  "descEn": "Organizing concepts by semantic categories is a core skill in clinical assessment: it allows generating hypotheses with speed and verbal precision. This week you train that capacity under pressure.",
   "microretos": [
     {
       "id": "w9m1",
-      "type": "escape_room",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Palabras Bajo Presión",
+      "titleEn": "Words Under Pressure",
+      "descEs": "Memoriza los conceptos del proceso evaluativo y la categoría a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the assessment process concepts and the category each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Rapport",                     "categoryEs": "Vínculo Evaluativo",  "categoryEn": "Evaluative Bond",      "initials": "RP", "colorKey": "green"  },
+        { "name": "Alianza de Trabajo",           "categoryEs": "Vínculo Evaluativo",  "categoryEn": "Evaluative Bond",      "initials": "AT", "colorKey": "green"  },
+        { "name": "Consentimiento Informado",     "categoryEs": "Marco Ético",          "categoryEn": "Ethical Framework",    "initials": "CI", "colorKey": "cyan"   },
+        { "name": "Confidencialidad Clínica",     "categoryEs": "Marco Ético",          "categoryEn": "Ethical Framework",    "initials": "CC", "colorKey": "cyan"   },
+        { "name": "Entrevista Semi-estructurada", "categoryEs": "Técnica Evaluativa",   "categoryEn": "Assessment Technique", "initials": "ES", "colorKey": "purple" },
+        { "name": "Observación Naturalista",      "categoryEs": "Técnica Evaluativa",   "categoryEn": "Assessment Technique", "initials": "ON", "colorKey": "purple" }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Cuál de estos conceptos NO estaba en la cuadrícula?",
+          "textEn": "Which of these concepts was NOT in the grid?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Rapport",
+            "Supervisión Clínica",
+            "Consentimiento Informado",
+            "Observación Naturalista"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Supervisión Clínica",
+          "correctEn": "Supervisión Clínica",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "Supervisión Clínica es un proceso profesional real pero no estaba en esta cuadrícula. Distinguir lo que fue presentado de lo meramente familiar es la base de la memoria de reconocimiento — y también de la lectura precisa de un protocolo de evaluación.",
+          "explanEn": "Clinical Supervision is a real professional process but was not in this grid. Distinguishing what was presented from what is merely familiar is the foundation of recognition memory — and also of precise protocol reading."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
-          "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
-          ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "textEs": "¿Cuántos conceptos de tipo 'Marco Ético' estaban en la cuadrícula?",
+          "textEn": "How many 'Ethical Framework' concepts were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Dos conceptos del Marco Ético: Consentimiento Informado y Confidencialidad Clínica. Ambos deben estar resueltos antes de iniciar cualquier proceso evaluativo — son condiciones de legitimidad, no formalidades.",
+          "explanEn": "Two Ethical Framework concepts: Informed Consent and Clinical Confidentiality. Both must be resolved before starting any assessment process — they are conditions of legitimacy, not formalities."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿A qué categoría pertenece Entrevista Semi-estructurada?",
+          "textEn": "What category does the Semi-structured Interview belong to?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Vínculo Evaluativo",  "en": "Evaluative Bond"      },
+            { "es": "Marco Ético",          "en": "Ethical Framework"    },
+            { "es": "Técnica Evaluativa",   "en": "Assessment Technique" },
+            { "es": "Fuente de Datos",      "en": "Data Source"          }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Técnica Evaluativa",
+          "correctEn": "Assessment Technique",
+          "skillEs": "Memoria semántica del proceso evaluativo",
+          "skillEn": "Semantic memory of the assessment process",
+          "explanEs": "La Entrevista Semi-estructurada es una Técnica Evaluativa: combina preguntas predefinidas con flexibilidad para explorar respuestas. Junto con la Observación Naturalista, permite obtener datos cualitativos que los instrumentos estandarizados no capturan por sí solos.",
+          "explanEn": "The Semi-structured Interview is an Assessment Technique: it combines predefined questions with flexibility to explore responses. Together with Naturalistic Observation, it allows obtaining qualitative data that standardized instruments cannot capture alone."
         }
       ]
     },
     {
       "id": "w9m2",
-      "type": "escape_room",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Construye la Categoría",
+      "titleEn": "Build the Category",
+      "descEs": "Se te presentan grupos de conceptos sin etiqueta. Identifica qué categoría semántica los unifica a todos.",
+      "descEn": "You are presented with groups of concepts without a label. Identify which semantic category unifies them all.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Qué categoría agrupa a: Entrevista Clínica, Observación Conductual, Registro de Autoinforme y Análisis Documental?",
+          "textEn": "Which category groups: Clinical Interview, Behavioral Observation, Self-report Record and Document Analysis?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Técnicas de obtención de información en evaluación psicológica",
+            "Tipos de instrumentos estandarizados",
+            "Fuentes de error en la medición",
+            "Estrategias de intervención clínica"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Técnicas de obtención de información en evaluación psicológica",
+          "correctEn": "Técnicas de obtención de información en evaluación psicológica",
+          "skillEs": "Organización semántica de técnicas evaluativas",
+          "skillEn": "Semantic organization of assessment techniques",
+          "explanEs": "Entrevista, observación, autoinforme y análisis documental son todos métodos para obtener información clínica. Clasificarlos bajo la misma categoría permite seleccionarlos estratégicamente según el objetivo de evaluación y las características del caso.",
+          "explanEn": "Interview, observation, self-report and document analysis are all methods for obtaining clinical information. Classifying them under the same category allows selecting them strategically according to the assessment objective and case characteristics."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "¿Qué tienen en común: Claridad, Precisión, Pertinencia y Adecuación a la audiencia?",
+          "textEn": "What do Clarity, Precision, Relevance and Audience Appropriateness have in common?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "Criterios de calidad de un informe psicológico",
+            "Principios del diagnóstico diferencial",
+            "Requisitos del consentimiento informado",
+            "Características de la atención sostenida"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "Criterios de calidad de un informe psicológico",
+          "correctEn": "Criterios de calidad de un informe psicológico",
+          "skillEs": "Clasificación de criterios de calidad",
+          "skillEn": "Classification of quality criteria",
+          "explanEs": "Claridad, precisión, pertinencia y adecuación a la audiencia son criterios que determinan si un informe psicológico cumple su función comunicativa. Un informe técnicamente correcto pero incomprensible para su destinatario pierde su utilidad clínica.",
+          "explanEn": "Clarity, precision, relevance and audience appropriateness are criteria that determine whether a psychological report fulfills its communicative function. A technically correct but incomprehensible report for its recipient loses its clinical utility."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿Qué categoría unifica a: Comparación Normativa, Análisis de Discrepancias, Interpretación de Perfil y Triangulación de Fuentes?",
+          "textEn": "Which category unifies: Normative Comparison, Discrepancy Analysis, Profile Interpretation and Source Triangulation?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Estrategias de interpretación de resultados evaluativos", "en": "Strategies for interpreting assessment results"  },
+            { "es": "Tipos de confiabilidad en psicometría",                   "en": "Types of reliability in psychometrics"          },
+            { "es": "Etapas del proceso de entrevista inicial",                 "en": "Stages of the initial interview process"        },
+            { "es": "Criterios de selección de baterías evaluativas",           "en": "Selection criteria for assessment batteries"    }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Estrategias de interpretación de resultados evaluativos",
+          "correctEn": "Strategies for interpreting assessment results",
+          "skillEs": "Categorización de estrategias interpretativas",
+          "skillEn": "Categorization of interpretive strategies",
+          "explanEs": "Comparación normativa, análisis de discrepancias, interpretación de perfil y triangulación de fuentes son estrategias distintas para atribuir significado clínico a los datos. Elegir la estrategia adecuada depende del tipo de pregunta clínica que se intenta responder.",
+          "explanEn": "Normative comparison, discrepancy analysis, profile interpretation and source triangulation are distinct strategies for attributing clinical meaning to data. Choosing the right strategy depends on the type of clinical question being answered."
         }
       ]
     },
     {
       "id": "w9m3",
-      "type": "escape_room",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Concepto Oculto",
+      "titleEn": "Hidden Concept",
+      "descEs": "Cada situación clínica describe un principio en acción. Identifica el concepto técnico que mejor explica lo que está ocurriendo.",
+      "descEn": "Each clinical situation describes a principle in action. Identify the technical concept that best explains what is happening.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Un instrumento produce resultados consistentes en diferentes momentos y con diferentes evaluadores, independientemente de lo que mida. ¿Qué concepto describe esta propiedad?",
+          "textEn": "An instrument produces consistent results at different times and with different evaluators, regardless of what it measures. Which concept describes this property?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Confiabilidad",
+            "Validez de constructo",
+            "Estandarización",
+            "Sensibilidad diagnóstica"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Confiabilidad",
+          "correctEn": "Confiabilidad",
+          "skillEs": "Identificación de conceptos psicométricos",
+          "skillEn": "Identification of psychometric concepts",
+          "explanEs": "La confiabilidad describe la estabilidad y consistencia de las mediciones, con independencia de lo que se esté midiendo. Es condición necesaria pero no suficiente para la validez: un instrumento puede ser confiable sin medir lo que pretende.",
+          "explanEn": "Reliability describes the stability and consistency of measurements, regardless of what is being measured. It is a necessary but not sufficient condition for validity: an instrument can be reliable without measuring what it intends to."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "El evaluador compara el rendimiento de un individuo con el de un grupo de referencia de la misma edad para determinar si está dentro del rango esperado. ¿Qué estrategia aplica?",
+          "textEn": "The evaluator compares an individual's performance with that of a reference group of the same age to determine if it is within the expected range. Which strategy is being applied?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "Interpretación normativa",
+            "Análisis idiográfico",
+            "Evaluación criterial",
+            "Comparación longitudinal"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "Interpretación normativa",
+          "correctEn": "Interpretación normativa",
+          "skillEs": "Identificación de estrategias de interpretación",
+          "skillEn": "Identification of interpretation strategies",
+          "explanEs": "La interpretación normativa compara el rendimiento individual con el de una muestra de referencia para determinar si es típico o atípico. Depende de que los baremos sean representativos del grupo al que pertenece el evaluado — de lo contrario, la comparación carece de validez.",
+          "explanEn": "Normative interpretation compares individual performance with that of a reference sample to determine if it is typical or atypical. It depends on the norms being representative of the group the examinee belongs to — otherwise the comparison lacks validity."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Un evaluador toma decisiones basadas exclusivamente en la evidencia obtenida en el proceso, sin que sus expectativas previas sobre el caso modifiquen el registro o la interpretación. ¿Qué principio guía su actuación?",
+          "textEn": "An evaluator makes decisions based exclusively on the evidence obtained in the process, without their prior expectations about the case modifying the recording or interpretation. Which principle guides their action?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Objetividad del proceso evaluativo", "en": "Objectivity of the assessment process" },
+            { "es": "Principio de beneficencia",          "en": "Principle of beneficence"              },
+            { "es": "Validez ecológica",                  "en": "Ecological validity"                   },
+            { "es": "Confiabilidad interjueces",          "en": "Inter-rater reliability"               }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Objetividad del proceso evaluativo",
+          "correctEn": "Objectivity of the assessment process",
+          "skillEs": "Identificación de principios metodológicos",
+          "skillEn": "Identification of methodological principles",
+          "explanEs": "La objetividad exige que el registro y la interpretación respondan a los datos, no a las expectativas del evaluador. Este principio protege la validez de las conclusiones y previene el sesgo de confirmación, uno de los errores más frecuentes en la práctica clínica.",
+          "explanEn": "Objectivity requires that recording and interpretation respond to the data, not to the evaluator's expectations. This principle protects the validity of conclusions and prevents confirmation bias, one of the most frequent errors in clinical practice."
         }
       ]
     }

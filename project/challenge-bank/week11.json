@@ -1,214 +1,227 @@
 {
   "week": 11,
-  "type": "verbal_fluency",
-  "titleEs": "Palabras y Conceptos",
-  "titleEn": "Words and Concepts",
-  "skillEs": "Fluidez verbal",
-  "skillEn": "Verbal fluency",
-  "descEs": "Entrena la habilidad de Fluidez verbal mediante preguntas interactivas.",
-  "descEn": "Train your Verbal fluency skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Razonamiento Clínico Inicial",
+  "titleEn": "Initial Clinical Reasoning",
+  "skillEs": "Razonamiento Clínico",
+  "skillEn": "Clinical Reasoning",
+  "descEs": "El razonamiento clínico comienza antes de aplicar cualquier instrumento: en la lectura del motivo de consulta, en la identificación de los datos relevantes y en la formulación de la primera hipótesis. Esta semana entrenas ese primer análisis.",
+  "descEn": "Clinical reasoning begins before applying any instrument: in reading the referral, in identifying relevant data and in formulating the first hypothesis. This week you train that initial analysis.",
   "microretos": [
     {
       "id": "w11m1",
-      "type": "verbal_fluency",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "Primer Análisis",
+      "titleEn": "First Analysis",
+      "descEs": "Memoriza los elementos clave de una presentación clínica y la dimensión evaluativa a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the key elements of a clinical presentation and the assessment dimension each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Motivo de Consulta",      "categoryEs": "Presentación",  "categoryEn": "Presentation", "initials": "MC", "colorKey": "amber" },
+        { "name": "Tiempo de Evolución",     "categoryEs": "Presentación",  "categoryEn": "Presentation", "initials": "TE", "colorKey": "amber" },
+        { "name": "Impacto Funcional",       "categoryEs": "Funcionamiento","categoryEn": "Functioning",  "initials": "IF", "colorKey": "green" },
+        { "name": "Nivel de Autonomía",      "categoryEs": "Funcionamiento","categoryEn": "Functioning",  "initials": "NA", "colorKey": "green" },
+        { "name": "Factor Desencadenante",   "categoryEs": "Historia",      "categoryEn": "History",      "initials": "FD", "colorKey": "cyan"  },
+        { "name": "Antecedentes Relevantes", "categoryEs": "Historia",      "categoryEn": "History",      "initials": "AR", "colorKey": "cyan"  }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "¿Cuál de estos elementos NO estaba en la cuadrícula?",
+          "textEn": "Which of these elements was NOT in the grid?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Motivo de Consulta",
+            "Red de Apoyo Social",
+            "Impacto Funcional",
+            "Factor Desencadenante"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Red de Apoyo Social",
+          "correctEn": "Red de Apoyo Social",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "La Red de Apoyo Social es un elemento clínico relevante pero no estaba en esta cuadrícula. Saber exactamente qué dimensiones se exploraron en la presentación inicial ayuda a identificar vacíos de información que pueden afectar la formulación de hipótesis.",
+          "explanEn": "Social Support Network is a clinically relevant element but was not in this grid. Knowing exactly which dimensions were explored in the initial presentation helps identify information gaps that may affect hypothesis formulation."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
-          "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
-          ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "textEs": "¿Cuántos elementos de tipo 'Presentación' estaban en la cuadrícula?",
+          "textEn": "How many 'Presentation' elements were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Dos elementos de Presentación: Motivo de Consulta y Tiempo de Evolución. Ambos son la puerta de entrada al razonamiento clínico: el motivo define la demanda y el tiempo de evolución orienta si el problema es agudo, subagudo o crónico — distinción crítica para la hipótesis inicial.",
+          "explanEn": "Two Presentation elements: Referral Reason and Evolution Time. Both are the entry point to clinical reasoning: the referral reason defines the demand and the evolution time guides whether the problem is acute, subacute or chronic — a critical distinction for the initial hypothesis."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "¿A qué dimensión pertenece Impacto Funcional?",
+          "textEn": "Which dimension does Functional Impact belong to?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "Presentación",   "en": "Presentation" },
+            { "es": "Funcionamiento", "en": "Functioning"  },
+            { "es": "Historia",       "en": "History"      },
+            { "es": "Contexto",       "en": "Context"      }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "Funcionamiento",
+          "correctEn": "Functioning",
+          "skillEs": "Clasificación de dimensiones clínicas",
+          "skillEn": "Classification of clinical dimensions",
+          "explanEs": "El Impacto Funcional pertenece a la dimensión de Funcionamiento: describe cómo las dificultades afectan las actividades cotidianas del evaluado. Esta dimensión determina la relevancia clínica del problema — sin impacto funcional, la presencia de síntomas aislados raramente justifica una intervención.",
+          "explanEn": "Functional Impact belongs to the Functioning dimension: it describes how difficulties affect the examinee's daily activities. This dimension determines the clinical relevance of the problem — without functional impact, the presence of isolated symptoms rarely justifies an intervention."
         }
       ]
     },
     {
       "id": "w11m2",
-      "type": "verbal_fluency",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Dato Relevante",
+      "titleEn": "Relevant Data",
+      "descEs": "Se te presenta una descripción clínica con múltiples datos. Identifica cuál de ellos es el más relevante para orientar el razonamiento diagnóstico inicial.",
+      "descEn": "You are presented with a clinical description with multiple data points. Identify which one is most relevant for orienting the initial diagnostic reasoning.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Un adulto de 35 años consulta por olvidos frecuentes. Tiene buen estado de salud, duerme 7 horas y hace ejercicio. Las dificultades de concentración y memoria iniciaron hace 3 semanas tras un cambio laboral significativo. ¿Cuál es el dato más relevante para el razonamiento inicial?",
+          "textEn": "A 35-year-old adult consults about frequent forgetfulness. They have good health, sleep 7 hours and exercise. Concentration and memory difficulties began 3 weeks ago after a significant job change. What is the most relevant data point for initial reasoning?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "El inicio reciente y específico de las dificultades de concentración y memoria",
+            "La edad del paciente y su estado general de salud",
+            "La cantidad de horas de sueño reportadas",
+            "La práctica regular de ejercicio físico"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "El inicio reciente y específico de las dificultades de concentración y memoria",
+          "correctEn": "El inicio reciente y específico de las dificultades de concentración y memoria",
+          "skillEs": "Identificación del dato clínicamente relevante",
+          "skillEn": "Identification of clinically relevant data",
+          "explanEs": "El inicio reciente y su coincidencia temporal con el cambio laboral es el dato más informativo para el razonamiento inicial: sugiere una relación entre el estresor situacional y los síntomas cognitivos. Los datos de salud general y hábitos son contextualmente positivos pero no explican el cambio.",
+          "explanEn": "The recent onset and its temporal coincidence with the job change is the most informative data point for initial reasoning: it suggests a relationship between the situational stressor and cognitive symptoms. General health and lifestyle data are contextually positive but do not explain the change."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Un estudiante de 17 años es referido por bajo rendimiento académico desde el último semestre. Reporta dormir poco por uso nocturno del celular. Su madre señala que las dificultades de organización existen desde que adquirió el celular hace un año. ¿Cuál es el dato más relevante para orientar la hipótesis inicial?",
+          "textEn": "A 17-year-old student is referred for poor academic performance since last semester. Reports sleeping little due to nighttime phone use. Their mother notes organizational difficulties have existed since acquiring the phone a year ago. What is the most relevant data point for orienting the initial hypothesis?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "La coincidencia temporal entre el inicio del bajo rendimiento, el sueño insuficiente y la adquisición del celular",
+            "El hecho de que sea un adolescente de 17 años con bajo rendimiento",
+            "Que su madre reporta el problema, no el estudiante",
+            "Que solo bajó en el último semestre, no en todos"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "La coincidencia temporal entre el inicio del bajo rendimiento, el sueño insuficiente y la adquisición del celular",
+          "correctEn": "La coincidencia temporal entre el inicio del bajo rendimiento, el sueño insuficiente y la adquisición del celular",
+          "skillEs": "Razonamiento causal inicial",
+          "skillEn": "Initial causal reasoning",
+          "explanEs": "La coincidencia temporal entre tres variables — rendimiento académico, sueño y uso del celular — ofrece una hipótesis contextual coherente que debe explorarse antes de plantear hipótesis de tipo neurocognitivo. El razonamiento clínico inicial busca la explicación más parsimoniosa compatible con los datos.",
+          "explanEn": "The temporal coincidence between three variables — academic performance, sleep and phone use — offers a coherent contextual hypothesis that must be explored before raising neurocognitive-type hypotheses. Initial clinical reasoning seeks the most parsimonious explanation compatible with the data."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Un adulto mayor de 72 años consulta porque olvida donde deja las cosas. Vive solo, maneja su auto, administra sus finanzas y mantiene actividad social activa. Sus hijos reportan que los olvidos existen desde hace años sin cambios notables. ¿Cuál es el dato más relevante?",
+          "textEn": "A 72-year-old older adult consults because they frequently forget where they leave things. They live alone, drive, manage finances and maintain active social activity. Their children report the forgetfulness has existed for years without notable changes. What is the most relevant data point?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "La preservación del funcionamiento cotidiano sugiere que los olvidos no tienen impacto funcional significativo", "en": "Preserved daily functioning suggests the forgetfulness has no significant functional impact"       },
+            { "es": "La edad de 72 años indica que existe un deterioro cognitivo esperado para su etapa vital",                     "en": "Age 72 indicates expected cognitive decline for their life stage"                               },
+            { "es": "Que viva solo es el factor de riesgo más relevante para un diagnóstico de deterioro",                         "en": "Living alone is the most relevant risk factor for a deterioration diagnosis"                     },
+            { "es": "Que los hijos perciban los olvidos confirma que el problema es clínicamente significativo",                   "en": "That the children perceive the forgetfulness confirms the problem is clinically significant"      }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "La preservación del funcionamiento cotidiano sugiere que los olvidos no tienen impacto funcional significativo",
+          "correctEn": "Preserved daily functioning suggests the forgetfulness has no significant functional impact",
+          "skillEs": "Peso clínico del funcionamiento en el razonamiento inicial",
+          "skillEn": "Clinical weight of functioning in initial reasoning",
+          "explanEs": "El mantenimiento de actividades instrumentales complejas (conducción, finanzas, vida social) sin cambios apreciables es el dato más informativo: sugiere que los olvidos no constituyen un deterioro clínicamente significativo. La preocupación de los hijos y la edad son factores contextuales, pero no reemplazan la evaluación del impacto funcional real.",
+          "explanEn": "Maintaining complex instrumental activities (driving, finances, social life) without appreciable changes is the most informative data: it suggests the forgetfulness does not constitute clinically significant decline. Children's concern and age are contextual factors, but do not replace the assessment of actual functional impact."
         }
       ]
     },
     {
       "id": "w11m3",
-      "type": "verbal_fluency",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Hipótesis Inicial",
+      "titleEn": "Initial Hypothesis",
+      "descEs": "A partir de una presentación clínica breve, formula la hipótesis inicial más adecuada. No se trata de diagnosticar: se trata de señalar la dirección más plausible para continuar el proceso.",
+      "descEn": "From a brief clinical presentation, formulate the most appropriate initial hypothesis. This is not about diagnosing: it is about pointing in the most plausible direction to continue the process.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿A cuál categoría pertenece el NEO PI-R?",
-          "textEn": "What category does the NEO PI-R belong to?",
+          "textEs": "Un joven de 19 años consulta por dificultades para organizarse, cumplir plazos y mantener orden en sus tareas. Reporta que siempre fue así. Sus padres confirman dificultades similares desde preescolar. Tiene buen rendimiento intelectual y vida social activa. ¿Cuál es la hipótesis inicial más adecuada?",
+          "textEn": "A 19-year-old consults about difficulties organizing, meeting deadlines and maintaining order in tasks. Reports always having been this way. Parents confirm similar difficulties since preschool. Has good intellectual performance and active social life. What is the most appropriate initial hypothesis?",
           "options": [
-            "Inteligencia",
-            "Personalidad",
-            "Neuropsicológico",
-            "Proyectivo"
+            "Posible alteración en funciones ejecutivas de inicio en la infancia, sin afectación funcional global",
+            "Deterioro cognitivo adquirido de inicio en la adultez temprana",
+            "Dificultad de aprendizaje que afecta todas las áreas cognitivas",
+            "Problema de motivación y hábitos sin base cognitiva"
           ],
-          "correctEs": "Personalidad",
-          "correctEn": "Personalidad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El NEO PI-R evalúa los cinco grandes factores de personalidad (Big Five).",
-          "explanEn": "The NEO PI-R assesses the Big Five personality factors."
+          "correctEs": "Posible alteración en funciones ejecutivas de inicio en la infancia, sin afectación funcional global",
+          "correctEn": "Posible alteración en funciones ejecutivas de inicio en la infancia, sin afectación funcional global",
+          "skillEs": "Formulación de hipótesis clínica inicial",
+          "skillEn": "Initial clinical hypothesis formulation",
+          "explanEs": "El patrón crónico desde la infancia, focalizado en organización y gestión de tareas con inteligencia general preservada y vida social activa, orienta hacia una hipótesis de alteración ejecutiva específica de inicio temprano. El diagnóstico diferencial vendrá después; la hipótesis inicial apunta la dirección evaluativa más plausible.",
+          "explanEn": "The chronic pattern since childhood, focused on organization and task management with preserved general intelligence and active social life, points toward a hypothesis of specific early-onset executive dysfunction. The differential diagnosis comes later; the initial hypothesis points in the most plausible assessment direction."
         },
         {
           "id": "q2",
-          "textEs": "¿Cuál de estos es un instrumento de evaluación neuropsicológica?",
-          "textEn": "Which of these is a neuropsychological assessment instrument?",
+          "textEs": "Una mujer de 28 años consulta por dificultades de concentración, memoria y toma de decisiones. Los síntomas iniciaron hace 4 meses coincidiendo con bajo estado de ánimo, falta de energía y anhedonia. Sin antecedentes cognitivos previos. ¿Cuál es la hipótesis clínica más adecuada?",
+          "textEn": "A 28-year-old woman consults about concentration, memory and decision-making difficulties. Symptoms began 4 months ago coinciding with low mood, lack of energy and anhedonia. No prior cognitive history. What is the most appropriate clinical hypothesis?",
           "options": [
-            "MMPI-2",
-            "TAT",
-            "Bender",
-            "NEO PI-R"
+            "Las dificultades cognitivas podrían ser secundarias al estado de ánimo depresivo",
+            "Existe un trastorno cognitivo primario que generó el cuadro afectivo",
+            "Las dificultades cognitivas y el estado de ánimo son problemas independientes",
+            "Sin evaluación neuropsicológica no es posible plantear ninguna hipótesis"
           ],
-          "correctEs": "Bender",
-          "correctEn": "Bender",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El Test de Bender evalúa la integración viso-motora, una función neuropsicológica.",
-          "explanEn": "The Bender Test assesses visual-motor integration, a neuropsychological function."
+          "correctEs": "Las dificultades cognitivas podrían ser secundarias al estado de ánimo depresivo",
+          "correctEn": "Las dificultades cognitivas podrían ser secundarias al estado de ánimo depresivo",
+          "skillEs": "Razonamiento diferencial afecto-cognición",
+          "skillEn": "Affect-cognition differential reasoning",
+          "explanEs": "La coincidencia temporal entre el inicio de los síntomas cognitivos y el cuadro afectivo, sumada a la ausencia de antecedentes cognitivos, favorece la hipótesis de disfunción cognitiva secundaria al estado de ánimo. Esta hipótesis es la más parsimoniosa con los datos disponibles y determina qué evaluar primero.",
+          "explanEn": "The temporal coincidence between the onset of cognitive symptoms and the affective episode, added to the absence of prior cognitive history, favors the hypothesis of cognitive dysfunction secondary to mood. This hypothesis is the most parsimonious with available data and determines what to assess first."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué tipo de instrumento es el STAI?",
-          "textEn": "What type of instrument is the STAI?",
+          "textEs": "Un niño de 8 años es referido por dificultades académicas. Sus notas son adecuadas en matemáticas pero muy bajas en lectura y escritura. Aprendió a hablar tarde, tuvo dificultades con las rimas en preescolar y aún confunde letras similares. Su funcionamiento social y atencional es normal. ¿Cuál es la hipótesis inicial más pertinente?",
+          "textEn": "An 8-year-old child is referred for academic difficulties. Grades are adequate in mathematics but very low in reading and writing. Spoke late, had difficulty with rhymes in preschool and still confuses similar letters. Social and attentional functioning is normal. What is the most pertinent initial hypothesis?",
           "options": [
-            "Proyectivo",
-            "De inteligencia",
-            "De ansiedad",
-            "De personalidad"
+            { "es": "El perfil sugiere explorar dificultades específicas en el procesamiento fonológico y el aprendizaje del lenguaje escrito", "en": "The profile suggests exploring specific difficulties in phonological processing and written language learning"  },
+            { "es": "El bajo rendimiento en lectura indica un déficit intelectual global que debe evaluarse con una batería completa",        "en": "Low reading performance indicates a global intellectual deficit that must be assessed with a complete battery"    },
+            { "es": "Los antecedentes de habla tardía confirman un trastorno del lenguaje que no requiere más evaluación",                 "en": "Late speech history confirms a language disorder that requires no further assessment"                            },
+            { "es": "La normalidad en matemáticas descarta cualquier tipo de dificultad de aprendizaje",                                  "en": "Normal mathematics performance rules out any type of learning difficulty"                                     }
           ],
-          "correctEs": "De ansiedad",
-          "correctEn": "De ansiedad",
-          "skillEs": "Clasificación de instrumentos",
-          "skillEn": "Instrument classification",
-          "explanEs": "El STAI (State-Trait Anxiety Inventory) es un instrumento específico para medir la ansiedad.",
-          "explanEn": "The STAI (State-Trait Anxiety Inventory) is a specific instrument for measuring anxiety."
+          "correctEs": "El perfil sugiere explorar dificultades específicas en el procesamiento fonológico y el aprendizaje del lenguaje escrito",
+          "correctEn": "The profile suggests exploring specific difficulties in phonological processing and written language learning",
+          "skillEs": "Hipótesis de dificultades específicas de aprendizaje",
+          "skillEn": "Specific learning difficulties hypothesis",
+          "explanEs": "El patrón — habla tardía, dificultades con rimas, confusión de letras y rendimiento disociado entre lectura y matemáticas — señala hacia dificultades en el procesamiento fonológico como área prioritaria de evaluación. Esta hipótesis inicial focaliza el proceso sin precipitar un diagnóstico ni descartarlo prematuramente.",
+          "explanEn": "The pattern — late speech, rhyme difficulties, letter confusion and dissociated performance between reading and mathematics — points toward phonological processing difficulties as a priority assessment area. This initial hypothesis focuses the process without precipitating a diagnosis or ruling it out prematurely."
         }
       ]
     }

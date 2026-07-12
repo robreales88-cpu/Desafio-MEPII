@@ -1,349 +1,227 @@
 {
   "week": 12,
   "type": "memory",
-  "titleEs": "Mapa Cognitivo",
-  "titleEn": "Cognitive Map",
-  "skillEs": "Memoria Visual",
-  "skillEn": "Visual Memory",
-  "descEs": "Entrena la habilidad de Memoria Visual mediante memorización visual.",
-  "descEn": "Train your Visual Memory skill through visual memorization.",
+  "titleEs": "Pensamiento Analítico",
+  "titleEn": "Analytical Thinking",
+  "skillEs": "Pensamiento Analítico",
+  "skillEn": "Analytical Thinking",
+  "descEs": "El pensamiento analítico descompone problemas complejos en partes manejables, examina las relaciones entre evidencias y construye conclusiones sólidas. Esta semana entrenas ese razonamiento en contextos clínicos reales.",
+  "descEn": "Analytical thinking breaks down complex problems into manageable parts, examines the relationships between evidence and builds solid conclusions. This week you train that reasoning in real clinical contexts.",
   "microretos": [
     {
       "id": "w12m1",
       "type": "memory",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "titleEs": "Analiza la Situación",
+      "titleEn": "Analyze the Situation",
+      "descEs": "Memoriza los componentes del pensamiento analítico y la fase del proceso a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the components of analytical thinking and the process phase each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
-      "memorizeTime": 10,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "items": [
-        {
-          "name": "WAIS-IV",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "WA",
-          "colorKey": "purple"
-        },
-        {
-          "name": "MMPI-2",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "MM",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "Rorschach",
-          "categoryEs": "Proyectivo",
-          "categoryEn": "Projective",
-          "initials": "RO",
-          "colorKey": "amber"
-        },
-        {
-          "name": "Bender",
-          "categoryEs": "Neuropsicológico",
-          "categoryEn": "Neuropsych",
-          "initials": "BN",
-          "colorKey": "green"
-        },
-        {
-          "name": "NEO PI-R",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "NE",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "K-ABC",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "KA",
-          "colorKey": "purple"
-        }
+        { "name": "Identificación del Problema",   "categoryEs": "Análisis",   "categoryEn": "Analysis",   "initials": "IP", "colorKey": "purple" },
+        { "name": "Descomposición del Problema",   "categoryEs": "Análisis",   "categoryEn": "Analysis",   "initials": "DP", "colorKey": "purple" },
+        { "name": "Búsqueda de Evidencias",        "categoryEs": "Evaluación", "categoryEn": "Evaluation", "initials": "BE", "colorKey": "green"  },
+        { "name": "Contraste de Hipótesis",        "categoryEs": "Evaluación", "categoryEn": "Evaluation", "initials": "CH", "colorKey": "green"  },
+        { "name": "Elaboración de Conclusión",     "categoryEs": "Síntesis",   "categoryEn": "Synthesis",  "initials": "EC", "colorKey": "amber"  },
+        { "name": "Generación de Recomendaciones", "categoryEs": "Síntesis",   "categoryEn": "Synthesis",  "initials": "GR", "colorKey": "amber"  }
       ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "¿Cuál de estos componentes NO estaba en la cuadrícula?",
+          "textEn": "Which of these components was NOT in the grid?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Búsqueda de Evidencias",
+            "Presentación del Caso",
+            "Contraste de Hipótesis",
+            "Generación de Recomendaciones"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Presentación del Caso",
+          "correctEn": "Presentación del Caso",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "Presentación del Caso no estaba en esta cuadrícula. Aunque es una actividad real del proceso clínico, pertenece a la comunicación de resultados, no al pensamiento analítico en sí. Distinguir los componentes del razonamiento de los productos de la comunicación es fundamental para no confundir el proceso con el informe.",
+          "explanEn": "Case Presentation was not in this grid. Although it is a real clinical process activity, it belongs to results communication, not to analytical thinking itself. Distinguishing reasoning components from communication products is fundamental to not confusing the process with the report."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
-          "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
-          ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "textEs": "¿Cuántos componentes de la fase 'Evaluación' estaban en la cuadrícula?",
+          "textEn": "How many 'Evaluation' phase components were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "2",
+          "correctEn": "2",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Dos componentes de Evaluación: Búsqueda de Evidencias y Contraste de Hipótesis. La fase de evaluación es el núcleo del pensamiento analítico: reunir evidencias sin contrastarlas con hipótesis no produce conocimiento clínico, solo datos acumulados.",
+          "explanEn": "Two Evaluation components: Evidence Search and Hypothesis Contrast. The evaluation phase is the core of analytical thinking: gathering evidence without contrasting it with hypotheses does not produce clinical knowledge, only accumulated data."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "¿A qué fase pertenece Generación de Recomendaciones?",
+          "textEn": "Which phase does Generating Recommendations belong to?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "Análisis",   "en": "Analysis"   },
+            { "es": "Evaluación", "en": "Evaluation" },
+            { "es": "Síntesis",   "en": "Synthesis"  },
+            { "es": "Revisión",   "en": "Review"     }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "Síntesis",
+          "correctEn": "Synthesis",
+          "skillEs": "Clasificación de fases del razonamiento",
+          "skillEn": "Reasoning phase classification",
+          "explanEs": "Generación de Recomendaciones pertenece a la Síntesis: es el producto final del proceso analítico, donde los hallazgos se transforman en orientaciones para la acción. Sin síntesis, el análisis queda incompleto — un informe sin recomendaciones accionables reduce su utilidad clínica.",
+          "explanEn": "Generating Recommendations belongs to Synthesis: it is the final product of the analytical process, where findings are transformed into action guidelines. Without synthesis, the analysis remains incomplete — a report without actionable recommendations reduces its clinical utility."
         }
       ]
     },
     {
       "id": "w12m2",
-      "type": "memory",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Relaciona las Evidencias",
+      "titleEn": "Connect the Evidence",
+      "descEs": "Se te presentan conjuntos de datos clínicos. Identifica la relación analítica más adecuada entre las evidencias para orientar el razonamiento.",
+      "descEn": "You are presented with sets of clinical data. Identify the most appropriate analytical relationship between the evidence to guide the reasoning.",
       "difficulty": "intermediate",
-      "answerTime": 22,
-      "memorizeTime": 9,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
-      "items": [
-        {
-          "name": "WAIS-IV",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "WA",
-          "colorKey": "purple"
-        },
-        {
-          "name": "MMPI-2",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "MM",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "Rorschach",
-          "categoryEs": "Proyectivo",
-          "categoryEn": "Projective",
-          "initials": "RO",
-          "colorKey": "amber"
-        },
-        {
-          "name": "Bender",
-          "categoryEs": "Neuropsicológico",
-          "categoryEn": "Neuropsych",
-          "initials": "BN",
-          "colorKey": "green"
-        },
-        {
-          "name": "NEO PI-R",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "NE",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "K-ABC",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "KA",
-          "colorKey": "purple"
-        }
-      ],
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Un paciente muestra: (A) baja flexibilidad cognitiva en la tarea, (B) respuestas perseverativas en tareas de cambio de regla, y (C) dificultad para cambiar de estrategia ante el error. ¿Cuál es la relación analítica más adecuada entre estos tres datos?",
+          "textEn": "A patient shows: (A) low cognitive flexibility in the task, (B) perseverative responses in rule-shifting tasks, and (C) difficulty changing strategy after errors. What is the most appropriate analytical relationship between these three data points?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "Los tres datos convergen hacia una dificultad en flexibilidad cognitiva y regulación ejecutiva",
+            "Los tres datos son independientes y deben interpretarse por separado",
+            "Solo el dato C es clínicamente relevante; A y B son consecuencia del mismo",
+            "La convergencia entre los datos confirma un trastorno ejecutivo sin análisis adicional"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "Los tres datos convergen hacia una dificultad en flexibilidad cognitiva y regulación ejecutiva",
+          "correctEn": "Los tres datos convergen hacia una dificultad en flexibilidad cognitiva y regulación ejecutiva",
+          "skillEs": "Análisis de convergencia de evidencias",
+          "skillEn": "Evidence convergence analysis",
+          "explanEs": "La convergencia de tres indicadores distintos hacia el mismo constructo aumenta la solidez analítica de la hipótesis. Sin embargo, converger no equivale a confirmar: la hipótesis requiere aún contrastarse con historia, funcionamiento cotidiano y otros instrumentos para alcanzar nivel diagnóstico.",
+          "explanEn": "The convergence of three different indicators toward the same construct increases the analytical solidity of the hypothesis. However, converging does not equal confirming: the hypothesis still needs to be contrasted with history, daily functioning and other instruments to reach diagnostic level."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "Un evaluado muestra puntuaciones muy bajas en velocidad de procesamiento pero rendimiento alto en razonamiento abstracto. Sufrió un traumatismo craneoencefálico hace 6 meses. ¿Cuál es la relación analítica más pertinente?",
+          "textEn": "An examinee shows very low scores in processing speed but high performance in abstract reasoning. They suffered a traumatic brain injury 6 months ago. What is the most pertinent analytical relationship?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "La disociación entre velocidad y razonamiento podría ser consistente con secuelas post-traumáticas que afectan selectivamente la velocidad",
+            "El alto razonamiento abstracto descarta cualquier consecuencia cognitiva del traumatismo",
+            "La baja velocidad confirma daño neurológico generalizado que invalida el alto razonamiento",
+            "Los datos son contradictorios y no pueden integrarse en una hipótesis coherente"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "La disociación entre velocidad y razonamiento podría ser consistente con secuelas post-traumáticas que afectan selectivamente la velocidad",
+          "correctEn": "La disociación entre velocidad y razonamiento podría ser consistente con secuelas post-traumáticas que afectan selectivamente la velocidad",
+          "skillEs": "Análisis de disociaciones en el perfil cognitivo",
+          "skillEn": "Analysis of cognitive profile dissociations",
+          "explanEs": "Las disociaciones entre dominios cognitivos son datos analíticamente valiosos: señalan qué funciones están preservadas y cuáles comprometidas. En el contexto de un traumatismo craneoencefálico, la afectación selectiva de la velocidad de procesamiento con razonamiento intacto es un perfil neurológicamente informativo.",
+          "explanEn": "Dissociations between cognitive domains are analytically valuable data: they indicate which functions are preserved and which are compromised. In the context of a traumatic brain injury, selective impairment of processing speed with intact reasoning is a neurologically informative profile."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Un evaluado reporta (A) sentirse bien emocionalmente, pero (B) las escalas de estado de ánimo muestran puntuaciones clínicas, y (C) su conducta durante la evaluación evidencia lentitud, evitación del contacto visual y bajo nivel de energía. ¿Cuál es la relación analítica más importante?",
+          "textEn": "An examinee reports (A) feeling emotionally well, but (B) mood scales show clinical scores, and (C) their behavior during assessment shows slowness, avoidance of eye contact and low energy. What is the most important analytical relationship?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "La discrepancia entre autorreporte y las otras fuentes es un dato clínico relevante que requiere exploración adicional", "en": "The discrepancy between self-report and other sources is a clinically relevant finding that requires further exploration" },
+            { "es": "El autorreporte positivo tiene más peso porque refleja la experiencia subjetiva directa del evaluado",                   "en": "Positive self-report carries more weight because it reflects the examinee's direct subjective experience"               },
+            { "es": "Los datos B y C son suficientes para establecer un diagnóstico definitivo sin considerar el autorreporte",            "en": "Data B and C are sufficient to establish a definitive diagnosis without considering the self-report"                   },
+            { "es": "Los tres datos son equivalentes y deben promediarse para llegar a una conclusión",                                   "en": "All three data points are equivalent and should be averaged to reach a conclusion"                                   }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "La discrepancia entre autorreporte y las otras fuentes es un dato clínico relevante que requiere exploración adicional",
+          "correctEn": "The discrepancy between self-report and other sources is a clinically relevant finding that requires further exploration",
+          "skillEs": "Análisis de discrepancias entre fuentes",
+          "skillEn": "Analysis of discrepancies between sources",
+          "explanEs": "La discrepancia entre lo que el paciente reporta y lo que las escalas y la observación revelan no se resuelve eligiendo una fuente sobre otra: es en sí misma un dato clínico que orienta la exploración. Puede indicar alexitimia, minimización, falta de conciencia de enfermedad o diferencias de interpretación.",
+          "explanEn": "The discrepancy between what the patient reports and what scales and observation reveal is not resolved by choosing one source over another: it is itself a clinical data point that guides exploration. It may indicate alexithymia, minimization, lack of illness awareness or interpretive differences."
         }
       ]
     },
     {
       "id": "w12m3",
-      "type": "memory",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Conclusión Lógica",
+      "titleEn": "Logical Conclusion",
+      "descEs": "Se te presentan patrones de evidencia clínica. Determina cuál es la conclusión analíticamente válida y cuál excede lo que los datos permiten inferir.",
+      "descEn": "You are presented with clinical evidence patterns. Determine which is the analytically valid conclusion and which exceeds what the data allows to infer.",
       "difficulty": "advanced",
-      "answerTime": 20,
-      "memorizeTime": 8,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
-      "items": [
-        {
-          "name": "WAIS-IV",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "WA",
-          "colorKey": "purple"
-        },
-        {
-          "name": "MMPI-2",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "MM",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "Rorschach",
-          "categoryEs": "Proyectivo",
-          "categoryEn": "Projective",
-          "initials": "RO",
-          "colorKey": "amber"
-        },
-        {
-          "name": "Bender",
-          "categoryEs": "Neuropsicológico",
-          "categoryEn": "Neuropsych",
-          "initials": "BN",
-          "colorKey": "green"
-        },
-        {
-          "name": "NEO PI-R",
-          "categoryEs": "Personalidad",
-          "categoryEn": "Personality",
-          "initials": "NE",
-          "colorKey": "cyan"
-        },
-        {
-          "name": "K-ABC",
-          "categoryEs": "Inteligencia",
-          "categoryEn": "Intelligence",
-          "initials": "KA",
-          "colorKey": "purple"
-        }
-      ],
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "Termómetro : Temperatura :: BDI-II : ___",
-          "textEn": "Thermometer : Temperature :: BDI-II : ___",
+          "textEs": "Cuatro fuentes distintas (historia clínica, observación, escalas y rendimiento cognitivo) apuntan consistentemente hacia deterioro en memoria episódica, funciones ejecutivas y velocidad de procesamiento en un adulto de 68 años sin antecedentes previos. ¿Cuál es la conclusión analíticamente más válida?",
+          "textEn": "Four different sources (clinical history, observation, scales and cognitive performance) consistently point toward deterioration in episodic memory, executive functions and processing speed in a 68-year-old adult with no prior history. What is the analytically most valid conclusion?",
           "options": [
-            "Ansiedad",
-            "Depresión",
-            "Inteligencia",
-            "Personalidad"
+            "El patrón es consistente con un deterioro cognitivo que requiere evaluación neuropsicológica más profunda",
+            "Los cuatro datos confirman diagnóstico definitivo de demencia en estadio temprano",
+            "La convergencia de cuatro fuentes hace innecesaria cualquier evaluación adicional",
+            "Al tener 68 años, el perfil es esperable para la edad y no requiere intervención"
           ],
-          "correctEs": "Depresión",
-          "correctEn": "Depresión",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "Así como el termómetro mide temperatura, el BDI-II mide depresión.",
-          "explanEn": "Just as a thermometer measures temperature, the BDI-II measures depression."
+          "correctEs": "El patrón es consistente con un deterioro cognitivo que requiere evaluación neuropsicológica más profunda",
+          "correctEn": "El patrón es consistente con un deterioro cognitivo que requiere evaluación neuropsicológica más profunda",
+          "skillEs": "Conclusión analítica con múltiples fuentes",
+          "skillEn": "Analytical conclusion with multiple sources",
+          "explanEs": "La convergencia de cuatro fuentes fortalece la hipótesis pero no la convierte en diagnóstico: ese paso requiere criterios diagnósticos formales, historia longitudinal y en muchos casos evaluación médica complementaria. La conclusión analíticamente válida reconoce el patrón y señala el siguiente paso, sin precipitar un diagnóstico.",
+          "explanEn": "The convergence of four sources strengthens the hypothesis but does not turn it into a diagnosis: that step requires formal diagnostic criteria, longitudinal history and in many cases complementary medical evaluation. The analytically valid conclusion recognizes the pattern and points to the next step, without precipitating a diagnosis."
         },
         {
           "id": "q2",
-          "textEs": "WAIS-IV : Adultos :: WISC-V : ___",
-          "textEn": "WAIS-IV : Adults :: WISC-V : ___",
+          "textEs": "Un evaluado obtiene puntuaciones en el percentil 15 en tres instrumentos diferentes que miden el mismo constructo de atención. ¿Cuál es la conclusión analítica más adecuada?",
+          "textEn": "An examinee obtains scores at percentile 15 on three different instruments that measure the same attention construct. What is the most appropriate analytical conclusion?",
           "options": [
-            "Niños",
-            "Ancianos",
-            "Adolescentes",
-            "Bebés"
+            "La convergencia entre instrumentos aumenta la confianza en que existe una dificultad real en ese constructo",
+            "El percentil 15 en tres instrumentos confirma un trastorno atencional que no requiere verificación adicional",
+            "Los tres instrumentos miden lo mismo, por lo que el resultado es redundante y no agrega información",
+            "El percentil 15 es bajo pero está dentro del rango aceptable para la mayoría de contextos clínicos"
           ],
-          "correctEs": "Niños",
-          "correctEn": "Niños",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El WISC-V es la versión para niños del test de Wechsler, como el WAIS-IV es para adultos.",
-          "explanEn": "The WISC-V is the children's version of the Wechsler test, as the WAIS-IV is for adults."
+          "correctEs": "La convergencia entre instrumentos aumenta la confianza en que existe una dificultad real en ese constructo",
+          "correctEn": "La convergencia entre instrumentos aumenta la confianza en que existe una dificultad real en ese constructo",
+          "skillEs": "Análisis de convergencia instrumental",
+          "skillEn": "Instrumental convergence analysis",
+          "explanEs": "Cuando instrumentos distintos que miden el mismo constructo arrojan resultados similares, la convergencia aumenta la confiabilidad del hallazgo: reduce la probabilidad de que el resultado sea un artefacto de un instrumento específico. Sin embargo, la convergencia instrumental no reemplaza el análisis del contexto, la historia y el funcionamiento.",
+          "explanEn": "When different instruments measuring the same construct produce similar results, convergence increases the reliability of the finding: it reduces the probability that the result is an artifact of a specific instrument. However, instrumental convergence does not replace analysis of context, history and functioning."
         },
         {
           "id": "q3",
-          "textEs": "Rorschach : Láminas de manchas :: TAT : ___",
-          "textEn": "Rorschach : Inkblot cards :: TAT : ___",
+          "textEs": "Un evaluador obtiene una puntuación 2 puntos por debajo del punto de corte en una escala y concluye en el informe: 'El paciente presenta deterioro cognitivo severo con afectación en múltiples dominios'. ¿Cuál es el problema analítico central de esta conclusión?",
+          "textEn": "An evaluator obtains a score 2 points below the cutoff on a scale and concludes in the report: 'The patient presents severe cognitive decline with impairment across multiple domains'. What is the central analytical problem with this conclusion?",
           "options": [
-            "Series numéricas",
-            "Láminas con escenas",
-            "Dibujos de figuras",
-            "Frases incompletas"
+            { "es": "La conclusión supera ampliamente lo que el dato permite inferir; una desviación mínima no sostiene ese diagnóstico",  "en": "The conclusion far exceeds what the data allows to infer; a minimal deviation does not support that diagnosis"          },
+            { "es": "El error es técnico: se debió usar puntuaciones normativas en lugar del punto de corte",                           "en": "The error is technical: normative scores should have been used instead of the cutoff point"                           },
+            { "es": "La conclusión es válida: cualquier puntuación por debajo del corte indica deterioro severo por definición",        "en": "The conclusion is valid: any score below the cutoff indicates severe deterioration by definition"                     },
+            { "es": "El problema es que el evaluador no especificó qué dominios concretos están afectados",                            "en": "The problem is that the evaluator did not specify which specific domains are affected"                               }
           ],
-          "correctEs": "Láminas con escenas",
-          "correctEn": "Láminas con escenas",
-          "skillEs": "Razonamiento analógico",
-          "skillEn": "Analogical reasoning",
-          "explanEs": "El TAT utiliza láminas con escenas ambiguas para explorar la personalidad, análogo a las manchas del Rorschach.",
-          "explanEn": "The TAT uses cards with ambiguous scenes to explore personality, analogous to the Rorschach inkblots."
+          "correctEs": "La conclusión supera ampliamente lo que el dato permite inferir; una desviación mínima no sostiene ese diagnóstico",
+          "correctEn": "The conclusion far exceeds what the data allows to infer; a minimal deviation does not support that diagnosis",
+          "skillEs": "Correspondencia entre datos y conclusión",
+          "skillEn": "Correspondence between data and conclusion",
+          "explanEs": "Una desviación mínima del punto de corte indica que el resultado está en el límite, no que existe deterioro severo generalizado. La conclusión excede el alcance del dato: 'severo' implica magnitud que una sola puntuación limítrofe no puede sostener. Las conclusiones deben ser proporcionales a la evidencia disponible.",
+          "explanEn": "A minimal deviation from the cutoff indicates the result is borderline, not that there is widespread severe deterioration. The conclusion exceeds the scope of the data: 'severe' implies magnitude that a single borderline score cannot support. Conclusions must be proportional to the available evidence."
         }
       ]
     }

@@ -1,214 +1,227 @@
 {
   "week": 13,
-  "type": "reasoning",
-  "titleEs": "Pensamiento Abstracto",
-  "titleEn": "Abstract Thinking",
-  "skillEs": "Razonamiento",
-  "skillEn": "Reasoning",
-  "descEs": "Entrena la habilidad de Razonamiento mediante preguntas interactivas.",
-  "descEn": "Train your Reasoning skill through interactive questions.",
+  "type": "memory",
+  "titleEs": "Comunicación de Resultados",
+  "titleEn": "Results Communication",
+  "skillEs": "Comunicación de Resultados",
+  "skillEn": "Results Communication",
+  "descEs": "Comunicar resultados no es leer un informe en voz alta: es transmitir hallazgos con precisión, claridad ética y sensibilidad al destinatario. Esta semana entrenas la habilidad de comunicar bien en contextos clínicos complejos.",
+  "descEn": "Communicating results is not reading a report aloud: it is transmitting findings with precision, ethical clarity and sensitivity to the recipient. This week you train the ability to communicate well in complex clinical contexts.",
   "microretos": [
     {
       "id": "w13m1",
-      "type": "reasoning",
-      "titleEs": "Microreto 1",
-      "titleEn": "Micro-task 1",
+      "type": "memory",
+      "titleEs": "¿Cómo lo Explicarías?",
+      "titleEn": "How Would You Explain It?",
+      "descEs": "Memoriza los criterios y principios de la comunicación de resultados y la categoría a la que pertenece cada uno. Tienes 12 segundos antes de que la cuadrícula desaparezca.",
+      "descEn": "Memorize the criteria and principles of results communication and the category each belongs to. You have 12 seconds before the grid disappears.",
       "difficulty": "basic",
-      "answerTime": 25,
+      "memorizeTime": 12,
+      "answerTime": 40,
       "maxAttempts": 3,
       "xp": {
         "base": 50,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
+      "items": [
+        { "name": "Claridad del Lenguaje",     "categoryEs": "Calidad Comunicativa", "categoryEn": "Communicative Quality", "initials": "CL", "colorKey": "cyan"   },
+        { "name": "Adecuación a la Audiencia", "categoryEs": "Calidad Comunicativa", "categoryEn": "Communicative Quality", "initials": "AA", "colorKey": "cyan"   },
+        { "name": "Precisión Técnica",         "categoryEs": "Calidad Comunicativa", "categoryEn": "Communicative Quality", "initials": "PT", "colorKey": "cyan"   },
+        { "name": "Confidencialidad",          "categoryEs": "Principio Ético",      "categoryEn": "Ethical Principle",     "initials": "CF", "colorKey": "purple" },
+        { "name": "Beneficencia",              "categoryEs": "Principio Ético",      "categoryEn": "Ethical Principle",     "initials": "BN", "colorKey": "purple" },
+        { "name": "No Maleficencia",           "categoryEs": "Principio Ético",      "categoryEn": "Ethical Principle",     "initials": "NM", "colorKey": "purple" }
+      ],
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "¿Cuál de estos criterios NO estaba en la cuadrícula?",
+          "textEn": "Which of these criteria was NOT in the grid?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Claridad del Lenguaje",
+            "Veracidad",
+            "Beneficencia",
+            "Precisión Técnica"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Veracidad",
+          "correctEn": "Veracidad",
+          "skillEs": "Memoria de reconocimiento aplicada",
+          "skillEn": "Applied recognition memory",
+          "explanEs": "Veracidad es un valor ético real y relevante en la comunicación de resultados, pero no estaba en esta cuadrícula. Detectar su ausencia muestra que se puede comunicar con calidad técnica y respetar principios éticos sin necesariamente listar todos los valores posibles.",
+          "explanEn": "Truthfulness is a real and relevant ethical value in results communication, but was not in this grid. Detecting its absence shows that one can communicate with technical quality and respect ethical principles without necessarily listing all possible values."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
-          "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
-          ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "textEs": "¿Cuántos criterios de 'Calidad Comunicativa' estaban en la cuadrícula?",
+          "textEn": "How many 'Communicative Quality' criteria were in the grid?",
+          "options": ["1", "2", "3", "4"],
+          "correctEs": "3",
+          "correctEn": "3",
+          "skillEs": "Memoria categorial",
+          "skillEn": "Categorical memory",
+          "explanEs": "Tres criterios de Calidad Comunicativa: Claridad del Lenguaje, Adecuación a la Audiencia y Precisión Técnica. Los tres son necesarios simultáneamente: un lenguaje claro pero impreciso desinforma; una precisión técnica sin adecuación a la audiencia hace el informe inaccesible.",
+          "explanEn": "Three Communicative Quality criteria: Language Clarity, Audience Appropriateness and Technical Precision. All three are simultaneously necessary: clear but imprecise language misinforms; technical precision without audience appropriateness makes the report inaccessible."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "¿A qué categoría pertenece Beneficencia?",
+          "textEn": "What category does Beneficence belong to?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Calidad Comunicativa", "en": "Communicative Quality" },
+            { "es": "Principio Ético",      "en": "Ethical Principle"     },
+            { "es": "Criterio Técnico",     "en": "Technical Criterion"   },
+            { "es": "Dimensión Relacional", "en": "Relational Dimension"  }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Principio Ético",
+          "correctEn": "Ethical Principle",
+          "skillEs": "Clasificación de principios deontológicos",
+          "skillEn": "Classification of deontological principles",
+          "explanEs": "Beneficencia es un Principio Ético que obliga al evaluador a actuar en el mayor beneficio del evaluado en la comunicación de resultados. Junto con No Maleficencia y Confidencialidad, forma el marco deontológico que rige cómo se comunica, no solo qué se comunica.",
+          "explanEn": "Beneficence is an Ethical Principle that obliges the evaluator to act in the greatest benefit of the examinee in communicating results. Together with Non-maleficence and Confidentiality, it forms the deontological framework that governs how results are communicated, not just what is communicated."
         }
       ]
     },
     {
       "id": "w13m2",
-      "type": "reasoning",
-      "titleEs": "Microreto 2",
-      "titleEn": "Micro-task 2",
+      "type": "multiple_choice",
+      "titleEs": "Mensaje Profesional",
+      "titleEn": "Professional Message",
+      "descEs": "Se te presentan situaciones de comunicación de resultados. Identifica la respuesta o estrategia más adecuada desde el punto de vista técnico y comunicativo.",
+      "descEn": "You are presented with results communication situations. Identify the most appropriate response or strategy from a technical and communicative perspective.",
       "difficulty": "intermediate",
-      "answerTime": 22,
+      "answerTime": 50,
       "maxAttempts": 3,
       "xp": {
         "base": 60,
-        "speedMax": 25,
+        "speedMax": 30,
         "perfectBonus": 50,
         "challengeComplete": 100
       },
+      "badge": "observer",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "Al finalizar la evaluación, el paciente pregunta: '¿Salí bien?' antes de que el evaluador haya preparado la sesión de devolución. ¿Cuál es la respuesta más adecuada?",
+          "textEn": "At the end of the assessment, the patient asks: 'Did I do well?' before the evaluator has prepared the feedback session. What is the most appropriate response?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Agendar una sesión de devolución para comunicar los hallazgos con el contexto apropiado",
+            "Responder inmediatamente con un resumen verbal de los resultados preliminares",
+            "Indicar que los resultados son confidenciales y no pueden compartirse en ningún momento",
+            "Dar una respuesta tranquilizadora positiva para reducir la ansiedad del paciente"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Agendar una sesión de devolución para comunicar los hallazgos con el contexto apropiado",
+          "correctEn": "Agendar una sesión de devolución para comunicar los hallazgos con el contexto apropiado",
+          "skillEs": "Gestión del momento y contexto de la comunicación",
+          "skillEn": "Management of timing and context of communication",
+          "explanEs": "Los resultados deben comunicarse en el contexto adecuado — con tiempo, preparación y los datos completos. Una respuesta improvisada, aunque bien intencionada, puede ser imprecisa, alarmar innecesariamente o minimizar hallazgos relevantes. El paciente tiene derecho a una devolución informada, no a una impresión rápida.",
+          "explanEn": "Results should be communicated in the appropriate context — with time, preparation and complete data. An improvised response, however well-intentioned, can be imprecise, unnecessarily alarming or minimize relevant findings. The patient has a right to an informed feedback session, not a quick impression."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "Un evaluador necesita redactar en el informe un hallazgo sobre atención. ¿Cuál de estas formulaciones es técnicamente más adecuada?",
+          "textEn": "An evaluator needs to write in the report a finding about attention. Which of these formulations is most technically appropriate?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "Las puntuaciones en el dominio atencional se ubican en el percentil 18, rango bajo, sugiriendo dificultades en la atención sostenida",
+            "El paciente tiene un problema grave de atención que afecta todo su desempeño",
+            "La atención del paciente es deficiente según los resultados obtenidos hoy",
+            "Se observaron algunas dificultades atencionales que podrían o no ser relevantes clínicamente"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "Las puntuaciones en el dominio atencional se ubican en el percentil 18, rango bajo, sugiriendo dificultades en la atención sostenida",
+          "correctEn": "Las puntuaciones en el dominio atencional se ubican en el percentil 18, rango bajo, sugiriendo dificultades en la atención sostenida",
+          "skillEs": "Redacción técnica de hallazgos evaluativos",
+          "skillEn": "Technical writing of assessment findings",
+          "explanEs": "Una formulación adecuada combina el dato normativo (percentil 18), la categoría interpretativa (rango bajo) y la hipótesis funcional (dificultades en atención sostenida) con lenguaje tentativo ('sugiriendo'). Esta estructura es reproducible, verificable y proporcional a la evidencia, a diferencia de las otras opciones que son imprecisas o exageradas.",
+          "explanEn": "An appropriate formulation combines the normative data (percentile 18), the interpretive category (low range) and the functional hypothesis (sustained attention difficulties) with tentative language ('suggesting'). This structure is reproducible, verifiable and proportional to the evidence, unlike the other options which are imprecise or exaggerated."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "Un evaluador debe comunicar los resultados de un menor de 10 años al equipo docente de su escuela. ¿Cuál es la estrategia comunicativa más adecuada?",
+          "textEn": "An evaluator must communicate the results of a 10-year-old child to their school teaching team. What is the most appropriate communication strategy?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Comunicar únicamente la información relevante para el contexto educativo, con lenguaje accesible y sin diagnósticos clínicos innecesarios", "en": "Communicate only information relevant to the educational context, with accessible language and without unnecessary clinical diagnoses" },
+            { "es": "Entregar el informe clínico completo al equipo docente para que dispongan de toda la información",                                         "en": "Provide the complete clinical report to the teaching team so they have all the information"                                        },
+            { "es": "No comunicar ningún resultado al equipo docente ya que son datos clínicos confidenciales",                                               "en": "Do not communicate any results to the teaching team as they are confidential clinical data"                                        },
+            { "es": "Comunicar los diagnósticos clínicos directamente para que los docentes entiendan la situación del alumno",                              "en": "Communicate clinical diagnoses directly so teachers understand the student's situation"                                           }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Comunicar únicamente la información relevante para el contexto educativo, con lenguaje accesible y sin diagnósticos clínicos innecesarios",
+          "correctEn": "Communicate only information relevant to the educational context, with accessible language and without unnecessary clinical diagnoses",
+          "skillEs": "Comunicación contextualizada a la audiencia",
+          "skillEn": "Audience-contextualized communication",
+          "explanEs": "La comunicación a equipos educativos debe filtrarse según el principio de mínima información necesaria: solo lo que el docente necesita saber para apoyar al alumno. El informe clínico completo puede contener información que, fuera de contexto, estigmatice o malinterprete. El lenguaje accesible garantiza que la comunicación sea útil, no solo técnicamente correcta.",
+          "explanEn": "Communication to educational teams must be filtered by the minimum necessary information principle: only what the teacher needs to know to support the student. The complete clinical report may contain information that, out of context, stigmatizes or is misinterpreted. Accessible language ensures the communication is useful, not just technically correct."
         }
       ]
     },
     {
       "id": "w13m3",
-      "type": "reasoning",
-      "titleEs": "Microreto 3",
-      "titleEn": "Micro-task 3",
+      "type": "multiple_choice",
+      "titleEs": "Comunicación Ética",
+      "titleEn": "Ethical Communication",
+      "descEs": "La comunicación de resultados genera dilemas éticos donde el criterio profesional debe ser claro y fundamentado. Identifica la actuación más adecuada en cada escenario.",
+      "descEn": "Results communication generates ethical dilemmas where professional judgment must be clear and grounded. Identify the most appropriate action in each scenario.",
       "difficulty": "advanced",
-      "answerTime": 20,
+      "answerTime": 60,
       "maxAttempts": 3,
       "xp": {
         "base": 70,
-        "speedMax": 25,
-        "perfectBonus": 50,
+        "speedMax": 30,
+        "perfectBonus": 60,
         "challengeComplete": 100
       },
+      "badge": "precision",
       "questions": [
         {
           "id": "q1",
-          "textEs": "¿Cuál de estos NO es un principio ético en evaluación psicológica?",
-          "textEn": "Which of these is NOT an ethical principle in psychological assessment?",
+          "textEs": "Un periodista contacta al evaluador solicitando datos de la evaluación de una figura pública, argumentando interés social legítimo. ¿Cuál es la actuación ética correcta?",
+          "textEn": "A journalist contacts the evaluator requesting data from the assessment of a public figure, arguing legitimate social interest. What is the correct ethical action?",
           "options": [
-            "Confidencialidad",
-            "Consentimiento informado",
-            "Publicar todos los resultados",
-            "No maleficencia"
+            "Negar la información; el interés social no constituye una excepción al principio de confidencialidad",
+            "Proporcionar solo los diagnósticos sin los datos psicométricos para proteger parcialmente la privacidad",
+            "Consultar con un colega de confianza antes de decidir si compartir la información",
+            "Compartir la información si el periodista garantiza el anonimato en la publicación"
           ],
-          "correctEs": "Publicar todos los resultados",
-          "correctEn": "Publicar todos los resultados",
-          "skillEs": "Ética en evaluación",
-          "skillEn": "Assessment ethics",
-          "explanEs": "Publicar todos los resultados sin consentimiento viola la confidencialidad.",
-          "explanEn": "Publishing all results without consent violates confidentiality."
+          "correctEs": "Negar la información; el interés social no constituye una excepción al principio de confidencialidad",
+          "correctEn": "Negar la información; el interés social no constituye una excepción al principio de confidencialidad",
+          "skillEs": "Límites éticos de la confidencialidad en comunicación",
+          "skillEn": "Ethical limits of confidentiality in communication",
+          "explanEs": "La condición pública del evaluado no elimina su derecho a la confidencialidad. Las excepciones reconocidas a la confidencialidad (riesgo vital, mandato judicial) no incluyen el interés mediático ni social. Compartir diagnósticos 'parcialmente' o bajo promesa de anonimato viola igualmente el principio deontológico.",
+          "explanEn": "The public figure status of the examinee does not eliminate their right to confidentiality. Recognized exceptions to confidentiality (life risk, judicial mandate) do not include media or social interest. Sharing diagnoses 'partially' or under promise of anonymity equally violates the deontological principle."
         },
         {
           "id": "q2",
-          "textEs": "¿Qué significa \"validez de constructo\"?",
-          "textEn": "What does \"construct validity\" mean?",
+          "textEs": "Una institución que financió el proceso evaluativo presiona al evaluador para modificar las conclusiones del informe a fin de que sean más favorables a sus intereses. ¿Cuál es la actuación ética correcta?",
+          "textEn": "An institution that funded the assessment process pressures the evaluator to modify the report conclusions to be more favorable to their interests. What is the correct ethical action?",
           "options": [
-            "La prueba mide lo que dice medir",
-            "La prueba es consistente",
-            "La prueba fue bien estandarizada",
-            "La prueba tiene normas actualizadas"
+            "Mantener la integridad del informe; las conclusiones deben reflejar los datos objetivos del proceso evaluativo",
+            "Modificar el lenguaje pero no los datos para mantener la relación profesional sin comprometer la ética",
+            "Añadir un anexo con la perspectiva de la institución junto a las conclusiones originales",
+            "Consultar a la institución sobre qué conclusiones serían aceptables antes de redactar el informe"
           ],
-          "correctEs": "La prueba mide lo que dice medir",
-          "correctEn": "La prueba mide lo que dice medir",
-          "skillEs": "Psicometría",
-          "skillEn": "Psychometrics",
-          "explanEs": "La validez de constructo indica que el instrumento mide el constructo teórico que pretende medir.",
-          "explanEn": "Construct validity indicates the instrument measures the theoretical construct it intends to measure."
+          "correctEs": "Mantener la integridad del informe; las conclusiones deben reflejar los datos objetivos del proceso evaluativo",
+          "correctEn": "Mantener la integridad del informe; las conclusiones deben reflejar los datos objetivos del proceso evaluativo",
+          "skillEs": "Integridad profesional en la comunicación de resultados",
+          "skillEn": "Professional integrity in results communication",
+          "explanEs": "La integridad del informe es no negociable: las conclusiones pertenecen al proceso evaluativo y al evaluado, no a quien financió el proceso. Modificar el lenguaje sin cambiar los datos es igualmente problemático si el efecto es alterar la impresión clínica. El evaluador que cede a esta presión viola su independencia profesional y puede causar daño directo al evaluado.",
+          "explanEn": "Report integrity is non-negotiable: conclusions belong to the assessment process and the examinee, not to whoever funded the process. Modifying language without changing data is equally problematic if the effect is to alter the clinical impression. An evaluator who yields to this pressure violates their professional independence and may cause direct harm to the examinee."
         },
         {
           "id": "q3",
-          "textEs": "¿Qué es el coeficiente alfa de Cronbach?",
-          "textEn": "What is Cronbach's alpha coefficient?",
+          "textEs": "Un colega comparte en una reunión de equipo diagnósticos clínicos de un paciente sin haber obtenido autorización explícita del paciente para esa divulgación. ¿Cuál es la actuación ética más adecuada ante esta situación?",
+          "textEn": "A colleague shares clinical diagnoses of a patient in a team meeting without having obtained explicit authorization from the patient for that disclosure. What is the most appropriate ethical action in this situation?",
           "options": [
-            "Una medida de validez",
-            "Una medida de consistencia interna",
-            "Una puntuación estándar",
-            "Un índice de dificultad"
+            { "es": "Señalar al colega que compartir diagnósticos sin consentimiento explícito del paciente es una violación ética que debe regularizarse", "en": "Point out to the colleague that sharing diagnoses without the patient's explicit consent is an ethical violation that must be rectified" },
+            { "es": "No intervenir; la reunión de equipo es un contexto profesional donde la confidencialidad no aplica",                                   "en": "Not intervene; the team meeting is a professional context where confidentiality does not apply"                                          },
+            { "es": "Participar de la discusión del caso ya que el colega asumió la responsabilidad de la divulgación",                                    "en": "Participate in the case discussion since the colleague assumed responsibility for the disclosure"                                       },
+            { "es": "Reportar de inmediato al paciente lo ocurrido sin consultar con el colega primero",                                                   "en": "Immediately report to the patient what happened without consulting the colleague first"                                              }
           ],
-          "correctEs": "Una medida de consistencia interna",
-          "correctEn": "Una medida de consistencia interna",
-          "skillEs": "Fiabilidad",
-          "skillEn": "Reliability",
-          "explanEs": "El alfa de Cronbach es el indicador más usado para estimar la consistencia interna de un instrumento.",
-          "explanEn": "Cronbach's alpha is the most used indicator to estimate the internal consistency of an instrument."
+          "correctEs": "Señalar al colega que compartir diagnósticos sin consentimiento explícito del paciente es una violación ética que debe regularizarse",
+          "correctEn": "Point out to the colleague that sharing diagnoses without the patient's explicit consent is an ethical violation that must be rectified",
+          "skillEs": "Responsabilidad ética colectiva en la práctica profesional",
+          "skillEn": "Collective ethical responsibility in professional practice",
+          "explanEs": "La responsabilidad ética no es solo individual: el profesional que observa una violación tiene la obligación de señalarla. La reunión de equipo no es una excepción automática a la confidencialidad — requiere consentimiento del paciente o un encuadre clínico justificado. Participar sin cuestionar la divulgación convierte al observador en partícipe de la violación.",
+          "explanEn": "Ethical responsibility is not only individual: the professional who witnesses a violation has the obligation to point it out. A team meeting is not an automatic exception to confidentiality — it requires patient consent or a justified clinical framework. Participating without questioning the disclosure makes the observer a participant in the violation."
         }
       ]
     }
