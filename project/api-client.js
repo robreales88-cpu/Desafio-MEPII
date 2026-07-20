@@ -198,13 +198,11 @@
       const q = readQueue();
       q.push({ action, data, ts: Date.now() });
       saveQueue(q);
-      console.info(`[API] Queued: ${action} (offline). Queue length: ${q.length}`);
     }
 
     async _flushQueue() {
       const q = readQueue();
       if (!q.length) return;
-      console.info(`[API] Flushing ${q.length} queued actions…`);
       const failed = [];
       for (const item of q) {
         try {

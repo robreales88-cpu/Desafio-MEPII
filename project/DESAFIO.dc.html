@@ -1512,10 +1512,7 @@ class Component extends DCLogic {
     const remote = this.state.remoteRanking || [];
     const myEmail = (user?.email || '').trim().toLowerCase();
     const others = remote
-      .filter(r => !(user && (
-        (r.Nombre || '').trim().toLowerCase() === (user.name || '').trim().toLowerCase() &&
-        (r.Nickname || '').trim().toLowerCase() === (user.nickname || '').trim().toLowerCase()
-      )))
+      .filter(r => (r.Correo || '').trim().toLowerCase() !== myEmail)
       .map(r => ({ name: r.Nombre, nick: r.Nickname, xp: Number(r.XP) || 0, av: Number(r.Avatar) || 0, g: r.Grupo, s: '' }));
     const all = [...others];
     if (user) all.push({ name: user.name, nick: user.nickname, xp: user.xp, av: user.avatar, g: user.group, s: user.section, isMe: true });
@@ -1532,7 +1529,6 @@ class Component extends DCLogic {
   openChallenge(idx) {
     const { user } = this.state;
     if (!user) return;
-    if (idx > 0 && !user.challenges[idx - 1].completed) return;
     if (!this.engine) return;
     this.setState({ loadingChallenge: true });
     this.engine.loadChallenge(idx + 1)

@@ -67,7 +67,7 @@ const HEADERS = {
   ESTUDIANTES : ['ID','Correo','Nombre','Nickname','Avatar','Grupo','Seccion','FechaRegistro','UltimoAcceso','Nivel','XP','Estado','Token'],
   PROGRESO    : ['IDEstudiante','Semana','Microreto','Tipo','Intentos','Tiempo','Correctas','Incorrectas','XP','CambiosPestana','Fecha','Validado'],
   INSIGNIAS   : ['IDEstudiante','Insignia','Fecha','XPAcumulada'],
-  RANKING     : ['Posicion','Nombre','Nickname','Nivel','XP','Insignias','Grupo','Avatar'],
+  RANKING     : ['Posicion','Nombre','Nickname','Nivel','XP','Insignias','Grupo','Avatar','Correo'],
   EVENTOS     : ['Actor','Evento','Detalle','Fecha','Navegador'],
   ANALITICA   : ['Metrica','Valor','Periodo','Fecha'],
   RESPUESTAS  : ['Semana','Microreto','PreguntaIdx','CorrectaEs','CorrectaEn','XPBase','XPSpeedMax','XPPerfectBonus','TiempoRespuesta'],
@@ -297,6 +297,8 @@ function guardarInsignia(data) {
     if (!data.insignia) return { ok: false, error: 'Insignia requerida' };
 
     const sheet = getSheet(SHEETS.INSIGNIAS);
+    const existing = sheetToObjects(sheet).find(r => r.IDEstudiante === auth.user.Correo && r.Insignia === data.insignia);
+    if (existing) return { ok: true, duplicate: true };
     sheet.appendRow([auth.user.Correo, data.insignia, new Date().toISOString(), auth.user.XP]);
     logEvento(auth.user.Correo, 'INSIGNIA', data.insignia, '');
     return { ok: true };
@@ -675,7 +677,7 @@ function updateRanking() {
   const values = [HEADERS.RANKING];
   sorted.forEach((u, i) => {
     const badges = badgeRows.filter(b => b.IDEstudiante === u.Correo).map(b => b.Insignia).join(',');
-    values.push([i + 1, u.Nombre, u.Nickname, u.Nivel, u.XP, badges, u.Grupo, u.Avatar || 0]);
+    values.push([i + 1, u.Nombre, u.Nickname, u.Nivel, u.XP, badges, u.Grupo, u.Avatar || 0, u.Correo]);
   });
 
   const rankSheet = getSheet(SHEETS.RANKING);
