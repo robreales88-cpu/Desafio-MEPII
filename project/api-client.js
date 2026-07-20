@@ -182,6 +182,12 @@
       return this.get('teacherPanel', { email, token, page, query }, 15);
     }
 
+    /** Recover a session from a new device by email — generates a new token
+     *  replacing the old one and returns the full profile for reconstruction. */
+    async recuperarSesion(email) {
+      return this.post('recuperarSesion', { email: (email || '').trim().toLowerCase() });
+    }
+
     async ping() {
       return this.get('ping', {}, 0);
     }

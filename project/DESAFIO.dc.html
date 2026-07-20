@@ -1034,7 +1034,7 @@ class Component extends DCLogic {
     user: null,
     selAvatar: 0,
     fName: '', fNick: '', fEmail: '', fGroup: '', fSection: '',
-    formErr: '',
+    formErr: '', regLoading: false,
     // challenge state
     challengeData: null,
     loadingChallenge: false,
@@ -1160,6 +1160,12 @@ class Component extends DCLogic {
       const raw = localStorage.getItem('desafio_user');
       if (raw) {
         const user = JSON.parse(raw);
+        if (!user.token) {
+          // Stale record saved before the persistence fix — discard and restart.
+          localStorage.removeItem('desafio_user');
+          this._refreshRanking();
+          return;
+        }
         const isDocente = user.role === 'docente';
         this.setState({ user, screen: isDocente ? 'teacher' : 'dashboard', teacherAuthed: isDocente });
         if (isDocente) this._loadTeacherData(user);
@@ -1170,6 +1176,10 @@ class Component extends DCLogic {
   }
 
   saveUser(user) {
+    if (!user?.token) {
+      console.error('[Session] saveUser blocked — user object has no token.', user?.email);
+      return;
+    }
     try { localStorage.setItem('desafio_user', JSON.stringify(user)); } catch(e) {}
   }
 
@@ -1189,6 +1199,59 @@ class Component extends DCLogic {
         this.setState({ user: updUser });
       }
     }).catch(() => {});
+  }
+
+  /** Token rejected by backend — wipe local session and redirect to register. */
+  _handleAuthExpiry = () => {
+    try { localStorage.removeItem('desafio_user'); } catch(e) {}
+    this.setState({
+      user: null, screen: 'register', regLoading: false,
+      formErr: this.state.lang === 'es'
+        ? 'Tu sesión ha expirado. Vuelve a ingresar.'
+        : 'Your session has expired. Please sign in again.',
+    });
+  };
+
+  /** Rebuild a full local user object from backend data returned by
+   *  recuperarSesion(). Reconstructs challenges/microretos as completed
+   *  using progreso records so the student doesn't lose their history. */
+  _reconstructUserFromServer(serverUser, progreso, insignias, avatar) {
+    const challenges = Array.from({ length: 18 }, (_, i) => ({
+      idx: i, completed: false,
+      microretos: [
+        { idx: 0, completed: false, attempts: 0, xp: 0, blocked: false },
+        { idx: 1, completed: false, attempts: 0, xp: 0, blocked: false },
+        { idx: 2, completed: false, attempts: 0, xp: 0, blocked: false },
+      ],
+    }));
+    (progreso || []).forEach(p => {
+      const si = Number(p.Semana) - 1;
+      const mi = Number(p.Microreto) - 1;
+      if (si >= 0 && si < 18 && mi >= 0 && mi < 3) {
+        const mr = challenges[si].microretos[mi];
+        mr.completed = true;
+        mr.xp = Math.max(mr.xp, Number(p.XP) || 0);
+        mr.attempts = Math.max(mr.attempts, Number(p.Intentos) || 1);
+      }
+    });
+    challenges.forEach(ch => {
+      if (ch.microretos.every(m => m.completed)) ch.completed = true;
+    });
+    return {
+      name     : serverUser.Nombre  || '',
+      email    : (serverUser.Correo || '').trim().toLowerCase(),
+      nickname : serverUser.Nickname || (serverUser.Nombre || '').split(' ')[0],
+      group    : serverUser.Grupo   || '',
+      section  : serverUser.Seccion || '',
+      avatar   : Number(avatar ?? serverUser.Avatar) || 0,
+      xp       : Number(serverUser.XP)    || 0,
+      level    : Number(serverUser.Nivel) || 1,
+      totalTime: 0,
+      joinedAt : serverUser.FechaRegistro ? new Date(serverUser.FechaRegistro).getTime() : Date.now(),
+      challenges,
+      badges   : (insignias || []).filter(Boolean),
+      activityLog: [],
+    };
   }
 
   /** Real classmates from the backend leaderboard, replacing the fixture data
@@ -1234,7 +1297,7 @@ class Component extends DCLogic {
 
   defaultUser(form, avatar) {
     return {
-      name: form.name, email: form.email, nickname: form.nick || form.name.split(' ')[0],
+      name: form.name, email: (form.email || '').trim().toLowerCase(), nickname: form.nick || form.name.split(' ')[0],
       group: form.group, section: form.section, avatar,
       xp: 0, level: 1, totalTime: 0, joinedAt: Date.now(),
       challenges: Array.from({ length: 18 }, (_, i) => ({
@@ -1293,31 +1356,89 @@ class Component extends DCLogic {
   onFSection = e => this.setState({ fSection: e.target.value });
 
   submitReg = () => {
-    const { fName, fEmail, fGroup, fSection, selAvatar } = this.state;
-    if (!fName.trim()) { this.setState({ formErr: 'Por favor ingresa tu nombre completo.' }); return; }
-    if (!fEmail.trim() || !fEmail.includes('@')) { this.setState({ formErr: 'Por favor ingresa un correo válido.' }); return; }
-    if (!fGroup.trim()) { this.setState({ formErr: 'Por favor ingresa tu grupo.' }); return; }
-    if (!fSection.trim()) { this.setState({ formErr: 'Por favor ingresa tu sección.' }); return; }
-    const user = this.defaultUser({ name: fName, email: fEmail, nick: this.state.fNick, group: fGroup, section: fSection }, selAvatar);
-    this.saveUser(user);
-    this.playXP();
-    this.setState({ user, screen: 'dashboard' });
-    // Sync to backend (non-blocking). The returned token is what authenticates
-    // every later guardarXP/guardarProgreso/getPerfil call for this account —
-    // without it those calls are rejected server-side (see Code.gs requireStudent).
-    if (window.desafioAPI) {
-      window.desafioAPI.registro({ nombre: fName, email: fEmail, nickname: this.state.fNick || fName.split(' ')[0], grupo: fGroup, seccion: fSection, avatar: selAvatar })
-        .then(res => {
-          if (res && res.ok && res.token) {
-            const isDocente = res.role === 'docente';
-            const withToken = { ...this.state.user, token: res.token, role: res.role || 'estudiante' };
-            this.saveUser(withToken);
-            this.setState({ user: withToken, ...(isDocente ? { screen: 'teacher', teacherAuthed: true } : {}) });
-            if (isDocente) this._loadTeacherData(withToken);
-          }
-        }).catch(() => {});
-      window.desafioAPI.guardarEvento(fEmail, 'REGISTRO', `Nuevo perfil: ${fName}`);
+    const { fName, fEmail, fGroup, fSection, selAvatar, regLoading, lang } = this.state;
+    if (regLoading) return;
+
+    // Client-side validation
+    if (!fName.trim())                          { this.setState({ formErr: lang === 'es' ? 'Por favor ingresa tu nombre completo.' : 'Please enter your full name.' }); return; }
+    if (!fEmail.trim() || !fEmail.includes('@')) { this.setState({ formErr: lang === 'es' ? 'Por favor ingresa un correo válido.' : 'Please enter a valid email.' }); return; }
+    if (!fGroup.trim())                          { this.setState({ formErr: lang === 'es' ? 'Por favor ingresa tu grupo.' : 'Please enter your group.' }); return; }
+    if (!fSection.trim())                        { this.setState({ formErr: lang === 'es' ? 'Por favor ingresa tu sección.' : 'Please enter your section.' }); return; }
+
+    if (!window.desafioAPI) {
+      this.setState({ formErr: lang === 'es' ? 'Sin conexión al servidor. Verifica tu internet.' : 'No server connection. Check your internet.' });
+      return;
     }
+
+    const email    = fEmail.trim().toLowerCase();
+    const nombre   = fName.trim();
+    const nickname = (this.state.fNick || '').trim() || nombre.split(' ')[0];
+    const grupo    = fGroup.trim();
+    const seccion  = fSection.trim();
+
+    this.setState({ regLoading: true, formErr: '' });
+
+    const _finalize = (res) => {
+      // Build the local user from server response.
+      // For recovered sessions, reconstruct challenges/badges from backend records.
+      const serverUser = res.user || {};
+      const progreso   = res.progreso || [];
+      const insignias  = res.insignias || [];
+      const user = (progreso.length > 0 || insignias.length > 0)
+        ? this._reconstructUserFromServer(serverUser, progreso, insignias, selAvatar)
+        : this.defaultUser({ name: nombre, email, nick: nickname, group: grupo, section: seccion }, selAvatar);
+
+      user.token = res.token;
+      user.role  = res.role || 'estudiante';
+      user.email = email;
+
+      this.saveUser(user);
+      this.playXP();
+      const isDocente = res.role === 'docente';
+      this.setState({
+        user, regLoading: false, formErr: '',
+        screen: isDocente ? 'teacher' : 'dashboard',
+        ...(isDocente ? { teacherAuthed: true } : {}),
+      });
+      if (isDocente) this._loadTeacherData(user);
+      // Log registration event — token is now available.
+      window.desafioAPI.guardarEvento(email, 'REGISTRO', `Perfil: ${nombre}`, res.token);
+    };
+
+    window.desafioAPI.registro({ nombre, email, nickname, grupo, seccion, avatar: selAvatar })
+      .then(res => {
+        if (res && res.queued) {
+          // Offline — a new account requires internet to receive a token.
+          this.setState({ regLoading: false, formErr: lang === 'es'
+            ? 'Sin conexión. Necesitas internet para crear o recuperar tu cuenta.'
+            : 'No connection. You need internet to create or recover your account.' });
+          return;
+        }
+        if (res && res.ok && res.token) {
+          // New account created or same-device re-submit with matching token.
+          _finalize(res);
+          return;
+        }
+        if (res && res.error === 'CUENTA_EXISTENTE') {
+          // Account exists on another device — auto-recover session.
+          this.setState({ formErr: lang === 'es' ? 'Cuenta encontrada. Recuperando tu sesión...' : 'Account found. Recovering your session...' });
+          window.desafioAPI.recuperarSesion(email)
+            .then(rec => {
+              if (rec && rec.ok && rec.token) {
+                _finalize(rec);
+              } else {
+                this.setState({ regLoading: false, formErr: rec?.error === 'CUENTA_NO_ENCONTRADA'
+                  ? (lang === 'es' ? 'No existe una cuenta con este correo.' : 'No account found with this email.')
+                  : (rec?.error || (lang === 'es' ? 'No se pudo recuperar la sesión. Contacta a tu docente.' : 'Could not recover session. Contact your teacher.')) });
+              }
+            })
+            .catch(() => this.setState({ regLoading: false, formErr: lang === 'es' ? 'Error de conexión al recuperar sesión.' : 'Connection error during session recovery.' }));
+          return;
+        }
+        // Any other error from the backend
+        this.setState({ regLoading: false, formErr: res?.message || res?.error || (lang === 'es' ? 'Error al crear cuenta. Intenta nuevamente.' : 'Error creating account. Try again.') });
+      })
+      .catch(() => this.setState({ regLoading: false, formErr: lang === 'es' ? 'Error de conexión. Verifica tu internet.' : 'Connection error. Check your internet.' }));
   };
 
   // ─── LEVEL / XP ─────────────────────────────────────────────────────────────
@@ -1340,8 +1461,12 @@ class Component extends DCLogic {
   getRankedList() {
     const user = this.state.user;
     const remote = this.state.remoteRanking || [];
+    const myEmail = (user?.email || '').trim().toLowerCase();
     const others = remote
-      .filter(r => !(user && r.Nombre === user.name && r.Nickname === user.nickname))
+      .filter(r => !(user && (
+        (r.Nombre || '').trim().toLowerCase() === (user.name || '').trim().toLowerCase() &&
+        (r.Nickname || '').trim().toLowerCase() === (user.nickname || '').trim().toLowerCase()
+      )))
       .map(r => ({ name: r.Nombre, nick: r.Nickname, xp: Number(r.XP) || 0, av: Number(r.Avatar) || 0, g: r.Grupo, s: '' }));
     const all = [...others];
     if (user) all.push({ name: user.name, nick: user.nickname, xp: user.xp, av: user.avatar, g: user.group, s: user.section, isMe: true });
@@ -1440,7 +1565,9 @@ class Component extends DCLogic {
       }));
       const token = updUser.token;
       window.desafioAPI.guardarProgreso({ email: updUser.email, token, semana: curChIdx+1, microreto: curMrIdx+1, tipo: this.state.challengeData?.type||'memory', intentos: mr.attempts, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, xp: stats.finalXP, cambiosPestana: stats.tabSwitches||0, answers });
-      window.desafioAPI.guardarXP(updUser.email, stats.finalXP, { token, semana: curChIdx+1, microreto: curMrIdx+1, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, answers, bonus: challengeBonus });
+      window.desafioAPI.guardarXP(updUser.email, stats.finalXP, { token, semana: curChIdx+1, microreto: curMrIdx+1, tiempo: stats.timeUsed, correctas: stats.correct, incorrectas: stats.wrong, answers, bonus: challengeBonus })
+        .then(res => { if (res && !res.ok && (res.error === 'No autorizado' || res.error === 'Usuario no encontrado')) this._handleAuthExpiry(); })
+        .catch(() => {});
       if (newBadge) window.desafioAPI.guardarInsignia(updUser.email, newBadge, token);
       window.desafioAPI.guardarEvento(updUser.email, 'MICRORETO_COMPLETADO', `S${curChIdx+1}M${curMrIdx+1} · ${stats.finalXP} XP`, token);
     }
@@ -1522,7 +1649,7 @@ class Component extends DCLogic {
   // ─── RENDER VALS ────────────────────────────────────────────────────────────
   renderVals() {
     const { screen, lang, soundOn, user, selAvatar, fName, fNick, fEmail, fGroup, fSection,
-      formErr, curChIdx, curMrIdx, phase, memTimeLeft, ansTimeLeft, curQIdx, selAnswer,
+      formErr, regLoading, curChIdx, curMrIdx, phase, memTimeLeft, ansTimeLeft, curQIdx, selAnswer,
       isCorrect, sessionXP, sessionAnswers, curFeedback, attemptsLeft, lastMrXP, newBadge, hasNextMr, resBreak } = this.state;
     const T = this.TR[lang];
     const av = this.AVATARS[user?.avatar || selAvatar || 0];
@@ -1923,6 +2050,8 @@ class Component extends DCLogic {
       borderName: fName ? 'rgba(124,58,237,0.35)' : formErr && !fName ? 'rgba(239,68,68,0.5)' : 'rgba(124,58,237,0.22)',
       borderEmail: fEmail ? 'rgba(124,58,237,0.35)' : formErr && !fEmail ? 'rgba(239,68,68,0.5)' : 'rgba(124,58,237,0.22)',
       submitReg: this.submitReg,
+      regLoading,
+      t_comenzar_ent: regLoading ? (lang === 'es' ? 'Verificando...' : 'Verifying...') : T.t_comenzar_ent,
       avatarOpts: this.AVATARS.map((a, i) => ({
         bg: a.bg, fill: a.fill,
         border: i === selAvatar ? '3px solid #7c3aed' : '2px solid transparent',

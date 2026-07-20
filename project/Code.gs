@@ -94,6 +94,7 @@ function doPost(e) {
       case 'adminAction'     : return respond(adminAction(body));
       case 'docenteAction'   : return respond(docenteAction(body));
       case 'subirBanco'      : return respond(subirBanco(body));
+      case 'recuperarSesion' : return respond(recuperarSesion(body));
       default: return respond({ ok: false, error: 'Acción no reconocida: ' + action });
     }
   } catch (err) {
@@ -148,7 +149,7 @@ function requireStudent(email, token) {
   if (!email) return { ok: false, error: 'Correo requerido' };
   const sheet = getSheet(SHEETS.ESTUDIANTES);
   const rows  = sheetToObjects(sheet);
-  const user  = rows.find(r => r.Correo === String(email).toLowerCase());
+  const user  = rows.find(r => r.Correo === String(email).trim().toLowerCase());
   if (!user) return { ok: false, error: 'Usuario no encontrado' };
   if (!tokensMatch(token, user.Token)) return { ok: false, error: 'No autorizado' };
   return { ok: true, user, rows, sheet };
@@ -185,7 +186,7 @@ function withIdempotency(requestId, fn) {
 /** Register (first visit) or acknowledge an existing account (email + token, no password). */
 function registro(data) {
   if (!data.email) return { ok: false, error: 'Correo requerido' };
-  const email = data.email.toLowerCase();
+  const email = data.email.trim().toLowerCase();
   const sheet = getSheet(SHEETS.ESTUDIANTES);
   const rows  = sheetToObjects(sheet);
   const existing = rows.find(r => r.Correo === email);
@@ -360,6 +361,36 @@ function subirBanco(data) {
   sheet.getRange(1, 1, values.length, HEADERS.RESPUESTAS.length).setValues(values);
   logEvento(data.adminEmail, 'BANCO_ACTUALIZADO', `Semana ${weekJson.week} · ${fresh.length} preguntas`, data.ua || '');
   return { ok: true, week: weekJson.week, preguntas: fresh.length };
+}
+
+/**
+ * Session recovery — lets a student reclaim their account from a new device
+ * without a password. Validates the email exists and is active, generates a
+ * fresh token (invalidating the old one), and returns the full profile so the
+ * frontend can reconstruct the local challenges/badges state.
+ * Security note: knowledge of the email address is the only credential required,
+ * which is intentional — there are no passwords in this system.
+ */
+function recuperarSesion(data) {
+  if (!data.email) return { ok: false, error: 'Correo requerido' };
+  const email = data.email.trim().toLowerCase();
+  const sheet = getSheet(SHEETS.ESTUDIANTES);
+  const rows  = sheetToObjects(sheet);
+  const user  = rows.find(r => r.Correo === email);
+  if (!user)                      return { ok: false, error: 'CUENTA_NO_ENCONTRADA' };
+  if (user.Estado === 'inactivo') return { ok: false, error: 'Cuenta desactivada. Contacta a tu docente.' };
+
+  const newToken = generateToken();
+  updateRow(sheet, rows, r => r.Correo === email, { Token: newToken, UltimoAcceso: new Date().toISOString() });
+
+  const progRows  = sheetToObjects(getSheet(SHEETS.PROGRESO));
+  const badgeRows = sheetToObjects(getSheet(SHEETS.INSIGNIAS));
+  const progreso  = progRows.filter(r => r.IDEstudiante === email);
+  const insignias = badgeRows.filter(r => r.IDEstudiante === email).map(r => r.Insignia);
+
+  logEvento(email, 'SESION_RECUPERADA', 'Token reemplazado por recuperación de sesión', data.ua || '');
+  const role = CONFIG.ADMIN_EMAILS.includes(email) ? 'docente' : 'estudiante';
+  return { ok: true, user: sanitizeUser(user), token: newToken, role, progreso, insignias };
 }
 
 /**
