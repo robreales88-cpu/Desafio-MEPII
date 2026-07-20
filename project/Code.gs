@@ -572,24 +572,59 @@ function docenteAction(data) {
   }
 }
 
-/** Upsert a week's schedule entry in 08_CALENDARIO. */
+/** Upsert a week's schedule entry in 08_CALENDARIO.
+ *  When fields.estado === 'activo' and closeOthers !== false, auto-closes all other active weeks. */
 function adminUpdateCalendario(adminEmail, semana, fields) {
   if (!semana) return { ok: false, error: 'Semana requerida' };
+
+  // Validate date range
+  if (fields.fechaInicio && fields.fechaFin && fields.fechaFin < fields.fechaInicio) {
+    return { ok: false, error: 'FechaFin debe ser igual o posterior a FechaInicio.' };
+  }
+  // Prevent invalid date strings
+  if (fields.fechaInicio && !/^\d{4}-\d{2}-\d{2}$/.test(fields.fechaInicio)) {
+    return { ok: false, error: 'FechaInicio inválida. Formato esperado: YYYY-MM-DD.' };
+  }
+  if (fields.fechaFin && !/^\d{4}-\d{2}-\d{2}$/.test(fields.fechaFin)) {
+    return { ok: false, error: 'FechaFin inválida. Formato esperado: YYYY-MM-DD.' };
+  }
+
   const sheet = getSheet(SHEETS.CALENDARIO);
   const rows  = sheetToObjects(sheet);
   const now   = new Date().toISOString();
-  const existing = rows.find(r => Number(r.Semana) === Number(semana));
+
+  // Auto-close other active weeks when activating one
+  const closedWeeks = [];
+  if (fields.estado === 'activo' && fields.closeOthers !== false) {
+    rows.forEach(function(r) {
+      if (Number(r.Semana) !== Number(semana) && r.Estado === 'activo') {
+        updateRow(sheet, rows, function(rr) { return Number(rr.Semana) === Number(r.Semana); },
+          { Estado: 'cerrado', ActualizadoPor: adminEmail, UltimaActualizacion: now });
+        closedWeeks.push(Number(r.Semana));
+        logEvento(adminEmail, 'CALENDARIO_CERRADO',
+          'Semana ' + r.Semana + ' cerrada automáticamente al activar semana ' + semana, '');
+      }
+    });
+  }
+
+  const existing = rows.find(function(r) { return Number(r.Semana) === Number(semana); });
   if (existing) {
     const updates = { ActualizadoPor: adminEmail, UltimaActualizacion: now };
     if (fields.fechaInicio != null) updates.FechaInicio = fields.fechaInicio;
     if (fields.fechaFin    != null) updates.FechaFin    = fields.fechaFin;
     if (fields.estado      != null) updates.Estado      = fields.estado;
-    updateRow(sheet, rows, r => Number(r.Semana) === Number(semana), updates);
+    updateRow(sheet, rows, function(r) { return Number(r.Semana) === Number(semana); }, updates);
   } else {
-    sheet.appendRow([Number(semana), fields.fechaInicio || '', fields.fechaFin || '', fields.estado || 'pendiente', adminEmail, now]);
+    sheet.appendRow([Number(semana), fields.fechaInicio || '', fields.fechaFin || '',
+      fields.estado || 'pendiente', adminEmail, now]);
   }
-  logEvento(adminEmail, 'CALENDARIO_UPDATE', `Semana ${semana} → ${JSON.stringify(fields)}`, '');
-  return { ok: true };
+
+  var evtLabel = fields.estado === 'activo'  ? 'CALENDARIO_ACTIVADO'
+               : fields.estado === 'cerrado' ? 'CALENDARIO_CERRADO'
+               : 'CALENDARIO_ACTUALIZADO';
+  logEvento(adminEmail, evtLabel,
+    'Semana ' + semana + ' → ' + JSON.stringify({ fechaInicio: fields.fechaInicio, fechaFin: fields.fechaFin, estado: fields.estado }), '');
+  return { ok: true, closedWeeks: closedWeeks };
 }
 
 // ══════════════════════════════════════════════════════════════════
