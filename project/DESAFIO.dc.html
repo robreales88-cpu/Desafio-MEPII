@@ -1693,11 +1693,11 @@ class Component extends DCLogic {
   // ─── NAV ────────────────────────────────────────────────────────────────────
   goLanding  = () => this.nav('landing');
   goRegister = () => this.nav('register');
-  loginExisting = () => { if (this.state.user) this.nav('dashboard'); else this.nav('register'); };
-  goDashboard   = () => this.nav('dashboard');
-  goChallenges  = () => this.nav('challenges');
-  goRanking     = () => { this._refreshRanking(); this.nav('ranking'); };
-  goProfile     = () => this.nav('profile');
+  loginExisting = () => { if (this.state.user) { if (this.state.user.role === 'docente') this.nav('teacher'); else this.nav('dashboard'); } else this.nav('register'); };
+  goDashboard   = () => { if (this.state.user?.role === 'docente') this.nav('teacher'); else this.nav('dashboard'); };
+  goChallenges  = () => { if (this.state.user?.role === 'docente') this.nav('teacher'); else this.nav('challenges'); };
+  goRanking     = () => { if (this.state.user?.role === 'docente') this.nav('teacher'); else { this._refreshRanking(); this.nav('ranking'); } };
+  goProfile     = () => { if (this.state.user?.role === 'docente') this.nav('teacher'); else this.nav('profile'); };
   goTeacher     = () => this.nav('teacher');
 
   // ─── TEACHER PANEL ACCESS GATE ──────────────────────────────────────────────
