@@ -36,6 +36,12 @@
  *     finishing at the same instant can't clobber each other's XP, and the
  *     ranking sheet is rewritten with a single range write instead of a
  *     clear+append-in-a-loop, so it's never readable half-built (SEC-5/BACK-3/BACK-12).
+ *   - guardarProgreso/guardarXP now validate that the submitted week is currently
+ *     active in 08_CALENDARIO before writing any data or awarding XP. Uses the
+ *     same dual-mode logic as the frontend (estado==='activo' OR date range). This
+ *     closes the calendar-bypass gap identified in AUDIT-01 hallazgo B1: previously
+ *     the calendar was enforced only on the client, so a direct API call could
+ *     register progress for any week regardless of schedule (AUDIT-01/B1).
  */
 
 // ══════════════════════════════════════════════════════════════════
@@ -163,6 +169,101 @@ function requireAdmin(adminEmail, adminToken) {
 }
 
 /**
+ * Verify that the given week (1-based) is currently active in 08_CALENDARIO.
+ * Mirrors the frontend dual-mode unlock logic exactly:
+ *   1. estado === 'activo'                              → always open
+ *   2. estado not 'cerrado'/'expirado' AND now in       → open (date-based auto-unlock)
+ *      [parseSVDate(FechaInicio,false), parseSVDate(FechaFin,true)]
+ *
+ * Returns { ok:true } when the week may be written to.
+ * Returns { ok:false, error, semana, estado } when it cannot — callers should
+ * return that object directly so the client receives a meaningful message.
+ */
+function requireWeekActive(semana) {
+  const weekNum = Number(semana);
+  if (!weekNum || isNaN(weekNum)) {
+    return { ok: false, error: 'Número de semana inválido.', semana: semana, estado: 'invalida' };
+  }
+
+  const rows  = sheetToObjects(getSheet(SHEETS.CALENDARIO));
+  const entry = rows.find(r => Number(r.Semana) === weekNum);
+
+  if (!entry) {
+    return {
+      ok: false,
+      error: 'La semana ' + weekNum + ' no está configurada en el calendario académico. Contacta a tu docente.',
+      semana: weekNum, estado: 'no_configurada',
+    };
+  }
+
+  const estado = (entry.Estado || 'pendiente').toString().trim();
+
+  // Explicitly active — no further check needed.
+  if (estado === 'activo') return { ok: true };
+
+  // Explicitly closed or expired — date range cannot reopen it.
+  if (estado === 'cerrado' || estado === 'expirado') {
+    return {
+      ok: false,
+      error: 'La semana ' + weekNum + ' ya está cerrada. No se puede registrar progreso.',
+      semana: weekNum, estado: estado,
+    };
+  }
+
+  // For pendiente / futuro: accept if the current SV time falls within [FechaInicio, FechaFin].
+  const fechaInicio = (entry.FechaInicio || '').toString().trim();
+  const fechaFin    = (entry.FechaFin    || '').toString().trim();
+
+  if (fechaInicio && fechaFin) {
+    const inicioMs = _parseSVDateForCalendar(fechaInicio, false);
+    const finMs    = _parseSVDateForCalendar(fechaFin,    true);
+    const now      = new Date().getTime();
+
+    if (inicioMs && finMs) {
+      if (now >= inicioMs && now <= finMs) return { ok: true };
+
+      if (now < inicioMs) {
+        return {
+          ok: false,
+          error: 'La semana ' + weekNum + ' aún no está disponible. Se abre el: ' + fechaInicio + '.',
+          semana: weekNum, estado: estado,
+        };
+      }
+
+      return {
+        ok: false,
+        error: 'La semana ' + weekNum + ' ya cerró (venció el ' + fechaFin + ').',
+        semana: weekNum, estado: estado,
+      };
+    }
+  }
+
+  // pendiente / futuro without usable dates → still locked.
+  return {
+    ok: false,
+    error: 'La semana ' + weekNum + ' aún no está habilitada. Contacta a tu docente.',
+    semana: weekNum, estado: estado,
+  };
+}
+
+/**
+ * Parse a YYYY-MM-DD date string as El Salvador local time (UTC−6, no DST).
+ * Exact mirror of parseSVDate() in the frontend so both layers agree on
+ * the boundaries of each day.
+ */
+function _parseSVDateForCalendar(dateStr, endOfDay) {
+  if (!dateStr) return null;
+  const p = dateStr.toString().trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!p) return null;
+  const y = parseInt(p[1], 10), mo = parseInt(p[2], 10), d = parseInt(p[3], 10);
+  // start of day SV: 00:00:00 UTC-6 = 06:00:00 UTC
+  // end   of day SV: 23:59:59 UTC-6 = next day 05:59:59 UTC
+  return endOfDay
+    ? Date.UTC(y, mo - 1, d + 1, 5, 59, 59, 999)
+    : Date.UTC(y, mo - 1, d,     6,  0,  0,   0);
+}
+
+/**
  * Run `fn` at most once per requestId. Repeated calls with the same requestId
  * (retries, offline-queue replays) return the original cached result instead of
  * re-applying the action. Requests without a requestId always run (older
@@ -240,6 +341,15 @@ function guardarProgreso(data) {
     const auth = requireStudent(data.email, data.token);
     if (!auth.ok) return auth;
 
+    // AUDIT-01/B1 — Reject submissions for weeks not active in 08_CALENDARIO.
+    // No data is written and no XP is awarded if this check fails.
+    const weekCheck = requireWeekActive(data.semana);
+    if (!weekCheck.ok) {
+      logEvento(auth.user.Correo, 'PROGRESO_BLOQUEADO',
+        'Semana ' + data.semana + ' · ' + weekCheck.error, data.ua || '');
+      return { ok: false, error: weekCheck.error, semana: weekCheck.semana, estado: weekCheck.estado };
+    }
+
     const evalResult = evaluateSubmission(data.semana, data.microreto, data.answers, data.tiempo, {
       correctas: data.correctas, incorrectas: data.incorrectas, xp: data.xp,
     });
@@ -262,6 +372,15 @@ function guardarXP(data) {
     const auth = requireStudent(data.email, data.token);
     if (!auth.ok) return auth;
     if (data.xp == null) return { ok: false, error: 'XP requerido' };
+
+    // AUDIT-01/B1 — Reject XP awards for weeks not active in 08_CALENDARIO.
+    // No XP is written and the ranking is not updated if this check fails.
+    const weekCheck = requireWeekActive(data.semana);
+    if (!weekCheck.ok) {
+      logEvento(auth.user.Correo, 'XP_BLOQUEADO',
+        'Semana ' + data.semana + ' · ' + weekCheck.error, data.ua || '');
+      return { ok: false, error: weekCheck.error, semana: weekCheck.semana, estado: weekCheck.estado };
+    }
 
     const evalResult = evaluateSubmission(data.semana, data.microreto, data.answers, data.tiempo, {
       correctas: data.correctas, incorrectas: data.incorrectas, xp: data.xp,
