@@ -27,6 +27,7 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
 @keyframes glowPulse{0%,100%{box-shadow:0 0 12px rgba(124,58,237,0.4);}50%{box-shadow:0 0 28px rgba(124,58,237,0.8),0 0 50px rgba(6,182,212,0.25);}}
 @media(max-width:640px){.dt-nav{display:none!important;}.mob-nav{display:flex!important;}.app-body{padding-bottom:68px!important;}}
 @media(min-width:641px){.mob-nav{display:none!important;}.dt-nav{display:flex!important;}}
+@media print{body,html{height:auto!important;overflow:visible!important;background:#fff!important;color:#000!important;overflow:auto!important;}.dt-nav,.mob-nav,.print-hide{display:none!important;}.app-body{overflow:visible!important;padding:0!important;}#teacher-print-area{display:block!important;}}
 </style>
 <script src="./event-bus.js"></script>
 <script src="./challenge-engine.js"></script>
@@ -47,17 +48,38 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
         <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#f1f5f9;letter-spacing:-0.3px;">DESAFÍO</span>
       </div>
 
-      <div class="dt-nav" style="flex:1;align-items:center;justify-content:center;gap:2px;">
-        <button onClick="{{ goDashboard }}" style="background:{{ navBg_dash }};color:{{ navCol_dash }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>{{ t_dash }}
-        </button>
-        <button onClick="{{ goChallenges }}" style="background:{{ navBg_ch }};color:{{ navCol_ch }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{{ t_challenges }}
-        </button>
-        <button onClick="{{ goRanking }}" style="background:{{ navBg_rk }};color:{{ navCol_rk }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>{{ t_ranking }}
-        </button>
-      </div>
+      <sc-if value="{{ isStudent }}" hint-placeholder-val="{{ true }}">
+        <div class="dt-nav" style="flex:1;align-items:center;justify-content:center;gap:2px;">
+          <button onClick="{{ goDashboard }}" style="background:{{ navBg_dash }};color:{{ navCol_dash }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>{{ t_dash }}
+          </button>
+          <button onClick="{{ goChallenges }}" style="background:{{ navBg_ch }};color:{{ navCol_ch }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{{ t_challenges }}
+          </button>
+          <button onClick="{{ goRanking }}" style="background:{{ navBg_rk }};color:{{ navCol_rk }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>{{ t_ranking }}
+          </button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isDocente }}" hint-placeholder-val="{{ false }}">
+        <div class="dt-nav" style="flex:1;align-items:center;justify-content:center;gap:2px;">
+          <button onClick="{{ goTeachDash }}" style="background:{{ tnBg_dash }};color:{{ tnC_dash }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>{{ t_teach_dash }}
+          </button>
+          <button onClick="{{ goTeachStudents }}" style="background:{{ tnBg_stu }};color:{{ tnC_stu }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>{{ t_teach_students }}
+          </button>
+          <button onClick="{{ goTeachAnalytics }}" style="background:{{ tnBg_ana }};color:{{ tnC_ana }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>{{ t_teach_analytics }}
+          </button>
+          <button onClick="{{ goTeachReports }}" style="background:{{ tnBg_rep }};color:{{ tnC_rep }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>{{ t_teach_reports }}
+          </button>
+          <button onClick="{{ goTeachConfig }}" style="background:{{ tnBg_cfg }};color:{{ tnC_cfg }};border:none;padding:6px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M2 12h2M20 12h2"/></svg>{{ t_teach_config }}
+          </button>
+        </div>
+      </sc-if>
 
       <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
         <button onClick="{{ toggleSound }}" title="{{ t_sound }}" style="background:transparent;border:1px solid rgba(124,58,237,0.25);border-radius:6px;padding:5px 8px;cursor:pointer;color:{{ soundColor }};display:flex;align-items:center;">
@@ -69,16 +91,24 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
           </sc-if>
         </button>
         <button onClick="{{ toggleLang }}" style="background:transparent;border:1px solid rgba(124,58,237,0.25);border-radius:6px;padding:4px 8px;cursor:pointer;color:#a855f7;font-size:11px;font-weight:700;letter-spacing:0.5px;">{{ langBtn }}</button>
-        <button onClick="{{ goProfile }}" style="background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:3px;">
-          <div style="width:32px;height:32px;border-radius:50%;background:{{ avBg }};border:2px solid #7c3aed;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <svg viewBox="0 0 40 40" width="30" height="30" fill="{{ avFill }}"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+        <sc-if value="{{ isStudent }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ goProfile }}" style="background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:3px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:{{ avBg }};border:2px solid #7c3aed;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+              <svg viewBox="0 0 40 40" width="30" height="30" fill="{{ avFill }}"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:#e2e8f0;line-height:1.2;">{{ uNick }}</div>
+              <div style="font-size:10px;color:#a855f7;line-height:1.2;">{{ uLevelLabel }}</div>
+            </div>
+          </button>
+          <button onClick="{{ goTeacher }}" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.28);border-radius:6px;padding:5px 10px;cursor:pointer;color:#f59e0b;font-size:11px;font-weight:600;">{{ t_teacher }}</button>
+        </sc-if>
+        <sc-if value="{{ isDocente }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;">
+            <div style="font-size:12px;font-weight:600;color:#f59e0b;line-height:1.2;">{{ uName }}</div>
+            <div style="font-size:10px;color:#64748b;line-height:1.2;">{{ t_panel_docente }}</div>
           </div>
-          <div>
-            <div style="font-size:12px;font-weight:600;color:#e2e8f0;line-height:1.2;">{{ uNick }}</div>
-            <div style="font-size:10px;color:#a855f7;line-height:1.2;">{{ uLevelLabel }}</div>
-          </div>
-        </button>
-        <button onClick="{{ goTeacher }}" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.28);border-radius:6px;padding:5px 10px;cursor:pointer;color:#f59e0b;font-size:11px;font-weight:600;">{{ t_teacher }}</button>
+        </sc-if>
       </div>
     </nav>
   </sc-if>
@@ -656,139 +686,381 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
 
     <!-- ===== TEACHER PANEL ===== -->
     <sc-if value="{{ isTeacher }}" hint-placeholder-val="{{ false }}">
-      <div style="max-width:880px;margin:0 auto;padding:26px 18px;animation:fadeUp 0.4s ease;">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px;">
-          <div>
-            <div style="font-size:11px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;">{{ t_panel_docente }}</div>
-            <h2 style="font-size:21px;font-weight:700;color:#f1f5f9;">{{ t_panel_sub }}</h2>
-          </div>
-          <sc-if value="{{ teacherAuthed }}" hint-placeholder-val="{{ false }}">
-            <div style="display:flex;gap:8px;">
-              <button onClick="{{ doExportCSV }}" style="background:transparent;border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                CSV
-              </button>
-              <button onClick="{{ doExportExcel }}" style="background:transparent;border:1px solid rgba(6,182,212,0.3);color:#06b6d4;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/></svg>
-                Excel
-              </button>
-            </div>
-          </sc-if>
-        </div>
 
-        <!-- Access gate — clicking "Docente" no longer reveals real student data by itself. -->
-        <sc-if value="{{ teacherNotAuthed }}" hint-placeholder-val="{{ true }}">
-          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:22px;max-width:380px;">
-            <div style="font-size:12px;font-weight:600;color:#f59e0b;margin-bottom:14px;">Acceso restringido — solo docentes</div>
-            <div style="margin-bottom:10px;">
-              <div style="font-size:10px;color:#64748b;margin-bottom:4px;">Correo docente</div>
+      <!-- Auth gate: for student who clicked "Docente" -->
+      <sc-if value="{{ teacherNotAuthed }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width:420px;margin:60px auto;padding:0 18px;">
+          <div style="background:#12121e;border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:26px;">
+            <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;">{{ t_panel_docente }}</div>
+            <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:18px;">Acceso restringido</h2>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:10px;color:#64748b;margin-bottom:5px;">Correo docente</div>
               <input type="email" value="{{ teacherEmailVal }}" onInput="{{ onTeacherEmail }}" placeholder="docente@universidad.edu" style="width:100%;background:#0a0a14;border:1px solid rgba(245,158,11,0.22);border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;">
             </div>
-            <div style="margin-bottom:12px;">
-              <div style="font-size:10px;color:#64748b;margin-bottom:4px;">Token de acceso</div>
-              <input type="password" value="{{ teacherTokenVal }}" onInput="{{ onTeacherToken }}" placeholder="Token compartido por la coordinación" style="width:100%;background:#0a0a14;border:1px solid rgba(245,158,11,0.22);border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;">
+            <div style="margin-bottom:14px;">
+              <div style="font-size:10px;color:#64748b;margin-bottom:5px;">Token de acceso</div>
+              <input type="password" value="{{ teacherTokenVal }}" onInput="{{ onTeacherToken }}" placeholder="Token de la coordinación" style="width:100%;background:#0a0a14;border:1px solid rgba(245,158,11,0.22);border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;">
             </div>
             <sc-if value="{{ hasTeacherAuthErr }}" hint-placeholder-val="{{ false }}">
-              <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:8px 12px;font-size:12px;color:#fca5a5;margin-bottom:10px;">{{ teacherAuthErr }}</div>
+              <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:8px 12px;font-size:12px;color:#fca5a5;margin-bottom:12px;">{{ teacherAuthErr }}</div>
             </sc-if>
-            <button onClick="{{ teacherLogin }}" style="width:100%;background:linear-gradient(135deg,#f59e0b,#f97316);color:white;border:none;padding:10px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Entrar</button>
+            <button onClick="{{ teacherLogin }}" style="width:100%;background:linear-gradient(135deg,#f59e0b,#f97316);color:white;border:none;padding:11px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Entrar al panel</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ teacherAuthed }}" hint-placeholder-val="{{ true }}">
+
+        <!-- ── DASHBOARD ── -->
+        <sc-if value="{{ isTeachDash }}" hint-placeholder-val="{{ true }}">
+          <div style="max-width:1100px;margin:0 auto;padding:24px 18px;animation:fadeUp 0.4s ease;">
+            <div style="margin-bottom:20px;">
+              <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_panel_docente }}</div>
+              <h2 style="font-size:20px;font-weight:700;color:#f1f5f9;">{{ t_panel_sub }}</h2>
+              <div style="font-size:11px;color:#475569;margin-top:2px;">{{ t_ultima_act_label }}: {{ tc_lastUpdate }}</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-bottom:20px;">
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_estudiantes }}</div>
+                <div style="font-size:30px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ tc_students }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(6,182,212,0.18);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_avg_xp }}</div>
+                <div style="font-size:30px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ tc_avgXP }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(245,158,11,0.18);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_semana_activa }}</div>
+                <div style="font-size:30px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ tc_activeWeek }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(16,185,129,0.18);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_total_comp }}</div>
+                <div style="font-size:30px;font-weight:700;color:#10b981;font-family:'Space Grotesk',sans-serif;">{{ tc_totalCompleted }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.12);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_xp_grupo }}</div>
+                <div style="font-size:30px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ tc_totalXP }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(6,182,212,0.12);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_avg_time }}</div>
+                <div style="font-size:30px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ tc_avgTime }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(245,158,11,0.12);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_activos_hoy }}</div>
+                <div style="font-size:30px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ tc_activeToday }}</div>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(239,68,68,0.12);border-radius:14px;padding:18px;">
+                <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">{{ t_pendientes }}</div>
+                <div style="font-size:30px;font-weight:700;color:#ef4444;font-family:'Space Grotesk',sans-serif;">{{ tc_pending }}</div>
+              </div>
+            </div>
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:14px;overflow:hidden;">
+              <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_est_registrados }}</span>
+                <button onClick="{{ goTeachStudents }}" style="background:transparent;border:none;color:#a855f7;font-size:11px;cursor:pointer;font-weight:500;">{{ t_teach_students }} →</button>
+              </div>
+              <div style="padding:8px 16px;background:rgba(124,58,237,0.04);display:grid;grid-template-columns:36px 1fr 80px 60px 70px 80px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.08);">
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_pos }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_nombre_col }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_nivel }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:right;">XP</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_desafios_col }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_avance_col }}</span>
+              </div>
+              <sc-for list="{{ tcDashRows }}" as="dr" hint-placeholder-count="5">
+                <div style="padding:10px 16px;border-bottom:1px solid rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 80px 60px 70px 80px;gap:8px;align-items:center;">
+                  <div style="font-size:12px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;text-align:center;">{{ dr.rank }}</div>
+                  <div><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ dr.name }}</div><div style="font-size:9px;color:#64748b;">{{ dr.email }}</div></div>
+                  <div style="text-align:center;font-size:11px;color:#a855f7;">{{ dr.level }}</div>
+                  <div style="text-align:right;font-size:13px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ dr.xp }}</div>
+                  <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ dr.done }}/18</div>
+                  <div style="text-align:center;"><div style="font-size:11px;font-weight:600;color:{{ dr.progC }};">{{ dr.progPct }}%</div><div style="height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:2px;"><div style="height:3px;background:{{ dr.progC }};border-radius:2px;width:{{ dr.progBarW }};"></div></div></div>
+                </div>
+              </sc-for>
+            </div>
           </div>
         </sc-if>
 
-        <sc-if value="{{ teacherAuthed }}" hint-placeholder-val="{{ false }}">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:22px;">
-            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_estudiantes }}</div><div style="font-size:26px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ tc_students }}</div></div>
-            <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_xp }}</div><div style="font-size:26px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ tc_avgXP }}</div></div>
-            <div style="background:#12121e;border:1px solid rgba(245,158,11,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_avg_time }}</div><div style="font-size:26px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ tc_avgTime }}</div></div>
-            <div style="background:#12121e;border:1px solid rgba(239,68,68,0.14);border-radius:12px;padding:15px;"><div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">{{ t_pendientes }}</div><div style="font-size:26px;font-weight:700;color:#ef4444;font-family:'Space Grotesk',sans-serif;">{{ tc_pending }}</div></div>
-          </div>
-
-          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:15px;overflow:hidden;margin-bottom:18px;">
-            <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_est_registrados }}</div>
-            <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
-              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_estudiante }}</span>
-              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_nivel }}</span>
-              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">XP</span>
-              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_completados }}</span>
-              <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;text-align:center;">{{ t_tiempo_min }}</span>
-            </div>
-            <sc-for list="{{ tcRows }}" as="st" hint-placeholder-count="8">
-              <div style="padding:11px 16px;border-bottom:1px solid rgba(124,58,237,0.06);display:grid;grid-template-columns:1fr 90px 54px 70px 70px;gap:8px;align-items:center;">
-                <div><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ st.name }}</div><div style="font-size:9px;color:#64748b;">{{ st.email }} · G:{{ st.group }}/S:{{ st.section }}</div></div>
-                <div style="text-align:center;font-size:11px;color:#a855f7;font-weight:500;">{{ st.level }}</div>
-                <div style="text-align:center;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#06b6d4;">{{ st.xp }}</div>
-                <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}</div>
-                <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ st.time }}</div>
+        <!-- ── STUDENTS ── -->
+        <sc-if value="{{ isTeachStudents }}" hint-placeholder-val="{{ false }}">
+          <div style="max-width:1100px;margin:0 auto;padding:24px 18px;animation:fadeUp 0.4s ease;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+              <div>
+                <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_students }}</div>
+                <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_est_registrados }}</h2>
               </div>
-            </sc-for>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+              <input type="text" value="{{ teacherSearchVal }}" onInput="{{ onTeacherSearch }}" placeholder="{{ t_buscar_est }}" style="flex:1;min-width:200px;background:#12121e;border:1px solid rgba(124,58,237,0.2);border-radius:9px;padding:9px 13px;color:#e2e8f0;font-size:13px;outline:none;">
+              <select value="{{ teacherFilterGroupVal }}" onChange="{{ onTeacherFilterGroup }}" style="background:#12121e;border:1px solid rgba(124,58,237,0.2);border-radius:9px;padding:9px 13px;color:#e2e8f0;font-size:12px;cursor:pointer;">
+                <sc-for list="{{ groupOpts }}" as="go" hint-placeholder-count="3">
+                  <option value="{{ go.val }}">{{ go.label }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:14px;overflow:hidden;margin-bottom:14px;">
+              <div style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;min-width:720px;">
+                  <thead>
+                    <tr style="background:rgba(124,58,237,0.06);border-bottom:1px solid rgba(124,58,237,0.12);">
+                      <th style="padding:10px 14px;text-align:left;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_pos }}</th>
+                      <th style="padding:10px 14px;text-align:left;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByName }}">{{ t_nombre_col }}{{ sortArrow_name }}</th>
+                      <th style="padding:10px 14px;text-align:left;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_correo_col }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByXP }}">XP{{ sortArrow_xp }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_nivel }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByDone }}">{{ t_desafios_col }}{{ sortArrow_done }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_insignias_col }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByProg }}">{{ t_avance_col }}{{ sortArrow_prog }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_ultima_col }}</th>
+                      <th style="padding:10px 14px;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <sc-for list="{{ tcRowsFull }}" as="st" hint-placeholder-count="10">
+                      <tr style="border-bottom:1px solid rgba(124,58,237,0.05);">
+                        <td style="padding:11px 14px;font-size:12px;font-weight:600;color:#475569;font-family:'Space Grotesk',sans-serif;">{{ st.rank }}</td>
+                        <td style="padding:11px 14px;"><div style="font-size:12px;font-weight:600;color:#e2e8f0;white-space:nowrap;">{{ st.name }}</div><div style="font-size:10px;color:#64748b;">G:{{ st.group }} S:{{ st.section }}</div></td>
+                        <td style="padding:11px 14px;font-size:11px;color:#94a3b8;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ st.email }}</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:13px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ st.xp }}</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:11px;color:#a855f7;font-weight:500;white-space:nowrap;">{{ st.level }}</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}/18</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;">{{ st.badges }}</td>
+                        <td style="padding:11px 14px;text-align:center;"><div style="font-size:11px;font-weight:600;color:{{ st.progC }};margin-bottom:3px;">{{ st.progPct }}%</div><div style="width:56px;height:4px;background:rgba(255,255,255,0.07);border-radius:3px;margin:0 auto;"><div style="height:4px;background:{{ st.progC }};border-radius:3px;width:{{ st.progBarW }};"></div></div></td>
+                        <td style="padding:11px 14px;text-align:center;font-size:10px;color:#64748b;white-space:nowrap;">{{ st.lastAct }}</td>
+                        <td style="padding:11px 14px;text-align:center;"><button onClick="{{ st.viewProfile }}" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);border-radius:6px;padding:4px 10px;font-size:10px;font-weight:600;color:#a855f7;cursor:pointer;">{{ t_ver_perfil }}</button></td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <sc-if value="{{ showPagination }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                <button onClick="{{ teacherPagePrev }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.22);border-radius:8px;padding:7px 13px;font-size:12px;color:#a855f7;cursor:pointer;">{{ t_anterior }}</button>
+                <span style="font-size:12px;color:#64748b;">{{ t_pagina }} {{ tcPageInfo }}</span>
+                <button onClick="{{ teacherPageNextFn }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.22);border-radius:8px;padding:7px 13px;font-size:12px;color:#a855f7;cursor:pointer;">{{ t_siguiente }}</button>
+              </div>
+            </sc-if>
           </div>
+        </sc-if>
 
-          <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:13px 15px;margin-bottom:16px;">
-            <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:5px;">{{ t_integridad }}</div>
-            <div style="font-size:12px;color:#94a3b8;">{{ t_sin_eventos }}</div>
-          </div>
-
-          <!-- Academic Calendar section -->
-          <div>
-            <button onClick="{{ toggleCalendar }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.28);border-radius:9px;padding:9px 16px;font-size:12px;font-weight:600;color:#a855f7;cursor:pointer;display:flex;align-items:center;gap:7px;margin-bottom:14px;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              {{ t_cal_toggle }}
-            </button>
-            <sc-if value="{{ calendarSection }}" hint-placeholder-val="{{ false }}">
-              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:15px;overflow:hidden;">
-                <div style="padding:13px 16px;border-bottom:1px solid rgba(124,58,237,0.1);font-size:12px;font-weight:600;color:#f1f5f9;">{{ t_calendario }}</div>
-                <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
-                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">S</span>
-                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_challenges }}</span>
-                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_inicio }}</span>
-                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_fin }}</span>
-                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_estado }}</span>
-                  <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_acciones }}</span>
+        <!-- ── ANALYTICS ── -->
+        <sc-if value="{{ isTeachAnalytics }}" hint-placeholder-val="{{ false }}">
+          <div style="max-width:1100px;margin:0 auto;padding:24px 18px;animation:fadeUp 0.4s ease;">
+            <div style="margin-bottom:20px;">
+              <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_analytics }}</div>
+              <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_panel_sub }}</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+              <div style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:14px;padding:20px;">
+                <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">{{ t_distribucion_nivel }}</div>
+                <sc-for list="{{ analyticsLevelBars }}" as="lb" hint-placeholder-count="5">
+                  <div style="margin-bottom:12px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#94a3b8;">{{ lb.label }}</span><span style="font-size:11px;font-weight:600;color:#e2e8f0;">{{ lb.count }}</span></div>
+                    <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;"><div style="height:8px;background:{{ lb.barC }};border-radius:4px;width:{{ lb.barW }};"></div></div>
+                    <div style="font-size:9px;color:#475569;margin-top:2px;">{{ lb.pct }}%</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="background:#12121e;border:1px solid rgba(16,185,129,0.14);border-radius:14px;padding:20px;">
+                <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">{{ t_distribucion_avance }}</div>
+                <sc-for list="{{ analyticsProgBars }}" as="pb" hint-placeholder-count="5">
+                  <div style="margin-bottom:12px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#94a3b8;">{{ pb.label }}</span><span style="font-size:11px;font-weight:600;color:#e2e8f0;">{{ pb.count }}</span></div>
+                    <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;"><div style="height:8px;background:#10b981;border-radius:4px;width:{{ pb.barW }};"></div></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="background:#12121e;border:1px solid rgba(6,182,212,0.14);border-radius:14px;padding:20px;">
+              <div style="font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">{{ t_xp_top }}</div>
+              <sc-for list="{{ analyticsXPBars }}" as="xb" hint-placeholder-count="10">
+                <div style="display:grid;grid-template-columns:160px 1fr 60px;gap:10px;align-items:center;margin-bottom:8px;">
+                  <div style="font-size:11px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ xb.name }}</div>
+                  <div style="height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;"><div style="height:10px;background:linear-gradient(90deg,#7c3aed,#06b6d4);border-radius:5px;width:{{ xb.barW }};"></div></div>
+                  <div style="text-align:right;font-size:12px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ xb.xp }}</div>
                 </div>
-                <sc-for list="{{ calendarRows }}" as="cr" hint-placeholder-count="18">
-                  <div style="border-bottom:1px solid rgba(124,58,237,0.05);">
-                    <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;align-items:center;">
-                      <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
-                      <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
-                      <input type="date" value="{{ cr.fechaInicio }}" onInput="{{ cr.setStart }}" onChange="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
-                      <input type="date" value="{{ cr.fechaFin }}" onInput="{{ cr.setEnd }}" onChange="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
-                      <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
-                      <div style="display:flex;gap:4px;">
-                        <button onClick="{{ cr.activate }}" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#10b981;cursor:pointer;">{{ t_cal_activar }}</button>
-                        <button onClick="{{ cr.close }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#ef4444;cursor:pointer;">{{ t_cal_cerrar }}</button>
-                      </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- ── REPORTS ── -->
+        <sc-if value="{{ isTeachReports }}" hint-placeholder-val="{{ false }}">
+          <div style="max-width:1100px;margin:0 auto;padding:24px 18px;animation:fadeUp 0.4s ease;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;" class="print-hide">
+              <div>
+                <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_reports }}</div>
+                <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_reporte_titulo }}</h2>
+              </div>
+              <button onClick="{{ doPrintReport }}" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);border:none;border-radius:9px;padding:10px 18px;font-size:12px;font-weight:600;color:white;cursor:pointer;display:flex;align-items:center;gap:7px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                {{ t_imprimir }}
+              </button>
+            </div>
+            <div id="teacher-print-area" style="background:#12121e;border:1px solid rgba(124,58,237,0.14);border-radius:14px;overflow:hidden;">
+              <div style="padding:16px 20px;border-bottom:1px solid rgba(124,58,237,0.1);">
+                <div style="font-size:15px;font-weight:700;color:#f1f5f9;">{{ t_reporte_titulo }}</div>
+                <div style="font-size:11px;color:#64748b;margin-top:2px;">{{ t_ultima_act_label }}: {{ tc_lastUpdate }} · {{ t_estudiantes }}: {{ tc_students }}</div>
+              </div>
+              <div style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;min-width:680px;">
+                  <thead>
+                    <tr style="background:rgba(124,58,237,0.06);border-bottom:1px solid rgba(124,58,237,0.1);">
+                      <th style="padding:10px 14px;text-align:left;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_pos }}</th>
+                      <th style="padding:10px 14px;text-align:left;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_nombre_col }}</th>
+                      <th style="padding:10px 14px;text-align:left;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_correo_col }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">XP</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_nivel }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_desafios_col }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_avance_col }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_inscrito }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <sc-for list="{{ tcRowsAll }}" as="rr" hint-placeholder-count="12">
+                      <tr style="border-bottom:1px solid rgba(124,58,237,0.05);">
+                        <td style="padding:9px 14px;font-size:11px;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ rr.rank }}</td>
+                        <td style="padding:9px 14px;font-size:12px;font-weight:600;color:#e2e8f0;">{{ rr.name }}</td>
+                        <td style="padding:9px 14px;font-size:11px;color:#94a3b8;">{{ rr.email }}</td>
+                        <td style="padding:9px 14px;text-align:center;font-size:12px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ rr.xp }}</td>
+                        <td style="padding:9px 14px;text-align:center;font-size:11px;color:#a855f7;">{{ rr.level }}</td>
+                        <td style="padding:9px 14px;text-align:center;font-size:11px;color:#94a3b8;">{{ rr.done }}/18</td>
+                        <td style="padding:9px 14px;text-align:center;font-size:11px;font-weight:600;color:{{ rr.progC }};">{{ rr.progPct }}%</td>
+                        <td style="padding:9px 14px;text-align:center;font-size:10px;color:#64748b;">{{ rr.lastAct }}</td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- ── CONFIG (calendar) ── -->
+        <sc-if value="{{ isTeachConfig }}" hint-placeholder-val="{{ false }}">
+          <div style="max-width:1100px;margin:0 auto;padding:24px 18px;animation:fadeUp 0.4s ease;">
+            <div style="margin-bottom:20px;">
+              <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_config }}</div>
+              <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_calendario }}</h2>
+            </div>
+            <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;overflow:hidden;">
+              <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">S</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_challenges }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_inicio }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_fin }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_estado }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_acciones }}</span>
+              </div>
+              <sc-for list="{{ calendarRows }}" as="cr" hint-placeholder-count="18">
+                <div style="border-bottom:1px solid rgba(124,58,237,0.05);">
+                  <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;align-items:center;">
+                    <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
+                    <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
+                    <input type="date" value="{{ cr.fechaInicio }}" onInput="{{ cr.setStart }}" onChange="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <input type="date" value="{{ cr.fechaFin }}" onInput="{{ cr.setEnd }}" onChange="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
+                    <div style="display:flex;gap:4px;">
+                      <button onClick="{{ cr.activate }}" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#10b981;cursor:pointer;">{{ t_cal_activar }}</button>
+                      <button onClick="{{ cr.close }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#ef4444;cursor:pointer;">{{ t_cal_cerrar }}</button>
                     </div>
-                    <sc-if value="{{ cr.hasCalErr }}" hint-placeholder-val="{{ false }}">
-                      <div style="padding:2px 16px 6px;font-size:10px;color:#fca5a5;background:rgba(239,68,68,0.06);">⚠ {{ cr.calErr }}</div>
-                    </sc-if>
+                  </div>
+                  <sc-if value="{{ cr.hasCalErr }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding:2px 16px 6px;font-size:10px;color:#fca5a5;background:rgba(239,68,68,0.06);">⚠ {{ cr.calErr }}</div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+      </sc-if>
+
+      <!-- Student profile modal (overlay, fixed) -->
+      <sc-if value="{{ hasStudentModal }}" hint-placeholder-val="{{ false }}">
+        <div style="position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;" onClick="{{ closeStudentProfile }}">
+          <div style="background:#12121e;border:1px solid rgba(124,58,237,0.25);border-radius:18px;padding:26px;max-width:480px;width:100%;animation:fadeUp 0.25s ease;max-height:90vh;overflow-y:auto;" onClick="{{ modalStopProp }}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;">
+              <div style="font-size:13px;font-weight:700;color:#f1f5f9;">{{ t_perfil_est }}</div>
+              <button onClick="{{ closeStudentProfile }}" style="background:rgba(255,255,255,0.06);border:none;border-radius:6px;padding:4px 10px;color:#94a3b8;cursor:pointer;font-size:12px;">{{ t_cerrar_modal }}</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+              <div style="width:56px;height:56px;border-radius:50%;background:{{ modalAvBg }};border:2px solid #7c3aed;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+                <svg viewBox="0 0 40 40" width="46" height="46" fill="rgba(255,255,255,0.88)"><circle cx="20" cy="14" r="9"/><path d="M4 40 Q4 27 20 27 Q36 27 36 40"/></svg>
+              </div>
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#f1f5f9;">{{ modalName }}</div>
+                <div style="font-size:11px;color:#64748b;margin-top:1px;">{{ modalEmail }}</div>
+                <div style="font-size:10px;color:#475569;margin-top:1px;">G:{{ modalGroup }} / S:{{ modalSection }}</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">
+              <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ modalXP }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">XP</div></div>
+              <div style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ modalDone }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_desafios_col }}</div></div>
+              <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ modalBadgeCount }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_insignias_col }}</div></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;margin-bottom:14px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#64748b;">{{ t_nivel }}</span><span style="font-size:11px;font-weight:600;color:#a855f7;">{{ modalLevel }}</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#64748b;">{{ t_tiempo_total_col }}</span><span style="font-size:11px;color:#94a3b8;">{{ modalTime }} min</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:11px;color:#64748b;">{{ t_avance_col }}</span><span style="font-size:11px;font-weight:600;color:{{ modalProgC }};">{{ modalProgPct }}%</span></div>
+              <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;"><div style="height:5px;background:{{ modalProgC }};border-radius:3px;width:{{ modalProgBarW }};"></div></div>
+            </div>
+            <sc-if value="{{ hasModalBadges }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">{{ t_insignias_col }}</div>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;">
+                <sc-for list="{{ modalBadges }}" as="mb" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:4px 9px;">
+                    <div style="width:18px;height:18px;border-radius:50%;background:{{ mb.color }}22;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:{{ mb.color }};">{{ mb.letter }}</div>
+                    <span style="font-size:10px;color:#94a3b8;">{{ mb.name }}</span>
                   </div>
                 </sc-for>
               </div>
             </sc-if>
           </div>
-        </sc-if>
-      </div>
+        </div>
+      </sc-if>
+
     </sc-if>
 
     <!-- Mobile bottom nav -->
     <nav class="mob-nav" style="display:none;position:fixed;bottom:0;left:0;right:0;height:62px;background:rgba(10,10,20,0.97);border-top:1px solid rgba(124,58,237,0.18);justify-content:space-around;align-items:center;z-index:200;">
       <sc-if value="{{ showNav }}" hint-placeholder-val="{{ false }}">
-        <button onClick="{{ goDashboard }}" style="background:transparent;border:none;color:{{ navCol_dash }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          <span style="font-size:8px;font-weight:500;">{{ t_dash }}</span>
-        </button>
-        <button onClick="{{ goChallenges }}" style="background:transparent;border:none;color:{{ navCol_ch }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span style="font-size:8px;font-weight:500;">{{ t_challenges }}</span>
-        </button>
-        <button onClick="{{ goRanking }}" style="background:transparent;border:none;color:{{ navCol_rk }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <span style="font-size:8px;font-weight:500;">{{ t_ranking }}</span>
-        </button>
-        <button onClick="{{ goProfile }}" style="background:transparent;border:none;color:{{ navCol_pf }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span style="font-size:8px;font-weight:500;">{{ t_perfil }}</span>
-        </button>
+        <sc-if value="{{ isStudent }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ goDashboard }}" style="background:transparent;border:none;color:{{ navCol_dash }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_dash }}</span>
+          </button>
+          <button onClick="{{ goChallenges }}" style="background:transparent;border:none;color:{{ navCol_ch }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_challenges }}</span>
+          </button>
+          <button onClick="{{ goRanking }}" style="background:transparent;border:none;color:{{ navCol_rk }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_ranking }}</span>
+          </button>
+          <button onClick="{{ goProfile }}" style="background:transparent;border:none;color:{{ navCol_pf }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_perfil }}</span>
+          </button>
+        </sc-if>
+        <sc-if value="{{ isDocente }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ goTeachDash }}" style="background:transparent;border:none;color:{{ tnC_dash }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_teach_dash }}</span>
+          </button>
+          <button onClick="{{ goTeachStudents }}" style="background:transparent;border:none;color:{{ tnC_stu }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_teach_students }}</span>
+          </button>
+          <button onClick="{{ goTeachAnalytics }}" style="background:transparent;border:none;color:{{ tnC_ana }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_teach_analytics }}</span>
+          </button>
+          <button onClick="{{ goTeachConfig }}" style="background:transparent;border:none;color:{{ tnC_cfg }};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            <span style="font-size:8px;font-weight:500;">{{ t_teach_config }}</span>
+          </button>
+        </sc-if>
       </sc-if>
     </nav>
 
@@ -986,6 +1258,24 @@ class Component extends DCLogic {
       t_calendario: 'Calendario Académico', t_cal_toggle: 'Calendario Académico',
       t_cal_inicio: 'Inicio', t_cal_fin: 'Fin', t_cal_estado: 'Estado',
       t_cal_acciones: 'Acciones', t_cal_activar: 'Activar', t_cal_cerrar: 'Cerrar',
+      t_teach_dash: 'Panel', t_teach_students: 'Estudiantes', t_teach_analytics: 'Analítica',
+      t_teach_reports: 'Reportes', t_teach_config: 'Configuración',
+      t_buscar_est: 'Buscar por nombre o correo...', t_exportar_pdf: 'Imprimir PDF',
+      t_pos: 'Pos.', t_nombre_col: 'Nombre', t_correo_col: 'Correo',
+      t_microretos_col: 'Microretos', t_desafios_col: 'Desafíos', t_avance_col: 'Avance',
+      t_ultima_col: 'Última actividad', t_ver_perfil: 'Ver perfil',
+      t_semana_activa: 'Semana activa', t_xp_grupo: 'XP del grupo',
+      t_activos_hoy: 'Activos hoy', t_total_comp: 'Completados',
+      t_ultima_act_label: 'Actualización', t_todos_grupos: 'Todos los grupos',
+      t_pagina: 'Página', t_anterior: '← Anterior', t_siguiente: 'Siguiente →',
+      t_perfil_est: 'Perfil del Estudiante', t_cerrar_modal: 'Cerrar',
+      t_insignias_col: 'Insignias', t_tiempo_total_col: 'Tiempo (min)',
+      t_distribucion_nivel: 'Distribución por nivel', t_distribucion_avance: 'Avance del grupo',
+      t_reporte_titulo: 'Reporte de Progreso — DESAFÍO',
+      t_reporte_sub: 'Plataforma de Entrenamiento Cognitivo',
+      t_imprimir: 'Imprimir reporte', t_sin_datos: 'Sin datos',
+      t_xp_top: 'Top estudiantes por XP', t_nivel_label: 'Nivel',
+      t_inscrito: 'Registrado', t_avance_pct: '% Avance',
     },
     en: {
       t_subtitle: 'Training Platform',
@@ -1028,6 +1318,24 @@ class Component extends DCLogic {
       t_calendario: 'Academic Calendar', t_cal_toggle: 'Academic Calendar',
       t_cal_inicio: 'Start', t_cal_fin: 'End', t_cal_estado: 'Status',
       t_cal_acciones: 'Actions', t_cal_activar: 'Activate', t_cal_cerrar: 'Close',
+      t_teach_dash: 'Panel', t_teach_students: 'Students', t_teach_analytics: 'Analytics',
+      t_teach_reports: 'Reports', t_teach_config: 'Settings',
+      t_buscar_est: 'Search by name or email...', t_exportar_pdf: 'Print PDF',
+      t_pos: 'Pos.', t_nombre_col: 'Name', t_correo_col: 'Email',
+      t_microretos_col: 'Micro-tasks', t_desafios_col: 'Challenges', t_avance_col: 'Progress',
+      t_ultima_col: 'Last activity', t_ver_perfil: 'View profile',
+      t_semana_activa: 'Active week', t_xp_grupo: 'Group XP',
+      t_activos_hoy: 'Active today', t_total_comp: 'Completed',
+      t_ultima_act_label: 'Updated', t_todos_grupos: 'All groups',
+      t_pagina: 'Page', t_anterior: '← Prev', t_siguiente: 'Next →',
+      t_perfil_est: 'Student Profile', t_cerrar_modal: 'Close',
+      t_insignias_col: 'Badges', t_tiempo_total_col: 'Time (min)',
+      t_distribucion_nivel: 'Distribution by level', t_distribucion_avance: 'Group progress',
+      t_reporte_titulo: 'Progress Report — DESAFÍO',
+      t_reporte_sub: 'Cognitive Training Platform',
+      t_imprimir: 'Print report', t_sin_datos: 'No data',
+      t_xp_top: 'Top students by XP', t_nivel_label: 'Level',
+      t_inscrito: 'Registered', t_avance_pct: '% Progress',
     },
   };
 
@@ -1066,6 +1374,9 @@ class Component extends DCLogic {
     teacherEmail: '', teacherToken: '', teacherAuthErr: '', teacherData: null,
     // schedule + calendar section (Sprint QA-03)
     schedule: {}, calendarSection: false, calendarLoaded: false, calErrMap: {},
+    teacherScreen: 'dashboard',
+    teacherSearch: '', teacherSortCol: 'xp', teacherSortDir: 'desc',
+    teacherPage: 0, teacherSelectedStudent: null, teacherFilterGroup: '',
   };
 
   engine = null;
@@ -1331,6 +1642,24 @@ class Component extends DCLogic {
   };
 
   toggleCalendar = () => this.setState(s => ({ calendarSection: !s.calendarSection }));
+
+  // ─── TEACHER SUB-NAV ────────────────────────────────────────────────────────
+  goTeachDash      = () => this.setState({ teacherScreen: 'dashboard' });
+  goTeachStudents  = () => this.setState({ teacherScreen: 'students', teacherPage: 0 });
+  goTeachAnalytics = () => this.setState({ teacherScreen: 'analytics' });
+  goTeachReports   = () => this.setState({ teacherScreen: 'reports' });
+  goTeachConfig    = () => this.setState({ teacherScreen: 'config' });
+  onTeacherSearch  = e => this.setState({ teacherSearch: e.target.value, teacherPage: 0 });
+  onTeacherFilterGroup = e => this.setState({ teacherFilterGroup: e.target.value, teacherPage: 0 });
+  setTeacherSort   = col => this.setState(s => ({
+    teacherSortCol: col,
+    teacherSortDir: s.teacherSortCol === col && s.teacherSortDir === 'desc' ? 'asc' : 'desc',
+    teacherPage: 0,
+  }));
+  openStudentProfile  = st => this.setState({ teacherSelectedStudent: st });
+  closeStudentProfile = () => this.setState({ teacherSelectedStudent: null });
+  teacherPagePrev = () => this.setState(s => ({ teacherPage: Math.max(0, s.teacherPage - 1) }));
+  doPrintReport   = () => window.print();
 
   // Parse YYYY-MM-DD as El Salvador local time (UTC-6, no DST).
   // SV 00:00:00 = UTC 06:00:00 same day; SV 23:59:59 = UTC next day 05:59:59.
@@ -1682,14 +2011,7 @@ class Component extends DCLogic {
   toggleLang  = () => this.setState(s => ({ lang: s.lang === 'es' ? 'en' : 'es' }));
 
   // ─── EXPORT ─────────────────────────────────────────────────────────────────
-  doExportCSV = () => {
-    const rows = this.getRankedList();
-    const lines = ['Nombre,Nickname,XP,Nivel,Grupo,Sección', ...rows.map((s,i) => `${s.name || s.nick},${s.nick || ''},${s.xp},${this.getLevel(s.xp).label.es},${s.g || ''},${s.s || ''}`)];
-    const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'desafio_resultados.csv'; a.click();
-  };
-
-  doExportExcel = () => alert('En producción se conecta a Google Sheets via Apps Script. Por ahora descarga el CSV.');
+  doPrintReport = () => window.print();
 
   // ─── RENDER VALS ────────────────────────────────────────────────────────────
   renderVals() {
@@ -2003,16 +2325,181 @@ class Component extends DCLogic {
     const teacherAuthErr = this.state.teacherAuthErr;
     const td = this.state.teacherData;
     const tdStudents = td?.students || [];
-    const tc_students = td?.totalStudents || 0;
+    const tc_students = td?.totalStudents || tdStudents.length || 0;
     const tc_avgXP = td?.avgXP || 0;
     const tc_avgTime = tdStudents.length ? Math.round(tdStudents.reduce((s, r) => s + Number(r.tiempoTotal || 0), 0) / tdStudents.length / 60) : 0;
     const tc_pending = tdStudents.filter(r => Number(r.XP) === 0).length;
-    const tcRows = tdStudents.map(u => ({
-      name: u.Nombre, email: u.Correo,
-      group: u.Grupo || '-', section: u.Seccion || '-',
-      level: this.getLevel(Number(u.XP) || 0).label[lang],
-      xp: Number(u.XP) || 0, done: u.completados || 0, time: Math.round((u.tiempoTotal || 0) / 60),
+
+    // Role flags
+    const isDocente = !!(this.state.user?.role === 'docente');
+    const isStudent = !isDocente;
+
+    // Teacher sub-screen state
+    const teacherScreen = this.state.teacherScreen || 'dashboard';
+    const isTeachDash      = teacherScreen === 'dashboard';
+    const isTeachStudents  = teacherScreen === 'students';
+    const isTeachAnalytics = teacherScreen === 'analytics';
+    const isTeachReports   = teacherScreen === 'reports';
+    const isTeachConfig    = teacherScreen === 'config';
+
+    // Teacher nav active styles
+    const _tnActBg = 'rgba(124,58,237,0.18)', _tnActC = '#a855f7';
+    const _tnDefBg = 'transparent',            _tnDefC = '#64748b';
+    const tnBg_dash = isTeachDash      ? _tnActBg : _tnDefBg;
+    const tnC_dash  = isTeachDash      ? _tnActC  : _tnDefC;
+    const tnBg_stu  = isTeachStudents  ? _tnActBg : _tnDefBg;
+    const tnC_stu   = isTeachStudents  ? _tnActC  : _tnDefC;
+    const tnBg_ana  = isTeachAnalytics ? _tnActBg : _tnDefBg;
+    const tnC_ana   = isTeachAnalytics ? _tnActC  : _tnDefC;
+    const tnBg_rep  = isTeachReports   ? _tnActBg : _tnDefBg;
+    const tnC_rep   = isTeachReports   ? _tnActC  : _tnDefC;
+    const tnBg_cfg  = isTeachConfig    ? _tnActBg : _tnDefBg;
+    const tnC_cfg   = isTeachConfig    ? _tnActC  : _tnDefC;
+
+    // Dashboard aggregate stats
+    const tc_totalXP = tdStudents.reduce((s, r) => s + (Number(r.XP) || 0), 0);
+    const tc_totalCompleted = td?.completados || tdStudents.reduce((s, r) => s + (Number(r.completados) || 0), 0);
+    const tc_activeToday = td?.activos || 0;
+    const tc_activeWeek = (() => {
+      const _s = this.state.schedule || {};
+      const now = Date.now();
+      for (let w = 1; w <= 18; w++) {
+        const e = _s[w] || {};
+        if (e.estado === 'activo') return w;
+        if (e.fechaInicio && e.fechaFin) {
+          const st = this.parseSVDate(e.fechaInicio, false);
+          const en = this.parseSVDate(e.fechaFin, true);
+          if (st && en && now >= st && now <= en) return w;
+        }
+      }
+      return '-';
+    })();
+    const tc_lastUpdate = (() => {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    })();
+
+    // Progress color helper
+    const _progColor = pct => pct >= 75 ? '#10b981' : pct >= 40 ? '#a855f7' : pct >= 1 ? '#f59e0b' : '#475569';
+
+    // Enrich a student record for table rows
+    const _enrichSt = (u, rank) => {
+      const xp   = Number(u.XP) || 0;
+      const done = Number(u.completados) || 0;
+      const pct  = Math.round((done / 18) * 100);
+      return {
+        rank, name: u.Nombre || u.Nickname || '', email: u.Correo || '',
+        group: u.Grupo || '-', section: u.Seccion || '-',
+        level: this.getLevel(xp).label[lang],
+        xp, done, badges: Number(u.insignias) || 0,
+        time: Math.round((Number(u.tiempoTotal) || 0) / 60),
+        progPct: pct, progBarW: pct + '%', progC: _progColor(pct),
+        lastAct: (u.FechaRegistro || '').toString().slice(0, 10) || '-',
+        viewProfile: () => this.openStudentProfile(u),
+      };
+    };
+
+    // Sort controls
+    const teacherSortCol = this.state.teacherSortCol || 'xp';
+    const teacherSortDir = this.state.teacherSortDir || 'desc';
+    const _arrow = col => teacherSortCol === col ? (teacherSortDir === 'desc' ? ' ↓' : ' ↑') : '';
+    const sortArrow_name = _arrow('name');
+    const sortArrow_xp   = _arrow('xp');
+    const sortArrow_done = _arrow('done');
+    const sortArrow_prog = _arrow('prog');
+    const sortByName = () => this.setTeacherSort('name');
+    const sortByXP   = () => this.setTeacherSort('xp');
+    const sortByDone = () => this.setTeacherSort('done');
+    const sortByProg = () => this.setTeacherSort('prog');
+
+    // Filter + sort
+    const teacherSearchVal = this.state.teacherSearch || '';
+    const teacherFilterGroupVal = this.state.teacherFilterGroup || '';
+    const _q = teacherSearchVal.toLowerCase();
+    const _filtered = tdStudents.filter(u => {
+      const ms = !_q || (u.Nombre||'').toLowerCase().includes(_q) || (u.Correo||'').toLowerCase().includes(_q);
+      const mg = !teacherFilterGroupVal || teacherFilterGroupVal === 'all' || (u.Grupo||'') === teacherFilterGroupVal;
+      return ms && mg;
+    }).slice(); // copy before sort
+    _filtered.sort((a, b) => {
+      let av, bv;
+      if (teacherSortCol === 'name') { av = (a.Nombre||'').toLowerCase(); bv = (b.Nombre||'').toLowerCase(); }
+      else if (teacherSortCol === 'done' || teacherSortCol === 'prog') { av = Number(a.completados)||0; bv = Number(b.completados)||0; }
+      else { av = Number(a.XP)||0; bv = Number(b.XP)||0; }
+      if (typeof av === 'string') return teacherSortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      return teacherSortDir === 'asc' ? av - bv : bv - av;
+    });
+
+    // Pagination
+    const _PAGE = 15;
+    const teacherPage = this.state.teacherPage || 0;
+    const _totalPages = Math.max(1, Math.ceil(_filtered.length / _PAGE));
+    const tcPageInfo = (teacherPage + 1) + ' / ' + _totalPages;
+    const showPagination = _filtered.length > _PAGE;
+    const teacherPageNextFn = () => this.setState(s => ({ teacherPage: Math.min(_totalPages - 1, s.teacherPage + 1) }));
+
+    // Paged rows for Students screen
+    const _paged = _filtered.slice(teacherPage * _PAGE, (teacherPage + 1) * _PAGE);
+    const tcRowsFull = _paged.map((u, i) => _enrichSt(u, teacherPage * _PAGE + i + 1));
+
+    // Top-5 by XP for dashboard preview
+    const tcDashRows = [...tdStudents].sort((a,b)=>(Number(b.XP)||0)-(Number(a.XP)||0)).slice(0,5).map((u,i)=>_enrichSt(u,i+1));
+
+    // All students sorted by XP for reports
+    const tcRowsAll = [...tdStudents].sort((a,b)=>(Number(b.XP)||0)-(Number(a.XP)||0)).map((u,i)=>_enrichSt(u,i+1));
+
+    // Backward compat alias
+    const tcRows = tcRowsAll;
+
+    // Group filter dropdown options
+    const _grps = [...new Set(tdStudents.map(u=>u.Grupo||'').filter(Boolean))].sort();
+    const groupOpts = [{ val: 'all', label: T.t_todos_grupos || 'Todos los grupos' }].concat(_grps.map(g=>({val:g,label:g})));
+
+    // Analytics — level distribution
+    const _lvlColors = ['#334155','#7c3aed','#0ea5e9','#b45309','#ef4444'];
+    const analyticsLevelBars = this.LEVELS.map((lvl, i) => {
+      const cnt = tdStudents.filter(u => this.getLevel(Number(u.XP)||0).num === lvl.num).length;
+      const pct = tc_students > 0 ? Math.round((cnt/tc_students)*100) : 0;
+      return { label: lvl.label[lang], count: cnt, pct, barW: pct+'%', barC: _lvlColors[i]||'#64748b' };
+    });
+
+    // Analytics — progress buckets
+    const _progBuckets = [{label:'0%',min:0,max:0},{label:'1–25%',min:1,max:25},{label:'26–50%',min:26,max:50},{label:'51–75%',min:51,max:75},{label:'76–100%',min:76,max:100}];
+    const analyticsProgBars = _progBuckets.map(b => {
+      const cnt = tdStudents.filter(u => { const p=Math.round(((Number(u.completados)||0)/18)*100); return p>=b.min&&p<=b.max; }).length;
+      return { label: b.label, count: cnt, barW: tc_students>0 ? Math.round((cnt/tc_students)*100)+'%' : '0%' };
+    });
+
+    // Analytics — top 10 XP bar chart
+    const _xpMax = Math.max(1, ...tdStudents.map(u=>Number(u.XP)||0));
+    const analyticsXPBars = [...tdStudents].sort((a,b)=>(Number(b.XP)||0)-(Number(a.XP)||0)).slice(0,10).map(u=>({
+      name: u.Nombre||u.Correo||'', xp: Number(u.XP)||0,
+      barW: Math.round(((Number(u.XP)||0)/_xpMax)*100)+'%',
     }));
+
+    // Student profile modal
+    const _sel = this.state.teacherSelectedStudent;
+    const hasStudentModal = !!_sel;
+    const _mxp  = Number(_sel?.XP)||0;
+    const _mdon = Number(_sel?.completados)||0;
+    const _mpct = Math.round((_mdon/18)*100);
+    const _mpc  = _progColor(_mpct);
+    const modalName        = _sel?.Nombre||'';
+    const modalEmail       = _sel?.Correo||'';
+    const modalGroup       = _sel?.Grupo||'-';
+    const modalSection     = _sel?.Seccion||'-';
+    const modalXP          = _mxp;
+    const modalDone        = _mdon;
+    const modalBadgeCount  = Number(_sel?.insignias)||0;
+    const modalLevel       = this.getLevel(_mxp).label[lang];
+    const modalTime        = Math.round((Number(_sel?.tiempoTotal)||0)/60);
+    const modalProgPct     = _mpct;
+    const modalProgBarW    = _mpct+'%';
+    const modalProgC       = _mpc;
+    const modalAvBg        = this.AVATARS[Number(_sel?.Avatar)||0]?.bg||'linear-gradient(135deg,#4c1d95,#7c3aed)';
+    const modalBadges      = [];
+    const hasModalBadges   = false;
+    const modalStopProp    = (e) => { if (e && e.stopPropagation) e.stopPropagation(); };
 
     const calendarSection = this.state.calendarSection;
     const _schMap = this.state.schedule || {};
@@ -2093,13 +2580,45 @@ class Component extends DCLogic {
       rkRows, showMyRankFooter,
       // profile
       allBadges, actLog,
-      // teacher
-      tc_students, tc_avgXP, tc_avgTime, tc_pending, tcRows,
+      // teacher — role flags
+      isDocente, isStudent,
+      // teacher — sub-screen flags
+      isTeachDash, isTeachStudents, isTeachAnalytics, isTeachReports, isTeachConfig,
+      // teacher — nav active styles
+      tnBg_dash, tnC_dash, tnBg_stu, tnC_stu, tnBg_ana, tnC_ana, tnBg_rep, tnC_rep, tnBg_cfg, tnC_cfg,
+      // teacher — nav handlers
+      goTeachDash: this.goTeachDash, goTeachStudents: this.goTeachStudents,
+      goTeachAnalytics: this.goTeachAnalytics, goTeachReports: this.goTeachReports,
+      goTeachConfig: this.goTeachConfig,
+      // teacher — aggregate stats
+      tc_students, tc_avgXP, tc_avgTime, tc_pending,
+      tc_totalXP, tc_totalCompleted, tc_activeToday, tc_activeWeek, tc_lastUpdate,
+      // teacher — rows
+      tcRows, tcDashRows, tcRowsFull, tcRowsAll,
+      // teacher — search/filter/sort
+      teacherSearchVal, teacherFilterGroupVal, groupOpts,
+      onTeacherSearch: this.onTeacherSearch, onTeacherFilterGroup: this.onTeacherFilterGroup,
+      sortArrow_name, sortArrow_xp, sortArrow_done, sortArrow_prog,
+      sortByName, sortByXP, sortByDone, sortByProg,
+      // teacher — pagination
+      showPagination, tcPageInfo, teacherPagePrev: this.teacherPagePrev, teacherPageNextFn,
+      // teacher — analytics
+      analyticsLevelBars, analyticsProgBars, analyticsXPBars,
+      // teacher — student modal
+      hasStudentModal, modalName, modalEmail, modalGroup, modalSection,
+      modalXP, modalDone, modalBadgeCount, modalLevel, modalTime,
+      modalProgPct, modalProgBarW, modalProgC, modalAvBg,
+      modalBadges, hasModalBadges, modalStopProp,
+      openStudentProfile: this.openStudentProfile, closeStudentProfile: this.closeStudentProfile,
+      // teacher — auth
       teacherAuthed, teacherNotAuthed, teacherEmailVal, teacherTokenVal,
       hasTeacherAuthErr, teacherAuthErr,
       onTeacherEmail: this.onTeacherEmail, onTeacherToken: this.onTeacherToken,
       teacherLogin: this.teacherLogin,
+      // teacher — calendar
       calendarSection, calendarRows, toggleCalendar: this.toggleCalendar,
+      // teacher — print
+      doPrintReport: this.doPrintReport,
       // navigation handlers
       goLanding: this.goLanding, goRegister: this.goRegister, loginExisting: this.loginExisting,
       goDashboard: this.goDashboard, goChallenges: this.goChallenges,
@@ -2124,7 +2643,6 @@ class Component extends DCLogic {
       nextQ: this.nextQ,
       finishMicroreto: this.finishMicroreto,
       continueNext: this.continueNext,
-      doExportCSV: this.doExportCSV, doExportExcel: this.doExportExcel,
     };
   }
 
