@@ -251,6 +251,18 @@ function requireWeekActive(semana) {
  * Exact mirror of parseSVDate() in the frontend so both layers agree on
  * the boundaries of each day.
  */
+/** Convert a Sheets cell value (Date object or any string) to "yyyy-MM-dd". Returns '' if falsy. */
+function _fmtDateCell(v) {
+  if (!v) return '';
+  if (v instanceof Date) {
+    var y = v.getFullYear();
+    var m = ('0' + (v.getMonth() + 1)).slice(-2);
+    var d = ('0' + v.getDate()).slice(-2);
+    return y + '-' + m + '-' + d;
+  }
+  return String(v).trim().slice(0, 10);
+}
+
 function _parseSVDateForCalendar(dateStr, endOfDay) {
   if (!dateStr) return null;
   const p = dateStr.toString().trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -667,10 +679,10 @@ function getCalendario(params) {
   rows.forEach(r => {
     schedule[Number(r.Semana)] = {
       semana            : Number(r.Semana),
-      fechaInicio       : r.FechaInicio || '',
-      fechaFin          : r.FechaFin || '',
+      fechaInicio       : _fmtDateCell(r.FechaInicio),
+      fechaFin          : _fmtDateCell(r.FechaFin),
       estado            : r.Estado || 'pendiente',
-      ultimaActualizacion: r.UltimaActualizacion || '',
+      ultimaActualizacion: _fmtDateCell(r.UltimaActualizacion),
       actualizadoPor    : r.ActualizadoPor || '',
     };
   });

@@ -2603,8 +2603,8 @@ class Component extends DCLogic {
       return {
         week: weekNum,
         title: this.CHALLENGE_TITLES[i][lang],
-        fechaInicio: sch.fechaInicio || '',
-        fechaFin: sch.fechaFin || '',
+        fechaInicio: (sch.fechaInicio || '').slice(0, 10),
+        fechaFin: (sch.fechaFin || '').slice(0, 10),
         estadoLabel: estadoLabels[estado] || estado,
         estadoColor,
         ultimaAct: (sch.ultimaActualizacion || '').slice(0, 10) || '-',
