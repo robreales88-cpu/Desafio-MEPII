@@ -950,9 +950,12 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
         <!-- ── CONFIG (calendar) ── -->
         <sc-if value="{{ isTeachConfig }}" hint-placeholder-val="{{ false }}">
           <div style="max-width:1100px;margin:0 auto;padding:24px 18px;animation:fadeUp 0.4s ease;">
-            <div style="margin-bottom:20px;">
-              <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_config }}</div>
-              <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_calendario }}</h2>
+            <div style="margin-bottom:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_config }}</div>
+                <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_calendario }}</h2>
+              </div>
+              <button onClick="{{ goTeachDash }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.22);border-radius:9px;padding:8px 15px;font-size:12px;font-weight:600;color:#a855f7;cursor:pointer;white-space:nowrap;align-self:center;">{{ t_volver_dash }}</button>
             </div>
             <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;overflow:hidden;">
               <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
@@ -1279,6 +1282,7 @@ class Component extends DCLogic {
       t_teach_dash: 'Panel', t_teach_students: 'Estudiantes', t_teach_analytics: 'Analítica',
       t_teach_reports: 'Reportes', t_teach_config: 'Calendario',
       t_cal_ult_act: 'Ult. actualiz.', t_intentos_col: 'Intentos', t_micros_col: 'Microretos',
+      t_volver_dash: '← Volver al Dashboard',
       t_buscar_est: 'Buscar por nombre o correo...', t_exportar_pdf: 'Imprimir PDF',
       t_pos: 'Pos.', t_nombre_col: 'Nombre', t_correo_col: 'Correo',
       t_microretos_col: 'Microretos', t_desafios_col: 'Desafíos', t_avance_col: 'Avance',
@@ -1340,6 +1344,7 @@ class Component extends DCLogic {
       t_teach_dash: 'Panel', t_teach_students: 'Students', t_teach_analytics: 'Analytics',
       t_teach_reports: 'Reports', t_teach_config: 'Calendar',
       t_cal_ult_act: 'Last update', t_intentos_col: 'Attempts', t_micros_col: 'Micro-tasks',
+      t_volver_dash: '← Back to Dashboard',
       t_buscar_est: 'Search by name or email...', t_exportar_pdf: 'Print PDF',
       t_pos: 'Pos.', t_nombre_col: 'Name', t_correo_col: 'Email',
       t_microretos_col: 'Micro-tasks', t_desafios_col: 'Challenges', t_avance_col: 'Progress',
