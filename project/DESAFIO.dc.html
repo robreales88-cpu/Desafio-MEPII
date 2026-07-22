@@ -972,8 +972,8 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                   <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;align-items:center;">
                     <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
                     <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
-                    <input type="date" sc-camel-value="{{ cr.fechaInicio }}" onChange="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
-                    <input type="date" sc-camel-value="{{ cr.fechaFin }}" onChange="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <input type="text" sc-camel-value="{{ cr.fechaInicio }}" onInput="{{ cr.fmtStart }}" onBlur="{{ cr.setStart }}" placeholder="aaaa-mm-dd" maxlength="10" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:text;">
+                    <input type="text" sc-camel-value="{{ cr.fechaFin }}" onInput="{{ cr.fmtEnd }}" onBlur="{{ cr.setEnd }}" placeholder="aaaa-mm-dd" maxlength="10" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:text;">
                     <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
                     <span style="font-size:9px;color:#475569;white-space:nowrap;">{{ cr.ultimaAct }}</span>
                     <div style="display:flex;gap:4px;">
@@ -1634,8 +1634,12 @@ class Component extends DCLogic {
     if (!hasUser && !hasAdmin) return;
     const lang = this.state.lang;
 
-    // Validate date range
+    // Validate date fields
     if (field === 'fechaInicio' || field === 'fechaFin') {
+      if (value && !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        this.setState(st => ({ calErrMap: { ...st.calErrMap, [weekNum]: lang === 'es' ? 'Formato inválido. Escribe: aaaa-mm-dd (ej: 2026-07-22).' : 'Invalid format. Use yyyy-MM-dd (e.g. 2026-07-22).' } }));
+        return;
+      }
       const cur = (this.state.schedule || {})[weekNum] || {};
       const startStr = field === 'fechaInicio' ? value : (cur.fechaInicio || '');
       const endStr   = field === 'fechaFin'   ? value : (cur.fechaFin   || '');
@@ -2605,8 +2609,10 @@ class Component extends DCLogic {
         estadoColor,
         ultimaAct: (sch.ultimaActualizacion || '').slice(0, 10) || '-',
         calErr, hasCalErr: !!calErr, dateBorder,
-        setStart: (e) => this.updateSchedule(weekNum, 'fechaInicio', e.target.value),
-        setEnd: (e) => this.updateSchedule(weekNum, 'fechaFin', e.target.value),
+        setStart: (e) => this.updateSchedule(weekNum, 'fechaInicio', e.target.value.trim()),
+        setEnd: (e) => this.updateSchedule(weekNum, 'fechaFin', e.target.value.trim()),
+        fmtStart: (e) => { const v = e.target.value.replace(/\D/g, '').slice(0, 8); e.target.value = v.length <= 4 ? v : v.length <= 6 ? v.slice(0,4)+'-'+v.slice(4) : v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); },
+        fmtEnd:   (e) => { const v = e.target.value.replace(/\D/g, '').slice(0, 8); e.target.value = v.length <= 4 ? v : v.length <= 6 ? v.slice(0,4)+'-'+v.slice(4) : v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); },
         activate: () => this.updateSchedule(weekNum, 'estado', 'activo'),
         close: () => this.updateSchedule(weekNum, 'estado', 'cerrado'),
       };
