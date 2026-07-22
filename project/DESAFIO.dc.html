@@ -2366,6 +2366,12 @@ class Component extends DCLogic {
     const tnBg_cfg  = isTeachConfig    ? _tnActBg : _tnDefBg;
     const tnC_cfg   = isTeachConfig    ? _tnActC  : _tnDefC;
 
+    // Max caps derived from active schedule weeks — must be declared before any consumer
+    const _activeWeeks = Math.max(1, Object.values(this.state.schedule || {}).filter(s => s.estado === 'activo').length);
+    const _maxDesafios = _activeWeeks;
+    const _maxMicros   = _activeWeeks * 3;
+    const _maxIntentos = _maxMicros * 3;
+
     // Dashboard aggregate stats
     const tc_totalXP = tdStudents.reduce((s, r) => s + (Number(r.XP) || 0), 0);
     const tc_totalCompleted = tdStudents.reduce((s, r) => s + Math.min(_maxDesafios, Math.floor((Number(r.completados)||0) / 3)), 0);
@@ -2384,12 +2390,6 @@ class Component extends DCLogic {
       const d = new Date();
       return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     })();
-
-    // Max caps derived from active schedule weeks
-    const _activeWeeks = Math.max(1, Object.values(this.state.schedule || {}).filter(s => s.estado === 'activo').length);
-    const _maxDesafios = _activeWeeks;
-    const _maxMicros   = _activeWeeks * 3;
-    const _maxIntentos = _maxMicros * 3;
 
     // Progress color helper
     const _progColor = pct => pct >= 75 ? '#10b981' : pct >= 40 ? '#a855f7' : pct >= 1 ? '#f59e0b' : '#475569';
