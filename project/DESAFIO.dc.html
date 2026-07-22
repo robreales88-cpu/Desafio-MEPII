@@ -1649,7 +1649,17 @@ class Component extends DCLogic {
     this.setState({ schedule: newSch });
 
     if (!window.desafioAPI) return;
+
+    // When changing estado (Activar / Cerrar), also send current dates so all three
+    // fields are persisted atomically in Sheets. Without this, only estado is saved and
+    // dates remain empty (or get lost) when the row is created or updated.
+    const updatedWeek = newSch[weekNum];
     const fields = { [field]: value, closeOthers: false };
+    if (field === 'estado') {
+      if (updatedWeek.fechaInicio) fields.fechaInicio = updatedWeek.fechaInicio;
+      if (updatedWeek.fechaFin)    fields.fechaFin    = updatedWeek.fechaFin;
+    }
+
     const call = hasUser
       ? window.desafioAPI.updateCalendario(user.email, user.token, weekNum, fields)
       : window.desafioAPI.post('adminAction', { adminEmail: teacherEmail, adminToken: teacherToken, action: 'calendarioUpdate', semana: weekNum, fields });
