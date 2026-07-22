@@ -772,10 +772,17 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                   <div><div style="font-size:12px;font-weight:600;color:#e2e8f0;">{{ dr.name }}</div><div style="font-size:9px;color:#64748b;">{{ dr.email }}</div></div>
                   <div style="text-align:center;font-size:11px;color:#a855f7;">{{ dr.level }}</div>
                   <div style="text-align:right;font-size:13px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ dr.xp }}</div>
-                  <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ dr.done }}/18</div>
+                  <div style="text-align:center;font-size:12px;color:#94a3b8;">{{ dr.done }}/{{ dr.doneOf }}</div>
                   <div style="text-align:center;"><div style="font-size:11px;font-weight:600;color:{{ dr.progC }};">{{ dr.progPct }}%</div><div style="height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:2px;"><div style="height:3px;background:{{ dr.progC }};border-radius:2px;width:{{ dr.progBarW }};"></div></div></div>
                 </div>
               </sc-for>
+            </div>
+            <div style="margin-top:16px;background:#12121e;border:1px solid rgba(245,158,11,0.2);border-radius:14px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <div>
+                <div style="font-size:9px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">{{ t_calendario }}</div>
+                <div style="font-size:13px;color:#94a3b8;">{{ t_semana_activa }}: <span style="color:#f59e0b;font-weight:700;">{{ tc_activeWeek }}</span></div>
+              </div>
+              <button onClick="{{ goTeachConfig }}" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-radius:9px;padding:8px 16px;font-size:12px;font-weight:600;color:#f59e0b;cursor:pointer;white-space:nowrap;">{{ t_teach_config }} →</button>
             </div>
           </div>
         </sc-if>
@@ -808,6 +815,8 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                       <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByXP }}">XP{{ sortArrow_xp }}</th>
                       <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_nivel }}</th>
                       <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByDone }}">{{ t_desafios_col }}{{ sortArrow_done }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_micros_col }}</th>
+                      <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_intentos_col }}</th>
                       <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_insignias_col }}</th>
                       <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;cursor:pointer;" onClick="{{ sortByProg }}">{{ t_avance_col }}{{ sortArrow_prog }}</th>
                       <th style="padding:10px 14px;text-align:center;font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;white-space:nowrap;">{{ t_ultima_col }}</th>
@@ -822,7 +831,9 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                         <td style="padding:11px 14px;font-size:11px;color:#94a3b8;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ st.email }}</td>
                         <td style="padding:11px 14px;text-align:center;font-size:13px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ st.xp }}</td>
                         <td style="padding:11px 14px;text-align:center;font-size:11px;color:#a855f7;font-weight:500;white-space:nowrap;">{{ st.level }}</td>
-                        <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}/18</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;">{{ st.done }}/{{ st.doneOf }}</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;">{{ st.micros }}/{{ st.microsOf }}</td>
+                        <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;white-space:nowrap;">{{ st.intUsed }}/{{ st.intMax }}</td>
                         <td style="padding:11px 14px;text-align:center;font-size:12px;color:#94a3b8;">{{ st.badges }}</td>
                         <td style="padding:11px 14px;text-align:center;"><div style="font-size:11px;font-weight:600;color:{{ st.progC }};margin-bottom:3px;">{{ st.progPct }}%</div><div style="width:56px;height:4px;background:rgba(255,255,255,0.07);border-radius:3px;margin:0 auto;"><div style="height:4px;background:{{ st.progC }};border-radius:3px;width:{{ st.progBarW }};"></div></div></td>
                         <td style="padding:11px 14px;text-align:center;font-size:10px;color:#64748b;white-space:nowrap;">{{ st.lastAct }}</td>
@@ -924,7 +935,7 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                         <td style="padding:9px 14px;font-size:11px;color:#94a3b8;">{{ rr.email }}</td>
                         <td style="padding:9px 14px;text-align:center;font-size:12px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ rr.xp }}</td>
                         <td style="padding:9px 14px;text-align:center;font-size:11px;color:#a855f7;">{{ rr.level }}</td>
-                        <td style="padding:9px 14px;text-align:center;font-size:11px;color:#94a3b8;">{{ rr.done }}/18</td>
+                        <td style="padding:9px 14px;text-align:center;font-size:11px;color:#94a3b8;">{{ rr.done }}/{{ rr.doneOf }}</td>
                         <td style="padding:9px 14px;text-align:center;font-size:11px;font-weight:600;color:{{ rr.progC }};">{{ rr.progPct }}%</td>
                         <td style="padding:9px 14px;text-align:center;font-size:10px;color:#64748b;">{{ rr.lastAct }}</td>
                       </tr>
@@ -944,22 +955,24 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
               <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_calendario }}</h2>
             </div>
             <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;overflow:hidden;">
-              <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
+              <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
                 <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">S</span>
                 <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_challenges }}</span>
                 <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_inicio }}</span>
                 <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_fin }}</span>
                 <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_estado }}</span>
+                <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_ult_act }}</span>
                 <span style="font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;">{{ t_cal_acciones }}</span>
               </div>
               <sc-for list="{{ calendarRows }}" as="cr" hint-placeholder-count="18">
                 <div style="border-bottom:1px solid rgba(124,58,237,0.05);">
-                  <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 130px;gap:8px;align-items:center;">
+                  <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;align-items:center;">
                     <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
                     <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
                     <input type="date" value="{{ cr.fechaInicio }}" onInput="{{ cr.setStart }}" onChange="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
                     <input type="date" value="{{ cr.fechaFin }}" onInput="{{ cr.setEnd }}" onChange="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
                     <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
+                    <span style="font-size:9px;color:#475569;white-space:nowrap;">{{ cr.ultimaAct }}</span>
                     <div style="display:flex;gap:4px;">
                       <button onClick="{{ cr.activate }}" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#10b981;cursor:pointer;">{{ t_cal_activar }}</button>
                       <button onClick="{{ cr.close }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#ef4444;cursor:pointer;">{{ t_cal_cerrar }}</button>
@@ -994,14 +1007,19 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                 <div style="font-size:10px;color:#475569;margin-top:1px;">G:{{ modalGroup }} / S:{{ modalSection }}</div>
               </div>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;">
               <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#a855f7;font-family:'Space Grotesk',sans-serif;">{{ modalXP }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">XP</div></div>
-              <div style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ modalDone }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_desafios_col }}</div></div>
+              <div style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#06b6d4;font-family:'Space Grotesk',sans-serif;">{{ modalDone }}/{{ modalMicrosOf }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_desafios_col }}</div></div>
               <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:#f59e0b;font-family:'Space Grotesk',sans-serif;">{{ modalBadgeCount }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_insignias_col }}</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;">
+              <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.18);border-radius:10px;padding:10px;text-align:center;"><div style="font-size:16px;font-weight:700;color:#10b981;font-family:'Space Grotesk',sans-serif;">{{ modalMicros }}/{{ modalMicrosOf }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_micros_col }}</div></div>
+              <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.16);border-radius:10px;padding:10px;text-align:center;"><div style="font-size:16px;font-weight:700;color:#f87171;font-family:'Space Grotesk',sans-serif;">{{ modalIntUsed }}/{{ modalIntMax }}</div><div style="font-size:9px;color:#64748b;margin-top:2px;">{{ t_intentos_col }}</div></div>
             </div>
             <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;margin-bottom:14px;">
               <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#64748b;">{{ t_nivel }}</span><span style="font-size:11px;font-weight:600;color:#a855f7;">{{ modalLevel }}</span></div>
               <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#64748b;">{{ t_tiempo_total_col }}</span><span style="font-size:11px;color:#94a3b8;">{{ modalTime }} min</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:11px;color:#64748b;">{{ t_intentos_col }} disponibles</span><span style="font-size:11px;color:#94a3b8;">{{ modalIntAvail }}</span></div>
               <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:11px;color:#64748b;">{{ t_avance_col }}</span><span style="font-size:11px;font-weight:600;color:{{ modalProgC }};">{{ modalProgPct }}%</span></div>
               <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;"><div style="height:5px;background:{{ modalProgC }};border-radius:3px;width:{{ modalProgBarW }};"></div></div>
             </div>
@@ -1259,7 +1277,8 @@ class Component extends DCLogic {
       t_cal_inicio: 'Inicio', t_cal_fin: 'Fin', t_cal_estado: 'Estado',
       t_cal_acciones: 'Acciones', t_cal_activar: 'Activar', t_cal_cerrar: 'Cerrar',
       t_teach_dash: 'Panel', t_teach_students: 'Estudiantes', t_teach_analytics: 'Analítica',
-      t_teach_reports: 'Reportes', t_teach_config: 'Configuración',
+      t_teach_reports: 'Reportes', t_teach_config: 'Calendario',
+      t_cal_ult_act: 'Ult. actualiz.', t_intentos_col: 'Intentos', t_micros_col: 'Microretos',
       t_buscar_est: 'Buscar por nombre o correo...', t_exportar_pdf: 'Imprimir PDF',
       t_pos: 'Pos.', t_nombre_col: 'Nombre', t_correo_col: 'Correo',
       t_microretos_col: 'Microretos', t_desafios_col: 'Desafíos', t_avance_col: 'Avance',
@@ -1319,7 +1338,8 @@ class Component extends DCLogic {
       t_cal_inicio: 'Start', t_cal_fin: 'End', t_cal_estado: 'Status',
       t_cal_acciones: 'Actions', t_cal_activar: 'Activate', t_cal_cerrar: 'Close',
       t_teach_dash: 'Panel', t_teach_students: 'Students', t_teach_analytics: 'Analytics',
-      t_teach_reports: 'Reports', t_teach_config: 'Settings',
+      t_teach_reports: 'Reports', t_teach_config: 'Calendar',
+      t_cal_ult_act: 'Last update', t_intentos_col: 'Attempts', t_micros_col: 'Micro-tasks',
       t_buscar_est: 'Search by name or email...', t_exportar_pdf: 'Print PDF',
       t_pos: 'Pos.', t_nombre_col: 'Name', t_correo_col: 'Email',
       t_microretos_col: 'Micro-tasks', t_desafios_col: 'Challenges', t_avance_col: 'Progress',
@@ -2348,7 +2368,7 @@ class Component extends DCLogic {
 
     // Dashboard aggregate stats
     const tc_totalXP = tdStudents.reduce((s, r) => s + (Number(r.XP) || 0), 0);
-    const tc_totalCompleted = td?.completados || tdStudents.reduce((s, r) => s + (Number(r.completados) || 0), 0);
+    const tc_totalCompleted = tdStudents.reduce((s, r) => s + Math.min(_maxDesafios, Math.floor((Number(r.completados)||0) / 3)), 0);
     const tc_activeToday = td?.activos || 0;
     const tc_activeWeek = (() => {
       const _s = this.state.schedule || {};
@@ -2365,19 +2385,30 @@ class Component extends DCLogic {
       return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     })();
 
+    // Max caps derived from active schedule weeks
+    const _activeWeeks = Math.max(1, Object.values(this.state.schedule || {}).filter(s => s.estado === 'activo').length);
+    const _maxDesafios = _activeWeeks;
+    const _maxMicros   = _activeWeeks * 3;
+    const _maxIntentos = _maxMicros * 3;
+
     // Progress color helper
     const _progColor = pct => pct >= 75 ? '#10b981' : pct >= 40 ? '#a855f7' : pct >= 1 ? '#f59e0b' : '#475569';
 
     // Enrich a student record for table rows
     const _enrichSt = (u, rank) => {
-      const xp   = Number(u.XP) || 0;
-      const done = Number(u.completados) || 0;
-      const pct  = Math.round((done / 18) * 100);
+      const xp      = Number(u.XP) || 0;
+      const micros  = Math.min(_maxMicros, Number(u.completados) || 0);
+      const done    = Math.min(_maxDesafios, Math.floor(micros / 3));
+      const intUsed = Math.min(_maxIntentos, Number(u.intentosTotal) || 0);
+      const intAvail= Math.max(0, _maxIntentos - intUsed);
+      const pct     = _maxMicros > 0 ? Math.round((micros / _maxMicros) * 100) : 0;
       return {
         rank, name: u.Nombre || u.Nickname || '', email: u.Correo || '',
         group: u.Grupo || '-', section: u.Seccion || '-',
         level: this.getLevel(xp).label[lang],
-        xp, done, badges: Number(u.insignias) || 0,
+        xp, done, doneOf: _maxDesafios, micros, microsOf: _maxMicros,
+        intUsed, intAvail, intMax: _maxIntentos,
+        badges: Number(u.insignias) || 0,
         time: Math.round((Number(u.tiempoTotal) || 0) / 60),
         progPct: pct, progBarW: pct + '%', progC: _progColor(pct),
         lastAct: (u.FechaRegistro || '').toString().slice(0, 10) || '-',
@@ -2452,7 +2483,11 @@ class Component extends DCLogic {
     // Analytics — progress buckets
     const _progBuckets = [{label:'0%',min:0,max:0},{label:'1–25%',min:1,max:25},{label:'26–50%',min:26,max:50},{label:'51–75%',min:51,max:75},{label:'76–100%',min:76,max:100}];
     const analyticsProgBars = _progBuckets.map(b => {
-      const cnt = tdStudents.filter(u => { const p=Math.round(((Number(u.completados)||0)/18)*100); return p>=b.min&&p<=b.max; }).length;
+      const cnt = tdStudents.filter(u => {
+        const micros = Math.min(_maxMicros, Number(u.completados)||0);
+        const p = _maxMicros > 0 ? Math.round((micros/_maxMicros)*100) : 0;
+        return p >= b.min && p <= b.max;
+      }).length;
       return { label: b.label, count: cnt, barW: tc_students>0 ? Math.round((cnt/tc_students)*100)+'%' : '0%' };
     });
 
@@ -2466,16 +2501,24 @@ class Component extends DCLogic {
     // Student profile modal
     const _sel = this.state.teacherSelectedStudent;
     const hasStudentModal = !!_sel;
-    const _mxp  = Number(_sel?.XP)||0;
-    const _mdon = Number(_sel?.completados)||0;
-    const _mpct = Math.round((_mdon/18)*100);
-    const _mpc  = _progColor(_mpct);
+    const _mxp     = Number(_sel?.XP)||0;
+    const _mmicros = Math.min(_maxMicros, Number(_sel?.completados)||0);
+    const _mdon    = Math.min(_maxDesafios, Math.floor(_mmicros / 3));
+    const _mpct    = _maxMicros > 0 ? Math.round((_mmicros/_maxMicros)*100) : 0;
+    const _mpc     = _progColor(_mpct);
+    const _mintU   = Math.min(_maxIntentos, Number(_sel?.intentosTotal)||0);
+    const _mintA   = Math.max(0, _maxIntentos - _mintU);
     const modalName        = _sel?.Nombre||'';
     const modalEmail       = _sel?.Correo||'';
     const modalGroup       = _sel?.Grupo||'-';
     const modalSection     = _sel?.Seccion||'-';
     const modalXP          = _mxp;
     const modalDone        = _mdon;
+    const modalMicros      = _mmicros;
+    const modalMicrosOf    = _maxMicros;
+    const modalIntUsed     = _mintU;
+    const modalIntAvail    = _mintA;
+    const modalIntMax      = _maxIntentos;
     const modalBadgeCount  = Number(_sel?.insignias)||0;
     const modalLevel       = this.getLevel(_mxp).label[lang];
     const modalTime        = Math.round((Number(_sel?.tiempoTotal)||0)/60);
@@ -2511,6 +2554,7 @@ class Component extends DCLogic {
         fechaFin: sch.fechaFin || '',
         estadoLabel: estadoLabels[estado] || estado,
         estadoColor,
+        ultimaAct: (sch.ultimaActualizacion || '').slice(0, 10) || '-',
         calErr, hasCalErr: !!calErr, dateBorder,
         setStart: (e) => this.updateSchedule(weekNum, 'fechaInicio', e.target.value),
         setEnd: (e) => this.updateSchedule(weekNum, 'fechaFin', e.target.value),
@@ -2592,9 +2636,11 @@ class Component extends DCLogic {
       analyticsLevelBars, analyticsProgBars, analyticsXPBars,
       // teacher — student modal
       hasStudentModal, modalName, modalEmail, modalGroup, modalSection,
-      modalXP, modalDone, modalBadgeCount, modalLevel, modalTime,
+      modalXP, modalDone, modalMicros, modalMicrosOf, modalIntUsed, modalIntAvail, modalIntMax,
+      modalBadgeCount, modalLevel, modalTime,
       modalProgPct, modalProgBarW, modalProgC, modalAvBg,
       modalBadges, hasModalBadges, modalStopProp,
+      tc_maxDesafios: _maxDesafios, tc_maxMicros: _maxMicros,
       openStudentProfile: this.openStudentProfile, closeStudentProfile: this.closeStudentProfile,
       // teacher — auth
       teacherAuthed, teacherNotAuthed, teacherEmailVal, teacherTokenVal,

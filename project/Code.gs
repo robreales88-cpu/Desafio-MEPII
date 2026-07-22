@@ -644,6 +644,7 @@ function getAdminData(params) {
     insignias  : badgeRows.filter(r => r.IDEstudiante === u.Correo).length,
     tiempoTotal: progRows.filter(r => r.IDEstudiante === u.Correo).reduce((s, r) => s + Number(r.Tiempo || 0), 0),
     cambiosPestana: eventRows.filter(r => r.Actor === u.Correo && r.Evento === 'TAB_SWITCH').length,
+    intentosTotal: progRows.filter(r => r.IDEstudiante === u.Correo).reduce((s, r) => s + Number(r.Intentos || 0), 0),
   }));
 
   return {
@@ -665,10 +666,12 @@ function getCalendario(params) {
   const schedule = {};
   rows.forEach(r => {
     schedule[Number(r.Semana)] = {
-      semana     : Number(r.Semana),
-      fechaInicio: r.FechaInicio || '',
-      fechaFin   : r.FechaFin || '',
-      estado     : r.Estado || 'pendiente',
+      semana            : Number(r.Semana),
+      fechaInicio       : r.FechaInicio || '',
+      fechaFin          : r.FechaFin || '',
+      estado            : r.Estado || 'pendiente',
+      ultimaActualizacion: r.UltimaActualizacion || '',
+      actualizadoPor    : r.ActualizadoPor || '',
     };
   });
   return { ok: true, schedule };
