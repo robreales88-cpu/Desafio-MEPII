@@ -742,6 +742,7 @@ function adminUpdateCalendario(adminEmail, semana, fields) {
     sheet.appendRow([Number(semana), fields.fechaInicio || '', fields.fechaFin || '',
       fields.estado || 'pendiente', adminEmail, now]);
   }
+  SpreadsheetApp.flush();
 
   var evtLabel = fields.estado === 'activo'  ? 'CALENDARIO_ACTIVADO'
                : fields.estado === 'cerrado' ? 'CALENDARIO_CERRADO'

@@ -172,9 +172,11 @@
       return this.get('calendario', {}, 60);
     }
 
-    /** Update a week's schedule entry using docente student token (no ADMIN_TOKEN needed). */
+    /** Update a week's schedule entry — strict (no offline queue); throws on network failure. */
     async updateCalendario(email, token, semana, fields) {
-      return this.post('docenteAction', { email, token, action: 'calendarioUpdate', semana, fields });
+      if (!this._online) return { ok: false, error: 'Sin conexión' };
+      return _request('POST', { action: 'docenteAction' },
+        { email, token, action: 'calendarioUpdate', semana, fields, ua: UA, requestId: genRequestId() });
     }
 
     /** Teacher panel data using student token — docentes only (see Code.gs getTeacherPanel). */
@@ -213,6 +215,24 @@
       }
       saveQueue(failed);
       if (!failed.length) emit('api:synced', { flushed: q.length });
+    }
+
+    /** POST without offline queuing — used for admin writes that must be confirmed by the server. */
+    async postStrict(action, data = {}) {
+      data.ua = UA;
+      if (!data.requestId) data.requestId = genRequestId();
+      if (!this._online) return { ok: false, error: 'Sin conexión' };
+      return await _request('POST', { action }, data);
+    }
+
+    /** Remove all GET cache entries whose key starts with actionPrefix (call before re-fetching after a write). */
+    invalidateCache(actionPrefix) {
+      try {
+        const cache = readCache();
+        const fresh = {};
+        Object.keys(cache).forEach(k => { if (!k.startsWith(actionPrefix)) fresh[k] = cache[k]; });
+        saveCache(fresh);
+      } catch {}
     }
 
     /** Number of actions pending sync. */

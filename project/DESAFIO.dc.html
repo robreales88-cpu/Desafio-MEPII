@@ -1612,6 +1612,14 @@ class Component extends DCLogic {
     }).catch(() => { this.setState({ calendarLoaded: true }); });
   }
 
+  _reloadSchedule() {
+    if (!window.desafioAPI) return;
+    if (window.desafioAPI.invalidateCache) window.desafioAPI.invalidateCache('calendario');
+    window.desafioAPI.getCalendario().then(res => {
+      if (res && res.ok) this.setState({ schedule: res.schedule || {}, calendarLoaded: true });
+    }).catch(() => {});
+  }
+
   _loadTeacherData(user) {
     if (!window.desafioAPI || !user?.email || !user?.token) return;
     window.desafioAPI.getTeacherPanel(user.email, user.token).then(res => {
@@ -1619,18 +1627,18 @@ class Component extends DCLogic {
     }).catch(() => {});
   }
 
-  updateSchedule = (weekNum, field, value) => {
+  updateSchedule = async (weekNum, field, value) => {
     const { user, teacherEmail, teacherToken } = this.state;
     const hasUser  = !!(user?.token && user?.email);
     const hasAdmin = !!(teacherEmail && teacherToken);
     if (!hasUser && !hasAdmin) return;
     const lang = this.state.lang;
 
-    // Validate date range before sending
+    // Validate date range
     if (field === 'fechaInicio' || field === 'fechaFin') {
       const cur = (this.state.schedule || {})[weekNum] || {};
-      const startStr = field === 'fechaInicio' ? value : cur.fechaInicio;
-      const endStr   = field === 'fechaFin'   ? value : cur.fechaFin;
+      const startStr = field === 'fechaInicio' ? value : (cur.fechaInicio || '');
+      const endStr   = field === 'fechaFin'   ? value : (cur.fechaFin   || '');
       if (startStr && endStr) {
         const s = this.parseSVDate(startStr, false);
         const e = this.parseSVDate(endStr, true);
@@ -1639,31 +1647,55 @@ class Component extends DCLogic {
           return;
         }
       }
-      this.setState(st => { const m = { ...st.calErrMap }; delete m[weekNum]; return { calErrMap: m }; });
     }
+    this.setState(st => { const m = { ...st.calErrMap }; delete m[weekNum]; return { calErrMap: m }; });
 
-    // Optimistic update for this week only — no auto-closing other weeks
-    const newSch = { ...this.state.schedule };
-    const prevSch = newSch[weekNum] || {};
-    newSch[weekNum] = { ...prevSch, [field]: value };
-    this.setState({ schedule: newSch });
+    // Save prev state for rollback; update local state so inputs are responsive while awaiting server
+    const prevWeek = (this.state.schedule || {})[weekNum] || {};
+    this.setState(st => ({
+      schedule: { ...st.schedule, [weekNum]: { ...prevWeek, [field]: value } }
+    }));
 
     if (!window.desafioAPI) return;
 
-    // When changing estado (Activar / Cerrar), also send current dates so all three
-    // fields are persisted atomically in Sheets. Without this, only estado is saved and
-    // dates remain empty (or get lost) when the row is created or updated.
-    const updatedWeek = newSch[weekNum];
+    // When activating/closing, always include current dates for atomic persistence
+    const curWeek = { ...prevWeek, [field]: value };
     const fields = { [field]: value, closeOthers: false };
     if (field === 'estado') {
-      if (updatedWeek.fechaInicio) fields.fechaInicio = updatedWeek.fechaInicio;
-      if (updatedWeek.fechaFin)    fields.fechaFin    = updatedWeek.fechaFin;
+      if (curWeek.fechaInicio) fields.fechaInicio = curWeek.fechaInicio;
+      if (curWeek.fechaFin)    fields.fechaFin    = curWeek.fechaFin;
     }
 
-    const call = hasUser
-      ? window.desafioAPI.updateCalendario(user.email, user.token, weekNum, fields)
-      : window.desafioAPI.post('adminAction', { adminEmail: teacherEmail, adminToken: teacherToken, action: 'calendarioUpdate', semana: weekNum, fields });
-    call.catch(() => this.setState({ schedule: { ...this.state.schedule, [weekNum]: prevSch } }));
+    try {
+      let result;
+      if (hasUser) {
+        result = await window.desafioAPI.updateCalendario(user.email, user.token, weekNum, fields);
+      } else {
+        result = await window.desafioAPI.postStrict('adminAction', {
+          adminEmail: teacherEmail, adminToken: teacherToken,
+          action: 'calendarioUpdate', semana: weekNum, fields,
+        });
+      }
+
+      if (!result || !result.ok) {
+        // Server rejected — revert local state and surface the error
+        this.setState(st => ({
+          schedule: { ...st.schedule, [weekNum]: prevWeek },
+          calErrMap: { ...st.calErrMap, [weekNum]: (result && result.error) || (lang === 'es' ? 'Error al guardar. Verifica la conexión.' : 'Save failed. Check connection.') },
+        }));
+        return;
+      }
+
+      // Server confirmed — reload from Sheets to reflect persisted state
+      this._reloadSchedule();
+
+    } catch (err) {
+      // Network failure — revert local state and show error
+      this.setState(st => ({
+        schedule: { ...st.schedule, [weekNum]: prevWeek },
+        calErrMap: { ...st.calErrMap, [weekNum]: lang === 'es' ? 'Error de red. Inténtalo de nuevo.' : 'Network error. Please try again.' },
+      }));
+    }
   };
 
   toggleCalendar = () => this.setState(s => ({ calendarSection: !s.calendarSection }));
