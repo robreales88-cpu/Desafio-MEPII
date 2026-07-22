@@ -1617,24 +1617,14 @@ class Component extends DCLogic {
       this.setState(st => { const m = { ...st.calErrMap }; delete m[weekNum]; return { calErrMap: m }; });
     }
 
-    // Optimistic update: auto-close other active weeks when activating
-    let newSch = { ...this.state.schedule };
-    if (field === 'estado' && value === 'activo') {
-      Object.keys(newSch).forEach(k => {
-        const w = Number(k);
-        if (w !== weekNum && newSch[w]?.estado === 'activo') {
-          newSch[w] = { ...newSch[w], estado: 'cerrado' };
-        }
-      });
-    }
+    // Optimistic update for this week only — no auto-closing other weeks
+    const newSch = { ...this.state.schedule };
     const prevSch = newSch[weekNum] || {};
     newSch[weekNum] = { ...prevSch, [field]: value };
     this.setState({ schedule: newSch });
 
     if (!window.desafioAPI) return;
-    const fields = (field === 'estado' && value === 'activo')
-      ? { [field]: value, closeOthers: true }
-      : { [field]: value };
+    const fields = { [field]: value, closeOthers: false };
     const call = hasUser
       ? window.desafioAPI.updateCalendario(user.email, user.token, weekNum, fields)
       : window.desafioAPI.post('adminAction', { adminEmail: teacherEmail, adminToken: teacherToken, action: 'calendarioUpdate', semana: weekNum, fields });
@@ -2362,17 +2352,13 @@ class Component extends DCLogic {
     const tc_activeToday = td?.activos || 0;
     const tc_activeWeek = (() => {
       const _s = this.state.schedule || {};
-      const now = Date.now();
+      const active = [];
       for (let w = 1; w <= 18; w++) {
-        const e = _s[w] || {};
-        if (e.estado === 'activo') return w;
-        if (e.fechaInicio && e.fechaFin) {
-          const st = this.parseSVDate(e.fechaInicio, false);
-          const en = this.parseSVDate(e.fechaFin, true);
-          if (st && en && now >= st && now <= en) return w;
-        }
+        if ((_s[w] || {}).estado === 'activo') active.push(w);
       }
-      return '-';
+      if (!active.length) return '-';
+      if (active.length === 1) return active[0];
+      return active.slice(0, 3).join(', ') + (active.length > 3 ? '…' : '');
     })();
     const tc_lastUpdate = (() => {
       const d = new Date();
