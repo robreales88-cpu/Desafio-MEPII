@@ -972,8 +972,8 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                   <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;align-items:center;">
                     <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
                     <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
-                    <input type="date" sc-camel-value="{{ cr.fechaInicio }}" onInput="{{ cr.setStart }}" onChange="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
-                    <input type="date" sc-camel-value="{{ cr.fechaFin }}" onInput="{{ cr.setEnd }}" onChange="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <input type="date" sc-camel-value="{{ cr.fechaInicio }}" onChange="{{ cr.setStart }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
+                    <input type="date" sc-camel-value="{{ cr.fechaFin }}" onChange="{{ cr.setEnd }}" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:pointer;">
                     <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
                     <span style="font-size:9px;color:#475569;white-space:nowrap;">{{ cr.ultimaAct }}</span>
                     <div style="display:flex;gap:4px;">
@@ -1686,8 +1686,10 @@ class Component extends DCLogic {
         return;
       }
 
-      // Server confirmed — reload from Sheets to reflect persisted state
-      this._reloadSchedule();
+      // For estado changes reload from Sheets (closeOthers may affect other weeks).
+      // For date changes trust the optimistic update — reloading on each keystroke
+      // races against the write and clears what the user just typed.
+      if (field === 'estado') this._reloadSchedule();
 
     } catch (err) {
       // Network failure — revert local state and show error
