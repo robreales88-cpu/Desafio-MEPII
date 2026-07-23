@@ -395,7 +395,7 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
             </div>
           </div>
 
-          <button onClick="{{ startMicroreto }}" style="width:100%;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:15px;border-radius:13px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;box-shadow:0 4px 20px rgba(124,58,237,0.42);letter-spacing:0.3px;">{{ t_iniciar }} 1</button>
+          <button onClick="{{ startMicroreto }}" style="width:100%;background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;border:none;padding:15px;border-radius:13px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;box-shadow:0 4px 20px rgba(124,58,237,0.42);letter-spacing:0.3px;">{{ t_iniciar }} {{ curMrDisplayIdx }}</button>
         </div>
       </div>
     </sc-if>
@@ -1270,7 +1270,7 @@ class Component extends DCLogic {
       t_ch_sub: 'Completa los desafíos en orden para avanzar',
       t_habilidad: 'Habilidad', t_duracion: 'Duración', t_min: 'min',
       t_intentos: 'Intentos', t_x_micro: 'por microreto', t_recuerda: 'Recuerda',
-      t_regla1: 'Máximo 3 intentos por microreto. Al agotarlos, queda bloqueado permanentemente.',
+      t_regla1: 'Máximo 3 intentos por microreto. Al agotarlos, se otorga XP de participación y puedes continuar.',
       t_regla2: 'El tiempo forma parte del cálculo de XP.',
       t_regla3: 'Cerrar el reto antes de terminar consume un intento.',
       t_iniciar: 'Iniciar microreto', t_intentos_lc: 'intentos',
@@ -1332,7 +1332,7 @@ class Component extends DCLogic {
       t_ch_sub: 'Complete challenges in order to advance',
       t_habilidad: 'Skill', t_duracion: 'Duration', t_min: 'min',
       t_intentos: 'Attempts', t_x_micro: 'per micro-task', t_recuerda: 'Remember',
-      t_regla1: 'Max 3 attempts per micro-task. Once exhausted, it is permanently locked.',
+      t_regla1: 'Max 3 attempts per micro-task. Once exhausted, participation XP is awarded and you may continue.',
       t_regla2: 'Time is part of the XP calculation.',
       t_regla3: 'Closing the challenge before finishing costs one attempt.',
       t_iniciar: 'Start micro-task', t_intentos_lc: 'attempts',
@@ -1520,6 +1520,17 @@ class Component extends DCLogic {
           localStorage.removeItem('desafio_user');
           this._refreshRanking();
           return;
+        }
+        // Migration: reset microretos that were blocked without ever completing (stuck state).
+        // These students now get 3 fresh attempts under the new pass-through rules.
+        if (user.challenges) {
+          let migrated = false;
+          user.challenges.forEach(ch => {
+            (ch.microretos || []).forEach(mr => {
+              if (mr.blocked && !mr.completed) { mr.blocked = false; mr.attempts = 0; migrated = true; }
+            });
+          });
+          if (migrated) this.saveUser(user);
         }
         const isDocente = user.role === 'docente';
         this.setState({ user, screen: isDocente ? 'teacher' : 'dashboard', teacherAuthed: isDocente });
@@ -1987,8 +1998,13 @@ class Component extends DCLogic {
     if (!user) return;
     if (!this.engine) return;
     this.setState({ loadingChallenge: true });
+    // Start at the first microreto that hasn't been completed so the student
+    // doesn't land on an already-done (or exhausted) microreto with a silent button.
+    const mrs = user.challenges[idx]?.microretos || [];
+    const firstIncomplete = mrs.findIndex(m => !m.completed);
+    const startMrIdx = firstIncomplete >= 0 ? firstIncomplete : 0;
     this.engine.loadChallenge(idx + 1)
-      .then(data => this.setState({ challengeData: data, curChIdx: idx, curMrIdx: 0, screen: 'challenge-intro', loadingChallenge: false }))
+      .then(data => this.setState({ challengeData: data, curChIdx: idx, curMrIdx: startMrIdx, screen: 'challenge-intro', loadingChallenge: false }))
       .catch(e => { console.error(e); this.setState({ loadingChallenge: false }); });
   }
 
@@ -2079,7 +2095,7 @@ class Component extends DCLogic {
       { label: 'XP ganado', val: `+${stats.baseXP}`, c: '#06b6d4' },
       { label: stats.allCorrect ? 'Bonus perfecto' : 'Total', val: `+${stats.finalXP + challengeBonus}`, c: '#f59e0b' },
     ];
-    const hasNextMr = curMrIdx < 2 && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.blocked && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.completed;
+    const hasNextMr = curMrIdx < 2 && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.completed;
 
     this.setState({ user: updUser, screen: 'results', lastMrXP: stats.finalXP + challengeBonus, newBadge, resBreak, hasNextMr });
   };
@@ -2087,23 +2103,56 @@ class Component extends DCLogic {
   /** Stops the engine and consumes an attempt for whatever microreto is
    *  active — shared by the explicit "Salir" button, the tab-switch handler,
    *  and nav() (leaving via the top/bottom nav mid-challenge). Does not touch
-   *  `screen` — callers decide where to land. */
+   *  `screen` — callers decide where to land.
+   *  Returns { exhausted: true, ... } when this was the final attempt so the
+   *  caller can show the results screen instead of going back to challenges. */
   _registerAbandon() {
     if (this.engine) this.engine.abandon();
-    const { curChIdx, curMrIdx, user, challengeData } = this.state;
-    if (!user) return;
+    const { curChIdx, curMrIdx, user, challengeData, lang } = this.state;
+    if (!user) return { exhausted: false };
     const updUser = JSON.parse(JSON.stringify(user));
     const mr = updUser.challenges[curChIdx].microretos[curMrIdx];
     const maxAttempts = challengeData?.microretos?.[curMrIdx]?.maxAttempts || 3;
     mr.attempts = (mr.attempts || 0) + 1;
+
+    // Was this the last attempt on an unfinished microreto?
+    const justExhausted = !mr.completed && mr.attempts >= maxAttempts;
     if (mr.attempts >= maxAttempts) mr.blocked = true;
+
+    if (justExhausted) {
+      // Mark as passed-by-exhaustion: award participation XP so the student
+      // is not penalised with zero and can continue to the next microreto.
+      const partialXP = 10;
+      mr.completed = true;
+      mr.xp = Math.max(mr.xp || 0, partialXP);
+      updUser.xp = (updUser.xp || 0) + partialXP;
+      this.saveUser(updUser);
+      this.setState({ user: updUser });
+      if (window.desafioAPI && updUser.email && updUser.token) {
+        const token = updUser.token;
+        window.desafioAPI.guardarXP(updUser.email, partialXP, { token, semana: curChIdx+1, microreto: curMrIdx+1 }).catch(() => {});
+        window.desafioAPI.guardarEvento(updUser.email, 'MICRORETO_AGOTADO', `S${curChIdx+1}M${curMrIdx+1} · ${partialXP} XP participación`, token).catch(() => {});
+      }
+      const hasNextMrExh = curMrIdx < 2 && !updUser.challenges[curChIdx].microretos[curMrIdx+1]?.completed;
+      const resBreakExh = [
+        { label: lang === 'es' ? 'Intentos agotados' : 'Attempts exhausted', val: `${maxAttempts}/${maxAttempts}`, c: '#ef4444' },
+        { label: lang === 'es' ? 'XP de participación' : 'Participation XP', val: `+${partialXP}`, c: '#f59e0b' },
+      ];
+      return { exhausted: true, partialXP, hasNextMr: hasNextMrExh, resBreak: resBreakExh };
+    }
+
     this.saveUser(updUser);
     this.setState({ user: updUser });
+    return { exhausted: false };
   }
 
   abandonChallenge = () => {
-    this._registerAbandon();
-    this.setState({ screen: 'challenges' });
+    const result = this._registerAbandon();
+    if (result && result.exhausted) {
+      this.setState({ screen: 'results', lastMrXP: result.partialXP, newBadge: null, resBreak: result.resBreak, hasNextMr: result.hasNextMr });
+    } else {
+      this.setState({ screen: 'challenges' });
+    }
   };
 
   continueNext = () => {
@@ -2718,6 +2767,7 @@ class Component extends DCLogic {
       // intro
       curTitle, curType, curDesc, curSkill, curWeek, introMrs,
       // active
+      curMrDisplayIdx: curMrIdx + 1,
       mrIndicators, attDots,
       isMemorize, isAnswer, isFeedback,
       timerDisp, timerC, memBarW, memTimeLeft,
