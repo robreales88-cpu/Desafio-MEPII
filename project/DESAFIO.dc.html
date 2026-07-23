@@ -955,7 +955,10 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                 <div style="font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;">{{ t_teach_config }}</div>
                 <h2 style="font-size:18px;font-weight:700;color:#f1f5f9;">{{ t_calendario }}</h2>
               </div>
-              <button onClick="{{ goTeachDash }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.22);border-radius:9px;padding:8px 15px;font-size:12px;font-weight:600;color:#a855f7;cursor:pointer;white-space:nowrap;align-self:center;">{{ t_volver_dash }}</button>
+              <div style="display:flex;gap:8px;align-self:center;flex-wrap:wrap;">
+                <button onClick="{{ recargarCalendario }}" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.22);border-radius:9px;padding:8px 15px;font-size:12px;font-weight:600;color:#10b981;cursor:pointer;white-space:nowrap;">↺ Recargar</button>
+                <button onClick="{{ goTeachDash }}" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.22);border-radius:9px;padding:8px 15px;font-size:12px;font-weight:600;color:#a855f7;cursor:pointer;white-space:nowrap;">{{ t_volver_dash }}</button>
+              </div>
             </div>
             <div style="background:#12121e;border:1px solid rgba(124,58,237,0.18);border-radius:14px;overflow:hidden;">
               <div style="padding:9px 16px;background:rgba(124,58,237,0.05);display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;border-bottom:1px solid rgba(124,58,237,0.1);">
@@ -972,17 +975,28 @@ a{color:#a855f7;}a:hover{color:#c084fc;}
                   <div style="padding:9px 16px;display:grid;grid-template-columns:36px 1fr 120px 120px 90px 90px 130px;gap:8px;align-items:center;">
                     <div style="font-size:11px;font-weight:700;color:#64748b;font-family:'Space Grotesk',sans-serif;">{{ cr.week }}</div>
                     <div style="font-size:11px;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cr.title }}</div>
-                    <input type="text" sc-camel-value="{{ cr.fechaInicio }}" onInput="{{ cr.fmtStart }}" onBlur="{{ cr.setStart }}" placeholder="aaaa-mm-dd" maxlength="10" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:text;">
-                    <input type="text" sc-camel-value="{{ cr.fechaFin }}" onInput="{{ cr.fmtEnd }}" onBlur="{{ cr.setEnd }}" placeholder="aaaa-mm-dd" maxlength="10" style="background:#0a0a14;border:1px solid {{ cr.dateBorder }};border-radius:6px;padding:4px 6px;color:#e2e8f0;font-size:10px;width:100%;cursor:text;">
+                    <span style="font-size:11px;color:{{ cr.fechaInicio ? '#e2e8f0' : '#475569' }};">{{ cr.fechaInicio || '—' }}</span>
+                    <span style="font-size:11px;color:{{ cr.fechaFin ? '#e2e8f0' : '#475569' }};">{{ cr.fechaFin || '—' }}</span>
                     <span style="font-size:9px;font-weight:600;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,0.3);color:{{ cr.estadoColor }};text-align:center;display:inline-block;">{{ cr.estadoLabel }}</span>
                     <span style="font-size:9px;color:#475569;white-space:nowrap;">{{ cr.ultimaAct }}</span>
-                    <div style="display:flex;gap:4px;">
+                    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                      <button onClick="{{ cr.edit }}" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#a855f7;cursor:pointer;">✏</button>
                       <button onClick="{{ cr.activate }}" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#10b981;cursor:pointer;">{{ t_cal_activar }}</button>
                       <button onClick="{{ cr.close }}" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:5px;padding:3px 7px;font-size:9px;font-weight:600;color:#ef4444;cursor:pointer;">{{ t_cal_cerrar }}</button>
                     </div>
                   </div>
                   <sc-if value="{{ cr.hasCalErr }}" hint-placeholder-val="{{ false }}">
                     <div style="padding:2px 16px 6px;font-size:10px;color:#fca5a5;background:rgba(239,68,68,0.06);">⚠ {{ cr.calErr }}</div>
+                  </sc-if>
+                  <sc-if value="{{ cr.isEditing }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding:8px 16px 10px;background:rgba(124,58,237,0.06);border-top:1px solid rgba(124,58,237,0.12);display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                      <span style="font-size:10px;color:#94a3b8;min-width:40px;">Inicio:</span>
+                      <input type="text" value="{{ cr.editInicio }}" onInput="{{ cr.setEditInicio }}" data-cal-week="{{ cr.week }}" data-cal-field="inicio" placeholder="aaaa-mm-dd" maxlength="10" style="background:#0a0a14;border:1px solid rgba(124,58,237,0.4);border-radius:6px;padding:5px 9px;color:#e2e8f0;font-size:12px;width:120px;">
+                      <span style="font-size:10px;color:#94a3b8;min-width:25px;">Fin:</span>
+                      <input type="text" value="{{ cr.editFin }}" onInput="{{ cr.setEditFin }}" data-cal-week="{{ cr.week }}" data-cal-field="fin" placeholder="aaaa-mm-dd" maxlength="10" style="background:#0a0a14;border:1px solid rgba(124,58,237,0.4);border-radius:6px;padding:5px 9px;color:#e2e8f0;font-size:12px;width:120px;">
+                      <button onClick="{{ cr.saveEdit }}" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);border-radius:6px;padding:5px 14px;font-size:11px;font-weight:600;color:#10b981;cursor:pointer;">Guardar</button>
+                      <button onClick="{{ cr.cancelEdit }}" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:5px 14px;font-size:11px;color:#64748b;cursor:pointer;">Cancelar</button>
+                    </div>
                   </sc-if>
                 </div>
               </sc-for>
@@ -1398,7 +1412,7 @@ class Component extends DCLogic {
     teacherAuthed: false,
     teacherEmail: '', teacherToken: '', teacherAuthErr: '', teacherData: null,
     // schedule + calendar section (Sprint QA-03)
-    schedule: {}, calendarSection: false, calendarLoaded: false, calErrMap: {},
+    schedule: {}, calendarSection: false, calendarLoaded: false, calErrMap: {}, calEditWeek: null,
     teacherScreen: 'dashboard',
     teacherSearch: '', teacherSortCol: 'xp', teacherSortDir: 'desc',
     teacherPage: 0, teacherSelectedStudent: null, teacherFilterGroup: '',
@@ -1704,7 +1718,57 @@ class Component extends DCLogic {
     }
   };
 
-  toggleCalendar = () => this.setState(s => ({ calendarSection: !s.calendarSection }));
+  toggleCalendar    = () => this.setState(s => ({ calendarSection: !s.calendarSection }));
+  startEditWeek     = (weekNum) => this.setState(st => ({ calEditWeek: weekNum, calErrMap: { ...st.calErrMap, [weekNum]: '' } }));
+  cancelEditWeek    = () => this.setState({ calEditWeek: null });
+  setEditInicio     = (e) => { const v = e.target.value.replace(/\D/g,'').slice(0,8); e.target.value = v.length<=4?v:v.length<=6?v.slice(0,4)+'-'+v.slice(4):v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); };
+  setEditFin        = (e) => { const v = e.target.value.replace(/\D/g,'').slice(0,8); e.target.value = v.length<=4?v:v.length<=6?v.slice(0,4)+'-'+v.slice(4):v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); };
+
+  saveDateRange = async (weekNum) => {
+    const startEl = document.querySelector('[data-cal-week="'+weekNum+'"][data-cal-field="inicio"]');
+    const endEl   = document.querySelector('[data-cal-week="'+weekNum+'"][data-cal-field="fin"]');
+    const fechaInicio = startEl ? startEl.value.trim() : '';
+    const fechaFin    = endEl   ? endEl.value.trim()   : '';
+    const { lang, user, teacherEmail, teacherToken } = this.state;
+    const hasUser  = !!(user?.token && user?.email);
+    const hasAdmin = !!(teacherEmail && teacherToken);
+    if (!hasUser && !hasAdmin) return;
+    const dateRe = /^\d{4}-\d{2}-\d{2}$/;
+    if (fechaInicio && !dateRe.test(fechaInicio)) {
+      this.setState(st => ({ calErrMap: { ...st.calErrMap, [weekNum]: lang==='es'?'Fecha inicio inválida. Use aaaa-mm-dd (ej: 2026-07-22).':'Invalid start date. Use yyyy-MM-dd.' } }));
+      return;
+    }
+    if (fechaFin && !dateRe.test(fechaFin)) {
+      this.setState(st => ({ calErrMap: { ...st.calErrMap, [weekNum]: lang==='es'?'Fecha fin inválida. Use aaaa-mm-dd (ej: 2026-07-22).':'Invalid end date. Use yyyy-MM-dd.' } }));
+      return;
+    }
+    if (fechaInicio && fechaFin) {
+      const s = this.parseSVDate(fechaInicio, false);
+      const e = this.parseSVDate(fechaFin, true);
+      if (s !== null && e !== null && e < s) {
+        this.setState(st => ({ calErrMap: { ...st.calErrMap, [weekNum]: lang==='es'?'Fecha fin debe ser igual o posterior a fecha inicio.':'End date must be on or after start date.' } }));
+        return;
+      }
+    }
+    this.setState(st => { const m={...st.calErrMap}; delete m[weekNum]; return {calErrMap:m}; });
+    const prevWeek = (this.state.schedule||{})[weekNum]||{};
+    const fields   = { fechaInicio, fechaFin, closeOthers: false };
+    this.setState(st => ({ schedule:{...st.schedule,[weekNum]:{...prevWeek,...fields}}, calEditWeek:null }));
+    if (!window.desafioAPI) return;
+    try {
+      let result;
+      if (hasUser) {
+        result = await window.desafioAPI.updateCalendario(user.email, user.token, weekNum, fields);
+      } else {
+        result = await window.desafioAPI.postStrict('adminAction', { adminEmail:teacherEmail, adminToken:teacherToken, action:'calendarioUpdate', semana:weekNum, fields });
+      }
+      if (!result || !result.ok) {
+        this.setState(st => ({ schedule:{...st.schedule,[weekNum]:prevWeek}, calErrMap:{...st.calErrMap,[weekNum]:(result&&result.error)||(lang==='es'?'Error al guardar.':'Save failed.')} }));
+      }
+    } catch(err) {
+      this.setState(st => ({ schedule:{...st.schedule,[weekNum]:prevWeek}, calErrMap:{...st.calErrMap,[weekNum]:lang==='es'?'Error de red. Inténtalo de nuevo.':'Network error. Please try again.'} }));
+    }
+  };
 
   // ─── TEACHER SUB-NAV ────────────────────────────────────────────────────────
   goTeachDash      = () => this.setState({ teacherScreen: 'dashboard' });
@@ -2584,6 +2648,7 @@ class Component extends DCLogic {
     const modalStopProp    = (e) => { if (e && e.stopPropagation) e.stopPropagation(); };
 
     const calendarSection = this.state.calendarSection;
+    const calEditWeek  = this.state.calEditWeek || null;
     const _schMap = this.state.schedule || {};
     const _calErrMap = this.state.calErrMap || {};
     const calendarRows = teacherAuthed ? Array.from({ length: 18 }, (_, i) => {
@@ -2609,10 +2674,14 @@ class Component extends DCLogic {
         estadoColor,
         ultimaAct: (sch.ultimaActualizacion || '').slice(0, 10) || '-',
         calErr, hasCalErr: !!calErr, dateBorder,
-        setStart: (e) => this.updateSchedule(weekNum, 'fechaInicio', e.target.value.trim()),
-        setEnd: (e) => this.updateSchedule(weekNum, 'fechaFin', e.target.value.trim()),
-        fmtStart: (e) => { const v = e.target.value.replace(/\D/g, '').slice(0, 8); e.target.value = v.length <= 4 ? v : v.length <= 6 ? v.slice(0,4)+'-'+v.slice(4) : v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); },
-        fmtEnd:   (e) => { const v = e.target.value.replace(/\D/g, '').slice(0, 8); e.target.value = v.length <= 4 ? v : v.length <= 6 ? v.slice(0,4)+'-'+v.slice(4) : v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8); },
+        isEditing: calEditWeek === weekNum,
+        editInicio: calEditWeek === weekNum ? (sch.fechaInicio || '').slice(0, 10) : '',
+        editFin:    calEditWeek === weekNum ? (sch.fechaFin    || '').slice(0, 10) : '',
+        edit:           () => this.startEditWeek(weekNum),
+        saveEdit:       () => this.saveDateRange(weekNum),
+        cancelEdit:     () => this.cancelEditWeek(),
+        setEditInicio:  (e) => this.setEditInicio(e),
+        setEditFin:     (e) => this.setEditFin(e),
         activate: () => this.updateSchedule(weekNum, 'estado', 'activo'),
         close: () => this.updateSchedule(weekNum, 'estado', 'cerrado'),
       };
@@ -2704,6 +2773,7 @@ class Component extends DCLogic {
       teacherLogin: this.teacherLogin,
       // teacher — calendar
       calendarSection, calendarRows, toggleCalendar: this.toggleCalendar,
+      recargarCalendario: this._reloadSchedule,
       // teacher — print
       doPrintReport: this.doPrintReport,
       // navigation handlers
